@@ -6,5 +6,5 @@
 4- Design giochi (Cristina, Maftei)<br>
 5- giochi (Cristina, Depalo, Ahmed)<br>
 6- Databade Sito Statico (Ahmed, Depalo)<br>
-7- Database Giochi (Ahmed, Depalo)
+7- Database Giochi (Ahmed, Depalo)<br>
 
