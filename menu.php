@@ -35,7 +35,7 @@ session_start();
       </button>
       <a class="navbar-brand" href="#">KinGames</a>
     </div>
-    <?php if (isset($_SESSION['fname'])): ?>
+    <?php if (!isset($_SESSION['fname'])): ?>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li><a href="giochi.php">Giochi</a></li>
