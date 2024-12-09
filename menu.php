@@ -33,7 +33,7 @@ session_start();
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">KinGames</a>
+      <a class="navbar-brand" href="index.php">KinGames</a>
     </div>
     <?php if (!isset($_SESSION['fname'])): ?>
     <div class="collapse navbar-collapse" id="myNavbar">
