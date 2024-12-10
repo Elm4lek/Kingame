@@ -12,18 +12,113 @@
 
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-12">
-                <h1 class="text-center">Chi Siamo</h1>
-                <p class="lead text-left">Chi Siamo</p>
-                <p class="lead text-left">Chi Siamo</p>
-                <p class="lead text-left">Chi Siamo</p>
-                <p class="lead text-left">Chi Siamo</p>
-                <p class="lead text-left">Chi Siamo</p>
-                <p class="lead text-left">Chi Siamo</p>
-                <p class="lead text-left">Chi Siamo</p>
-                <p class="lead text-left">Chi Siamo</p>
-                <p class="lead text-left">Chi Siamo</p>
-                <p class="lead text-left">Chi Siamo</p>
+        <div class="container mt-3">
+            <div class="card" style="width:400px">
+                <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                <div class="card-body">
+                <h4 class="card-title">John Doe</h4>
+                <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+                </div>
+            </div>
+        </div>   
+        <div class="row">
+            <div class="container mt-3">
+            <div class="card" style="width:400px">
+                <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                <div class="card-body">
+                <h4 class="card-title">John Doe</h4>
+                <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+                </div>
+            </div>
+            </div> 
+
+            <div class="row">
+            <div class="container mt-3">
+            <div class="card" style="width:400px">
+                <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                <div class="card-body">
+                <h4 class="card-title">John Doe</h4>
+                <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="container mt-3">
+            <div class="card" style="width:400px">
+                <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                <div class="card-body">
+                <h4 class="card-title">John Doe</h4>
+                <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+                </div>
+            </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+            <div class="container mt-3">
+            <div class="card" style="width:400px">
+                <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                <div class="card-body">
+                <h4 class="card-title">John Doe</h4>
+                <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+                </div>
+            </div>
+            </div>
+            
+            <div class="row">
+            <div class="container mt-3">
+            <div class="card" style="width:400px">
+                <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                <div class="card-body">
+                <h4 class="card-title">John Doe</h4>
+                <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="container mt-3">
+            <div class="card" style="width:400px">
+                <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                <div class="card-body">
+                <h4 class="card-title">John Doe</h4>
+                <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="container mt-3">
+            <div class="card" style="width:400px">
+                <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                <div class="card-body">
+                <h4 class="card-title">John Doe</h4>
+                <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+                </div>
+            </div>
+            </div>
+            <br>
+
+            <div class="row">
+            <div class="container mt-3">
+            <div class="card" style="width:400px">
+                <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                <div class="card-body">
+                <h4 class="card-title">John Doe</h4>
+                <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+                </div>
+            </div>
             </div>
         </div>
     </div>
