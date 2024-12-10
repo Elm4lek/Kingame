@@ -25,6 +25,10 @@
         width: 80%;
         margin-bottom: 30%;
     }
+    img{
+        width: 200px;
+        height: 200px;
+    }
 </style>
 <body>
 
@@ -32,7 +36,7 @@
         <div class="row">
             <div class="col">
                 <div class="card" >
-                    <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="img/elmalek.jpg" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">Elam4lek</h4>
                         <p class="card-text">...</p>
@@ -42,7 +46,7 @@
             </div>
             <div class="col">
                 <div class="card" >
-                    <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">Dyy</h4>
                         <p class="card-text">...</p>
@@ -52,7 +56,7 @@
             </div>
             <div class="col">
                 <div class="card" >
-                    <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">Sbettox</h4>
                         <p class="card-text">...</p>
@@ -65,7 +69,7 @@
         <div class="row">
             <div class="col">
                 <div class="card" >
-                    <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">Abbassolgbtq</h4>
                         <p class="card-text">...</p>
@@ -75,7 +79,7 @@
             </div>
             <div class="col">
                 <div class="card" >
-                    <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">Edumelo</h4>
                         <p class="card-text">...</p>
@@ -85,7 +89,7 @@
             </div>
             <div class="col">
                 <div class="card" >
-                    <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">IlSupo</h4>
                         <p class="card-text">...</p>
@@ -98,7 +102,7 @@
         <div class="row">
             <div class="col">
                 <div class="card" >
-                    <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">Georgiana059</h4>
                         <p class="card-text">...</p>
@@ -108,7 +112,7 @@
             </div>
             <div class="col">
                 <div class="card" >
-                    <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">AleVale2005</h4>
                         <p class="card-text">...</p>
@@ -118,7 +122,7 @@
             </div>
             <div class="col">
                 <div class="card" >
-                    <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title"><Tarea></Tarea>Tomgun444</h4>
                         <p class="card-text">...</p>
