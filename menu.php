@@ -35,7 +35,7 @@ session_start();
       </button>
       <a class="navbar-brand" href="index.php">KinGames</a>
     </div>
-    <?php if (!isset($_SESSION['fname'])): ?>
+    <?php if (isset($_SESSION['fname'])): ?>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li><a href="giochi.php">Giochi</a></li>
@@ -55,7 +55,7 @@ session_start();
       <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        <li><a href="signup.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="registrazione.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       </ul>
     </div>
     <?php endif; ?>
