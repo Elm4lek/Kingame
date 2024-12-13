@@ -1,0 +1,1 @@
+INSERT INTO pm_tipo (Tipo, DebolezzaNormale, DebolezzaFuoco, DebolezzaAcqua, DebolezzaErba, DebolezzaElettro, DebolezzaGhiaccio, DebolezzaLotta, DebolezzaVeleno,DebolezzaTerra, DebolezzaVolante, DebolezzaPsico, DebolezzaColeottero, DebolezzaRoccia, DebolezzaSpettro, DebolezzaDrago, DebolezzaBuio, DebolezzaAccaio,DebolezzaFolletto)
