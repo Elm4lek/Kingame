@@ -1,7 +1,6 @@
 <?php include 'menu.php'; ?>
 
 <!DOCTYPE html>
-<html lang="en">
 
 <head>
     <link rel="stylesheet" href="css/index.css">
@@ -31,6 +30,10 @@
             Preparati per l'avventura della tua vita! </h5>
         <h4><style>h4 { color: #ffffff; }</style>Una volta effettuato l'accesso con il proprio account, potrai selezionare la bandiera del tuo paese</h4>
     </div>
+<div class="bottom">
+<?php include 'footer.php'; ?>
+</div>
 </body>
+
 
 </html>
