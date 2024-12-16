@@ -1,11 +1,11 @@
 .footer-basic {
     padding:40px 0;
-    background-color:#ffffff;
-    color:#4b4c4d;
-    position: absolute;
+    background-color:#330033;
+    color:#ffffff;
+    position: relative ;
     bottom: 0;
     width: 100%;
-    opacity: 0.8;
+    top: 100vh;
   }
   
   .footer-basic ul {
