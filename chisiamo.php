@@ -12,6 +12,12 @@
 </head>
 <style>
 
+    .navbar{
+    position:sticky;
+    top: 0;
+    z-index: 100;
+    }
+
     body {
         font-family: 'Gochi Hand', cursive;
         
@@ -55,7 +61,7 @@
                     <img class="card-img-top" src="https://avatars.githubusercontent.com/u/130972307?v=4" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">Georgiana059</h4>
-                        <p class="card-text">Da ben 17 anni combatte contro la stupidit� delle persone, dando lezioni private sulla matematica e sulla programmazione. Attualmente frequenta l�universit� degli studi di Milano, studiando machine learning e l�AI. Un futuro talento nel campo high-tech!</p>
+                        <p class="card-text">Pronta a supportare i componenti nel team per eventuali idee e apportare modifiche per miglioramenti.</p>
                         <a href="https://github.com/georgiana059" class="btn btn-primary" target="_blank" >See Profile</a>
                     </div>
                 </div>
@@ -65,7 +71,7 @@
                     <img class="card-img-top" src="https://avatars.githubusercontent.com/u/190075560?v=4" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">Sbettox</h4>
-                        <p class="card-text">Manager di alto livello e autore coi fiocchi, capace di gestire i conflitti con ottime doti di problem solving. Futuro imprenditore e CEO di un�importante azienda!</p>
+                        <p class="card-text">Manager di alto livello e autore coi fiocchi, capace di gestire i conflitti con ottime doti di problem solving.</p>
                         <a href="https://github.com/Sbettox" class="btn btn-primary" target="_blank" >See Profile</a>
                     </div>
                 </div>
@@ -78,7 +84,7 @@
                     <img class="card-img-top" src="https://avatars.githubusercontent.com/u/131394105?v=4" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">Dyy</h4>
-                        <p class="card-text">Da ben 17 anni combatte contro la stupidit� delle persone, dando lezioni private sulla matematica e sulla programmazione. Attualmente frequenta l�universit� degli studi di Milano, studiando machine learning e l�AI. Un futuro talento nel campo high-tech!</p>
+                        <p class="card-text">Da ben 17 anni combatte contro la stupidità delle persone, dando lezioni private sulla matematica e sulla programmazione.</p>
                         <a href="https://github.com/dyy0101" class="btn btn-primary" target="_blank" >See Profile</a>
                     </div>
                 </div>
@@ -88,7 +94,7 @@
                     <img class="card-img-top" src="https://avatars.githubusercontent.com/u/190075051?v=4" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">Edumelo</h4>
-                        <p class="card-text">Un tornado di allegria, con la musica Brasiliana nel sangue rallegra sempre le giornate del team ma � anche un ottimo aiutante e web designer.</p>
+                        <p class="card-text">Un tornado di allegria, con la musica Brasiliana nel sangue rallegra sempre le giornate del team.</p>
                         <a href="https://github.com/edumelo-ludu" class="btn btn-primary" target="_blank" >See Profile</a>
                     </div>
                 </div>
@@ -98,7 +104,7 @@
                     <img class="card-img-top" src="https://avatars.githubusercontent.com/u/191097751?v=4" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">IlSupo</h4>
-                        <p class="card-text">Dal Per� con furore, sempre pronto a dare consigli costruttivi e ad ascoltare gli altri.</p>
+                        <p class="card-text">Dal Però con furore, sempre pronto a dare consigli costruttivi e ad ascoltare gli altri.</p>
                         <a href="https://github.com/IlSupo" class="btn btn-primary" target="_blank" >See Profile</a>
                     </div>
                 </div>
