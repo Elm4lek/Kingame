@@ -39,25 +39,25 @@
                     <img class="card-img-top" src="https://avatars.githubusercontent.com/u/161753396?v=4" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">Elam4lek</h4>
-<<<<<<< HEAD
+
                         <p class="card-text">...</p>
                         <a href="https://github.com/Elm4lek" class="btn btn-primary" target="_blank" >See Profile</a>
-=======
+
                         <p class="card-text">Programmatore dalla nascita, nato a colpi di cicli for e di linguaggi imperitivi, pronto a stupirvi con tutta la sua conoscenza.</p>
                         <a href="#" class="btn btn-primary">Visita il profilo</a>
->>>>>>> 506c760c8106d5d4b7ab0e6edfb9f2ed18be6633
+
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="card" >
-<<<<<<< HEAD
+
                     <img class="card-img-top" src="https://avatars.githubusercontent.com/u/130972307?v=4" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">Georgiana059</h4>
                         <p class="card-text">...</p>
                         <a href="https://github.com/georgiana059" class="btn btn-primary" target="_blank" >See Profile</a>
-=======
+
                     <img class="card-img-top" src="../bootstrap4/img_avatar1.png" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">Dyy</h4>
@@ -119,7 +119,7 @@
                         <h4 class="card-title">Georgiana059</h4>
                         <p class="card-text">Pronta a supportare i componenti nel team per eventuali idee e apportare modifiche per miglioramenti.</p>
                         <a href="#" class="btn btn-primary">Visita il profilo</a>
->>>>>>> 506c760c8106d5d4b7ab0e6edfb9f2ed18be6633
+
                     </div>
                 </div>
             </div>
@@ -184,13 +184,12 @@
                     <img class="card-img-top" src="https://avatars.githubusercontent.com/u/190074916?v=4" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">AleVale2005</h4>
-<<<<<<< HEAD
+
                         <p class="card-text">...</p>
                         <a href="https://github.com/AleVale2005" class="btn btn-primary" target="_blank" >See Profile</a>
-=======
+
                         <p class="card-text">Il king di tutta Sesto San Giovanni, pronto a sfoderare tutta la sua simpatia e le sue hard skills da PR.</p>
                         <a href="#" class="btn btn-primary">Visita il profilo</a>
->>>>>>> 506c760c8106d5d4b7ab0e6edfb9f2ed18be6633
                     </div>
                 </div>
             </div>
@@ -198,15 +197,13 @@
                 <div class="card" >
                     <img class="card-img-top" src="https://avatars.githubusercontent.com/u/133581691?v=4" alt="Card image" >
                     <div class="card-body">
-<<<<<<< HEAD
+
                         <h4 class="card-title"><Tarea></Tarea>Tomgun444</h4>
                         <p class="card-text">...</p>
                         <a href="https://github.com/tomgun444" class="btn btn-primary" target="_blank" >See Profile</a>
-=======
                         <h4 class="card-title">Tomgun444</h4>
                         <p class="card-text">Abilissimo UX/UI Designer crea ottime icone in grado di invogliare il giocatore nella scelta e nel gameplay dei giochi.</p>
                         <a href="#" class="btn btn-primary">Visita il profilo</a>
->>>>>>> 506c760c8106d5d4b7ab0e6edfb9f2ed18be6633
                     </div>
                 </div>
             </div>
