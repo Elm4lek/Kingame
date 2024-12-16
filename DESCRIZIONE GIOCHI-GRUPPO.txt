@@ -1,0 +1,25 @@
+LISTA DEI GIOCHI
+-Pokemon (single player)
+-Carta,sasso,forbice(single player/online)
+-Tris Tris(Online)
+-Tetris(single player)
+-Omino-cacciatore(single player)
+DESCRIZIONE DEL GRUPPO
+-Elmalek
+Programmatore dalla nascita, nato a colpi di cicli for e di linguaggi imperitivi, pronto a stupirvi con tutta la sua conoscenza.
+-Cristina
+Da ben 17 anni combatte contro la stupidità delle persone, dando lezioni private sulla matematica e sulla programmazione. Attualmente frequenta l’università degli studi di Milano, studiando machine learning e l’AI. Un futuro talento nel campo high-tech!
+-Bettins
+Manager di alto livello e autore coi fiocchi, capace di gestire i conflitti con ottime doti di problem solving. Futuro imprenditore e CEO di un’importante azienda!
+-AleVale2005
+Il king di tutta Sesto San Giovanni, pronto a sfoderare tutta la sua simpatia e le sue hard skills da PR.
+-Supo
+Dal Perù con furore, sempre pronto a dare consigli costruttivi e ad ascoltare gli altri.
+-Melo
+Un tornado di allegria, con la musica Brasiliana nel sangue rallegra sempre le giornate del team ma è anche un ottimo aiutante e web designer.
+-Depa
+Direttamente da Alberobello un abile talento nel campo dei DB, capace di progettarlo e renderlo funzionante in breve tempo.
+-Georgiana
+Pronta a supportare i componenti nel team per eventuali idee e apportare modifiche per miglioramenti.
+-Tommy
+Abilissimo UX/UI Designer crea ottime icone in grado di invogliare il giocatore nella scelta e nel gameplay dei giochi. 
