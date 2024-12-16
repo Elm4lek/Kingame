@@ -1,7 +1,7 @@
 body {
     color: hsla(0, 0%, 100%, 0.801);
     font-family: 'Gochi Hand', cursive;
-    background-image: url('../img/kingamesSfondo.jpg');
+    background-image: url('../bozze/bozza12_fotoSfondo.jpg');
     background-color: #333;
     background-size: cover;
     background-position: center;
@@ -12,7 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    /*overflow: hidden;*/
+    overflow: hidden;
   }
   @import url('https://fonts.googleapis.com/css?family=Gochi+Hand');
   .container h5 {
@@ -47,7 +47,6 @@ body {
     left: 50%;
     margin-top: -200px;
     margin-left: -300px;
-    
   }
   
   h1 {
@@ -83,8 +82,5 @@ body {
   .container input[type="submit"]:hover {
     background-color: #45a049;
   }
-.navbar{
-  position:sticky;
-  top: 0;
-  z-index: 100;
-}
+
+
