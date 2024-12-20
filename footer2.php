@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Untitled</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/footer2.css">
 </head>
 
 <body>
     <div class="footer-basic">
-        <footer>
+    <footer>
             <div class="social"><a href="#"><i class="fa fa-github" aria-hidden="true"></i></a><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>
             </a></div>
             <ul class="list-inline">

@@ -3,9 +3,8 @@
     background-color:#330033;
     color:#ffffff;
     position: relative ;
+    bottom: 0;
     width: 100%;
-    top: 100vh;
-    bottom: 0px;
   }
   
   .footer-basic ul {
