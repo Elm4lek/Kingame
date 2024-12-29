@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Dic 20, 2024 alle 09:46
+-- Creato il: Dic 29, 2024 alle 11:15
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -157,7 +157,7 @@ CREATE TABLE `pm_tipo` (
   `DebolezzaSpettro` decimal(2,1) DEFAULT NULL,
   `DebolezzaDrago` decimal(2,1) DEFAULT NULL,
   `DebolezzaBuio` decimal(2,1) DEFAULT NULL,
-  `DebolezzaAccaio` decimal(2,1) DEFAULT NULL,
+  `DebolezzaAcciaio` decimal(2,1) DEFAULT NULL,
   `DebolezzaFolletto` decimal(2,1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -165,8 +165,8 @@ CREATE TABLE `pm_tipo` (
 -- Dump dei dati per la tabella `pm_tipo`
 --
 
-INSERT INTO `pm_tipo` (`Tipo`, `DebolezzaNormale`, `DebolezzaFuoco`, `DebolezzaAcqua`, `DebolezzaErba`, `DebolezzaElettro`, `DebolezzaGhiaccio`, `DebolezzaLotta`, `DebolezzaVeleno`, `DebolezzaTerra`, `DebolezzaVolante`, `DebolezzaPsico`, `DebolezzaColeottero`, `DebolezzaRoccia`, `DebolezzaSpettro`, `DebolezzaDrago`, `DebolezzaBuio`, `DebolezzaAccaio`, `DebolezzaFolletto`) VALUES
-('accaio', 1.0, 0.5, 0.5, 1.0, 0.5, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 0.5, 2.0),
+INSERT INTO `pm_tipo` (`Tipo`, `DebolezzaNormale`, `DebolezzaFuoco`, `DebolezzaAcqua`, `DebolezzaErba`, `DebolezzaElettro`, `DebolezzaGhiaccio`, `DebolezzaLotta`, `DebolezzaVeleno`, `DebolezzaTerra`, `DebolezzaVolante`, `DebolezzaPsico`, `DebolezzaColeottero`, `DebolezzaRoccia`, `DebolezzaSpettro`, `DebolezzaDrago`, `DebolezzaBuio`, `DebolezzaAcciaio`, `DebolezzaFolletto`) VALUES
+('acciaio', 1.0, 0.5, 0.5, 1.0, 0.5, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 0.5, 2.0),
 ('acqua', 1.0, 2.0, 0.5, 0.5, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 2.0, 1.0, 0.5, 1.0, 1.0, 1.0),
 ('buio', 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 0.5, 1.0, 0.5),
 ('coleottero', 1.0, 0.5, 1.0, 2.0, 1.0, 1.0, 0.5, 0.5, 1.0, 0.5, 2.0, 1.0, 1.0, 0.5, 1.0, 2.0, 0.5, 0.5),
@@ -351,7 +351,60 @@ INSERT INTO `pokemon` (`Pokedex`, `nome`, `PS`, `Atk`, `AtkSP`, `Dif`, `DifSP`, 
 (113, 'chansey', 357, 62, 95, 62, 172, 112, 'normale', NULL),
 (114, 'tangela', 172, 117, 167, 183, 101, 123, 'erba', NULL),
 (115, 'kangaskhan', 212, 161, 101, 145, 145, 156, 'normale', NULL),
-(116, 'horsea', 137, 101, 134, 134, 84, 123, 'acqua', NULL);
+(116, 'horsea', 137, 101, 134, 134, 84, 123, 'acqua', NULL),
+(117, 'seadra', 162, 128, 161, 161, 106, 150, 'acqua', NULL),
+(118, 'goldeen', 152, 130, 95, 123, 112, 126, 'acqua', NULL),
+(119, 'seaking', 187, 158, 128, 128, 145, 132, 'acqua', NULL),
+(120, 'staryu', 137, 106, 134, 117, 117, 150, 'acqua', NULL),
+(121, 'starmie', 167, 139, 167, 150, 150, 183, 'acqua', 'psico'),
+(122, 'mr. mime', 147, 106, 167, 128, 189, 156, 'psico', 'folletto'),
+(123, 'scyther', 177, 178, 117, 145, 145, 172, 'coleottero', 'volante'),
+(124, 'jynx', 172, 112, 183, 95, 161, 161, 'ghiaccio', 'psico'),
+(125, 'electabuzz', 172, 148, 161, 119, 150, 172, 'elettro', NULL),
+(126, 'magmar', 172, 161, 167, 119, 150, 159, 'fuoco', NULL),
+(127, 'pinsir', 172, 194, 117, 167, 134, 150, 'coleottero', NULL),
+(128, 'tauros', 182, 167, 101, 161, 134, 178, 'normale', NULL),
+(129, 'magikarp', 127, 68, 73, 117, 79, 145, 'acqua', NULL),
+(130, 'gyarados', 202, 194, 123, 144, 167, 146, 'acqua', 'volante'),
+(131, 'lapras', 237, 150, 150, 145, 161, 123, 'acqua', 'ghiaccio'),
+(132, 'ditto', 155, 110, 110, 110, 110, 110, 'normale', NULL),
+(133, 'eevee', 162, 117, 106, 112, 128, 117, 'normale', NULL),
+(134, 'vaporeon', 237, 128, 178, 123, 161, 128, 'acqua', NULL),
+(135, 'jolteon', 172, 128, 178, 123, 161, 200, 'elettro', NULL),
+(136, 'flareon', 172, 200, 161, 123, 178, 128, 'fuoco', NULL),
+(137, 'porygon', 172, 123, 150, 134, 139, 101, 'normale', NULL),
+(138, 'omanyte', 142, 101, 156, 167, 117, 95, 'roccia', 'acqua'),
+(139, 'omastar', 177, 123, 183, 194, 134, 117, 'roccia', 'acqua'),
+(140, 'kabuto', 137, 145, 117, 156, 106, 117, 'roccia', 'acqua'),
+(141, 'kabutops', 167, 183, 128, 172, 134, 145, 'roccia', 'acqua'),
+(142, 'aerodactyl', 187, 172, 123, 128, 139, 200, 'roccia', 'volante'),
+(143, 'snorlax', 267, 178, 128, 128, 178, 90, 'normale', NULL),
+(144, 'articuno', 197, 150, 161, 167, 194, 150, 'ghiaccio', 'volante'),
+(145, 'zapdos', 197, 156, 194, 150, 156, 167, 'elettro', 'volante'),
+(146, 'moltres', 197, 167, 194, 156, 150, 156, 'fuoco', 'volante'),
+(147, 'dratini', 148, 127, 112, 106, 112, 112, 'drago', NULL),
+(148, 'dragonair', 168, 149, 134, 128, 134, 134, 'drago', NULL),
+(149, 'dragonite', 198, 204, 167, 161, 167, 145, 'drago', 'volante'),
+(150, 'mewtwo', 213, 178, 226, 156, 156, 200, 'psico', NULL),
+(151, 'mew', 207, 167, 167, 167, 167, 167, 'psico', NULL),
+(152, 'chikorita', 152, 111, 111, 128, 128, 106, 'erba', NULL),
+(153, 'bayleef', 167, 125, 126, 145, 145, 123, 'erba', NULL),
+(154, 'meganium', 187, 147, 148, 167, 167, 145, 'erba', NULL),
+(155, 'cyndaquil', 146, 114, 123, 104, 112, 128, 'fuoco', NULL),
+(156, 'quilava', 165, 127, 145, 121, 128, 145, 'fuoco', NULL),
+(157, 'typhlosion', 185, 149, 177, 143, 150, 167, 'fuoco', NULL),
+(158, 'totodile', 157, 128, 105, 127, 110, 104, 'acqua', NULL),
+(159, 'croconaw', 172, 145, 122, 145, 126, 121, 'acqua', NULL),
+(160, 'feraligatr', 192, 172, 144, 167, 148, 143, 'acqua', NULL),
+(161, 'sentret', 142, 107, 95, 94, 106, 79, 'normale', NULL),
+(162, 'furret', 192, 140, 106, 127, 117, 156, 'normale', NULL),
+(163, 'hoothoot', 167, 90, 96, 90, 118, 112, 'normale', 'volante'),
+(164, 'noctowl', 207, 112, 151, 112, 162, 134, 'normale', 'volante'),
+(165, 'ledyba', 147, 79, 101, 90, 145, 117, 'coleottero', 'volante'),
+(166, 'ledian', 162, 95, 117, 112, 178, 150, 'coleottero', 'volante'),
+(167, 'spinarak', 147, 123, 101, 101, 101, 90, 'coleottero', 'veleno'),
+(168, 'ariados', 177, 156, 123, 134, 134, 101, 'coleottero', 'veleno'),
+(169, 'crobat', 192, 156, 134, 145, 145, 200, 'veleno', 'volante');
 
 --
 -- Indici per le tabelle scaricate
