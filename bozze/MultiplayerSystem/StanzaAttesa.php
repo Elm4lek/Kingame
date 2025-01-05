@@ -53,7 +53,7 @@ $giocatore = $_SESSION['gioco']['giocatore'];
 <script>
 window.addEventListener("unload", function () {
     console.log("User has left the page.");
-    const data = JSON.stringify({ event: "page_unload", timestamp: Date.now() });
+    const data = JSON.stringify({ event: "page_unload", timestamp: 'something'});
     navigator.sendBeacon('prova.php', data);
 });
 </script>

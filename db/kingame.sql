@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Dic 29, 2024 alle 11:15
--- Versione del server: 10.4.28-MariaDB
--- Versione PHP: 8.2.4
+-- Creato il: Gen 05, 2025 alle 20:14
+-- Versione del server: 10.4.32-MariaDB
+-- Versione PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -406,6 +406,33 @@ INSERT INTO `pokemon` (`Pokedex`, `nome`, `PS`, `Atk`, `AtkSP`, `Dif`, `DifSP`, 
 (168, 'ariados', 177, 156, 123, 134, 134, 101, 'coleottero', 'veleno'),
 (169, 'crobat', 192, 156, 134, 145, 145, 200, 'veleno', 'volante');
 
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `stanze`
+--
+
+CREATE TABLE `stanze` (
+  `Id` int(3) NOT NULL,
+  `Gioco` varchar(10) NOT NULL,
+  `Numero` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `utenti`
+--
+
+CREATE TABLE `utenti` (
+  `UserName` varchar(20) NOT NULL,
+  `NickName` varchar(20) NOT NULL,
+  `Email` varchar(20) NOT NULL,
+  `Password` varchar(6) NOT NULL,
+  `StatoId` int(3) NOT NULL,
+  `StanzaId` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indici per le tabelle scaricate
 --
@@ -469,6 +496,18 @@ ALTER TABLE `pm_user`
 --
 ALTER TABLE `pokemon`
   ADD PRIMARY KEY (`Pokedex`);
+
+--
+-- Indici per le tabelle `stanze`
+--
+ALTER TABLE `stanze`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indici per le tabelle `utenti`
+--
+ALTER TABLE `utenti`
+  ADD PRIMARY KEY (`UserName`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
