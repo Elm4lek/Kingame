@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 05, 2025 alle 20:14
--- Versione del server: 10.4.32-MariaDB
--- Versione PHP: 8.2.12
+-- Creato il: Gen 07, 2025 alle 12:50
+-- Versione del server: 10.4.28-MariaDB
+-- Versione PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -404,34 +404,37 @@ INSERT INTO `pokemon` (`Pokedex`, `nome`, `PS`, `Atk`, `AtkSP`, `Dif`, `DifSP`, 
 (166, 'ledian', 162, 95, 117, 112, 178, 150, 'coleottero', 'volante'),
 (167, 'spinarak', 147, 123, 101, 101, 101, 90, 'coleottero', 'veleno'),
 (168, 'ariados', 177, 156, 123, 134, 134, 101, 'coleottero', 'veleno'),
-(169, 'crobat', 192, 156, 134, 145, 145, 200, 'veleno', 'volante');
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `stanze`
---
-
-CREATE TABLE `stanze` (
-  `Id` int(3) NOT NULL,
-  `Gioco` varchar(10) NOT NULL,
-  `Numero` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `utenti`
---
-
-CREATE TABLE `utenti` (
-  `UserName` varchar(20) NOT NULL,
-  `NickName` varchar(20) NOT NULL,
-  `Email` varchar(20) NOT NULL,
-  `Password` varchar(6) NOT NULL,
-  `StatoId` int(3) NOT NULL,
-  `StanzaId` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(169, 'crobat', 192, 156, 134, 145, 145, 200, 'veleno', 'volante'),
+(170, 'chinchou', 182, 99, 118, 99, 118, 130, 'acqua', 'elettro'),
+(171, 'lanturn', 232, 121, 140, 121, 140, 130, 'acqua', 'elettro'),
+(172, 'pichu', 127, 101, 95, 73, 95, 123, 'elettro', NULL),
+(173, 'cleffa', 157, 84, 106, 88, 117, 73, 'folletto', NULL),
+(174, 'igglybuff', 197, 90, 101, 73, 79, 73, 'normale', 'folletto'),
+(175, 'togepi', 142, 79, 101, 128, 128, 79, 'folletto', NULL),
+(176, 'togetic', 162, 101, 145, 150, 172, 101, 'folletto', 'volante'),
+(177, 'natu', 147, 112, 134, 106, 106, 134, 'psico', 'volante'),
+(178, 'xatu', 172, 139, 161, 134, 134, 161, 'psico', 'volante'),
+(179, 'mareep', 162, 101, 128, 101, 106, 95, 'elettro', NULL),
+(180, 'flaaffy', 177, 117, 145, 117, 123, 106, 'elettro', NULL),
+(181, 'ampharos', 197, 139, 183, 150, 156, 117, 'elettro', NULL),
+(182, 'bellossom', 182, 145, 156, 161, 167, 112, 'erba', NULL),
+(183, 'marill', 177, 79, 79, 112, 112, 101, 'acqua', 'folletto'),
+(184, 'azumarill', 207, 112, 123, 145, 145, 112, 'acqua', 'folletto'),
+(185, 'sudowoodo', 177, 167, 90, 183, 128, 90, 'roccia', NULL),
+(186, 'politoed', 197, 139, 156, 139, 167, 134, 'acqua', NULL),
+(187, 'hoppip', 142, 95, 95, 101, 117, 112, 'erba', 'volante'),
+(188, 'skiploom', 162, 106, 106, 112, 128, 145, 'erba', 'volante'),
+(189, 'jumpluff', 182, 117, 117, 134, 161, 178, 'erba', 'volante'),
+(190, 'aipom', 162, 134, 101, 117, 117, 150, 'normale', NULL),
+(191, 'sunkern', 137, 90, 90, 90, 90, 90, 'erba', NULL),
+(192, 'sunflora', 182, 139, 172, 117, 150, 90, 'erba', NULL),
+(193, 'yanma', 172, 128, 139, 106, 106, 161, 'coleottero', 'volante'),
+(194, 'wooper', 162, 106, 84, 106, 84, 73, 'acqua', 'terra'),
+(195, 'quagsire', 202, 150, 128, 150, 128, 95, 'acqua', 'terra'),
+(196, 'espeon', 172, 128, 200, 123, 161, 178, 'psico', NULL),
+(197, 'umbreon', 202, 128, 123, 178, 200, 128, 'buio', NULL),
+(198, 'murkrow', 167, 150, 150, 103, 103, 157, 'buio', 'volante'),
+(199, 'slowking', 202, 139, 167, 145, 178, 90, 'acqua', 'psico');
 
 --
 -- Indici per le tabelle scaricate
@@ -496,18 +499,6 @@ ALTER TABLE `pm_user`
 --
 ALTER TABLE `pokemon`
   ADD PRIMARY KEY (`Pokedex`);
-
---
--- Indici per le tabelle `stanze`
---
-ALTER TABLE `stanze`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indici per le tabelle `utenti`
---
-ALTER TABLE `utenti`
-  ADD PRIMARY KEY (`UserName`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
