@@ -1,18 +1,25 @@
 <?php
-// Read the raw POST data from the input stream
-$rawData = file_get_contents("php://input");
+// Create connection
+$stanza = $_POST['stanza'];
+$gioco = $_POST['gioco'];
+$num = $_POST['num'];
+$giocatore = $_POST['giocatore'];
 
-// Decode the JSON data
-$data = json_decode($rawData, true);
+$conn = new mysqli("localhost","root","","kingame")  or die (mysql_error())
 
-// Create an object to save into the file
-$myObj = new stdClass();
-$myObj->timestamp = $data['timestamp'];
-$myObj->event = $data['event'];
+if($tipo == 'crea'){
+    aggiungiStanza($stanza,$gioco,$num,$giocatore);
+}
 
-// Encode the object into JSON
-$myJSON = json_encode($myObj);
+function aggiungiStanza($stanza,$gioco,$num,$giocatore){
+    $sql = "INSERT INTO stanze(Id, Gioco, Numero) VALUES (".$stanza.",".$gioco.",".$num.")"; 
+    $con->query($sql);
+    aggiungiGiocatore($stanza,$giocatore);
+}
+function aggiungiGiocatore($stanza,$giocatore){
+    $sql = "INSERT INTO giocatori(Stanza, Giocatore) VALUES (".$stanza.",".$giocatore.")"; 
+    $con->query($sql);
+}
+$con->close();
 
-// Write the JSON to a file
-file_put_contents('prova.json', $myJSON);
 ?>
