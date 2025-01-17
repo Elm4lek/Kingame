@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 07, 2025 alle 12:50
+-- Creato il: Gen 17, 2025 alle 09:49
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -66,7 +66,7 @@ CREATE TABLE `pm_img_npc` (
 --
 
 CREATE TABLE `pm_mossa` (
-  `MT` decimal(4,0) NOT NULL,
+  `MT` varchar(5) NOT NULL,
   `Nome` varchar(20) DEFAULT NULL,
   `Tipo` varchar(15) DEFAULT NULL,
   `Categoria` varchar(10) DEFAULT NULL,
@@ -434,7 +434,40 @@ INSERT INTO `pokemon` (`Pokedex`, `nome`, `PS`, `Atk`, `AtkSP`, `Dif`, `DifSP`, 
 (196, 'espeon', 172, 128, 200, 123, 161, 178, 'psico', NULL),
 (197, 'umbreon', 202, 128, 123, 178, 200, 128, 'buio', NULL),
 (198, 'murkrow', 167, 150, 150, 103, 103, 157, 'buio', 'volante'),
-(199, 'slowking', 202, 139, 167, 145, 178, 90, 'acqua', 'psico');
+(199, 'slowking', 202, 139, 167, 145, 178, 90, 'acqua', 'psico'),
+(200, 'misdreavus', 167, 123, 150, 123, 150, 150, 'spettro', NULL),
+(201, 'unown', 155, 126, 136, 110, 110, 110, 'psico', NULL),
+(202, 'wobbuffet', 297, 93, 93, 121, 121, 93, 'psico', NULL),
+(203, 'girafarig', 177, 145, 156, 128, 128, 150, 'normale', 'psico'),
+(204, 'pineco', 157, 128, 95, 156, 95, 73, 'coleottero', NULL),
+(205, 'forretress', 182, 156, 123, 211, 123, 101, 'coleottero', 'acciaio'),
+(206, 'dunsparce', 207, 134, 128, 134, 128, 106, 'normale', NULL),
+(207, 'giglar', 172, 139, 95, 172, 128, 150, 'terra', 'volante'),
+(208, 'steelix', 182, 150, 117, 277, 128, 90, 'acciaio', 'terra'),
+(209, 'snubbull', 167, 145, 101, 112, 101, 90, 'folletto', NULL),
+(210, 'granbull', 197, 189, 123, 139, 123, 106, 'folletto', NULL),
+(211, 'qwilfish', 172, 161, 117, 150, 117, 150, 'acqua', 'veleno'),
+(212, 'scizor', 177, 200, 117, 167, 145, 128, 'coleottero', 'acciaio'),
+(213, 'shuckle', 127, 68, 68, 310, 310, 62, 'coleottero', 'roccia'),
+(214, 'heracross', 187, 194, 101, 139, 161, 150, 'coleottero', 'lotta'),
+(215, 'sneasel', 162, 161, 95, 117, 139, 183, 'buio', 'ghiaccio'),
+(216, 'teddiursa', 167, 145, 112, 112, 112, 101, 'normale', NULL),
+(217, 'ursaring', 197, 200, 139, 139, 139, 117, 'normale', NULL),
+(218, 'slugma', 147, 101, 134, 101, 101, 79, 'fuoco', NULL),
+(219, 'magcargo', 167, 112, 156, 189, 145, 90, 'fuoco', 'roccia'),
+(220, 'swinub', 157, 112, 90, 101, 90, 112, 'ghiaccio', 'terra'),
+(221, 'piloswine', 207, 167, 123, 145, 123, 112, 'ghiaccio', 'terra'),
+(222, 'corsola', 172, 117, 128, 161, 161, 95, 'acqua', 'roccia'),
+(223, 'remoraid', 142, 128, 128, 95, 95, 128, 'acqua', NULL),
+(224, 'octillery', 182, 172, 172, 139, 139, 106, 'acqua', NULL),
+(225, 'delibird', 152, 117, 128, 106, 106, 139, 'ghiaccio', 'volante'),
+(226, 'mantine', 192, 101, 145, 134, 211, 134, 'acqua', 'volante'),
+(227, 'skarmory', 172, 145, 101, 211, 134, 134, 'acciaio', 'volante'),
+(228, 'houndur', 152, 123, 145, 90, 112, 128, 'buio', 'fuoco'),
+(229, 'houndoom', 182, 156, 178, 112, 145, 161, 'buio', 'fuoco'),
+(230, 'kingdra', 182, 161, 161, 161, 161, 150, 'acqua', NULL),
+(231, 'phanpy', 197, 123, 101, 123, 101, 101, 'terra', NULL),
+(232, 'donphan', 197, 189, 123, 189, 123, 112, 'terra', NULL);
 
 --
 -- Indici per le tabelle scaricate
