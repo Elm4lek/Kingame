@@ -12,7 +12,6 @@ if (isset($_SESSION['fname'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/navbar.css">
   <title>Registrazione</title>
- 
 </head>
 <body>
 
@@ -33,7 +32,7 @@ if (isset($_SESSION['fname'])) {
       <input type="password" id="password" name="password" required>
 
       <label for="cpassword">Conferma Password</label>
-      <input type="password" id="cpassword" name="cpassword" onchange="checkEquality('cpassword','password')" required>
+      <input type="password" id="cpassword" name="cpassword" required>
 
       <input type="submit" value="Registrati" id="submitBtn" disabled>
 
@@ -45,40 +44,46 @@ if (isset($_SESSION['fname'])) {
 </html>
 
 <script>
-  function checkEquality(now, og){
-    var nowEl = document.getElementById(now);
-    var ogEl = document.getElementById(og);
-    var responseDiv = document.getElementById(og+'diverso');
+  function checkEquality() {
+    const password = document.getElementById('password').value;
+    const cpassword = document.getElementById('cpassword').value;
+    const errorDiv = document.getElementById('passwordMismatch');
 
-    if (nowEl.value != ogEl.value) {
-      if (!responseDiv) {
-        responseDiv = document.createElement('div');
-        responseDiv.id = og+'diverso';
-        responseDiv.innerHTML = 'Password non uguale';
-        nowEl.parentNode.insertBefore(responseDiv, nowEl.nextSibling);
+    if (password !== cpassword) {
+      if (!errorDiv) {
+        const newErrorDiv = document.createElement('div');
+        newErrorDiv.id = 'passwordMismatch';
+        newErrorDiv.style.color = 'red';
+        newErrorDiv.textContent = 'Le password non coincidono';
+        document.getElementById('cpassword').parentNode.insertBefore(newErrorDiv, document.getElementById('cpassword').nextSibling);
       }
     } else {
-      if (responseDiv) {
-        responseDiv.remove();
+      if (errorDiv) {
+        errorDiv.remove();
       }
     }
-    
-    prosegui();
   }
 
-  function prosegui() {
+  function validateForm() {
     const form = document.getElementById('registrationForm');
     const submitBtn = document.getElementById('submitBtn');
-    
-    //controlla se i campi sono pieni o no
-    const pieno = Array.from(form.elements).every((input) => {
+    const password = document.getElementById('password').value;
+    const cpassword = document.getElementById('cpassword').value;
+
+    // Controlla se tutti i campi obbligatori sono riempiti
+    const allFieldsFilled = Array.from(form.elements).every((input) => {
       return input.value.trim() !== '' || !input.required;
     });
-    
-    submitBtn.disabled = !pieno;
+
+    // Abilita il pulsante solo se i campi sono pieni e le password coincidono
+    submitBtn.disabled = !(allFieldsFilled && password === cpassword);
   }
 
+  // Aggiungi event listener per tutti i campi di input
   document.querySelectorAll('input').forEach(input => {
-    input.addEventListener('input', validateForm);
+    input.addEventListener('input', () => {
+      checkEquality();
+      validateForm();
+    });
   });
 </script>
