@@ -32,7 +32,7 @@ if (isset($_SESSION['fname'])) {
       <input type="password" id="password" name="password" required>
 
       <label for="cpassword">Conferma Password</label>
-      <input type="password" id="cpassword" name="cpassword" required>
+      <input type="password" id="cpassword" name="cpassword" oninput="checkEquality()" required>
 
       <input type="submit" value="Registrati" id="submitBtn" disabled>
 
@@ -82,7 +82,6 @@ if (isset($_SESSION['fname'])) {
   // Aggiungi event listener per tutti i campi di input
   document.querySelectorAll('input').forEach(input => {
     input.addEventListener('input', () => {
-      checkEquality();
       validateForm();
     });
   });

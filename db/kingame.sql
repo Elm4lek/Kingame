@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 21, 2025 alle 16:06
+-- Creato il: Gen 21, 2025 alle 20:15
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -622,6 +622,33 @@ INSERT INTO `pokemon` (`Pokedex`, `nome`, `PS`, `Atk`, `AtkSP`, `Dif`, `DifSP`, 
 (384, 'rayquaza', 212, 222, 222, 156, 156, 161, 'drago', 'volante'),
 (385, 'jirachi', 207, 167, 167, 167, 167, 167, 'acciaio', 'psico'),
 (386, 'deoxys', 157, 222, 222, 112, 112, 222, 'psico', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `stanze`
+--
+
+CREATE TABLE `stanze` (
+  `Id` int(3) NOT NULL,
+  `Gioco` varchar(10) NOT NULL,
+  `Numero` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `utenti`
+--
+
+CREATE TABLE `utenti` (
+  `UserName` varchar(20) NOT NULL,
+  `NickName` varchar(20) NOT NULL,
+  `Email` varchar(20) NOT NULL,
+  `Password` varchar(6) NOT NULL,
+  `StatoId` int(3) NOT NULL,
+  `StanzaId` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indici per le tabelle scaricate
