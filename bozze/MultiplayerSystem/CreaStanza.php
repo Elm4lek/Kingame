@@ -54,6 +54,7 @@ if(empty($_SESSION['gioco'])){
     }
 }
 if($haPosto){
+    $url = 'AggiornaDB.php';
     $options = [
         'http' => [
             'header' => "Content-type: application/x-www-form-urlencoded\r\n",

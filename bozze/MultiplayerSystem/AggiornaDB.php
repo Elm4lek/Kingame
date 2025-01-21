@@ -10,6 +10,9 @@ $conn = new mysqli("localhost","root","","kingame")  or die (mysql_error())
 if($tipo == 'crea'){
     aggiungiStanza($stanza,$gioco,$num,$giocatore);
 }
+else{
+    aggiungiGiocatore($stanza,$giocatore);
+}
 
 function aggiungiStanza($stanza,$gioco,$num,$giocatore){
     $sql = "INSERT INTO stanze(Id, Gioco, Numero) VALUES (".$stanza.",".$gioco.",".$num.")"; 
