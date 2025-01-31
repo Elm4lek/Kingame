@@ -54,7 +54,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
         <input type="hidden" name="nome" value="<?php echo $_POST['nome']; ?>">
         <input type="hidden" name="cognome" value="<?php echo $_POST['cognome']; ?>">
         <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>">
-        <input type="hidden" name="password" value="<?php echo $_POST['password']; ?>">
+        <input type="hidden" name="password" value="<?php echo md5($_POST['password']); ?>">
       </select>
 
       <input type="submit" value="Registrati" id="submitBtn" disabled>
