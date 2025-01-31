@@ -1,13 +1,4 @@
 <?php
-session_start();
-$nome = $_POST['nome'];
-$cognome = $_POST['cognome'];
-$email = $_POST['email'];
-$password = $_POST['password'];
-$secPassword = md5($password);
-?>
-
-<?php
 include 'menu.php';
 
 $json_url = "https://restcountries.com/v3.1/all";
@@ -60,18 +51,17 @@ if (json_last_error() !== JSON_ERROR_NONE) {
             echo '</option>'; 
         }
         ?>
-        <?php
-        echo '<input type="hidden" name = "nome" value= "'$nome'"/>'
-        echo '<input type="hidden" id="surname" name="'$cognome'" required>'
-        echo '<input type="hidden" id="email" name="'$email'" required>'
-        echo '<input type="hidden" id="password" name="'$password'" required>''
-        ?>
-</select>
+        <input type="hidden" name="nome" value="<?php echo $_POST['nome']; ?>">
+        <input type="hidden" name="cognome" value="<?php echo $_POST['cognome']; ?>">
+        <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>">
+        <input type="hidden" name="password" value="<?php echo $_POST['password']; ?>">
+      </select>
 
       <input type="submit" value="Registrati" id="submitBtn" disabled>
    </form>
 </div>
     
+
 
         
     
@@ -79,3 +69,4 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 
 
 </html>
+
