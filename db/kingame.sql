@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 30, 2025 alle 12:43
+-- Creato il: Gen 31, 2025 alle 08:08
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -788,7 +788,8 @@ ALTER TABLE `pm_img_npc`
 -- Indici per le tabelle `pm_mossa`
 --
 ALTER TABLE `pm_mossa`
-  ADD PRIMARY KEY (`MT`);
+  ADD PRIMARY KEY (`MT`),
+  ADD KEY `Tipo` (`Tipo`);
 
 --
 -- Indici per le tabelle `pm_npc`
@@ -883,6 +884,12 @@ ALTER TABLE `pm_img`
 --
 ALTER TABLE `pm_img_npc`
   ADD CONSTRAINT `pm_img_npc_ibfk_1` FOREIGN KEY (`NPC_ID`) REFERENCES `pm_npc` (`NPC_ID`);
+
+--
+-- Limiti per la tabella `pm_mossa`
+--
+ALTER TABLE `pm_mossa`
+  ADD CONSTRAINT `pm_mossa_ibfk_1` FOREIGN KEY (`Tipo`) REFERENCES `pm_tipo` (`Tipo`);
 
 --
 -- Limiti per la tabella `pm_npc`

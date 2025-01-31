@@ -1,9 +1,10 @@
 <?php
 session_start();
 $haPosto = true;
+
 if(empty($_SESSION['gioco'])){
     $tipo = $_POST['tipo'];
-    $nome = $_POST['nome'];
+    $nome = $_SESSION['nome'];
     $server = "localhost";
     $conn = new mysqli($server,"root","","kingame")  or die (mysql_error());
     $sql = "SELECT * FROM stanze"; 
@@ -34,39 +35,32 @@ if(empty($_SESSION['gioco'])){
             }
         }
 
-        $data = ['stanza' => $stanza, 'gioco' => $gioco,'num' => $numero,'giocatore' => $nome];
-
+        $data = ['stanza' => $stanza, 'gioco' => $gioco,'num' => $numero];
+        $sessione = ['giocatore' => $nome,'stanza' => $stanza, 'gioco' => $gioco];
     }
     else{
         $stanza = $_POST['stanza'];
         $result = findByKeyValue($data, 'stanza', $stanza);
-
         $numero = $result['numero'];
 
-        $sql = "SELECT COUNT(*) FROM utenti WHERE StanzaId = ".$stanza; 
+        $sql = "SELECT COUNT(*) FROM sessione WHERE Stanza = ".$stanza." and In_Sessione = ".true; 
         $giocatori = $conn->query($sql);
 
         if($giocatori === $numero){
             $haPosto = false;
         }else{
-            $data = ['stanza' => $stanza,'giocatore' => $nome];
+            $sessione = ['giocatore' => $nome,'stanza' => $stanza, 'gioco' => $gioco];
         }
     }
 }
 if($haPosto){
-    $url = 'AggiornaDB.php';
-    $options = [
-        'http' => [
-            'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-            'method' => 'POST',
-            'content' => http_build_query($data),
-        ],
-    ];
-    $context = stream_context_create($options);
-    $result = file_get_contents($server, false, $context);
-    $context = stream_context_create($options);
+    if($tipo == 'crea'){
+        post($tipo,[$data,$sessione]);
+    }
+    else{
+        post($tipo,[[],$sessione]);
+    }
     $_SESSION['gioco']['stanza'] = $stanza;
-    $_SESSION['gioco']['nome'] = $nome;
     $_SESSION['gioco']['gioco'] = $gioco;
     $_SESSION['gioco']['numero'] = $numero;
     $_SESSION['gioco']['giocatore'] = $giocatore;
@@ -80,5 +74,19 @@ else{
             <a href = 'AggiungiStanza.php'>aggiungi in una stanza</a>
             </div>";
     $_SESSION['gioco'] = [];
+}
+function post($tipo,$data){
+
+    $url = 'AggiornaDB.php';
+    $options = [
+        'http' => [
+            'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method' => 'POST',
+            'content' => http_build_query([$tipo,$data]),
+        ],
+    ];
+    $context = stream_context_create($options);
+    $result = file_get_contents($server, false, $context);
+    $context = stream_context_create($options);
 }
 ?>
