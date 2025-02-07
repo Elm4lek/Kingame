@@ -10,7 +10,7 @@ $pageTitle = "Termini e Condizioni";
     <title><?php echo $pageTitle; ?></title>
     <link rel="stylesheet" href="css/index.css">
 </head>
-<body>
+<body link="red">
     <div class="container">
         <h1>Termini e Condizioni</h1>
 
@@ -25,7 +25,7 @@ $pageTitle = "Termini e Condizioni";
 
 Dopo aver effettuato un ordine, i clienti riceveranno un’e-mail di conferma con il dettaglio dei servizi ordinati e del costo totale. La GAMES SPA si riserva il diritto di annullare un ordine in qualsiasi momento, in caso di circostanze impreviste.
 
-Accettiamo i seguenti metodi di pagamento: <a href="https://www.visaitalia.com" target="_blank">Visa</a>, <a href="https://www.mastercard.com" target="_blank">Mastercard</a>, <a href="https://it.wikipedia.org/wiki/Maestro_(carta_di_debito)" target="_blank">Maestro</a>, Pagamenti in natura e <a href="https://www.paypal.com" target="_blank">Paypal</a>.
+Accettiamo i seguenti metodi di pagamento: Visa, Mastercard, Maestro, Pagamenti in natura e Paypal.
 
 Tutti i prezzi sono soggetti a modifiche senza preavviso.
 
