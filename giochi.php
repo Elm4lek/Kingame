@@ -35,7 +35,11 @@ include 'menu.php';
 
 <body>
     <div class="centro">
-        <div class="contenitore"></div>
+    <a href="tetris.php">
+        <div class="contenitore">
+        <img src="C:\xampp\htdocs\Kingame\img">
+        </div>
+    </a>
         <div class="contenitore"></div>
         <div class="contenitore"></div>
         
