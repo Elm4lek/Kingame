@@ -22,6 +22,24 @@ include 'menu.php';
          gap: 4px;
             
         }
+        .contenitoretetris {
+            width: 200px;
+            height: 200px;
+            background-color: #fff;
+            border-radius: 20px;
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-image: url('img/tetrislogo.png');
+            background-size: cover;
+            background-position: center;
+}
+
         .contenitore {
             width: 200px;
             height: 200px;
@@ -31,17 +49,20 @@ include 'menu.php';
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
+        .contenitoretetris:hover {
+            transform: scale(1.1);
+        }
         .contenitore:hover {
             transform: scale(1.1);
         }
+        
     </style>
 </head> 
 
 <body>
     <div class="centro">
     <a href="tetris.php">
-        <div class="contenitore">
-        <img src="C:\xampp\htdocs\Kingame\img">
+        <div class="contenitoretetris">
         </div>
     </a>
         <div class="contenitore"></div>
