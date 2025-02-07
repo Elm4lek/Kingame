@@ -18,7 +18,7 @@
                 <li class="list-inline-item"><a href="index.php">Home</a></li>
                 <li class="list-inline-item"><a href="giochi.php">Services</a></li>
                 <li class="list-inline-item"><a href="chisiamo.php">About</a></li>
-                <li class="list-inline-item"><a href="terms.php">Terms</a></li>
+                <li class="list-inline-item"><a href="termini.php">Terms</a></li>
                 <li class="list-inline-item"><a href="privacy.php">Privacy Policy</a></li>
             </ul>
             <p class="copyright">Kingames © 2025</p>
