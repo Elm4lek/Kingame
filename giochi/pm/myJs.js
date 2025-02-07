@@ -10,6 +10,7 @@ var moveList = [
     move("botta")];
 
 function select(choice){
+    cancel();
     switch(choice){
         case 'Fight': fight();
             break;
@@ -17,37 +18,42 @@ function select(choice){
             break;
         case 'Pokemon': pokemon();
             break;
-        case 'Cancel': cancel();
-            break;
     }
 }
 
 function fight(){
     var choices = [];
     var box = document.getElementById("dialog-box");
-    while (box.firstChild) {
-        box.removeChild(box.lastChild);
-    }
-    for(let i = 0 ; i < 4; i++){
-        choices[i] = document.createElement("div");
-        choices[i].id = "move"+(i+1);
-        choices[i].classList.add("move-botton");
-        choices[i].classList.add("text-container");
-        choices[i].innerHTML = moveList[i].name;
-        choices[i].onclick = function() {
-            selectMove(moveList[i].name);
+    for(let i = 0 ; i < moveList.length; i++){
+        var fightfightMove = document.createElement("div");
+        fightMove.id = "move"+(i+1);
+        fightMove.classList.add("move-botton");
+        fightMove.classList.add("text-container");
+        fightMove.onclick = function() {
+            selectfightMove(moveList[i].name);
         };
+        fightMove.addEventListener('mouseover', () => {
+            hoverDiv.style.backgroundColor = 'lightcoral';
+        });
+
+        fightMove.addEventListener('mouseout', () => {
+            hoverDiv.style.backgroundColor = 'lightblue';
+        });
+        choices.push(fightMove);
         box.appendChild(choices[i]);
     }
 
 }
 
-
-function selectMove(name){
+function cancel(){
     var box = document.getElementById("dialog-box");
     while (box.firstChild) {
         box.removeChild(box.lastChild);
     }
+}
+
+function selectMove(name){
+    var box = document.getElementById("dialog-box");
     box.innerHTML="hai usato "+name;
 
 }

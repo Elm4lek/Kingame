@@ -52,9 +52,9 @@ body{
     height: 20%;
 }
 .move-botton {
-    height: 97%;
-    width: 24%;
-    border: 5px solid darkslategrey;
+    height: 100%;
+    width: 25%;    
+    box-shadow:inset 0px 0px 0px 5px darkslategrey;
     background-color: cornsilk;
 }
 .text-container{
