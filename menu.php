@@ -44,7 +44,7 @@ session_start();
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profilo<span class="caret"></span></a>
           <ul class="dropdown-menu">
-              <li><a href="impostazioni.php">Imostazioni</a></li>
+              <li><a href="impostazioni.php">Impostazioni</a></li>
             <li><a href="logout.php">Logout</a></li>
           </ul>
         </li>

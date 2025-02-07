@@ -107,7 +107,7 @@ include 'menu.php';
                     <img class="card-img-top" src="https://avatars.githubusercontent.com/u/191097751?v=4" alt="Card image" >
                     <div class="card-body">
                         <h4 class="card-title">IlSupo</h4>
-                        <p class="card-text">Dal Però con furore, sempre pronto a dare consigli costruttivi e ad ascoltare gli altri.</p>
+                        <p class="card-text">Dal Perù con furore, sempre pronto a dare consigli costruttivi e ad ascoltare gli altri.</p>
                         <a href="https://github.com/IlSupo" class="btn btn-primary" target="_blank" >See Profile</a>
                     </div>
                 </div>
