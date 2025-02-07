@@ -1,6 +1,9 @@
 <?php
 include 'menu.php';
-
+/*if (!isset($_SESSION['fname'])) {
+    header("Location: index.php");
+    exit();
+}*/
 $json_url = "https://restcountries.com/v3.1/all";
 
 $ch = curl_init($json_url);
