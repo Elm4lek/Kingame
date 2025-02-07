@@ -9,12 +9,11 @@ $nome = $_POST['nome'];
 $cognome = $_POST['cognome'];
 $email = $_POST['email'];
 $password = $_POST['password'];
-$secPassword = md5($password);
 $paese = $_POST['paese'];
 $nomeUtente = $_POST['nickname'];
 
-$stmt = $conn->prepare("INSERT INTO utenti (nome, cognome, email, password, paese, nomeUtente) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("ssssss", $nome, $cognome, $email, $secPassword, $paese, $nomeUtente);
+$stmt = $conn->prepare("INSERT INTO utenti (nome, cognome, email, password, paese, nomeUtente) VALUES (?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("ssssss", $nome, $cognome, $email, $password, $paese, $nomeUtente);
 
 if ($stmt->execute()) {
 } else {

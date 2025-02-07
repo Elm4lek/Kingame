@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 30, 2025 alle 12:43
+-- Creato il: Feb 07, 2025 alle 08:02
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -20,6 +20,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `kingame`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `giochi`
+--
+
+CREATE TABLE `giochi` (
+  `ID` int(1) NOT NULL,
+  `Gioco` varchar(20) NOT NULL,
+  `Numero_Gioatori` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -73,6 +85,103 @@ CREATE TABLE `pm_mossa` (
   `Potenza` decimal(3,0) DEFAULT NULL,
   `PP` decimal(2,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `pm_mossa`
+--
+
+INSERT INTO `pm_mossa` (`MT`, `Nome`, `Tipo`, `Categoria`, `Potenza`, `PP`) VALUES
+('MT001', 'botta', 'normale', 'fisico', 40, 35),
+('MT002', 'colpokarate', 'lotta', 'fisico', 50, 25),
+('MT003', 'doppiasberla', 'normale', 'fisico', 30, 10),
+('MT004', 'cometapugno', 'normale', 'fisico', 18, 15),
+('MT005', 'megapugno', 'normale', 'fisico', 80, 20),
+('MT006', 'giornopaga', 'normale', 'fisico', 40, 20),
+('MT007', 'fuocopugno', 'fuoco', 'fisico', 75, 15),
+('MT008', 'gelopugno', 'ghiaccio', 'fisico', 75, 15),
+('MT009', 'tuonopugno', 'elettro', 'fisico', 75, 15),
+('MT010', 'graffio', 'normale', 'fisico', 40, 35),
+('MT011', 'presa', 'normale', 'fisico', 55, 30),
+('MT012', 'ghigliottina', 'normale', 'fisico', 999, 5),
+('MT013', 'ventagliente', 'normale', 'speciale', 80, 10),
+('MT014', 'danzaspada', 'normale', 'stato', 0, 20),
+('MT015', 'taglio', 'normale', 'fisico', 50, 30),
+('MT016', 'raffica', 'volante', 'speciale', 40, 35),
+('MT017', 'attacco d-ala', 'volante', 'fisico', 60, 35),
+('MT018', 'turbine', 'normale', 'stato', 0, 20),
+('MT019', 'volo', 'volante', 'fisico', 90, 15),
+('MT020', 'legatutto', 'normale', 'fisico', 15, 20),
+('MT021', 'schianto', 'normale', 'fisico', 80, 20),
+('MT022', 'frustata', 'erba', 'fisico', 45, 25),
+('MT023', 'pestone', 'normale', 'fisico', 65, 20),
+('MT024', 'doppiocalcio', 'lotta', 'fisico', 60, 30),
+('MT025', 'megacalcio', 'normale', 'fisico', 120, 5),
+('MT026', 'calciosalto', 'lotta', 'fisico', 100, 10),
+('MT027', 'calciorullo', 'lotta', 'fisico', 60, 15),
+('MT028', 'turbosabbia', 'terra', 'stato', 0, 15),
+('MT029', 'bottintesta', 'normale', 'fisico', 70, 15),
+('MT030', 'incornata', 'normale', 'fisico', 65, 25),
+('MT031', 'furia', 'normale', 'fisico', 15, 20),
+('MT032', 'perforcorno', 'normale', 'fisico', 999, 5),
+('MT033', 'azione', 'normale', 'fisico', 40, 35),
+('MT034', 'corposcontro', 'normale', 'fisico', 85, 15),
+('MT035', 'avvolgibotta', 'normale', 'fisico', 15, 20),
+('MT036', 'riduttore', 'normale', 'fisico', 90, 20),
+('MT037', 'colpo', 'normale', 'fisico', 120, 10),
+('MT038', 'sdoppiatore', 'normale', 'fisico', 120, 15),
+('MT039', 'colpocoda', 'normale', 'stato', 0, 30),
+('MT040', 'velenospina', 'veleno', 'fisico', 15, 35),
+('MT041', 'doppio ago', 'coleottero', 'fisico', 25, 20),
+('MT042', 'missilspillo', 'coleottero', 'fisico', 25, 20),
+('MT043', 'fulmisguardo', 'normale', 'stato', 0, 30),
+('MT044', 'morso', 'buio', 'fisico', 60, 25),
+('MT045', 'ruggito', 'normale', 'stato', 0, 40),
+('MT046', 'boato', 'normale', 'stato', 0, 20),
+('MT047', 'canto', 'normale', 'stato', 0, 15),
+('MT048', 'supersuono', 'normale', 'stato', 0, 20),
+('MT049', 'sonicboom', 'normale', 'speciale', 20, 20),
+('MT050', 'inibitore', 'normale', 'stato', 0, 20),
+('MT051', 'acido', 'veleno', 'speciale', 40, 30),
+('MT052', 'braciere', 'fuoco', 'speciale', 40, 25),
+('MT053', 'lanciafiamme', 'fuoco', 'speciale', 90, 15),
+('MT054', 'nebbia', 'ghiaccio', 'stato', 0, 30),
+('MT055', 'pistolacqua', 'acqua', 'speciale', 40, 25),
+('MT056', 'idropompa', 'acqua', 'speciale', 110, 5),
+('MT057', 'surf', 'acqua', 'speciale', 90, 15),
+('MT058', 'geloraggio', 'ghiaccio', 'speciale', 90, 10),
+('MT059', 'bora', 'ghiaccio', 'speciale', 110, 5),
+('MT060', 'psicoraggio', 'psico', 'speciale', 65, 20),
+('MT061', 'bollaraggio', 'acqua', 'speciale', 65, 20),
+('MT062', 'raggiaurora', 'ghiaccio', 'speciale', 65, 20),
+('MT063', 'iper raggio', 'normale', 'speciale', 150, 5),
+('MT064', 'beccata', 'volante', 'fisico', 35, 35),
+('MT065', 'perforbecco', 'volante', 'fisico', 80, 20),
+('MT066', 'sottomissione', 'lotta', 'fisico', 80, 20),
+('MT067', 'colpo basso', 'lotta', 'fisico', 80, 20),
+('MT068', 'contrattacco', 'lotta', 'fisico', 0, 20),
+('MT069', 'movimento sismico', 'lotta', 'fisico', 50, 20),
+('MT070', 'forza', 'normale', 'fisico', 80, 15),
+('MT071', 'assorbimento', 'erba', 'speciale', 20, 25),
+('MT072', 'megaassorbimento', 'erba', 'speciale', 40, 15),
+('MT073', 'parassiseme', 'erba', 'stato', 0, 10),
+('MT074', 'crescita', 'normale', 'stato', 0, 20),
+('MT075', 'foglielama', 'erba', 'fisico', 55, 25),
+('MT076', 'solarraggio', 'erba', 'speciale', 120, 10),
+('MT077', 'velenpolvere', 'veleno', 'stato', 0, 35),
+('MT078', 'paralizzante', 'erba', 'stato', 0, 30),
+('MT079', 'sonnifero', 'erba', 'stato', 0, 15),
+('MT080', 'petalodanza', 'erba', 'speciale', 120, 10),
+('MT081', 'millebave', 'coleottero', 'stato', 0, 40),
+('MT082', 'ira di drago', 'drago', 'speciale', 40, 10),
+('MT083', 'turbofuoco', 'fuoco', 'speciale', 35, 15),
+('MT084', 'tuonoshock', 'elettro', 'speciale', 40, 30),
+('MT085', 'fulmine', 'elettro', 'speciale', 90, 15),
+('MT086', 'tuononda', 'elettro', 'stato', 0, 20),
+('MT087', 'tuono', 'elettro', 'speciale', 110, 10),
+('MT088', 'sassata', 'roccia', 'fisico', 50, 15),
+('MT089', 'terremoto', 'terra', 'fisico', 100, 10),
+('MT090', 'abisso', 'terra', 'fisico', 999, 5),
+('MT091', 'fossa', 'terra', 'fisico', 80, 10);
 
 -- --------------------------------------------------------
 
@@ -735,13 +844,26 @@ INSERT INTO `pokemon` (`Pokedex`, `nome`, `PS`, `Atk`, `AtkSP`, `Dif`, `DifSP`, 
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `sessione`
+--
+
+CREATE TABLE `sessione` (
+  `User` varchar(20) NOT NULL,
+  `Stanza` int(4) NOT NULL,
+  `Punteggio` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `stanze`
 --
 
 CREATE TABLE `stanze` (
-  `Id` int(3) NOT NULL,
-  `Gioco` varchar(10) NOT NULL,
-  `Numero` int(1) NOT NULL
+  `Id` int(4) NOT NULL,
+  `Gioco` int(1) NOT NULL,
+  `Data` date NOT NULL,
+  `Stato` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -762,6 +884,12 @@ CREATE TABLE `utenti` (
 --
 -- Indici per le tabelle scaricate
 --
+
+--
+-- Indici per le tabelle `giochi`
+--
+ALTER TABLE `giochi`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indici per le tabelle `pm_borsa`
@@ -788,7 +916,8 @@ ALTER TABLE `pm_img_npc`
 -- Indici per le tabelle `pm_mossa`
 --
 ALTER TABLE `pm_mossa`
-  ADD PRIMARY KEY (`MT`);
+  ADD PRIMARY KEY (`MT`),
+  ADD KEY `Tipo` (`Tipo`);
 
 --
 -- Indici per le tabelle `pm_npc`
@@ -850,10 +979,18 @@ ALTER TABLE `pokemon`
   ADD KEY `tipo2` (`tipo2`);
 
 --
+-- Indici per le tabelle `sessione`
+--
+ALTER TABLE `sessione`
+  ADD PRIMARY KEY (`User`,`Stanza`),
+  ADD KEY `Stanza` (`Stanza`);
+
+--
 -- Indici per le tabelle `stanze`
 --
 ALTER TABLE `stanze`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `Gioco` (`Gioco`);
 
 --
 -- Indici per le tabelle `utenti`
@@ -883,6 +1020,12 @@ ALTER TABLE `pm_img`
 --
 ALTER TABLE `pm_img_npc`
   ADD CONSTRAINT `pm_img_npc_ibfk_1` FOREIGN KEY (`NPC_ID`) REFERENCES `pm_npc` (`NPC_ID`);
+
+--
+-- Limiti per la tabella `pm_mossa`
+--
+ALTER TABLE `pm_mossa`
+  ADD CONSTRAINT `pm_mossa_ibfk_1` FOREIGN KEY (`Tipo`) REFERENCES `pm_tipo` (`Tipo`);
 
 --
 -- Limiti per la tabella `pm_npc`
@@ -921,6 +1064,19 @@ ALTER TABLE `pm_user`
 ALTER TABLE `pokemon`
   ADD CONSTRAINT `pokemon_ibfk_1` FOREIGN KEY (`tipo1`) REFERENCES `pm_tipo` (`Tipo`),
   ADD CONSTRAINT `pokemon_ibfk_2` FOREIGN KEY (`tipo2`) REFERENCES `pm_tipo` (`Tipo`);
+
+--
+-- Limiti per la tabella `sessione`
+--
+ALTER TABLE `sessione`
+  ADD CONSTRAINT `sessione_ibfk_1` FOREIGN KEY (`User`) REFERENCES `utenti` (`UserName`),
+  ADD CONSTRAINT `sessione_ibfk_2` FOREIGN KEY (`Stanza`) REFERENCES `stanze` (`Id`);
+
+--
+-- Limiti per la tabella `stanze`
+--
+ALTER TABLE `stanze`
+  ADD CONSTRAINT `stanze_ibfk_1` FOREIGN KEY (`Gioco`) REFERENCES `giochi` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
