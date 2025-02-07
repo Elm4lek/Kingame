@@ -2,6 +2,8 @@
 $pageTitle = "Termini e Condizioni";
 ?>
 
+<?php include 'menu.php'; ?>
+
 <!DOCTYPE html>
 <html>
 <head>
