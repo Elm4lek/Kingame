@@ -1,7 +1,6 @@
 function move(name){
     var move = {};
     move.name = name;
-    console.log(move);
     return move;
 }
 var moveList = [
@@ -10,7 +9,6 @@ var moveList = [
     move("botta"),
     move("botta")];
 
-console.log(moveList);
 function select(choice){
     switch(choice){
         case 'Fight': fight();
@@ -26,20 +24,30 @@ function select(choice){
 
 function fight(){
     var choices = [];
-    choices.push(document.getElementById("choice1"));
-    choices.push(document.getElementById("choice2"));
-    choices.push(document.getElementById("choice3"));
-    choices.push(document.getElementById("choice4"));
-
+    var box = document.getElementById("dialog-box");
+    while (box.firstChild) {
+        box.removeChild(box.lastChild);
+    }
     for(let i = 0 ; i < 4; i++){
+        choices[i] = document.createElement("div");
+        choices[i].id = "move"+(i+1);
+        choices[i].classList.add("move-botton");
+        choices[i].classList.add("text-container");
         choices[i].innerHTML = moveList[i].name;
         choices[i].onclick = function() {
             selectMove(moveList[i].name);
         };
+        box.appendChild(choices[i]);
     }
+
 }
 
 
 function selectMove(name){
-    document.getElementById("dialog-box").innerHTML="hai usato "+name;
+    var box = document.getElementById("dialog-box");
+    while (box.firstChild) {
+        box.removeChild(box.lastChild);
+    }
+    box.innerHTML="hai usato "+name;
+
 }

@@ -37,6 +37,7 @@ body{
     border: 5px solid darkslategrey;
     background-color: white;
     height: 95%;
+    display: flex;
 }
 #choice-bar{
     height: 100%;
@@ -46,9 +47,17 @@ body{
 .choice {
     width: 80%;
     margin: auto;
-    margin-top: 10%;
+    margin-top: 7%;
     background-color: cadetblue;
     height: 20%;
+}
+.move-botton {
+    height: 97%;
+    width: 24%;
+    border: 5px solid darkslategrey;
+    background-color: cornsilk;
+}
+.text-container{
     align-content: center;
     justify-content: center;
     display: flex;
