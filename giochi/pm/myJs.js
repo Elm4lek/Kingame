@@ -1,13 +1,16 @@
-function move(name){
+function move(name, description, pp){
     var move = {};
     move.name = name;
+    move.description = description;
+    move.pp = pp;
+    move.ppRest = pp;
     return move;
 }
 var moveList = [
-    move("botta"),
-    move("negro"),
-    move("botta"),
-    move("botta")];
+    move("botta","shgdsda",10),
+    move("negro","shgdsda",15),
+    move("botta","shgdsda",17),
+    move("botta","shgdsda",5)];
 
 function select(choice){
     cancel();
@@ -20,29 +23,37 @@ function select(choice){
             break;
     }
 }
-
-function fight(){
+function fight() {
     var choices = [];
     var box = document.getElementById("dialog-box");
-    for(let i = 0 ; i < moveList.length; i++){
-        var fightfightMove = document.createElement("div");
-        fightMove.id = "move"+(i+1);
-        fightMove.classList.add("move-botton");
-        fightMove.classList.add("text-container");
-        fightMove.onclick = function() {
-            selectfightMove(moveList[i].name);
+    for (let i = 0; i < moveList.length; i++) { // Usa 'let' invece di 'var'
+        let fightMove = document.createElement("div"); // Usa 'let'
+        fightMove.id = "move" + (i + 1);
+        fightMove.move = moveList[i];
+        fightMove.innerHTML = fightMove.move.name;
+        fightMove.classList.add("move-botton", "text-container");
+
+        fightMove.onclick = function () {
+            selectMove(fightMove.move.name);
         };
-        fightMove.addEventListener('mouseover', () => {
-            hoverDiv.style.backgroundColor = 'lightcoral';
+        fightMove.addEventListener("onclick", () => {
+            selectMove(fightMove.move.name);
+            fightMove.move.ppRest --;
         });
 
-        fightMove.addEventListener('mouseout', () => {
-            hoverDiv.style.backgroundColor = 'lightblue';
+        fightMove.addEventListener("mouseover", () => {
+            fightMove.innerHTML = fightMove.move.name + "<br>" +
+                                  fightMove.move.description + "<br>" +
+                                  fightMove.move.pp + "/" + fightMove.move.pp ;
         });
+
+        fightMove.addEventListener("mouseout", () => {
+            fightMove.innerHTML = fightMove.move.name;
+        });
+
         choices.push(fightMove);
-        box.appendChild(choices[i]);
+        box.appendChild(fightMove);
     }
-
 }
 
 function cancel(){
@@ -54,6 +65,5 @@ function cancel(){
 
 function selectMove(name){
     var box = document.getElementById("dialog-box");
-    box.innerHTML="hai usato "+name;
-
+    box.innerHTML="YOU HAVE USED "+name;
 }
