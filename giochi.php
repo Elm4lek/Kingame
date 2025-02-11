@@ -55,7 +55,18 @@ include 'menu.php';
         .contenitore:hover {
             transform: scale(1.1);
         }
-        
+        @keyframes gradientAnimation {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+        }
+
+        body {
+        background: linear-gradient(-45deg, #6c4675, #503459, #7d5a8c, #432f48);
+        background-size: 400% 400%;
+        animation: gradientAnimation 10s ease infinite;
+        }
+
     </style>
 </head> 
 
