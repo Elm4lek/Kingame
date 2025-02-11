@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 09, 2025 alle 16:52
+-- Creato il: Feb 11, 2025 alle 11:38
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -441,7 +441,74 @@ INSERT INTO `pm_mossa` (`MT`, `Tipo`, `Categoria`, `Potenza`, `PP`) VALUES
 ('MT351', 'elettro', 'speciale', 60, 20),
 ('MT352', 'acqua', 'speciale', 60, 20),
 ('MT353', 'acciaio', 'speciale', 140, 5),
-('MT354', 'psico', 'speciale', 140, 5);
+('MT354', 'psico', 'speciale', 140, 5),
+('MT355', 'volante', 'stato', 0, 10),
+('MT356', 'psico', 'stato', 0, 5),
+('MT357', 'psico', 'stato', 0, 40),
+('MT358', 'lotta', 'fisico', 70, 10),
+('MT359', 'lotta', 'fisico', 100, 10),
+('MT360', 'acciaio', 'fisico', 0, 5),
+('MT361', 'psico', 'stato', 0, 10),
+('MT362', 'acqua', 'speciale', 65, 10),
+('MT363', 'normale', 'fisico', 65, 15),
+('MT364', 'normale', 'fisico', 30, 10),
+('MT365', 'volante', 'fisico', 60, 20),
+('MT366', 'volante', 'stato', 0, 15),
+('MT367', 'normale', 'stato', 0, 30),
+('MT368', 'acciaio', 'fisico', 0, 10),
+('MT369', 'coleottero', 'fisico', 70, 10),
+('MT370', 'lotta', 'fisico', 120, 5),
+('MT371', 'buio', 'fisico', 50, 10),
+('MT372', 'buio', 'fisico', 60, 10),
+('MT373', 'buio', 'stato', 0, 15),
+('MT374', 'buio', 'fisico', 50, 10),
+('MT375', 'psico', 'stato', 0, 10),
+('MT376', 'normale', 'speciale', 0, 5),
+('MT377', 'psico', 'stato', 0, 15),
+('MT378', 'normale', 'speciale', 0, 5),
+('MT379', 'psico', 'stato', 0, 10),
+('MT380', 'veleno', 'stato', 0, 10),
+('MT381', 'normale', 'stato', 0, 30),
+('MT382', 'normale', 'stato', 0, 20),
+('MT383', 'normale', 'stato', 0, 20),
+('MT384', 'psico', 'stato', 0, 10),
+('MT385', 'psico', 'stato', 0, 10),
+('MT386', 'buio', 'fisico', 0, 5),
+('MT387', 'normale', 'fisico', 140, 5),
+('MT388', 'erba', 'stato', 0, 10),
+('MT389', 'buio', 'fisico', 70, 5),
+('MT390', 'veleno', 'stato', 0, 20),
+('MT391', 'psico', 'stato', 0, 10),
+('MT392', 'acqua', 'stato', 0, 20),
+('MT393', 'elettro', 'stato', 0, 10),
+('MT394', 'fuoco', 'fisico', 120, 15),
+('MT395', 'lotta', 'fisico', 60, 10),
+('MT396', 'lotta', 'speciale', 80, 20),
+('MT397', 'roccia', 'stato', 0, 20),
+('MT398', 'veleno', 'fisico', 80, 20),
+('MT399', 'buio', 'speciale', 80, 15),
+('MT400', 'buio', 'fisico', 70, 15),
+('MT401', 'acqua', 'fisico', 90, 10),
+('MT402', 'erba', 'fisico', 80, 15),
+('MT403', 'volante', 'speciale', 75, 15),
+('MT404', 'coleottero', 'fisico', 80, 15),
+('MT405', 'coleottero', 'speciale', 90, 10),
+('MT406', 'drago', 'speciale', 85, 10),
+('MT407', 'drago', 'fisico', 100, 10),
+('MT408', 'roccia', 'speciale', 80, 20),
+('MT409', 'lotta', 'fisico', 75, 10),
+('MT410', 'lotta', 'speciale', 40, 30),
+('MT411', 'lotta', 'speciale', 120, 5),
+('MT412', 'erba', 'speciale', 90, 10),
+('MT413', 'volante', 'fisico', 120, 15),
+('MT414', 'terra', 'speciale', 90, 10),
+('MT415', 'buio', 'stato', 0, 10),
+('MT416', 'normale', 'fisico', 150, 5),
+('MT417', 'buio', 'stato', 0, 20),
+('MT418', 'acciaio', 'fisico', 40, 30),
+('MT419', 'ghiaccio', 'fisico', 60, 10),
+('MT420', 'ghiaccio', 'fisico', 40, 30),
+('MT421', 'spettro', 'fisico', 70, 15);
 
 -- --------------------------------------------------------
 
@@ -452,12 +519,12 @@ INSERT INTO `pm_mossa` (`MT`, `Tipo`, `Categoria`, `Potenza`, `PP`) VALUES
 CREATE TABLE `pm_npc` (
   `NPC_ID` decimal(2,0) NOT NULL,
   `Nome` varchar(20) DEFAULT NULL,
-  `Descrizione` varchar(50) DEFAULT NULL,
+  `Descrizione` varchar(20) DEFAULT NULL,
   `Regione` varchar(10) DEFAULT NULL,
-  `Dialogo1` varchar(100) DEFAULT NULL,
-  `Dialogo2` varchar(100) DEFAULT NULL,
-  `Dialogo3` varchar(100) DEFAULT NULL,
-  `Dialogo4` varchar(100) DEFAULT NULL,
+  `Prebattaglia` varchar(20) DEFAULT NULL,
+  `PrimoKO` varchar(20) DEFAULT NULL,
+  `UltimoKO` varchar(20) DEFAULT NULL,
+  `Finebattagia` varchar(20) DEFAULT NULL,
   `Trainer_ID` decimal(3,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -1129,6 +1196,18 @@ CREATE TABLE `stanze` (
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `testi`
+--
+
+CREATE TABLE `testi` (
+  `Nome_Testo` varchar(20) NOT NULL,
+  `Lingua` varchar(2) NOT NULL,
+  `Testo` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `utenti`
 --
 
@@ -1184,6 +1263,7 @@ ALTER TABLE `pm_mossa`
 --
 ALTER TABLE `pm_npc`
   ADD PRIMARY KEY (`NPC_ID`),
+  ADD UNIQUE KEY `Descrizione` (`Descrizione`,`Prebattaglia`,`PrimoKO`,`UltimoKO`,`Finebattagia`),
   ADD KEY `Trainer_ID` (`Trainer_ID`);
 
 --
@@ -1251,6 +1331,12 @@ ALTER TABLE `sessione`
 ALTER TABLE `stanze`
   ADD PRIMARY KEY (`Id`),
   ADD KEY `Gioco` (`Gioco`);
+
+--
+-- Indici per le tabelle `testi`
+--
+ALTER TABLE `testi`
+  ADD PRIMARY KEY (`Nome_Testo`,`Lingua`);
 
 --
 -- Indici per le tabelle `utenti`
@@ -1337,6 +1423,12 @@ ALTER TABLE `sessione`
 --
 ALTER TABLE `stanze`
   ADD CONSTRAINT `stanze_ibfk_1` FOREIGN KEY (`Gioco`) REFERENCES `giochi` (`ID`);
+
+--
+-- Limiti per la tabella `testi`
+--
+ALTER TABLE `testi`
+  ADD CONSTRAINT `testi_ibfk_1` FOREIGN KEY (`Nome_Testo`) REFERENCES `pm_npc` (`Descrizione`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
