@@ -22,6 +22,6 @@ $pageTitle = "Privacy Policy";
 
         <h3>GAMES S.P.A ha nominato il responsabile della protezione dei dati a cui può rivolgersi scrivendo all’indirizzo <a href="mailto:kingames@GAMES.com">kingames@GAMES.com</a> Inoltre, qualora il trattamento sia basato sul consenso, l’interessato ha il diritto di revocare il consenso medesimo in qualsiasi momento, senza pregiudicare la liceità del trattamento basato sul consenso prestato prima della revoca. Qualora ravvisasse una violazione dei propri diritti può rivolgersi all'autorità di controllo competente ai sensi dell’art. 77 del Regolamento UE 679/2016.</h3>
     </div>
-    <?php include 'footer2.php'; ?>
+    <?php include 'footer.php'; ?>
 </body>
 </html>

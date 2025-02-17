@@ -122,6 +122,6 @@ include 'menu.php';
 
 </body>
 
-<?php include 'footer2.php'; ?>
+<?php include 'footer.php'; ?>
 
 </html>

@@ -27,5 +27,5 @@ include 'menu.php';
         <script src="tetris.js"></script>
     </canvas>
 </body>
-
+<?php include 'footer.php'; ?>
 </html>

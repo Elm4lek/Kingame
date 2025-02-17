@@ -85,9 +85,7 @@ include 'menu.php';
         <div class="contenitore"></div>
         
     </div>
+<?php include 'footer.php'; ?>
 
-    <div class="bottom">
-<?php include 'footer2.php'; ?>
-</div>
 </body>
 </html>

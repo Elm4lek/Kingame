@@ -163,5 +163,5 @@ include 'menu.php';
     </div>
     
 </body>
-<?php include 'footer2.php'; ?>
+<?php include 'footer.php'; ?>
 </html>
