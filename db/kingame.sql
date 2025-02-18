@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 15, 2025 alle 18:40
--- Versione del server: 10.4.32-MariaDB
--- Versione PHP: 8.2.12
+-- Creato il: Feb 18, 2025 alle 11:24
+-- Versione del server: 10.4.28-MariaDB
+-- Versione PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -619,7 +619,53 @@ INSERT INTO `pm_mossa` (`MT`, `Tipo`, `Categoria`, `Potenza`, `PP`) VALUES
 ('MT418', 'acciaio', 'fisico', 40, 30),
 ('MT419', 'ghiaccio', 'fisico', 60, 10),
 ('MT420', 'ghiaccio', 'fisico', 40, 30),
-('MT421', 'spettro', 'fisico', 70, 15);
+('MT421', 'spettro', 'fisico', 70, 15),
+('MT422', 'elettro', 'fisico', 65, 15),
+('MT423', 'ghiaccio', 'fisico', 65, 15),
+('MT424', 'fuoco', 'fisico', 65, 15),
+('MT425', 'spettro', 'fisico', 40, 30),
+('MT426', 'terra', 'speciale', 65, 10),
+('MT427', 'psico', 'fisico', 70, 20),
+('MT428', 'psico', 'fisico', 80, 15),
+('MT429', 'acciaio', 'speciale', 65, 10),
+('MT430', 'acciaio', 'speciale', 80, 10),
+('MT431', 'normale', 'fisico', 90, 20),
+('MT432', 'volante', 'stato', 0, 15),
+('MT433', 'psico', 'stato', 0, 5),
+('MT434', 'drago', 'speciale', 130, 5),
+('MT435', 'elettro', 'speciale', 80, 15),
+('MT436', 'fuoco', 'speciale', 80, 15),
+('MT437', 'erba', 'speciale', 130, 5),
+('MT438', 'erba', 'fisico', 120, 10),
+('MT439', 'roccia', 'fisico', 150, 5),
+('MT440', 'veleno', 'fisico', 70, 20),
+('MT441', 'veleno', 'fisico', 120, 5),
+('MT442', 'acciaio', 'fisico', 80, 15),
+('MT443', 'acciaio', 'fisico', 60, 20),
+('MT444', 'roccia', 'fisico', 100, 5),
+('MT445', 'normale', 'stato', 0, 20),
+('MT446', 'roccia', 'stato', 0, 20),
+('MT447', 'erba', 'speciale', 0, 20),
+('MT448', 'volante', 'speciale', 65, 20),
+('MT449', 'normale', 'speciale', 100, 10),
+('MT450', 'coleottero', 'fisico', 60, 20),
+('MT451', 'elettro', 'speciale', 50, 10),
+('MT452', 'erba', 'fisico', 120, 15),
+('MT453', 'acqua', 'fisico', 40, 20),
+('MT454', 'coleottero', 'fisico', 90, 15),
+('MT455', 'coleottero', 'stato', 0, 10),
+('MT456', 'coleottero', 'stato', 0, 10),
+('MT457', 'roccia', 'fisico', 150, 5),
+('MT458', 'normale', 'fisico', 35, 10),
+('MT459', 'drago', 'speciale', 150, 5),
+('MT460', 'drago', 'speciale', 100, 5),
+('MT461', 'psico', 'stato', 0, 10),
+('MT462', 'normale', 'fisico', 0, 5),
+('MT463', 'fuoco', 'speciale', 100, 5),
+('MT464', 'buio', 'stato', 0, 10),
+('MT465', 'erba', 'speciale', 120, 5),
+('MT466', 'spettro', 'speciale', 60, 5),
+('MT467', 'spettro', 'fisico', 120, 5);
 
 -- --------------------------------------------------------
 
@@ -681,6 +727,68 @@ CREATE TABLE `pm_tecniche` (
   `Pokedex` decimal(3,0) NOT NULL,
   `MT` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `pm_tecniche`
+--
+
+INSERT INTO `pm_tecniche` (`Pokedex`, `MT`) VALUES
+(1, 'MT014'),
+(1, 'MT015'),
+(1, 'MT070'),
+(1, 'MT076'),
+(1, 'MT092'),
+(1, 'MT104'),
+(1, 'MT148'),
+(1, 'MT156'),
+(1, 'MT164'),
+(1, 'MT182'),
+(1, 'MT188'),
+(1, 'MT202'),
+(1, 'MT203'),
+(1, 'MT207'),
+(1, 'MT213'),
+(1, 'MT214'),
+(1, 'MT216'),
+(1, 'MT218'),
+(1, 'MT237'),
+(1, 'MT241'),
+(1, 'MT249'),
+(1, 'MT263'),
+(1, 'MT290'),
+(1, 'MT331'),
+(1, 'MT363'),
+(1, 'MT412'),
+(1, 'MT445'),
+(1, 'MT447'),
+(2, 'MT014'),
+(2, 'MT015'),
+(2, 'MT070'),
+(2, 'MT076'),
+(2, 'MT092'),
+(2, 'MT104'),
+(2, 'MT148'),
+(2, 'MT156'),
+(2, 'MT164'),
+(2, 'MT182'),
+(2, 'MT188'),
+(2, 'MT202'),
+(2, 'MT203'),
+(2, 'MT207'),
+(2, 'MT213'),
+(2, 'MT214'),
+(2, 'MT216'),
+(2, 'MT218'),
+(2, 'MT237'),
+(2, 'MT241'),
+(2, 'MT249'),
+(2, 'MT263'),
+(2, 'MT290'),
+(2, 'MT331'),
+(2, 'MT363'),
+(2, 'MT412'),
+(2, 'MT445'),
+(2, 'MT447');
 
 -- --------------------------------------------------------
 
@@ -1328,7 +1436,8 @@ CREATE TABLE `utenti` (
   `Email` varchar(20) NOT NULL,
   `Password` varchar(6) NOT NULL,
   `StatoId` int(3) NOT NULL,
-  `StanzaId` int(3) NOT NULL
+  `StanzaId` int(3) NOT NULL,
+  `Data_registrazione` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
