@@ -11,6 +11,9 @@ include 'menu.php';
 <head>
     <meta charset='UTF-8'>
     <style>
+        body{
+            overflow: hidden;
+        }
         canvas {
             position: absolute;
             top: 45%;
@@ -27,5 +30,5 @@ include 'menu.php';
         <script src="tetris.js"></script>
     </canvas>
 </body>
-<?php include 'footer.php'; ?>
+
 </html>

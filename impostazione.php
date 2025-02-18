@@ -14,6 +14,7 @@ include 'menu.php';
         integrity="sha384-KyZXEJ6H4L6gkR6mef1Pf4hzRfEXM04Cw9TAsii9FsZ0uSks8W5s7DFAaa7QK8YF" crossorigin="anonymous">
     
     <style>
+<<<<<<< HEAD
         @keyframes gradientAnimation {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
@@ -23,6 +24,14 @@ include 'menu.php';
             background: linear-gradient(-45deg, #6c4675, #503459, #7d5a8c, #432f48);
             background-size: 400% 400%;
             animation: gradientAnimation 10s ease infinite;
+=======
+        body{
+            font-family: 'Gochi Hand', cursive;
+            background: #1e1e2f; /* Sfondo solido senza sfumature */
+            color: white;
+            margin: 0;
+            padding: 0;
+>>>>>>> 172edea3b1ddaa807e84a0eef0824770bc5fd639
         }
 
         .container {
