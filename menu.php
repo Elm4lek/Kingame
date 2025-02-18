@@ -11,6 +11,14 @@ session_start();
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <style>
+  body {
+            background: linear-gradient(-45deg, #6c4675, #503459, #7d5a8c, #432f48);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            color: white;
+            text-align: center;
+            font-family: 'Gochi Hand', cursive;
+        }
     .navbar-inverse {
         background-color: #330033;
     }

@@ -28,6 +28,16 @@ include 'menu.php';
             100% { background-position: 0% 50%; }
         }
 
+        .navbar-inverse {
+            background-color: #330033;
+        }
+        .navbar-inverse .navbar-nav>li>a {
+            color: #fff;
+        }
+        .navbar-inverse .navbar-nav>li>a:hover,
+        .navbar-inverse .navbar-nav>li>a:focus {
+            background-color: #1f1f2e;
+        }
         .main-container {
             display: flex;
             justify-content: center;
@@ -61,8 +71,9 @@ include 'menu.php';
 <body>
     
     <div class="main-container">
-        <div class="box">Chi siamo</div>
-        <div class="box">Gioca</div>
+        <a href="chisiamo.php"><div class="box">Chi siamo</div>
+        <a href="giochi.php"><div class="box">Gioca</div>
+        
     </div>
     <div class="bottom">
 </body>
