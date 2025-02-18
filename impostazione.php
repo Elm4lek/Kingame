@@ -14,7 +14,7 @@ include 'menu.php';
         integrity="sha384-KyZXEJ6H4L6gkR6mef1Pf4hzRfEXM04Cw9TAsii9FsZ0uSks8W5s7DFAaa7QK8YF" crossorigin="anonymous">
     
     <style>
-        body {
+        body{
             font-family: 'Gochi Hand', cursive;
             background: #1e1e2f; /* Sfondo solido senza sfumature */
             color: white;

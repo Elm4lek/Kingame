@@ -386,7 +386,7 @@
             fillRect(gridRect, gridColor);  // Griglia di sfondo
         
             // Disegniamo la griglia di fondo
-            drawGrid();  // Funzione per disegnare la griglia
+             // Funzione per disegnare la griglia
         
             // Disegniamo i blocchi già caduti nella griglia
             for (var r = 0; r < nRows; r++) {
@@ -429,31 +429,7 @@
             g.translate(-cx, -cy);
         }
 
-        function drawGrid() {
-            var bs = blockSize;
         
-            // Imposta il colore della griglia
-            g.strokeStyle = gridBorderColor;
-            g.lineWidth = smallStroke;
-        
-            // Disegnare le linee orizzontali
-            for (var r = 1; r < nRows; r++) {  // Inizia dalla seconda riga
-                var y = topMargin + r * bs;
-                g.beginPath();
-                g.moveTo(leftMargin, y);
-                g.lineTo(leftMargin + nCols * bs, y);  // Colonna finale non inclusa
-                g.stroke();
-            }
-        
-            // Disegnare le linee verticali
-            for (var c = 1; c < nCols; c++) {  // Inizia dalla seconda colonna
-                var x = leftMargin + c * bs;
-                g.beginPath();
-                g.moveTo(x, topMargin);
-                g.lineTo(x, topMargin + nRows * bs);  // Riga finale non inclusa
-                g.stroke();
-            }
-        }
         
 
 
