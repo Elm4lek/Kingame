@@ -12,6 +12,11 @@ $pageTitle = "Privacy Policy";
     <title><?php echo $pageTitle; ?></title>
     <link rel="stylesheet" href="css/index.css">
 </head>
+<style>
+    .footer-basic {
+        margin-top:1000px;
+    }
+</style>
 <body link="red">
     <div class="container">
         <h1>Privacy Policy</h1>

@@ -54,19 +54,14 @@ include 'menu.php';
     100% { background-position: 0% 50%; }
     }   
     body {
-    background: linear-gradient(-45deg, #6c4675, #503459, #7d5a8c, #432f48);
-    background-size: 400% 400%;
-    animation: gradientAnimation 10s ease infinite;
+        background: linear-gradient(-45deg, #6c4675, #503459, #7d5a8c, #432f48);
+        background-size: 400% 400%;
+        animation: gradientAnimation 10s ease infinite;
     }
     .footer-basic {
-  padding: 40px 0;
-  background-color: #330033;
-  color: #ffffff;
-  position: absolute;
-  width: 100%;
-  bottom: 1;
-  margin-top: 500px;
-}
+        bottom: 1;
+        margin-top: 50px;
+    }
 </style>
 <body>
 

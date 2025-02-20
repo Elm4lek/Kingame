@@ -92,6 +92,11 @@ include 'menu.php';
             text-align: center;
             font-size: 1.2rem;
         }
+        .footer-basic {
+            bottom: 0;
+            margin-top: 500px;
+        }
+        
     </style>
 </head>
 
