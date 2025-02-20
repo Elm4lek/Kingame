@@ -86,6 +86,7 @@ h2 {
     justify-self: center;
     max-width: 400px;
     text-align: center;
+    color: black;
 }
 
 .form-container input[type="text"],
