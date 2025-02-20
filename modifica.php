@@ -19,11 +19,8 @@ if (isset($_SESSION['fname'])) {
     <h2>Modifica il tuo profilo</h2>
 
     <form method="POST" action="completaReg.php" id="registrationForm">
-      <label for="name">Nome</label>
+      <label for="name">NickName</label>
       <input type="text" id="name" name="nome" required>
-
-      <label for="surname">Cognome</label>
-      <input type="text" id="surname" name="cognome" required>
 
       <label for="email">Email</label>
       <input type="email" id="email" name="email" required>
@@ -31,8 +28,7 @@ if (isset($_SESSION['fname'])) {
       <label for="password">Password</label>
       <input type="password" id="password" name="password" required>
 
-      <label for="cpassword">Conferma Password</label>
-      <input type="password" id="cpassword" name="cpassword" oninput="checkEquality()" required>
+      <label for="cpassword">Seleziona immagine</label>
 
       <input type="submit" value="Registrati" id="submitBtn" disabled>
 
