@@ -2,10 +2,10 @@
   padding: 40px 0;
   background-color: #330033;
   color: #ffffff;
-  position: relative;
+  position: absolute;
   width: 100%;
   bottom: 0;
-  margin-top: 0;
+  margin-top: 500px;
 }
 
 .footer-basic ul {

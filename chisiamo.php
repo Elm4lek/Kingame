@@ -58,6 +58,15 @@ include 'menu.php';
     background-size: 400% 400%;
     animation: gradientAnimation 10s ease infinite;
     }
+    .footer-basic {
+  padding: 40px 0;
+  background-color: #330033;
+  color: #ffffff;
+  position: absolute;
+  width: 100%;
+  bottom: 1;
+  margin-top: 500px;
+}
 </style>
 <body>
 
@@ -164,4 +173,5 @@ include 'menu.php';
     
 </body>
 <?php include 'footer.php'; ?>
+
 </html>
