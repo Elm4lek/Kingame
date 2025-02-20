@@ -36,6 +36,23 @@ include 'menu.php';
             background-size: cover;
             background-position: center;
 }
+.contenitoretristris {
+            width: 200px;
+            height: 200px;
+            background-color: #fff;
+            border-radius: 20px;
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-image: url('Grafiche videogiochi/screenshotTrisTris.png');
+            background-size: cover;
+            background-position: center;
+}
 
         .contenitore {
             width: 200px;
@@ -47,6 +64,9 @@ include 'menu.php';
             transition: transform 0.3s ease;
         }
         .contenitoretetris:hover {
+            transform: scale(1.1);
+        }
+        .contenitoretristris:hover {
             transform: scale(1.1);
         }
         .contenitore:hover {
@@ -77,7 +97,7 @@ include 'menu.php';
         <div class="contenitoretetris">
         </div>
     </a>
-        <div class="contenitore"></div>
+        <div class="contenitoretristris"></div>
         <div class="contenitore"></div>
         
     </div>
