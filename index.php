@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="css/index.css">
     <title>Games</title>
 </head>
+<style>
+.footer-basic {
+
+  margin-top: 800px;
+}
+</style>
 
 <body>
     <div class="container">

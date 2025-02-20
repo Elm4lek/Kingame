@@ -80,6 +80,10 @@ include 'menu.php';
         background-size: 400% 400%;
         animation: gradientAnimation 10s ease infinite;
         }
+        .footer-basic {
+            bottom: 0;
+            margin-top: 500px;
+        }
 
     </style>
 </head> 
