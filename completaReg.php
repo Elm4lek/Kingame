@@ -39,7 +39,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
       <label for="name">Nome Utente</label>
       <input type="text" id="name" name="nome" required>
       
-      <label for="paesi">Nome Utente</label>
+      <label for="paesi">Seleziona il tuo Paese</label>
       <select name="paese" id="paese">
         <?php
 

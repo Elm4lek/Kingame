@@ -28,9 +28,11 @@ if (isset($_SESSION['fname'])) {
       <label for="password">Password</label>
       <input type="password" id="password" name="password" required>
 
-      <label for="cpassword">Seleziona immagine</label>
+      <label for="paesi">Seleziona il tuo Paese</label>
+      <select name="paese" id="paese">
+      <option value="image1"></option>
 
-      <input type="submit" value="Registrati" id="submitBtn" disabled>
+      <input type="submit" value="Modifica" id="submitBtn" disabled>
 
       <a href="index.php" class="home-link">Torna alla Home</a>
    </form>
