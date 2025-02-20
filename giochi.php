@@ -66,6 +66,9 @@ include 'menu.php';
         .contenitoretetris:hover {
             transform: scale(1.1);
         }
+        .contenitoretristris:hover {
+            transform: scale(1.1);
+        }
         .contenitore:hover {
             transform: scale(1.1);
         }
