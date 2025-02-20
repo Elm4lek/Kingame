@@ -32,7 +32,7 @@ include 'menu.php';
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            background-image: url('img/tetrislogo.png');
+            background-image: url('Grafiche videogiochi/screenshot tetris.png');
             background-size: cover;
             background-position: center;
 }
