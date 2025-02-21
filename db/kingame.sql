@@ -1,16 +1,25 @@
-@ -3,9 +3,9 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 21, 2025 alle 09:22
--- Creato il: Feb 21, 2025 alle 09:48
--- Versione del server: 10.4.28-MariaDB
--- Versione PHP: 8.0.28
--- Versione PHP: 8.2.4
+-- Creato il: Feb 21, 2025 alle 13:58
+-- Versione del server: 10.4.32-MariaDB
+-- Versione PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-@ -23,18 +23,6 @@ SET time_zone = "+00:00";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `kingame`
+--
 
 -- --------------------------------------------------------
 
@@ -29,9 +38,265 @@ CREATE TABLE `giochi` (
 --
 -- Struttura della tabella `nazioni`
 --
-@ -44,1935 +32,97 @@ CREATE TABLE `nazioni` (
+
+CREATE TABLE `nazioni` (
+  `ISO` char(2) NOT NULL,
   `Nome_Nazione` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `nazioni`
+--
+
+INSERT INTO `nazioni` (`ISO`, `Nome_Nazione`) VALUES
+('AD', 'Andorra'),
+('AE', 'Emirati Arabi Uniti'),
+('AF', 'Afghanistan'),
+('AG', 'Antigua e Barbuda'),
+('AI', 'Anguilla'),
+('AL', 'Albania'),
+('AM', 'Armenia'),
+('AO', 'Angola'),
+('AQ', 'Antartide'),
+('AR', 'Argentina'),
+('AS', 'Samoa Americane'),
+('AT', 'Austria'),
+('AU', 'Australia'),
+('AW', 'Aruba'),
+('AX', 'Isole Åland'),
+('AZ', 'Azerbaigian'),
+('BA', 'Bosnia ed Erzegovina'),
+('BB', 'Barbados'),
+('BD', 'Bangladesh'),
+('BE', 'Belgio'),
+('BF', 'Burkina Faso'),
+('BG', 'Bulgaria'),
+('BH', 'Bahrein'),
+('BI', 'Burundi'),
+('BJ', 'Benin'),
+('BL', 'Saint-Barthélemy'),
+('BM', 'Bermuda'),
+('BN', 'Brunei'),
+('BO', 'Bolivia'),
+('BQ', 'Isole BES'),
+('BR', 'Brasile'),
+('BS', 'Bahamas'),
+('BT', 'Bhutan'),
+('BV', 'Isola Bouvet'),
+('BW', 'Botswana'),
+('BY', 'Bielorussia'),
+('BZ', 'Belize'),
+('CA', 'Canada'),
+('CC', 'Isole Cocos (Keeling)'),
+('CD', 'RD del Congo'),
+('CF', 'Rep. Centrafricana'),
+('CG', 'Rep. del Congo'),
+('CH', 'Svizzera'),
+('CI', 'Costa d\'Avorio'),
+('CK', 'Isole Cook'),
+('CL', 'Cile'),
+('CM', 'Camerun'),
+('CN', 'Cina'),
+('CO', 'Colombia'),
+('CR', 'Costa Rica'),
+('CU', 'Cuba'),
+('CV', 'Capo Verde'),
+('CW', 'Curaçao'),
+('CX', 'Isola di Natale'),
+('CY', 'Cipro'),
+('CZ', 'Rep. Ceca'),
+('DE', 'Germania'),
+('DJ', 'Gibuti'),
+('DK', 'Danimarca'),
+('DM', 'Dominica'),
+('DO', 'Rep. Dominicana'),
+('DZ', 'Algeria'),
+('EC', 'Ecuador'),
+('EE', 'Estonia'),
+('EG', 'Egitto'),
+('EH', 'Sahara Occidentale'),
+('ER', 'Eritrea'),
+('ES', 'Spagna'),
+('ET', 'Etiopia'),
+('FI', 'Finlandia'),
+('FJ', 'Figi'),
+('FK', 'Isole Falkland'),
+('FM', 'Micronesia'),
+('FO', 'Fær Øer'),
+('FR', 'Francia'),
+('GA', 'Gabon'),
+('GB', 'Regno Unito'),
+('GD', 'Grenada'),
+('GE', 'Georgia'),
+('GF', 'Guyana francese'),
+('GG', 'Guernsey'),
+('GH', 'Ghana'),
+('GI', 'Gibilterra'),
+('GL', 'Groenlandia'),
+('GM', 'Gambia'),
+('GN', 'Guinea'),
+('GP', 'Guadalupa'),
+('GQ', 'Guinea Equatoriale'),
+('GR', 'Grecia'),
+('GS', 'Georgia del Sud e Isole Sandwich Australi'),
+('GT', 'Guatemala'),
+('GU', 'Guam'),
+('GW', 'Guinea-Bissau'),
+('GY', 'Guyana'),
+('HK', 'Hong Kong'),
+('HM', 'Isole Heard e McDonald'),
+('HN', 'Honduras'),
+('HR', 'Croazia'),
+('HT', 'Haiti'),
+('HU', 'Ungheria'),
+('ID', 'Indonesia'),
+('IE', 'Irlanda'),
+('IM', 'Isola di Man'),
+('IN', 'India'),
+('IO', 'Territorio britannico dell\'Oceano Indiano'),
+('IQ', 'Iraq'),
+('IR', 'Iran'),
+('IS', 'Islanda'),
+('IT', 'Italia'),
+('JE', 'Jersey'),
+('JM', 'Giamaica'),
+('JO', 'Giordania'),
+('JP', 'Giappone'),
+('KE', 'Kenya'),
+('KG', 'Kirghizistan'),
+('KH', 'Cambogia'),
+('KI', 'Kiribati'),
+('KM', 'Comore'),
+('KN', 'Saint Kitts e Nevis'),
+('KP', 'Corea del Nord'),
+('KR', 'Corea del Sud'),
+('KW', 'Kuwait'),
+('KY', 'Isole Cayman'),
+('KZ', 'Kazakistan'),
+('LA', 'Laos'),
+('LB', 'Libano'),
+('LC', 'Saint Lucia'),
+('LI', 'Liechtenstein'),
+('LK', 'Sri Lanka'),
+('LR', 'Liberia'),
+('LS', 'Lesotho'),
+('LT', 'Lituania'),
+('LU', 'Lussemburgo'),
+('LV', 'Lettonia'),
+('LY', 'Libia'),
+('MA', 'Marocco'),
+('MC', 'Monaco'),
+('MD', 'Moldavia'),
+('ME', 'Montenegro'),
+('MF', 'Saint-Martin'),
+('MG', 'Madagascar'),
+('MH', 'Isole Marshall'),
+('MK', 'Macedonia del Nord'),
+('ML', 'Mali'),
+('MM', 'Birmania'),
+('MN', 'Mongolia'),
+('MO', 'Macao'),
+('MP', 'Isole Marianne Settentrionali'),
+('MQ', 'Martinica'),
+('MR', 'Mauritania'),
+('MS', 'Montserrat'),
+('MT', 'Malta'),
+('MU', 'Mauritius'),
+('MV', 'Maldive'),
+('MW', 'Malawi'),
+('MX', 'Messico'),
+('MY', 'Malaysia'),
+('MZ', 'Mozambico'),
+('NA', 'Namibia'),
+('NC', 'Nuova Caledonia'),
+('NE', 'Niger'),
+('NF', 'Isola Norfolk'),
+('NG', 'Nigeria'),
+('NI', 'Nicaragua'),
+('NL', 'Paesi Bassi'),
+('NO', 'Norvegia'),
+('NP', 'Nepal'),
+('NR', 'Nauru'),
+('NU', 'Niue'),
+('NZ', 'Nuova Zelanda'),
+('OM', 'Oman'),
+('PA', 'Panama'),
+('PE', 'Perù'),
+('PF', 'Polinesia francese'),
+('PG', 'Papua Nuova Guinea'),
+('PH', 'Filippine'),
+('PK', 'Pakistan'),
+('PL', 'Polonia'),
+('PM', 'Saint-Pierre e Miquelon'),
+('PN', 'Isole Pitcairn'),
+('PR', 'Porto Rico'),
+('PS', 'Palestina'),
+('PT', 'Portogallo'),
+('PW', 'Palau'),
+('PY', 'Paraguay'),
+('QA', 'Qatar'),
+('RE', 'La Riunione'),
+('RO', 'Romania'),
+('RS', 'Serbia'),
+('RU', 'Russia'),
+('RW', 'Ruanda'),
+('SA', 'Arabia Saudita'),
+('SB', 'Isole Salomone'),
+('SC', 'Seychelles'),
+('SD', 'Sudan'),
+('SE', 'Svezia'),
+('SG', 'Singapore'),
+('SH', 'Sant\'Elena, Ascensione e Tristan da Cunha'),
+('SI', 'Slovenia'),
+('SJ', 'Svalbard e Jan Mayen'),
+('SK', 'Slovacchia'),
+('SL', 'Sierra Leone'),
+('SM', 'San Marino'),
+('SN', 'Senegal'),
+('SO', 'Somalia'),
+('SR', 'Suriname'),
+('SS', 'Sudan del Sud'),
+('ST', 'São Tomé e Príncipe'),
+('SV', 'El Salvador'),
+('SX', 'Sint Maarten'),
+('SY', 'Siria'),
+('SZ', 'eSwatini'),
+('TC', 'Turks e Caicos'),
+('TD', 'Ciad'),
+('TF', 'Terre Australi e Antartiche Francesi'),
+('TG', 'Togo'),
+('TH', 'Thailandia'),
+('TJ', 'Tagikistan'),
+('TK', 'Tokelau'),
+('TL', 'Timor Est'),
+('TM', 'Turkmenistan'),
+('TN', 'Tunisia'),
+('TO', 'Tonga'),
+('TR', 'Turchia'),
+('TT', 'Trinidad e Tobago'),
+('TV', 'Tuvalu'),
+('TW', 'Taiwan'),
+('TZ', 'Tanzania'),
+('UA', 'Ucraina'),
+('UG', 'Uganda'),
+('UM', 'Isole minori esterne degli Stati Uniti'),
+('US', 'Stati Uniti'),
+('UY', 'Uruguay'),
+('UZ', 'Uzbekistan'),
+('VA', 'Città del Vaticano'),
+('VC', 'Saint Vincent e Grenadine'),
+('VE', 'Venezuela'),
+('VG', 'Isole Vergini Britanniche'),
+('VI', 'Isole Vergini Americane'),
+('VN', 'Vietnam'),
+('VU', 'Vanuatu'),
+('WF', 'Wallis e Futuna'),
+('WS', 'Samoa'),
+('YE', 'Yemen'),
+('YT', 'Mayotte'),
+('ZA', 'Sudafrica'),
+('ZM', 'Zambia'),
+('ZW', 'Zimbabwe');
 
 -- --------------------------------------------------------
 
@@ -208,7 +473,6 @@ INSERT INTO `pm_img` (`PM_img`, `Pokedex`, `Tipo`, `Sprite_url`) VALUES
 (143, 143, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/snorlax.gif'),
 (144, 144, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/articuno.gif'),
 (145, 145, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/zapdos.gif');
-
 
 -- --------------------------------------------------------
 
@@ -1738,85 +2002,6 @@ CREATE TABLE `utenti` (
   `Data_registrazione` date NOT NULL,
   `ISO` varchar(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
--- Dump dei dati per la tabella `nazioni`
---
-
-INSERT INTO `nazioni` (`ISO`, `Nome_Nazione`) VALUES
-('AF', ' Afghanistan'),
-('AL', 'Albania'),
-('DZ', 'Algeria'),
-('AD', 'Andorra'),
-('AO', 'Angola'),
-('	A', 'Anguilla'),
-('AQ', 'Antartide'),
-('AG', 'Antigua e Barbuda'),
-('SA', 'Arabia Saudita'),
-('AR', 'Argentina'),
-('AM', 'Armenia'),
-('AW', 'Aruba'),
-('AU', 'Australia'),
-('AT', 'Austria'),
-('AZ', 'Azerbaigian'),
-('BS', 'Bahamas'),
-('BH', 'Bahrein'),
-('BD', 'Bangladesh'),
-('BB', 'Barbados'),
-('BE', 'Belgio'),
-('BZ', 'Belize'),
-('BJ', 'Benin'),
-('BM', 'Bermuda'),
-('BT', 'Bhutan'),
-('BY', 'Bielorussia'),
-('MM', 'Birmania'),
-('BO', 'Bolivia'),
-('BA', 'Bosnia ed Erzegovina'),
-('BW', 'Botswana'),
-('BR', 'Brasile'),
-('BN', 'Brunei'),
-('BG', 'Bulgaria'),
-('BF', 'Burkina Faso'),
-('BI', 'Burundi'),
-('KH', 'Cambogia'),
-('CM', 'Camerun'),
-('CA', 'Canada'),
-('CV', 'Capo Verde'),
-('TD', 'Ciad'),
-('CL', 'Cile'),
-('CN', 'Cina'),
-('CY', 'Cipro'),
-('VA', 'Città del Vaticano'),
-('CO', 'Colombia'),
-('KM', 'Comore'),
-('KP', 'Corea del Nord'),
-('KR', 'Corea del Sud'),
-('CI', 'Costa d\'Avorio'),
-('CR', 'Costa Rica'),
-('HR', 'Croazia'),
-('CU', 'Cuba'),
-('CW', 'Curaçao'),
-('DK', 'Danimarca'),
-('DM', 'Dominica'),
-('EC', 'Ecuador'),
-('EG', 'Egitto'),
-('SV', 'El Salvador'),
-('AE', 'Emirati Arabi Uniti'),
-('ER', 'Eritrea'),
-('EE', 'Estonia'),
-('ET', 'Etiopia'),
-('FJ', 'Figi'),
-('PH', 'Filippine'),
-('FI', 'Finlandia'),
-('FR', 'Francia'),
-('GA', 'Gabon'),
-('GM', 'Gambia'),
-('GE', 'Georgia'),
-('GS', 'Georgia del Sud e Isole Sandwich Australi'),
-('DE', 'Germania'),
-('GH', 'Ghana'),
-('JM', 'Giamaica'),
-('JP', 'Giappone'),
-('GI', 'Gibilterra'),
-('DJ', 'Gibuti');
 
 --
 -- Indici per le tabelle scaricate
@@ -1832,8 +2017,7 @@ ALTER TABLE `giochi`
 -- Indici per le tabelle `nazioni`
 --
 ALTER TABLE `nazioni`
-  ADD PRIMARY KEY (`ISO`),
-  ADD UNIQUE KEY `Nome_Nazione` (`Nome_Nazione`);
+  ADD PRIMARY KEY (`ISO`);
 
 --
 -- Indici per le tabelle `pm_borsa`
@@ -1995,52 +2179,8 @@ ALTER TABLE `pm_squadra`
   ADD CONSTRAINT `pm_squadra_ibfk_4` FOREIGN KEY (`Mossa3`) REFERENCES `pm_mossa` (`MT`),
   ADD CONSTRAINT `pm_squadra_ibfk_5` FOREIGN KEY (`Mossa4`) REFERENCES `pm_mossa` (`MT`),
   ADD CONSTRAINT `pm_squadra_ibfk_6` FOREIGN KEY (`Trainer_ID`) REFERENCES `pm_trainer` (`Trainer_ID`);
-
---
--- Limiti per la tabella `pm_tecniche`
---
-ALTER TABLE `pm_tecniche`
-  ADD CONSTRAINT `pm_tecniche_ibfk_1` FOREIGN KEY (`MT`) REFERENCES `pm_mossa` (`MT`),
-  ADD CONSTRAINT `pm_tecniche_ibfk_2` FOREIGN KEY (`Pokedex`) REFERENCES `pokemon` (`Pokedex`);
-
---
--- Limiti per la tabella `pm_user`
---
-ALTER TABLE `pm_user`
-  ADD CONSTRAINT `pm_user_ibfk_1` FOREIGN KEY (`Trainer_ID`) REFERENCES `pm_trainer` (`Trainer_ID`),
-  ADD CONSTRAINT `pm_user_ibfk_2` FOREIGN KEY (`ID`) REFERENCES `utenti` (`UserName`);
-
---
--- Limiti per la tabella `pokemon`
---
-ALTER TABLE `pokemon`
-  ADD CONSTRAINT `pokemon_ibfk_1` FOREIGN KEY (`tipo1`) REFERENCES `pm_tipo` (`Tipo`),
-  ADD CONSTRAINT `pokemon_ibfk_2` FOREIGN KEY (`tipo2`) REFERENCES `pm_tipo` (`Tipo`);
-
---
--- Limiti per la tabella `sessione`
---
-ALTER TABLE `sessione`
-  ADD CONSTRAINT `sessione_ibfk_1` FOREIGN KEY (`User`) REFERENCES `utenti` (`UserName`),
-  ADD CONSTRAINT `sessione_ibfk_2` FOREIGN KEY (`Stanza`) REFERENCES `stanze` (`Id`);
-
---
--- Limiti per la tabella `stanze`
---
-ALTER TABLE `stanze`
-  ADD CONSTRAINT `stanze_ibfk_1` FOREIGN KEY (`Gioco`) REFERENCES `giochi` (`ID`);
-
---
--- Limiti per la tabella `testi`
---
-ALTER TABLE `testi`
-  ADD CONSTRAINT `testi_ibfk_1` FOREIGN KEY (`Nome_Testo`) REFERENCES `pm_npc` (`Descrizione`);
-
---
--- Limiti per la tabella `utenti`
---
-ALTER TABLE `utenti`
-  ADD CONSTRAINT `utenti_ibfk_1` FOREIGN KEY (`ISO`) REFERENCES `nazioni` (`ISO`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
