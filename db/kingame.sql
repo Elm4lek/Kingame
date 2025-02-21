@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 20, 2025 alle 12:44
+-- Creato il: Feb 21, 2025 alle 09:22
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.0.28
 
@@ -31,6 +31,17 @@ CREATE TABLE `giochi` (
   `ID` int(1) NOT NULL,
   `Gioco` varchar(20) NOT NULL,
   `Numero_Gioatori` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `nazioni`
+--
+
+CREATE TABLE `nazioni` (
+  `ISO` varchar(2) NOT NULL,
+  `Nome_Nazione` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -1694,7 +1705,8 @@ CREATE TABLE `utenti` (
   `Password` varchar(6) NOT NULL,
   `StatoId` int(3) NOT NULL,
   `StanzaId` int(3) NOT NULL,
-  `Data_registrazione` date NOT NULL
+  `Data_registrazione` date NOT NULL,
+  `ISO` varchar(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -1706,6 +1718,13 @@ CREATE TABLE `utenti` (
 --
 ALTER TABLE `giochi`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Indici per le tabelle `nazioni`
+--
+ALTER TABLE `nazioni`
+  ADD PRIMARY KEY (`ISO`),
+  ADD UNIQUE KEY `Nome_Nazione` (`Nome_Nazione`);
 
 --
 -- Indici per le tabelle `pm_borsa`
@@ -1819,7 +1838,8 @@ ALTER TABLE `testi`
 -- Indici per le tabelle `utenti`
 --
 ALTER TABLE `utenti`
-  ADD PRIMARY KEY (`UserName`);
+  ADD PRIMARY KEY (`UserName`),
+  ADD KEY `ISO` (`ISO`);
 
 --
 -- Limiti per le tabelle scaricate
@@ -1906,6 +1926,12 @@ ALTER TABLE `stanze`
 --
 ALTER TABLE `testi`
   ADD CONSTRAINT `testi_ibfk_1` FOREIGN KEY (`Nome_Testo`) REFERENCES `pm_npc` (`Descrizione`);
+
+--
+-- Limiti per la tabella `utenti`
+--
+ALTER TABLE `utenti`
+  ADD CONSTRAINT `utenti_ibfk_1` FOREIGN KEY (`ISO`) REFERENCES `nazioni` (`ISO`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
