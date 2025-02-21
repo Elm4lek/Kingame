@@ -12,75 +12,60 @@ if (isset($_SESSION['fname'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/navbar.css">
   <title>Registrazione</title>
+    <!-- Aggiungi il CSS di Select2 -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
+  <!-- Aggiungi il JS di Select2 -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
 </head>
+<style>
+  .form-container input[type="submit"]{
+    margin-top: 15px;
+  }
+</style>
 <body>
 
- <div class="form-container">
-    <h2>Modifica il tuo profilo</h2>
+<div class="form-container">
+  <h2>Modifica il tuo profilo</h2>
 
-    <form method="POST" action="completaReg.php" id="registrationForm">
-      <label for="name">NickName</label>
-      <input type="text" id="name" name="nome" required>
+  <form method="POST" action="completaReg.php" id="registrationForm">
+    <label for="name">NickName</label>
+    <input type="text" id="name" name="nome" required>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
 
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" required>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
 
-      <label for="paesi">Seleziona il tuo Paese</label>
-      <select name="paese" id="paese">
-      <option value="image1"></option>
+    <label for="paesi">Seleziona la tua foto profilo</label> 
+    <select name="paese" id="paese">
+      <option value="imag1" data-image="a.jpg">Opzione 1</option>
+      <option value="imag2" data-image="b.png">Opzione 2</option>
+      <option value="imag3" data-image="c.png">Opzione 3</option>
+    </select>
 
-      <input type="submit" value="Modifica" id="submitBtn" disabled>
+    <input type="submit" value="Modifica" id="submitBtn" disabled>
 
-      <a href="index.php" class="home-link">Torna alla Home</a>
-   </form>
-  </div>
+    <a href="index.php" class="home-link">Torna alla Home</a>
+  </form>
+</div>
   
 </body>
 </html>
 
 <script>
-  function checkEquality() {
-    const password = document.getElementById('password').value;
-    const cpassword = document.getElementById('cpassword').value;
-    const errorDiv = document.getElementById('passwordMismatch');
-
-    if (password !== cpassword) {
-      if (!errorDiv) {
-        const newErrorDiv = document.createElement('div');
-        newErrorDiv.id = 'passwordMismatch';
-        newErrorDiv.style.color = 'red';
-        newErrorDiv.textContent = 'Le password non coincidono';
-        document.getElementById('cpassword').parentNode.insertBefore(newErrorDiv, document.getElementById('cpassword').nextSibling);
+  $(document).ready(function() {
+    $('#paese').select2({
+      templateResult: function(data) {
+        if (!data.id) { return data.text; }
+        var $result = $('<span><img src="' + $(data.element).data('image') + '" style="width: 20px; height: 20px; margin-right: 10px;" />' + data.text + '</span>');
+        return $result;
       }
-    } else {
-      if (errorDiv) {
-        errorDiv.remove();
-      }
-    }
-  }
-
-  function validateForm() {
-    const form = document.getElementById('registrationForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const password = document.getElementById('password').value;
-    const cpassword = document.getElementById('cpassword').value;
-
-    // Controlla se tutti i campi obbligatori sono riempiti
-    const allFieldsFilled = Array.from(form.elements).every((input) => {
-      return input.value.trim() !== '' || !input.required;
-    });
-
-    // Abilita il pulsante solo se i campi sono pieni e le password coincidono
-    submitBtn.disabled = !(allFieldsFilled && password === cpassword);
-  }
-
-  // Aggiungi event listener per tutti i campi di input
-  document.querySelectorAll('input').forEach(input => {
-    input.addEventListener('input', () => {
-      validateForm();
     });
   });
 </script>
+
+

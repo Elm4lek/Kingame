@@ -44,6 +44,9 @@ if (json_last_error() !== JSON_ERROR_NONE) {
         <?php
 
         foreach($countries as $country) {
+            if ($country['cca2'] === 'IL') {
+                continue;
+            }
             echo '<option value="';
             echo $country['cca2'];
             echo '">';
