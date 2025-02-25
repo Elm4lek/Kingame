@@ -1,0 +1,70 @@
+<html><head>
+    <script type="text/javascript" src="myJs.js"></script>
+    <link rel="stylesheet" href="myCss.css">
+</head>
+
+<body>
+    <div id="content">
+    <div style="
+    width: 100%;
+    height: 75%;
+">
+
+
+<div style="
+    height: 50%;
+    width: 100%;
+    background: aqua;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+">
+    <div style="
+    height: 50%;
+    width: 40%;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    border: 5px solid darkslategrey;
+"></div>
+    <div style="
+    width: 45%;
+    height: 100%;
+"></div>
+</div><div style="
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+">
+    <div style="
+    width: 45%;
+    height: 100%;
+"></div>
+    <div style="
+    height: 50%;
+    width: 40%;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    border: 5px solid darkslategrey;
+"></div>
+</div></div>
+    
+        <div class="dialog-box-background">
+            <div class="dialog-box-border">
+                <div id="dialog-box" class="text-container"><div id="move0" class="move-botton text-container">botta</div><div id="move1" class="move-botton text-container">negro</div><div id="move2" class="move-botton text-container">botta</div><div id="move3" class="move-botton text-container">botta</div></div>
+            </div>
+        </div>
+    </div>
+    <div id="choice-bar">
+        <div id="choice1" class="choice text-container" onclick="select('Fight')"> Fight </div>
+        <div id="choice2" class="choice text-container" onclick="select('Bag')"> Bag </div>
+        <div id="choice3" class="choice text-container" onclick="select('Pokemon')"> Pokemon</div>
+        <div id="choice4" class="choice text-container" onclick="select('Cancel')"> Cancel </div>
+    </div>
+
+
+
+</body></html>
