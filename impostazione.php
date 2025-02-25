@@ -110,7 +110,10 @@ include 'menu.php';
                     <img class="card-img-left" src="https://avatars.githubusercontent.com/u/161753396?v=4" alt="Avatar">
                     <h4 class="card-title ms-3">SlinkPompano</h4>
                 </div>
-                <button class="btn btn-primary">Modifica</button>
+                
+                <form method="get" action="modifica.php">
+                    <button type="submit" class="btn btn-primary">Modifica</button>
+                </form>
             </div>
 
             <!-- Info principali -->
