@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 23, 2025 alle 14:29
--- Versione del server: 10.4.32-MariaDB
--- Versione PHP: 8.2.12
+-- Generation Time: Feb 25, 2025 at 11:15 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `giochi`
+-- Table structure for table `giochi`
 --
 
 CREATE TABLE `giochi` (
@@ -36,7 +36,7 @@ CREATE TABLE `giochi` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `nazioni`
+-- Table structure for table `nazioni`
 --
 
 CREATE TABLE `nazioni` (
@@ -45,7 +45,7 @@ CREATE TABLE `nazioni` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `nazioni`
+-- Dumping data for table `nazioni`
 --
 
 INSERT INTO `nazioni` (`ISO`, `Nome_Nazione`) VALUES
@@ -301,7 +301,7 @@ INSERT INTO `nazioni` (`ISO`, `Nome_Nazione`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `pm_borsa`
+-- Table structure for table `pm_borsa`
 --
 
 CREATE TABLE `pm_borsa` (
@@ -313,7 +313,7 @@ CREATE TABLE `pm_borsa` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `pm_img`
+-- Table structure for table `pm_img`
 --
 
 CREATE TABLE `pm_img` (
@@ -324,7 +324,7 @@ CREATE TABLE `pm_img` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `pm_img`
+-- Dumping data for table `pm_img`
 --
 
 INSERT INTO `pm_img` (`PM_img`, `Pokedex`, `Tipo`, `Sprite_url`) VALUES
@@ -472,12 +472,87 @@ INSERT INTO `pm_img` (`PM_img`, `Pokedex`, `Tipo`, `Sprite_url`) VALUES
 (142, 142, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/aerodactyl.gif'),
 (143, 143, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/snorlax.gif'),
 (144, 144, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/articuno.gif'),
-(145, 145, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/zapdos.gif');
+(145, 145, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/zapdos.gif'),
+(146, 146, 0, ''),
+(147, 147, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/dratini.gif'),
+(148, 148, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/dragonair.gif'),
+(149, 149, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/dragonite.gif'),
+(150, 150, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/mewtwo.gif'),
+(151, 151, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/mew.gif'),
+(152, 152, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/chikorita.gif'),
+(153, 153, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/bayleef.gif'),
+(154, 154, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/meganium.gif'),
+(155, 155, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/cyndaquil.gif'),
+(156, 156, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/quilava.gif'),
+(157, 157, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/typhlosion.gif'),
+(158, 158, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/totodile.gif'),
+(159, 159, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/croconaw.gif'),
+(160, 160, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/feraligatr.gif'),
+(161, 161, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/sentret.gif'),
+(162, 162, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/furret.gif'),
+(163, 163, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/hoothoot.gif'),
+(164, 164, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/noctowl.gif'),
+(165, 165, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/ledyba.gif'),
+(166, 166, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/ledian.gif'),
+(167, 167, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/spinarak.gif'),
+(168, 168, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/ariados.gif'),
+(169, 169, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/crobat.gif'),
+(170, 170, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/chinchou.gif'),
+(171, 171, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/lanturn.gif'),
+(172, 172, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/pichu.gif'),
+(173, 173, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/cleffa.gif'),
+(174, 174, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/igglybuff.gif'),
+(175, 175, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/togepi.gif'),
+(176, 176, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/togetic.gif'),
+(177, 177, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/natu.gif'),
+(178, 178, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/xatu.gif'),
+(179, 179, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/mareep.gif'),
+(180, 180, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/flaaffy.gif'),
+(181, 181, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/ampharos.gif'),
+(182, 182, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/bellossom.gif'),
+(183, 183, 0, ''),
+(184, 184, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/azumarill.gif'),
+(185, 185, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/sudowoodo.gif'),
+(186, 186, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/politoed.gif'),
+(187, 187, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/hoppip.gif'),
+(188, 188, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/skiploom.gif'),
+(189, 189, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/jumpluff.gif'),
+(190, 190, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/aipom.gif'),
+(191, 191, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/sunkern.gif'),
+(192, 192, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/sunflora.gif'),
+(193, 193, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/yanma.gif'),
+(194, 194, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/wooper.gif'),
+(195, 195, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/altri%20dal%2096%20al%20192/quagsire.gif'),
+(196, 196, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/espeon.gif'),
+(197, 197, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/umbreon.gif'),
+(198, 198, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/murkrow.gif'),
+(199, 199, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/slowking.gif'),
+(200, 200, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/misdreavus.gif'),
+(201, 201, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/unown.gif'),
+(202, 202, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/wobbuffet.gif'),
+(203, 203, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/girafarig.gif'),
+(204, 204, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/pineco.gif'),
+(205, 205, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/forretress.gif'),
+(206, 206, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/dunsparce.gif'),
+(207, 207, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/gligar.gif'),
+(208, 208, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/steelix.gif'),
+(209, 209, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/snubbull.gif'),
+(210, 210, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/granbull.gif'),
+(211, 211, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/qwilfish.gif'),
+(212, 212, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/scizor.gif'),
+(213, 213, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/shuckle.gif'),
+(214, 214, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/heracross.gif'),
+(215, 215, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/sneasel.gif'),
+(216, 216, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/teddiursa.gif'),
+(217, 217, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/ursaring.gif'),
+(218, 218, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/slugma.gif'),
+(219, 219, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/magcargo.gif'),
+(220, 220, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/swinub.gif');
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `pm_img_npc`
+-- Table structure for table `pm_img_npc`
 --
 
 CREATE TABLE `pm_img_npc` (
@@ -490,7 +565,7 @@ CREATE TABLE `pm_img_npc` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `pm_mossa`
+-- Table structure for table `pm_mossa`
 --
 
 CREATE TABLE `pm_mossa` (
@@ -502,7 +577,7 @@ CREATE TABLE `pm_mossa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `pm_mossa`
+-- Dumping data for table `pm_mossa`
 --
 
 INSERT INTO `pm_mossa` (`MT`, `Tipo`, `Categoria`, `Potenza`, `PP`) VALUES
@@ -975,7 +1050,7 @@ INSERT INTO `pm_mossa` (`MT`, `Tipo`, `Categoria`, `Potenza`, `PP`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `pm_npc`
+-- Table structure for table `pm_npc`
 --
 
 CREATE TABLE `pm_npc` (
@@ -993,7 +1068,7 @@ CREATE TABLE `pm_npc` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `pm_oggetti`
+-- Table structure for table `pm_oggetti`
 --
 
 CREATE TABLE `pm_oggetti` (
@@ -1008,7 +1083,7 @@ CREATE TABLE `pm_oggetti` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `pm_squadra`
+-- Table structure for table `pm_squadra`
 --
 
 CREATE TABLE `pm_squadra` (
@@ -1025,7 +1100,7 @@ CREATE TABLE `pm_squadra` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `pm_tecniche`
+-- Table structure for table `pm_tecniche`
 --
 
 CREATE TABLE `pm_tecniche` (
@@ -1034,7 +1109,7 @@ CREATE TABLE `pm_tecniche` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `pm_tecniche`
+-- Dumping data for table `pm_tecniche`
 --
 
 INSERT INTO `pm_tecniche` (`Pokedex`, `MT`) VALUES
@@ -1525,7 +1600,7 @@ INSERT INTO `pm_tecniche` (`Pokedex`, `MT`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `pm_tipo`
+-- Table structure for table `pm_tipo`
 --
 
 CREATE TABLE `pm_tipo` (
@@ -1551,7 +1626,7 @@ CREATE TABLE `pm_tipo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `pm_tipo`
+-- Dumping data for table `pm_tipo`
 --
 
 INSERT INTO `pm_tipo` (`Tipo`, `DebolezzaNormale`, `DebolezzaFuoco`, `DebolezzaAcqua`, `DebolezzaErba`, `DebolezzaElettro`, `DebolezzaGhiaccio`, `DebolezzaLotta`, `DebolezzaVeleno`, `DebolezzaTerra`, `DebolezzaVolante`, `DebolezzaPsico`, `DebolezzaColeottero`, `DebolezzaRoccia`, `DebolezzaSpettro`, `DebolezzaDrago`, `DebolezzaBuio`, `DebolezzaAcciaio`, `DebolezzaFolletto`) VALUES
@@ -1578,7 +1653,7 @@ INSERT INTO `pm_tipo` (`Tipo`, `DebolezzaNormale`, `DebolezzaFuoco`, `DebolezzaA
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `pm_trainer`
+-- Table structure for table `pm_trainer`
 --
 
 CREATE TABLE `pm_trainer` (
@@ -1589,7 +1664,7 @@ CREATE TABLE `pm_trainer` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `pm_user`
+-- Table structure for table `pm_user`
 --
 
 CREATE TABLE `pm_user` (
@@ -1604,7 +1679,7 @@ CREATE TABLE `pm_user` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `pokemon`
+-- Table structure for table `pokemon`
 --
 
 CREATE TABLE `pokemon` (
@@ -1621,7 +1696,7 @@ CREATE TABLE `pokemon` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `pokemon`
+-- Dumping data for table `pokemon`
 --
 
 INSERT INTO `pokemon` (`Pokedex`, `nome`, `PS`, `Atk`, `AtkSP`, `Dif`, `DifSP`, `Vel`, `tipo1`, `tipo2`) VALUES
@@ -2122,7 +2197,7 @@ INSERT INTO `pokemon` (`Pokedex`, `nome`, `PS`, `Atk`, `AtkSP`, `Dif`, `DifSP`, 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `sessione`
+-- Table structure for table `sessione`
 --
 
 CREATE TABLE `sessione` (
@@ -2134,7 +2209,7 @@ CREATE TABLE `sessione` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `stanze`
+-- Table structure for table `stanze`
 --
 
 CREATE TABLE `stanze` (
@@ -2147,7 +2222,7 @@ CREATE TABLE `stanze` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `testi`
+-- Table structure for table `testi`
 --
 
 CREATE TABLE `testi` (
@@ -2159,7 +2234,7 @@ CREATE TABLE `testi` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `utenti`
+-- Table structure for table `utenti`
 --
 
 CREATE TABLE `utenti` (
@@ -2167,58 +2242,56 @@ CREATE TABLE `utenti` (
   `NickName` varchar(20) NOT NULL,
   `Email` varchar(20) NOT NULL,
   `Password` varchar(6) NOT NULL,
-  `StatoId` int(3) NOT NULL,
-  `StanzaId` int(3) NOT NULL,
   `Data_registrazione` date NOT NULL,
   `ISO` varchar(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Indici per le tabelle scaricate
+-- Indexes for dumped tables
 --
 
 --
--- Indici per le tabelle `giochi`
+-- Indexes for table `giochi`
 --
 ALTER TABLE `giochi`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indici per le tabelle `nazioni`
+-- Indexes for table `nazioni`
 --
 ALTER TABLE `nazioni`
   ADD PRIMARY KEY (`ISO`);
 
 --
--- Indici per le tabelle `pm_borsa`
+-- Indexes for table `pm_borsa`
 --
 ALTER TABLE `pm_borsa`
   ADD PRIMARY KEY (`Trainer_ID`,`Oggetto_ID`),
   ADD KEY `Oggetto_ID` (`Oggetto_ID`);
 
 --
--- Indici per le tabelle `pm_img`
+-- Indexes for table `pm_img`
 --
 ALTER TABLE `pm_img`
   ADD PRIMARY KEY (`PM_img`),
   ADD KEY `Pokedex` (`Pokedex`);
 
 --
--- Indici per le tabelle `pm_img_npc`
+-- Indexes for table `pm_img_npc`
 --
 ALTER TABLE `pm_img_npc`
   ADD PRIMARY KEY (`NPC_IMG`),
   ADD KEY `NPC_ID` (`NPC_ID`);
 
 --
--- Indici per le tabelle `pm_mossa`
+-- Indexes for table `pm_mossa`
 --
 ALTER TABLE `pm_mossa`
   ADD PRIMARY KEY (`MT`),
   ADD KEY `Tipo` (`Tipo`);
 
 --
--- Indici per le tabelle `pm_npc`
+-- Indexes for table `pm_npc`
 --
 ALTER TABLE `pm_npc`
   ADD PRIMARY KEY (`NPC_ID`),
@@ -2226,13 +2299,13 @@ ALTER TABLE `pm_npc`
   ADD KEY `Trainer_ID` (`Trainer_ID`);
 
 --
--- Indici per le tabelle `pm_oggetti`
+-- Indexes for table `pm_oggetti`
 --
 ALTER TABLE `pm_oggetti`
   ADD PRIMARY KEY (`Oggetto_ID`);
 
 --
--- Indici per le tabelle `pm_squadra`
+-- Indexes for table `pm_squadra`
 --
 ALTER TABLE `pm_squadra`
   ADD PRIMARY KEY (`PM_ID`),
@@ -2244,33 +2317,33 @@ ALTER TABLE `pm_squadra`
   ADD KEY `Trainer_ID` (`Trainer_ID`);
 
 --
--- Indici per le tabelle `pm_tecniche`
+-- Indexes for table `pm_tecniche`
 --
 ALTER TABLE `pm_tecniche`
   ADD PRIMARY KEY (`Pokedex`,`MT`),
   ADD KEY `MT` (`MT`);
 
 --
--- Indici per le tabelle `pm_tipo`
+-- Indexes for table `pm_tipo`
 --
 ALTER TABLE `pm_tipo`
   ADD PRIMARY KEY (`Tipo`);
 
 --
--- Indici per le tabelle `pm_trainer`
+-- Indexes for table `pm_trainer`
 --
 ALTER TABLE `pm_trainer`
   ADD PRIMARY KEY (`Trainer_ID`);
 
 --
--- Indici per le tabelle `pm_user`
+-- Indexes for table `pm_user`
 --
 ALTER TABLE `pm_user`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `Trainer_ID` (`Trainer_ID`);
 
 --
--- Indici per le tabelle `pokemon`
+-- Indexes for table `pokemon`
 --
 ALTER TABLE `pokemon`
   ADD PRIMARY KEY (`Pokedex`),
@@ -2278,69 +2351,69 @@ ALTER TABLE `pokemon`
   ADD KEY `tipo2` (`tipo2`);
 
 --
--- Indici per le tabelle `sessione`
+-- Indexes for table `sessione`
 --
 ALTER TABLE `sessione`
   ADD PRIMARY KEY (`User`,`Stanza`),
   ADD KEY `Stanza` (`Stanza`);
 
 --
--- Indici per le tabelle `stanze`
+-- Indexes for table `stanze`
 --
 ALTER TABLE `stanze`
   ADD PRIMARY KEY (`Id`),
   ADD KEY `Gioco` (`Gioco`);
 
 --
--- Indici per le tabelle `testi`
+-- Indexes for table `testi`
 --
 ALTER TABLE `testi`
   ADD PRIMARY KEY (`Nome_Testo`,`Lingua`);
 
 --
--- Indici per le tabelle `utenti`
+-- Indexes for table `utenti`
 --
 ALTER TABLE `utenti`
   ADD PRIMARY KEY (`UserName`),
   ADD KEY `ISO` (`ISO`);
 
 --
--- Limiti per le tabelle scaricate
+-- Constraints for dumped tables
 --
 
 --
--- Limiti per la tabella `pm_borsa`
+-- Constraints for table `pm_borsa`
 --
 ALTER TABLE `pm_borsa`
   ADD CONSTRAINT `pm_borsa_ibfk_1` FOREIGN KEY (`Trainer_ID`) REFERENCES `pm_trainer` (`Trainer_ID`),
   ADD CONSTRAINT `pm_borsa_ibfk_2` FOREIGN KEY (`Oggetto_ID`) REFERENCES `pm_oggetti` (`Oggetto_ID`);
 
 --
--- Limiti per la tabella `pm_img`
+-- Constraints for table `pm_img`
 --
 ALTER TABLE `pm_img`
   ADD CONSTRAINT `pm_img_ibfk_1` FOREIGN KEY (`Pokedex`) REFERENCES `pokemon` (`Pokedex`);
 
 --
--- Limiti per la tabella `pm_img_npc`
+-- Constraints for table `pm_img_npc`
 --
 ALTER TABLE `pm_img_npc`
   ADD CONSTRAINT `pm_img_npc_ibfk_1` FOREIGN KEY (`NPC_ID`) REFERENCES `pm_npc` (`NPC_ID`);
 
 --
--- Limiti per la tabella `pm_mossa`
+-- Constraints for table `pm_mossa`
 --
 ALTER TABLE `pm_mossa`
   ADD CONSTRAINT `pm_mossa_ibfk_1` FOREIGN KEY (`Tipo`) REFERENCES `pm_tipo` (`Tipo`);
 
 --
--- Limiti per la tabella `pm_npc`
+-- Constraints for table `pm_npc`
 --
 ALTER TABLE `pm_npc`
   ADD CONSTRAINT `pm_npc_ibfk_1` FOREIGN KEY (`Trainer_ID`) REFERENCES `pm_trainer` (`Trainer_ID`);
 
 --
--- Limiti per la tabella `pm_squadra`
+-- Constraints for table `pm_squadra`
 --
 ALTER TABLE `pm_squadra`
   ADD CONSTRAINT `pm_squadra_ibfk_1` FOREIGN KEY (`Pokedex`) REFERENCES `pokemon` (`Pokedex`),
