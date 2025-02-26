@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2025 at 08:29 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Creato il: Feb 26, 2025 alle 09:33
+-- Versione del server: 10.4.32-MariaDB
+-- Versione PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `giochi`
+-- Struttura della tabella `giochi`
 --
 
 CREATE TABLE `giochi` (
@@ -36,7 +36,7 @@ CREATE TABLE `giochi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nazioni`
+-- Struttura della tabella `nazioni`
 --
 
 CREATE TABLE `nazioni` (
@@ -45,7 +45,7 @@ CREATE TABLE `nazioni` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `nazioni`
+-- Dump dei dati per la tabella `nazioni`
 --
 
 INSERT INTO `nazioni` (`ISO`, `Nome_Nazione`) VALUES
@@ -301,7 +301,7 @@ INSERT INTO `nazioni` (`ISO`, `Nome_Nazione`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pm_borsa`
+-- Struttura della tabella `pm_borsa`
 --
 
 CREATE TABLE `pm_borsa` (
@@ -313,7 +313,7 @@ CREATE TABLE `pm_borsa` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pm_img`
+-- Struttura della tabella `pm_img`
 --
 
 CREATE TABLE `pm_img` (
@@ -324,7 +324,7 @@ CREATE TABLE `pm_img` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `pm_img`
+-- Dump dei dati per la tabella `pm_img`
 --
 
 INSERT INTO `pm_img` (`PM_img`, `Pokedex`, `Tipo`, `Sprite_url`) VALUES
@@ -561,7 +561,7 @@ INSERT INTO `pm_img` (`PM_img`, `Pokedex`, `Tipo`, `Sprite_url`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pm_img_npc`
+-- Struttura della tabella `pm_img_npc`
 --
 
 CREATE TABLE `pm_img_npc` (
@@ -574,7 +574,7 @@ CREATE TABLE `pm_img_npc` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pm_mossa`
+-- Struttura della tabella `pm_mossa`
 --
 
 CREATE TABLE `pm_mossa` (
@@ -586,7 +586,7 @@ CREATE TABLE `pm_mossa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `pm_mossa`
+-- Dump dei dati per la tabella `pm_mossa`
 --
 
 INSERT INTO `pm_mossa` (`MT`, `Tipo`, `Categoria`, `Potenza`, `PP`) VALUES
@@ -1059,7 +1059,7 @@ INSERT INTO `pm_mossa` (`MT`, `Tipo`, `Categoria`, `Potenza`, `PP`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pm_npc`
+-- Struttura della tabella `pm_npc`
 --
 
 CREATE TABLE `pm_npc` (
@@ -1077,7 +1077,7 @@ CREATE TABLE `pm_npc` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pm_oggetti`
+-- Struttura della tabella `pm_oggetti`
 --
 
 CREATE TABLE `pm_oggetti` (
@@ -1092,7 +1092,7 @@ CREATE TABLE `pm_oggetti` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pm_squadra`
+-- Struttura della tabella `pm_squadra`
 --
 
 CREATE TABLE `pm_squadra` (
@@ -1109,7 +1109,7 @@ CREATE TABLE `pm_squadra` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pm_tecniche`
+-- Struttura della tabella `pm_tecniche`
 --
 
 CREATE TABLE `pm_tecniche` (
@@ -1118,7 +1118,7 @@ CREATE TABLE `pm_tecniche` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `pm_tecniche`
+-- Dump dei dati per la tabella `pm_tecniche`
 --
 
 INSERT INTO `pm_tecniche` (`Pokedex`, `MT`) VALUES
@@ -1609,7 +1609,7 @@ INSERT INTO `pm_tecniche` (`Pokedex`, `MT`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pm_tipo`
+-- Struttura della tabella `pm_tipo`
 --
 
 CREATE TABLE `pm_tipo` (
@@ -1635,7 +1635,7 @@ CREATE TABLE `pm_tipo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `pm_tipo`
+-- Dump dei dati per la tabella `pm_tipo`
 --
 
 INSERT INTO `pm_tipo` (`Tipo`, `DebolezzaNormale`, `DebolezzaFuoco`, `DebolezzaAcqua`, `DebolezzaErba`, `DebolezzaElettro`, `DebolezzaGhiaccio`, `DebolezzaLotta`, `DebolezzaVeleno`, `DebolezzaTerra`, `DebolezzaVolante`, `DebolezzaPsico`, `DebolezzaColeottero`, `DebolezzaRoccia`, `DebolezzaSpettro`, `DebolezzaDrago`, `DebolezzaBuio`, `DebolezzaAcciaio`, `DebolezzaFolletto`) VALUES
@@ -1662,7 +1662,7 @@ INSERT INTO `pm_tipo` (`Tipo`, `DebolezzaNormale`, `DebolezzaFuoco`, `DebolezzaA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pm_trainer`
+-- Struttura della tabella `pm_trainer`
 --
 
 CREATE TABLE `pm_trainer` (
@@ -1673,7 +1673,7 @@ CREATE TABLE `pm_trainer` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pm_user`
+-- Struttura della tabella `pm_user`
 --
 
 CREATE TABLE `pm_user` (
@@ -1688,7 +1688,7 @@ CREATE TABLE `pm_user` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pokemon`
+-- Struttura della tabella `pokemon`
 --
 
 CREATE TABLE `pokemon` (
@@ -1705,7 +1705,7 @@ CREATE TABLE `pokemon` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `pokemon`
+-- Dump dei dati per la tabella `pokemon`
 --
 
 INSERT INTO `pokemon` (`Pokedex`, `nome`, `PS`, `Atk`, `AtkSP`, `Dif`, `DifSP`, `Vel`, `tipo1`, `tipo2`) VALUES
@@ -2206,7 +2206,7 @@ INSERT INTO `pokemon` (`Pokedex`, `nome`, `PS`, `Atk`, `AtkSP`, `Dif`, `DifSP`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sessione`
+-- Struttura della tabella `sessione`
 --
 
 CREATE TABLE `sessione` (
@@ -2218,7 +2218,7 @@ CREATE TABLE `sessione` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stanze`
+-- Struttura della tabella `stanze`
 --
 
 CREATE TABLE `stanze` (
@@ -2231,19 +2231,29 @@ CREATE TABLE `stanze` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `testi`
+-- Struttura della tabella `text_en`
 --
 
-CREATE TABLE `testi` (
-  `Nome_Testo` varchar(20) NOT NULL,
-  `Lingua` varchar(2) NOT NULL,
-  `Testo` varchar(100) NOT NULL
+CREATE TABLE `text_en` (
+  `name` varchar(20) NOT NULL,
+  `text` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utenti`
+-- Struttura della tabella `text_it`
+--
+
+CREATE TABLE `text_it` (
+  `name` varchar(20) NOT NULL,
+  `text` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `utenti`
 --
 
 CREATE TABLE `utenti` (
@@ -2256,51 +2266,51 @@ CREATE TABLE `utenti` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Indexes for dumped tables
+-- Indici per le tabelle scaricate
 --
 
 --
--- Indexes for table `giochi`
+-- Indici per le tabelle `giochi`
 --
 ALTER TABLE `giochi`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `nazioni`
+-- Indici per le tabelle `nazioni`
 --
 ALTER TABLE `nazioni`
   ADD PRIMARY KEY (`ISO`);
 
 --
--- Indexes for table `pm_borsa`
+-- Indici per le tabelle `pm_borsa`
 --
 ALTER TABLE `pm_borsa`
   ADD PRIMARY KEY (`Trainer_ID`,`Oggetto_ID`),
   ADD KEY `Oggetto_ID` (`Oggetto_ID`);
 
 --
--- Indexes for table `pm_img`
+-- Indici per le tabelle `pm_img`
 --
 ALTER TABLE `pm_img`
   ADD PRIMARY KEY (`PM_img`),
   ADD KEY `Pokedex` (`Pokedex`);
 
 --
--- Indexes for table `pm_img_npc`
+-- Indici per le tabelle `pm_img_npc`
 --
 ALTER TABLE `pm_img_npc`
   ADD PRIMARY KEY (`NPC_IMG`),
   ADD KEY `NPC_ID` (`NPC_ID`);
 
 --
--- Indexes for table `pm_mossa`
+-- Indici per le tabelle `pm_mossa`
 --
 ALTER TABLE `pm_mossa`
   ADD PRIMARY KEY (`MT`),
   ADD KEY `Tipo` (`Tipo`);
 
 --
--- Indexes for table `pm_npc`
+-- Indici per le tabelle `pm_npc`
 --
 ALTER TABLE `pm_npc`
   ADD PRIMARY KEY (`NPC_ID`),
@@ -2308,13 +2318,13 @@ ALTER TABLE `pm_npc`
   ADD KEY `Trainer_ID` (`Trainer_ID`);
 
 --
--- Indexes for table `pm_oggetti`
+-- Indici per le tabelle `pm_oggetti`
 --
 ALTER TABLE `pm_oggetti`
   ADD PRIMARY KEY (`Oggetto_ID`);
 
 --
--- Indexes for table `pm_squadra`
+-- Indici per le tabelle `pm_squadra`
 --
 ALTER TABLE `pm_squadra`
   ADD PRIMARY KEY (`PM_ID`),
@@ -2326,33 +2336,33 @@ ALTER TABLE `pm_squadra`
   ADD KEY `Trainer_ID` (`Trainer_ID`);
 
 --
--- Indexes for table `pm_tecniche`
+-- Indici per le tabelle `pm_tecniche`
 --
 ALTER TABLE `pm_tecniche`
   ADD PRIMARY KEY (`Pokedex`,`MT`),
   ADD KEY `MT` (`MT`);
 
 --
--- Indexes for table `pm_tipo`
+-- Indici per le tabelle `pm_tipo`
 --
 ALTER TABLE `pm_tipo`
   ADD PRIMARY KEY (`Tipo`);
 
 --
--- Indexes for table `pm_trainer`
+-- Indici per le tabelle `pm_trainer`
 --
 ALTER TABLE `pm_trainer`
   ADD PRIMARY KEY (`Trainer_ID`);
 
 --
--- Indexes for table `pm_user`
+-- Indici per le tabelle `pm_user`
 --
 ALTER TABLE `pm_user`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `Trainer_ID` (`Trainer_ID`);
 
 --
--- Indexes for table `pokemon`
+-- Indici per le tabelle `pokemon`
 --
 ALTER TABLE `pokemon`
   ADD PRIMARY KEY (`Pokedex`),
@@ -2360,69 +2370,75 @@ ALTER TABLE `pokemon`
   ADD KEY `tipo2` (`tipo2`);
 
 --
--- Indexes for table `sessione`
+-- Indici per le tabelle `sessione`
 --
 ALTER TABLE `sessione`
   ADD PRIMARY KEY (`User`,`Stanza`),
   ADD KEY `Stanza` (`Stanza`);
 
 --
--- Indexes for table `stanze`
+-- Indici per le tabelle `stanze`
 --
 ALTER TABLE `stanze`
   ADD PRIMARY KEY (`Id`),
   ADD KEY `Gioco` (`Gioco`);
 
 --
--- Indexes for table `testi`
+-- Indici per le tabelle `text_en`
 --
-ALTER TABLE `testi`
-  ADD PRIMARY KEY (`Nome_Testo`,`Lingua`);
+ALTER TABLE `text_en`
+  ADD PRIMARY KEY (`name`);
 
 --
--- Indexes for table `utenti`
+-- Indici per le tabelle `text_it`
+--
+ALTER TABLE `text_it`
+  ADD PRIMARY KEY (`name`);
+
+--
+-- Indici per le tabelle `utenti`
 --
 ALTER TABLE `utenti`
   ADD PRIMARY KEY (`UserName`),
   ADD KEY `ISO` (`ISO`);
 
 --
--- Constraints for dumped tables
+-- Limiti per le tabelle scaricate
 --
 
 --
--- Constraints for table `pm_borsa`
+-- Limiti per la tabella `pm_borsa`
 --
 ALTER TABLE `pm_borsa`
   ADD CONSTRAINT `pm_borsa_ibfk_1` FOREIGN KEY (`Trainer_ID`) REFERENCES `pm_trainer` (`Trainer_ID`),
   ADD CONSTRAINT `pm_borsa_ibfk_2` FOREIGN KEY (`Oggetto_ID`) REFERENCES `pm_oggetti` (`Oggetto_ID`);
 
 --
--- Constraints for table `pm_img`
+-- Limiti per la tabella `pm_img`
 --
 ALTER TABLE `pm_img`
   ADD CONSTRAINT `pm_img_ibfk_1` FOREIGN KEY (`Pokedex`) REFERENCES `pokemon` (`Pokedex`);
 
 --
--- Constraints for table `pm_img_npc`
+-- Limiti per la tabella `pm_img_npc`
 --
 ALTER TABLE `pm_img_npc`
   ADD CONSTRAINT `pm_img_npc_ibfk_1` FOREIGN KEY (`NPC_ID`) REFERENCES `pm_npc` (`NPC_ID`);
 
 --
--- Constraints for table `pm_mossa`
+-- Limiti per la tabella `pm_mossa`
 --
 ALTER TABLE `pm_mossa`
   ADD CONSTRAINT `pm_mossa_ibfk_1` FOREIGN KEY (`Tipo`) REFERENCES `pm_tipo` (`Tipo`);
 
 --
--- Constraints for table `pm_npc`
+-- Limiti per la tabella `pm_npc`
 --
 ALTER TABLE `pm_npc`
   ADD CONSTRAINT `pm_npc_ibfk_1` FOREIGN KEY (`Trainer_ID`) REFERENCES `pm_trainer` (`Trainer_ID`);
 
 --
--- Constraints for table `pm_squadra`
+-- Limiti per la tabella `pm_squadra`
 --
 ALTER TABLE `pm_squadra`
   ADD CONSTRAINT `pm_squadra_ibfk_1` FOREIGN KEY (`Pokedex`) REFERENCES `pokemon` (`Pokedex`),
@@ -2431,6 +2447,46 @@ ALTER TABLE `pm_squadra`
   ADD CONSTRAINT `pm_squadra_ibfk_4` FOREIGN KEY (`Mossa3`) REFERENCES `pm_mossa` (`MT`),
   ADD CONSTRAINT `pm_squadra_ibfk_5` FOREIGN KEY (`Mossa4`) REFERENCES `pm_mossa` (`MT`),
   ADD CONSTRAINT `pm_squadra_ibfk_6` FOREIGN KEY (`Trainer_ID`) REFERENCES `pm_trainer` (`Trainer_ID`);
+
+--
+-- Limiti per la tabella `pm_tecniche`
+--
+ALTER TABLE `pm_tecniche`
+  ADD CONSTRAINT `pm_tecniche_ibfk_1` FOREIGN KEY (`MT`) REFERENCES `pm_mossa` (`MT`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pm_tecniche_ibfk_2` FOREIGN KEY (`Pokedex`) REFERENCES `pokemon` (`Pokedex`) ON DELETE CASCADE;
+
+--
+-- Limiti per la tabella `pm_user`
+--
+ALTER TABLE `pm_user`
+  ADD CONSTRAINT `pm_user_ibfk_1` FOREIGN KEY (`Trainer_ID`) REFERENCES `pm_trainer` (`Trainer_ID`),
+  ADD CONSTRAINT `pm_user_ibfk_2` FOREIGN KEY (`ID`) REFERENCES `utenti` (`UserName`);
+
+--
+-- Limiti per la tabella `pokemon`
+--
+ALTER TABLE `pokemon`
+  ADD CONSTRAINT `pokemon_ibfk_1` FOREIGN KEY (`tipo1`) REFERENCES `pm_tipo` (`Tipo`),
+  ADD CONSTRAINT `pokemon_ibfk_2` FOREIGN KEY (`tipo2`) REFERENCES `pm_tipo` (`Tipo`);
+
+--
+-- Limiti per la tabella `sessione`
+--
+ALTER TABLE `sessione`
+  ADD CONSTRAINT `sessione_ibfk_1` FOREIGN KEY (`Stanza`) REFERENCES `stanze` (`Id`),
+  ADD CONSTRAINT `sessione_ibfk_2` FOREIGN KEY (`User`) REFERENCES `utenti` (`UserName`) ON DELETE CASCADE;
+
+--
+-- Limiti per la tabella `stanze`
+--
+ALTER TABLE `stanze`
+  ADD CONSTRAINT `stanze_ibfk_1` FOREIGN KEY (`Gioco`) REFERENCES `giochi` (`ID`);
+
+--
+-- Limiti per la tabella `utenti`
+--
+ALTER TABLE `utenti`
+  ADD CONSTRAINT `utenti_ibfk_1` FOREIGN KEY (`ISO`) REFERENCES `nazioni` (`ISO`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
