@@ -7,13 +7,15 @@ if ($conn->connect_error) {
 
 $nome = $_POST['nome'];
 $cognome = $_POST['cognome'];
+$username = $nome.$cognome;
+$nickname = $_POST['nickname'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 $paese = $_POST['paese'];
-$nomeUtente = $_POST['nickname'];
 
-$stmt = $conn->prepare("INSERT INTO utenti (nome, cognome, email, password, paese, nomeUtente) VALUES (?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssss", $nome, $cognome, $email, $password, $paese, $nomeUtente);
+$stmt = $conn->prepare("INSERT INTO utenti (UserName, NickName, Email, 
+Password, ISO) VALUES (?, ?, ?, ?, ?)");
+$stmt->bind_param("sssss", $username, $nickname, $email, $password, $paese);
 
 if ($stmt->execute()) {
 } else {
@@ -43,7 +45,6 @@ $conn->close();
             <button class="btn-home" type="submit">Torna alla Home</button>
         </form>
 
-        <div class="footer">elmalek</div>
     </div>
 
 </body>

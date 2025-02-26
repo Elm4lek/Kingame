@@ -37,7 +37,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
         <h2>Completa Registrazione</h2>
     <form method="POST" action="completaReg.php" id="registrationForm">
       <label for="name">Nome Utente</label>
-      <input type="text" id="name" name="nome" required>
+      <input type="text" id="nome" name="nickname" required>
       
       <label for="paesi">Seleziona il tuo Paese</label>
       <select name="paese" id="paese">
