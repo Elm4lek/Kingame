@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2025 at 11:15 AM
+-- Generation Time: Feb 26, 2025 at 08:29 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -547,7 +547,16 @@ INSERT INTO `pm_img` (`PM_img`, `Pokedex`, `Tipo`, `Sprite_url`) VALUES
 (217, 217, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/ursaring.gif'),
 (218, 218, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/slugma.gif'),
 (219, 219, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/magcargo.gif'),
-(220, 220, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/swinub.gif');
+(220, 220, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/swinub.gif'),
+(221, 221, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/piloswine.gif'),
+(222, 222, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/corsola.gif'),
+(223, 223, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/remoraid.gif'),
+(224, 224, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/octillery.gif'),
+(225, 225, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/delibird.gif'),
+(226, 226, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/mantine.gif'),
+(227, 227, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/skarmory.gif'),
+(228, 228, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/houndour.gif'),
+(229, 229, 0, 'https://github.com/tomgun444/Kingame1/blob/9df9693cdf31699ed394fa131d4bf9e92a162b72/dal%20192%20al%20288/houndoom.gif');
 
 -- --------------------------------------------------------
 
