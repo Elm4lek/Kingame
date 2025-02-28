@@ -5,42 +5,6 @@ if (isset($_SESSION['fname'])) {
     exit();
 }
 ?>
-<head>
-  <style>
-    .card {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            max-width: 400px;
-            background: #1e1e2f; /* Sfondo nero */
-            backdrop-filter: blur(8px);
-            border-radius: 12px;
-            padding: 20px;
-            align-items: center;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            color: white; /* Testo bianco */
-          }
-    .card h2, 
-    .card label {
-            color: white; /* Colore delle etichette e del titolo in bianco */
-    }
-    .card input {
-            width: 100%;
-            padding: 8px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            background: white;
-            color: black;
-    }
-    .card input[type="submit"] {
-            color: white;
-            border: none;
-            cursor: pointer;
-    }
-  </style>
-</head>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,8 +15,9 @@ if (isset($_SESSION['fname'])) {
   <title>Login Page</title>
 </head>
 <body>
-<div class="card">  
+  <div class="form-container">
     <h2>Login</h2>
+
     <form method="POST" action="logRiquest.php">
       <label for="username">Username</label>
       <input type="text" id="username" name="fname" required>
@@ -62,7 +27,9 @@ if (isset($_SESSION['fname'])) {
 
       <input type="submit" value="Login">
     </form>
+
     Non hai un account? <a href="registrazione.php" class="home-link">Registrati</a>
-</div>
+  </div>
+
 </body>
 </html>

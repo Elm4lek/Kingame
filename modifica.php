@@ -19,42 +19,12 @@ if (isset($_SESSION['fname'])) {
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
-  <style>
-    .form-container {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        max-width: 400px;
-        background: #1e1e2f; /* Sfondo nero */
-        backdrop-filter: blur(8px);
-        border-radius: 12px;
-        padding: 20px;
-        align-items: center;
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        color: white; /* Testo bianco */
-    }
-    .form-container h2, 
-    .form-container label {
-        color: white; /* Colore del titolo e delle etichette in bianco */
-    }
-    .form-container input, 
-    .form-container select {
-        width: 100%;
-        padding: 8px;
-        margin: 10px 0;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        background: white;
-        color: black;
-    }
-    .form-container input[type="submit"] {
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
-  </style>
 </head>
+<style>
+  .form-container input[type="submit"]{
+    margin-top: 15px;
+  }
+</style>
 <body>
 
 <div class="form-container">
@@ -97,3 +67,5 @@ if (isset($_SESSION['fname'])) {
     });
   });
 </script>
+
+
