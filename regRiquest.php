@@ -13,8 +13,7 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 $paese = $_POST['paese'];
 
-$stmt = $conn->prepare("INSERT INTO utenti (UserName, NickName, Email, 
-Password, ISO) VALUES (?, ?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO utenti (UserName, NickName, Email, Password, ISO) VALUES (?, ?, ?, ?, ?)");
 $stmt->bind_param("sssss", $username, $nickname, $email, $password, $paese);
 
 if ($stmt->execute()) {

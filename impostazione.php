@@ -1,5 +1,12 @@
 <?php
 include 'menu.php';
+session_start();
+
+$nickname = $_SESSION['nickname'];
+$username = $_SESSION['username'];
+$data_reg = $_SESSION['data_reg'];
+$n_giochi = $_SESSION['n_giochi'];
+$punteggio = $_SESSION['punteggio'];
 ?>
 
 <!DOCTYPE html>
@@ -15,10 +22,11 @@ include 'menu.php';
     
     <style>
         @keyframes gradientAnimation {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
+
         body {
             background: linear-gradient(-45deg, #6c4675, #503459, #7d5a8c, #432f48);
             background-size: 400% 400%;
@@ -92,11 +100,11 @@ include 'menu.php';
             text-align: center;
             font-size: 1.2rem;
         }
+
         .footer-basic {
             bottom: 0;
             margin-top: 500px;
         }
-        
     </style>
 </head>
 
@@ -104,11 +112,10 @@ include 'menu.php';
 
     <div class="container">
         <div class="card">
-            <!-- Intestazione con immagine, nome e pulsante -->
             <div class="card-header">
                 <div class="left-section">
                     <img class="card-img-left" src="https://avatars.githubusercontent.com/u/161753396?v=4" alt="Avatar">
-                    <h4 class="card-title ms-3">SlinkPompano</h4>
+                    <h4 class="card-title ms-3"><?php echo $nickname;?></h4>
                 </div>
                 
                 <form method="get" action="modifica.php">
@@ -116,14 +123,12 @@ include 'menu.php';
                 </form>
             </div>
 
-            <!-- Info principali -->
             <div class="card-body">
                 <div class="info-row">
-                    <span>🎮 <strong>Livello:</strong> 16</span>
-                    <span>⭐ <strong>XP:</strong> 5080</span>
-                    <span>📅 <strong>Account creato nel:</strong> Ottobre 2019</span>
-                    <span>🏆 <strong>Achievement:</strong> 25</span>
-                    <span>🥇 <strong>Platinum:</strong> 1</span>
+                    <span>🔷 <strong>Username:</strong> <?php echo $username;?></span>
+                    <span>🎮 <strong>Giochi giocati:</strong> <?php echo $n_giochi;?></span>
+                    <span>⭐ <strong>Punti accumulati:</strong> <?php echo $punteggio;?></span>
+                    <span>📅 <strong>Account creato nel:</strong> <?php echo $data_reg;?></span>
                 </div>
             </div>
         </div>
