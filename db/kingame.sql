@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 26, 2025 alle 09:33
--- Versione del server: 10.4.32-MariaDB
--- Versione PHP: 8.0.30
+-- Creato il: Feb 28, 2025 alle 09:43
+-- Versione del server: 10.4.28-MariaDB
+-- Versione PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -1070,7 +1070,7 @@ CREATE TABLE `pm_npc` (
   `Prebattaglia` varchar(20) DEFAULT NULL,
   `PrimoKO` varchar(20) DEFAULT NULL,
   `UltimoKO` varchar(20) DEFAULT NULL,
-  `Finebattagia` varchar(20) DEFAULT NULL,
+  `Finebattaglia` varchar(20) DEFAULT NULL,
   `Trainer_ID` decimal(3,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -1084,10 +1084,47 @@ CREATE TABLE `pm_oggetti` (
   `Oggetto_ID` decimal(2,0) NOT NULL,
   `Nome` varchar(20) DEFAULT NULL,
   `Tipo` varchar(15) DEFAULT NULL,
-  `Prezzo` decimal(3,0) DEFAULT NULL,
+  `Prezzo` decimal(4,0) DEFAULT NULL,
   `Descrizione` varchar(50) DEFAULT NULL,
   `Sprite_url` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `pm_oggetti`
+--
+
+INSERT INTO `pm_oggetti` (`Oggetto_ID`, `Nome`, `Tipo`, `Prezzo`, `Descrizione`, `Sprite_url`) VALUES
+(1, 'poz_name', 'cura', 300, 'poz_desc', ''),
+(2, 'supPoz_name', 'cura', 700, 'supPoz_desc', ''),
+(3, 'iperPoz_name', 'cura', 1200, 'iperPoz_desc', ''),
+(4, 'maxPoz_name', 'cura', 2500, 'maxPoz_desc', ''),
+(5, 'fullRestore_name', 'cura', 3000, 'fullRestore_desc', ''),
+(6, 'rev_name', 'revitalizza', 600, 'rev_desc', ''),
+(7, 'maxRev_name', 'revitalizza', 1800, 'maxRev_desc', ''),
+(8, 'atkX_name', 'atkBuff', 1000, 'atkX_desc', ''),
+(9, 'difX_name', 'difBuff', 1000, 'difX_desc', ''),
+(10, 'spAtkX_name', 'spAtkBuff', 1000, 'spAtk_desc', ''),
+(11, 'spDifX_name', 'spDifBuff', 1000, 'spDif_desc', ''),
+(12, 'velX_name', 'velBuff', 1000, 'vel_desc', ''),
+(13, 'sColpo_name', 'critBuff', 1000, 'sColpo_desc', ''),
+(14, 'atkX2_name', 'atkBuff', 2200, 'atkX2_desc', ''),
+(15, 'atkX3_name', 'atkBuff', 3300, 'atkX3_desc', ''),
+(16, 'atkX6_name', 'atkBuff', 6600, 'atkX6_desc', ''),
+(17, 'difX2_name', 'difBuff', 2200, 'difX2_desc', ''),
+(18, 'difX3_name', 'difBuff', 3300, 'difX3_desc', ''),
+(19, 'difX6_name', 'difBuff', 6600, 'difX6_desc', ''),
+(20, 'spAtkX2_name', 'spAtkBuff', 2200, 'spAtkX2_desc', ''),
+(21, 'spAtkX3_name', 'spAtkBuff', 3300, 'spAtkX3_desc', ''),
+(22, 'spAtkX6_name', 'spAtkBuff', 6600, 'spAtkX6_desc', ''),
+(23, 'spDifX2_name', 'spDifBuff', 2200, 'spDifX2_desc', ''),
+(24, 'spDifX3_name', 'spDifBuff', 3300, 'spDifX3_desc', ''),
+(25, 'spDifX6_name', 'spDifBuff', 6600, 'spDifX6_desc', ''),
+(26, 'velX2_name', 'velBuff', 2200, 'velX2_desc', ''),
+(27, 'velX3_name', 'velBuff', 3300, 'velX3_desc', ''),
+(28, 'velX6_name', 'velBuff', 6600, 'velX6_desc', ''),
+(29, 'sColpo2_name', 'critBuff', 2200, 'sColpo2_desc', ''),
+(30, 'sColpo3_name', 'critBuff', 3300, 'sColpo3_desc', ''),
+(31, 'sGuardia_name', 'statoBuff', 5000, 'sGuardia_desc', NULL);
 
 -- --------------------------------------------------------
 
@@ -2231,23 +2268,13 @@ CREATE TABLE `stanze` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `text_en`
+-- Struttura della tabella `testi`
 --
 
-CREATE TABLE `text_en` (
+CREATE TABLE `testi` (
   `name` varchar(20) NOT NULL,
-  `text` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `text_it`
---
-
-CREATE TABLE `text_it` (
-  `name` varchar(20) NOT NULL,
-  `text` varchar(100) NOT NULL
+  `ITA` varchar(200) DEFAULT NULL,
+  `ENG` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -2314,14 +2341,20 @@ ALTER TABLE `pm_mossa`
 --
 ALTER TABLE `pm_npc`
   ADD PRIMARY KEY (`NPC_ID`),
-  ADD UNIQUE KEY `Descrizione` (`Descrizione`,`Prebattaglia`,`PrimoKO`,`UltimoKO`,`Finebattagia`),
-  ADD KEY `Trainer_ID` (`Trainer_ID`);
+  ADD UNIQUE KEY `Descrizione` (`Descrizione`,`Prebattaglia`,`PrimoKO`,`UltimoKO`,`Finebattaglia`),
+  ADD KEY `Trainer_ID` (`Trainer_ID`),
+  ADD KEY `Prebattaglia` (`Prebattaglia`),
+  ADD KEY `PrimoKO` (`PrimoKO`),
+  ADD KEY `UltimoKO` (`UltimoKO`),
+  ADD KEY `Finebattaglia` (`Finebattaglia`);
 
 --
 -- Indici per le tabelle `pm_oggetti`
 --
 ALTER TABLE `pm_oggetti`
-  ADD PRIMARY KEY (`Oggetto_ID`);
+  ADD PRIMARY KEY (`Oggetto_ID`),
+  ADD KEY `Nome` (`Nome`),
+  ADD KEY `Descrizione` (`Descrizione`);
 
 --
 -- Indici per le tabelle `pm_squadra`
@@ -2384,15 +2417,9 @@ ALTER TABLE `stanze`
   ADD KEY `Gioco` (`Gioco`);
 
 --
--- Indici per le tabelle `text_en`
+-- Indici per le tabelle `testi`
 --
-ALTER TABLE `text_en`
-  ADD PRIMARY KEY (`name`);
-
---
--- Indici per le tabelle `text_it`
---
-ALTER TABLE `text_it`
+ALTER TABLE `testi`
   ADD PRIMARY KEY (`name`);
 
 --
@@ -2429,13 +2456,30 @@ ALTER TABLE `pm_img_npc`
 -- Limiti per la tabella `pm_mossa`
 --
 ALTER TABLE `pm_mossa`
-  ADD CONSTRAINT `pm_mossa_ibfk_1` FOREIGN KEY (`Tipo`) REFERENCES `pm_tipo` (`Tipo`);
+  ADD CONSTRAINT `pm_mossa_ibfk_1` FOREIGN KEY (`Tipo`) REFERENCES `pm_tipo` (`Tipo`),
+  ADD CONSTRAINT `pm_mossa_ibfk_2` FOREIGN KEY (`MT`) REFERENCES `testi` (`name`);
 
 --
 -- Limiti per la tabella `pm_npc`
 --
 ALTER TABLE `pm_npc`
-  ADD CONSTRAINT `pm_npc_ibfk_1` FOREIGN KEY (`Trainer_ID`) REFERENCES `pm_trainer` (`Trainer_ID`);
+  ADD CONSTRAINT `pm_npc_ibfk_1` FOREIGN KEY (`Trainer_ID`) REFERENCES `pm_trainer` (`Trainer_ID`),
+  ADD CONSTRAINT `pm_npc_ibfk_10` FOREIGN KEY (`Finebattaglia`) REFERENCES `testi` (`name`),
+  ADD CONSTRAINT `pm_npc_ibfk_2` FOREIGN KEY (`Descrizione`) REFERENCES `testi` (`name`),
+  ADD CONSTRAINT `pm_npc_ibfk_3` FOREIGN KEY (`Prebattaglia`) REFERENCES `testi` (`name`),
+  ADD CONSTRAINT `pm_npc_ibfk_4` FOREIGN KEY (`PrimoKO`) REFERENCES `testi` (`name`),
+  ADD CONSTRAINT `pm_npc_ibfk_5` FOREIGN KEY (`UltimoKO`) REFERENCES `testi` (`name`),
+  ADD CONSTRAINT `pm_npc_ibfk_6` FOREIGN KEY (`Descrizione`) REFERENCES `testi` (`name`),
+  ADD CONSTRAINT `pm_npc_ibfk_7` FOREIGN KEY (`Prebattaglia`) REFERENCES `testi` (`name`),
+  ADD CONSTRAINT `pm_npc_ibfk_8` FOREIGN KEY (`PrimoKO`) REFERENCES `testi` (`name`),
+  ADD CONSTRAINT `pm_npc_ibfk_9` FOREIGN KEY (`UltimoKO`) REFERENCES `testi` (`name`);
+
+--
+-- Limiti per la tabella `pm_oggetti`
+--
+ALTER TABLE `pm_oggetti`
+  ADD CONSTRAINT `pm_oggetti_ibfk_1` FOREIGN KEY (`Nome`) REFERENCES `testi` (`name`),
+  ADD CONSTRAINT `pm_oggetti_ibfk_2` FOREIGN KEY (`Descrizione`) REFERENCES `testi` (`name`);
 
 --
 -- Limiti per la tabella `pm_squadra`
