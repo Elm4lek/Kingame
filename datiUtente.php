@@ -1,6 +1,6 @@
 <?php
 session_start();
-$conn = new mysqli("mysql:host=localhost;dbname=kingame", 'root', '');
+$conn = mysqli_connect("localhost","root","","kingame") or die (mysql_error());
 
 if ($conn->connect_error) {
     die("Connessione fallita: " . $conn->connect_error);
@@ -17,6 +17,7 @@ if ($result->num_rows > 0) {
         $_SESSION['data_reg'] = $row["Data_registrazione"];
         $_SESSION['n_giochi'] = $row["COUNT(User)"];
         $_SESSION['punteggio'] = $row["SUM(Punteggio)"];
+        
     }
 } else {
     echo "utente non trovato";
