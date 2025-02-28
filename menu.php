@@ -42,8 +42,8 @@
     <?php if (!isset($_SESSION['fname'])): ?>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="giochi.php">Giochi</a></li>
-        <li><a href="chisiamo.php">Chi siamo</a></li>
+        <li><a href="giochi.php"  style="font-family: 'Arial', cursive">Giochi</a></li>
+        <li><a href="chisiamo.php" style="font-family: 'Arial', cursive">Chi siamo</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
