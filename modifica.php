@@ -11,7 +11,7 @@ if (isset($_SESSION['fname'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/navbar.css">
-  <title>Registrazione</title>
+  <title>Modifica Profilo</title>
     <!-- Aggiungi il CSS di Select2 -->
   <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -20,6 +20,16 @@ if (isset($_SESSION['fname'])) {
   <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
   <style>
+    @keyframes gradientAnimation {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+        }
+        body {
+            background: linear-gradient(-45deg, #6c4675, #503459, #7d5a8c, #432f48);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+        }
     .form-container {
         display: flex;
         flex-direction: column;

@@ -35,6 +35,7 @@ if (isset($_SESSION['fname'])) {
             color: black;
     }
     .card input[type="submit"] {
+            background:#4caf50;
             color: white;
             border: none;
             cursor: pointer;
