@@ -12,7 +12,7 @@
 <body>
     <div class="footer-basic">
         <footer>
-            <div class="social"><a href="#"><i class="fa fa-github" aria-hidden="true"></i></a><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>
+            <div class="social"><a href="https://github.com/"><i class="fa fa-github" aria-hidden="true"></i></a><a href="https://it.linkedin.com/in/matteo-bettini-9580732b7"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a><a href="https://www.instagram.com/"><i class="fa fa-instagram" aria-hidden="true"></i></a><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>
             </a></div>
             <ul class="list-inline">
                 <li class="list-inline-item"><a href="index.php">Home</a></li>
