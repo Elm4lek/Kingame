@@ -69,7 +69,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 
 <div class="form-container">
     <h2>Completa Registrazione</h2>
-    <form method="POST" action="completaReg.php" id="registrationForm">
+    <form method="POST" action="regRequest.php" id="registrationForm">
         <label for="name">Nome Utente</label>
         <input type="text" id="nome" name="nickname" required>
         
