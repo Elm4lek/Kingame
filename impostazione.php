@@ -125,10 +125,10 @@ $punteggio = $_SESSION['punteggio'];
 
             <div class="card-body">
                 <div class="info-row">
-                    <span>🔷 <strong>Username:</strong><?php echo $username;?></span>
-                    <span>🎮 <strong>Giochi giocati:</strong><?php echo $n_giochi;?></span>
-                    <span>⭐ <strong>Punti accumulati:</strong><?php echo $punteggio;?></span>
-                    <span>📅 <strong>Account creato nel:</strong><?php echo $data_reg;?></span>
+                    <span>🔷 <strong>Username:</strong> <?php echo $username;?></span>
+                    <span>🎮 <strong>Giochi giocati:</strong> <?php echo $n_giochi;?></span>
+                    <span>⭐ <strong>Punti accumulati:</strong> <?php echo $punteggio;?></span>
+                    <span>📅 <strong>Account creato nel:</strong> <?php echo $data_reg;?></span>
                 </div>
             </div>
         </div>
