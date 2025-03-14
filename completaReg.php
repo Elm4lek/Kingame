@@ -28,7 +28,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/navbar.css">
-    <title>Bandiere</title>
+    <title>Completa Registrazione</title>
 </head>
 <body>
 
@@ -72,4 +72,3 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 
 
 </html>
-
