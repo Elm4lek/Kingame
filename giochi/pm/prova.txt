@@ -5,56 +5,39 @@
 
 <body>
     <div id="content">
-    <div style="
-    width: 100%;
-    height: 75%;
-">
-
-
-<div style="
-    height: 50%;
-    width: 100%;
-    background: aqua;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-">
-    <div style="
-    height: 50%;
-    width: 40%;
-    background-color: antiquewhite;
-    border-radius: 10px;
-    border: 5px solid darkslategrey;
-"></div>
-    <div style="
-    width: 45%;
-    height: 100%;
-"></div>
-</div><div style="
-    height: 50%;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-">
-    <div style="
-    width: 45%;
-    height: 100%;
-"></div>
-    <div style="
-    height: 50%;
-    width: 40%;
-    background-color: antiquewhite;
-    border-radius: 10px;
-    border: 5px solid darkslategrey;
-"></div>
-</div></div>
+        <div style="
+        width: 100%;
+        height: 75%;">
+            <div class="half-container">
+                <div class="description-box">
+                </div>
+                <div style="
+                width: 45%;
+                height: 100%;">
+                </div>
+            </div>
+            <div class="half-container">
+                <div style="
+                width: 45%;
+                height: 100%;"></div>
+                <div class="description-box">
+    <div class="half-container">
+            <h1 id="pmName"></h1>
+    </div>
+    <div class="half-container">
+            <div class="progress-line border-black border-radius background-dg h-4 w-9">
+                <div id="hp-delay" class="green container">
+                        <div id="hp" class="green container"></div>
+                    </div>
+            </div>
+    </div>
+</div>
+            </div>
+        </div>
     
         <div class="dialog-box-background">
             <div class="dialog-box-border">
-                <div id="dialog-box" class="text-container"><div id="move0" class="move-botton text-container">botta</div><div id="move1" class="move-botton text-container">negro</div><div id="move2" class="move-botton text-container">botta</div><div id="move3" class="move-botton text-container">botta</div></div>
+                <div id="dialog-box" class="text-container"></div>
             </div>
         </div>
     </div>
@@ -68,3 +51,117 @@
 
 
 </body></html>
+
+body{
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+#content{
+    height:  100%;
+    width:  75%;
+    background-color: aquamarine;
+}
+#content{
+    height:  100%;
+    width:  75%;
+    background-color: aquamarine;
+}
+.dialog-box-background{
+    position:  relative;
+    margin: auto;
+    height: 25%;
+    width: 100%;
+    justify-content: center;
+    background-color: darkslategrey;
+}
+.dialog-box-border{
+    position: relative;
+    margin: auto;
+    height: 85%;
+    width: 97%;
+    top: 3%;
+    border-radius: 10px;
+    background-color: #f3eeb1;
+    border: 8px solid #f3eeb1;
+}
+#dialog-box{
+    border-radius: 10px;
+    border: 5px solid darkslategrey;
+    background-color: white;
+    height: 95%;
+    display: flex;
+}
+#choice-bar{
+    height: 100%;
+    width: 25%;
+    background: antiquewhite;
+}
+.choice {
+    width: 80%;
+    margin: auto;
+    margin-top: 7%;
+    background-color: cadetblue;
+    height: 20%;
+}
+.move-botton {
+    height: 100%;
+    width: 25%;    
+    box-shadow:inset 0px 0px 0px 5px darkslategrey;
+    background-color: cornsilk;
+}
+.text-container{
+    align-content: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+.half-container {
+    height: 50%;
+    width: 100%;
+    /* background: aqua; */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+.description-box{
+    height: 50%;
+    width: 40%;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    border: 5px solid darkslategrey;
+}
+/*v26*/
+
+.progress-line {
+    width: 100%;
+    height: 100%;
+    background: white;
+}
+
+.w-8 {
+    width: 80%;
+}
+
+.w-9 {
+    width: 90%;
+}
+
+.border-black {
+    border: 4px solid darkslategray;
+}
+.border-white {
+    width:100%;
+    height:100%;
+    background-color:yellow;
+    box-shadow:0px 0px 0px 2px white inset;
+    margin-bottom:20px;}
+
+.h-4 {
+    height: 40%;
+}
+
+.border-radius {
+    border-radius: 25px;
+}
