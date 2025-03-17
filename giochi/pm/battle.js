@@ -1,6 +1,17 @@
 import * as Funcs from './functions.js';
 import * as move from './moves.js';
 
+function changeStatStage(target,stat,stageIncrease){
+    // Calculate new stage after applying the increase/decrease
+    let newStage = target.statStages[stat] + stageIncrease;
+
+    // Make sure the stage remains within the allowed range (-6 to +6)
+    newStage = Math.max(-6, Math.min(6, newStage));
+
+    // Update the Pokémon's stat stage
+    target.statStages[stat] = newStage;
+}
+
 //Create default state conditions
 function createStateCondition(name,minTurns,maxTurns,onStatApply,isMoveUsable,onTurnProgress,onRemove,onSwitchOut){
     return{
@@ -15,6 +26,7 @@ function createStateCondition(name,minTurns,maxTurns,onStatApply,isMoveUsable,on
         onSwitchOut: onSwitchOut || ((target) => {}) // Default empty function
     }
 } 
+
 //Basic status of a pokemon
 const STATUS={
     NORMAL : createStateCondition(
@@ -247,7 +259,6 @@ var enemy = {
     buffList: [],
     status:STATUS.NORMAL
 };
-pm.movelist.push(accel(pm));
 pm.movelist.push(hit(pm));
 
 function select(choice){
