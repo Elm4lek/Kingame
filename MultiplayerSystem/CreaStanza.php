@@ -1,12 +1,16 @@
 <?php
 session_start();
 $haPosto = true;
-print_r($_SESSION);
-if(empty($_SESSION['gioco'])){
-    $tipo = $_POST['tipo'];
-    $nome = $_SESSION['nome'];
-    $server = "localhost";
-    $conn = new mysqli($server,"root","","kingame")  or die (mysql_error());
+//if(empty($_SESSION['gioco'])){
+$tipo = $_POST['tipo'];
+$gioco = $_POST['gioco'];
+$numero = $_POST['numero'];
+$nome = $_SESSION['nome'];
+
+$server = "localhost";
+$conn = new mysqli($server,"root","","kingame")  or die (mysql_error());
+
+if($tipo == 'crea'){
     $sql = "SELECT * FROM stanze INNER JOIN giochi ON stanze.Gioco = giochi.ID"; 
     $result = $conn->query($sql);
     
@@ -20,32 +24,28 @@ if(empty($_SESSION['gioco'])){
         }
     }
 
-    if($tipo == 'crea'){
-        $gioco = $_POST['gioco'];
-        $numero = $_POST['numero'];
+    $stanza = 1;
+    if(isset($data))
+        $stanza = $data[sizeof($data)-1]['stanza']++;
 
-        $stanza = 1;
-        if(isset($data))
-            $stanza = $data[sizeof($data)-1]['stanza']++;
+    $data = ['stanza' => $stanza, 'gioco' => $gioco,'num' => $numero];
+    $sessione = ['giocatore' => $nome,'stanza' => $stanza];
+}
+else{
+    $stanza = $_POST['stanza'];
 
-        $data = ['stanza' => $stanza, 'gioco' => $gioco,'num' => $numero];
-        $sessione = ['giocatore' => $nome,'stanza' => $stanza, 'gioco' => $gioco];
-    }
-    else{
-        $stanza = $_POST['stanza'];
-        $result = findByKeyValue($data, 'stanza', $stanza);
-        $numero = $result['numero'];
+    $sql = "SELECT Numero_Giocatori FROM giochi WHERE Nome = ".$gioco; 
+    $numero = $conn->query($sql);
+    $sql = "SELECT COUNT(*) FROM sessione WHERE Stanza = ".$stanza; 
+    $giocatori = $conn->query($sql);
 
-        $sql = "SELECT COUNT(*) FROM sessione WHERE Stanza = ".$stanza." and In_Sessione = ".true; 
-        $giocatori = $conn->query($sql);
-
-        if($giocatori === $numero){
-            $haPosto = false;
-        }else{
-            $sessione = ['giocatore' => $nome,'stanza' => $stanza, 'gioco' => $gioco];
-        }
+    if($giocatori === $numero){
+        $haPosto = false;
+    }else{
+        $sessione = ['giocatore' => $nome,'stanza' => $stanza];
     }
 }
+//}
 if($haPosto){
     if($tipo == 'crea'){
         post($tipo,[$data,$sessione]);
@@ -56,8 +56,8 @@ if($haPosto){
     $_SESSION['gioco']['stanza'] = $stanza;
     $_SESSION['gioco']['gioco'] = $gioco;
     $_SESSION['gioco']['numero'] = $numero;
-    $_SESSION['gioco']['giocatore'] = $giocatore;
-    header("Location: StanzaAttesa.php");
+    $_SESSION['gioco']['giocatore'] = $nome;
+    //header("Location: StanzaAttesa.php");
     exit;
 }
 else{
@@ -68,17 +68,25 @@ else{
             </div>";
     $_SESSION['gioco'] = [];
 }
-function post($tipo,$data){
-
-    $url = 'AggiornaDB.php';
+function post($tipo, $data) {
+    $url = 'http://localhost/kingame/MultiplayerSystem/AggiornaDB.php';
     $options = [
         'http' => [
             'header' => "Content-type: application/x-www-form-urlencoded\r\n",
             'method' => 'POST',
-            'content' => http_build_query([$tipo,$data]),
+            'content' => http_build_query(['tipo' => $tipo, 'data' => $data]),
         ],
     ];
     $context = stream_context_create($options);
     $result = file_get_contents($url, false, $context);
+    
+    // Check for errors
+    if ($result === FALSE) {
+        die('Error in request');
+    }
+
+    // Output real response
+    var_dump($result);
 }
+
 ?>

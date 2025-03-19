@@ -1,34 +1,63 @@
 <?php
+
 // Create connection
+$conn = new mysqli("localhost", "root", "", "kingame");
 
-$tipo = $_POST[0]['tipo'];
-
-$conn = new mysqli("localhost","root","","kingame")  or die (mysql_error())
-
-if($tipo == 'crea'){
-    aggiungiStanza();
-}
-else{
-    aggiungiGiocatore();
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
-function aggiungiStanza(){
+// Get data from POST request
+$tipo = $_POST['tipo'];
+$data = $_POST['data'];
+
+// Debugging: Print received data
+// var_dump($tipo, $data);
+
+if ($tipo == 'crea') {
+    aggiungiStanza($data);
+} else {
+    aggiungiGiocatore($data);
+}
+
+function aggiungiStanza($data) {
+    global $conn;
+
+    $stanza = $data[0]['stanza'];
+    $gioco = $data[0]['gioco'];
+    $num = $data[0]['num'];
+
+    $sql = "INSERT INTO stanze(Id, Gioco, Numero, In_Sessione) VALUES ($stanza, $gioco, $num, 1)";
     
-    $stanza = $_POST[1][0]['stanza'];
-    $gioco = $_POST[1][0]['gioco'];
-    $num = $_POST[1][0]['num'];
+    if ($conn->query($sql) === TRUE) {
+        echo "Stanza aggiunta con successo.<br>";
+    } else {
+        echo "Errore aggiunta stanza: " . $conn->error . "<br>";
+    }
 
-    $sql = "INSERT INTO stanze(Id, Gioco, Numero,In_Sessione) VALUES (".$stanza.",".$gioco.",".$num.",1)"; 
-    $con->query($sql);
-    aggiungiGiocatore();
+    aggiungiGiocatore($data);
 }
-function aggiungiGiocatore(){
-    $giocatore = $_POST[1][1]['giocatore'];
-    $stanza = $_POST[1][1]['stanza'];
-    $gioco = $_POST[1][1]['gioco'];
-    $sql = "INSERT INTO sessione(Stanza, Giocatore, Gioco, "."Data".", In_Sessione) VALUES (".$stanza.",".$giocatore.",".$gioco.",0,".date("Y-m-d").",1)"; 
-    $con->query($sql);
-}
-$con->close();
 
+function aggiungiGiocatore($data) {
+    global $conn;
+
+    $giocatore = $data[1]['giocatore'];
+    $stanza = $data[1]['stanza'];
+    $gioco = $data[1]['gioco'];
+
+    $sql = "INSERT INTO sessione (Stanza, Giocatore, Gioco, Data, In_Sessione) 
+            VALUES ($stanza, $giocatore, $gioco, '" . date("Y-m-d") . "', 1)";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Giocatore aggiunto con successo.<br>";
+    } else {
+        echo "Errore aggiunta giocatore: " . $conn->error . "<br>";
+    }
+}
+
+// Close connection
+$conn->close();
+
+echo "Aggiornamento fatto";
 ?>
