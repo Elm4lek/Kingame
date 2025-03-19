@@ -1,39 +1,32 @@
 <?php
 session_start();
 $haPosto = true;
-
+print_r($_SESSION);
 if(empty($_SESSION['gioco'])){
     $tipo = $_POST['tipo'];
     $nome = $_SESSION['nome'];
     $server = "localhost";
     $conn = new mysqli($server,"root","","kingame")  or die (mysql_error());
-    $sql = "SELECT * FROM stanze"; 
+    $sql = "SELECT * FROM stanze INNER JOIN giochi ON stanze.Gioco = giochi.ID"; 
     $result = $conn->query($sql);
     
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $data[] = array(
-                "stanza" => (int)$row["Id"],  
-                "gioco" => $row["Gioco"],
-                "numero" => (int)$row["Numero"]
+                "stanza" => (int)$row["stanze.Id"],  
+                "gioco" => $row["giochi.Nome"],
+                "numero" => (int)$row["giochi.Numero_Giocatori"]
             );
         }
     }
-
-    $st = array_column($data, 'stanza');
-    array_multisort($st, SORT_ASC, $data);
 
     if($tipo == 'crea'){
         $gioco = $_POST['gioco'];
         $numero = $_POST['numero'];
 
         $stanza = 1;
-    
-        for ($i = 0 ; $i < sizeof($data); $i++){
-            if($stanza == $data[$i]['stanza']){
-                $stanza ++;
-            }
-        }
+        if(isset($data))
+            $stanza = $data[sizeof($data)-1]['stanza']++;
 
         $data = ['stanza' => $stanza, 'gioco' => $gioco,'num' => $numero];
         $sessione = ['giocatore' => $nome,'stanza' => $stanza, 'gioco' => $gioco];
@@ -86,7 +79,6 @@ function post($tipo,$data){
         ],
     ];
     $context = stream_context_create($options);
-    $result = file_get_contents($server, false, $context);
-    $context = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
 }
 ?>

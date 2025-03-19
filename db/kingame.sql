@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `giochi` (
   `ID` int(1) NOT NULL,
-  `Gioco` varchar(20) NOT NULL,
-  `Numero_Gioatori` int(1) NOT NULL
+  `Nome` varchar(20) NOT NULL,
+  `Numero_Giocatori` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

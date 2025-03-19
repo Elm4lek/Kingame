@@ -4,13 +4,13 @@ function fetchStanze(){
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           var risposta = JSON.parse(this.responseText);
-          for (var i=0; i <risposta.length; i++){
+          for (var i=0; i < risposta.length; i++){
             if(risposta[i]['numero'] != risposta[i]['giocatore'].length)
                 elencoStanze.push(risposta[i]); 
           }
         }
       };
-    xhttp.open("GET", "Stanze.json",true);
+    xhttp.open("GET", "CercaStanze.php",true);
     xhttp.send();
 }
 //

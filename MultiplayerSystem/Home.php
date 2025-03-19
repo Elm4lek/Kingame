@@ -7,4 +7,5 @@ num: <input type="text" name="numero">
 </form>
 <?php
 session_start();
+$_SESSION["nome"] = "nome"
 ?>

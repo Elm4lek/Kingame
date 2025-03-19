@@ -25,7 +25,7 @@ export const cut = createMove("cut", "cuts HP in half", 10, (attacker, target) =
 export const agility = createMove("Agility", "Raises the user's Speed by two stages.", 30, 
     (target) => changeStatStage(target, "vel", 2) // Calls function to increase speed stage by +2
     );
-
+    
 export const struggle = createMove("struggle", "", 0, (attacker, target) => {
     attacker.hp -= Math.round(attacker.maxHp/4);
     attacker.atk/2})

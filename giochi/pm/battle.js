@@ -74,13 +74,13 @@ const STATUS={
         2, // Duration 2 turns
         2, 
         (target) => {
-            target.statStages.dmg = Math.max(pm.statStages.dmg - 1, -6);//increase reviced demage for 1 stage
+            changeStatStage(target,"dmg",-1)//increase reviced demage for 1 stage
         }, 
         () => {true}, // Always allow moves
         (target) => {}, // Nothing happens on turn progress
         (target) => {
             changeStatus(target,STATUS.SLEEP);//change the status to sleep
-            target.statStages.dmg = Math.min(pm.statStages.dmg + 1, 6);//reset the change of demage
+            changeStatStage(target,"dmg",1);//reset the change of demage
         }, 
         (target) => {} // No effect on switch-out
     ),
@@ -99,14 +99,14 @@ const STATUS={
         Infinity, 
         Infinity, 
         (target) => {
-            target.statStages.spd = Math.max(pm.statStages.spd - 2, -6);// Speed decremented for two stage
+            changeStatStage(target,"spd",-2)// Speed decremented for two stage
         }, 
         () => {
             !Funcs.probability(1/4)// 25% of probability return false
         }, 
         (target) => {}, // Nothing happens on turn progress
         (target) => {
-            target.statStages.spd = Math.max(pm.statStages.spd +2, 6);// reinpost speed
+            changeStatStage(target,"spd",2)// reset speed
         }, 
         (target) => {} // No effect on switch-out
     ),
@@ -115,14 +115,14 @@ const STATUS={
         Infinity, 
         Infinity, 
         (target) => {
-            target.statStages.atk = Math.max(pm.statStages.atk - 2, -6);// Atk decremented for two stage
+            changeStatStage(target,"atk",-2)// Atk decremented for two stage
         }, 
         () => {true},//Always allows moves 
         (target) => {
             target.hp -= (target.maxHp / 16);//Lose 1/16 of max HP
         }, 
         (target) => {
-            target.statStages.atk = Math.max(pm.statStages.atk +2, 6);// reinpost speed
+            changeStatStage(target,"atk",2)// reset speed
         }, 
         (target) => {} // No effect on switch-out
     ),
@@ -145,7 +145,7 @@ const STATUS={
         Infinity, 
         Infinity, 
         (target) => {
-            target.statStages.spAtk = Math.max(pm.statStages.spAtk - 2, -6);// Atk decremented for two stage
+            changeStatStage(target,"spAtk",-2)// Atk decremented for two stage
         }, 
         () => {true},//Always allows moves 
         (target) => {
@@ -156,7 +156,7 @@ const STATUS={
             }
         }, 
         (target) => {
-            target.statStages.spAtk = Math.max(pm.statStages.spAtk +2, 6);// reinpost speed
+            changeStatStage(target,"spAtk",2)// reset speed
         }, 
         (target) => {} // No effect on switch-out
     ),
@@ -252,14 +252,27 @@ var pm = {
 var enemy = {
     name:"pikachu",
     maxHp: 100,
-    hp:100,
-    atk:50,
-    spd:20,
+    hp: 100,
+    atk: 50,
+    def: 50,
+    spd: 21,
+    spAtk: 50,
+    spDef: 50,
     movelist: [],
-    buffList: [],
+    statList: [],
+    statStages: [
+        atk = 0,
+        def = 0,
+        spd = 0,
+        spAtk = 0,
+        spDef = 0,
+        dmg = 0,
+        evs = 0,
+        dmg = 0,
+    ],
     status:STATUS.NORMAL
 };
-pm.movelist.push(hit(pm));
+pm.movelist.push(move.agility(pm));
 
 function select(choice){
     cancel();
