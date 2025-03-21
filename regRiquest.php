@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli('localhost','root','', 'dati');
+$conn = new mysqli('localhost','root','', 'kingame');
 
 if ($conn->connect_error) {
     die("Connessione fallita: " . $conn->connect_error);
