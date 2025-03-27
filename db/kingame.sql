@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mar 17, 2025 alle 22:10
+-- Creato il: Mar 27, 2025 alle 11:52
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -580,11 +580,11 @@ CREATE TABLE `pm_img_npc` (
 CREATE TABLE `pm_mossa` (
   `MT` varchar(5) NOT NULL,
   `Tipo` varchar(15) DEFAULT NULL,
-  `Categoria` varchar(10) NOT NULL CHECK (category IN ('fisico', 'speciale', 'stato')),
+  `Categoria` varchar(10) NOT NULL,
   `Potenza` decimal(3,0) DEFAULT NULL,
   `Precisione` int(11) NOT NULL,
   `PP` decimal(2,0) DEFAULT NULL,
-  `Bersaglio` varchar(5) DEFAULT NULL CHECK (target IN ('enemy', 'self','reserve', 'all')),
+  `Bersaglio` varchar(5) DEFAULT NULL,
   `Effetto` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
