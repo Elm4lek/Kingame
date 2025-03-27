@@ -12,18 +12,18 @@ include 'menu.php';
 <body>
     <div class="container">
         <?php
-        $conn = new mysqli('localhost','root','', 'dati');
+        $conn = new mysqli('localhost','root','', 'kingame');
 
         if ($conn->connect_error) {
             die("Connessione fallita: " . $conn->connect_error);
         }
 
         if (!empty($_POST['fname']) && !empty($_POST['fpassword'])) {
-            $username = trim($_POST['fname']);
+            $nickname = trim($_POST['fname']);
             $password = trim($_POST['fpassword']);
         } else {
             if (isset($_SESSION['fname']) && isset($_SESSION['fpassword'])) {
-                $username = $_SESSION['fname'];
+                $nickname = $_SESSION['fname'];
                 $password = $_SESSION['fpassword'];
             } else {
                 echo 'Sessione scaduta o non valida';
@@ -31,8 +31,8 @@ include 'menu.php';
             }
         }
 
-        $stmt = $conn->prepare("SELECT password FROM utenti WHERE username = ?");
-        $stmt->bind_param("s", $username);
+        $stmt = $conn->prepare("SELECT password FROM utenti WHERE NickName = ?");
+        $stmt->bind_param("s", $nickname);
         $stmt->execute();
         $stmt->store_result();
 
@@ -41,21 +41,21 @@ include 'menu.php';
             $stmt->fetch();
 
             if (md5($password) === $dbSecPassword) {
-                echo "<div class='welcome-message'>Benvenuto, $username!</div>";
-                $_SESSION['fname'] = $username;
+                echo "<div class='welcome-message'>Benvenuto, $nickname!</div>";
+                echo '<button class="btn-home" onclick="window.location.href=\'gioco.php\';">vai ai Giochi</button>';
+                $_SESSION['fname'] = $nickname;
                 $_SESSION['fpassword'] = $password;
             } else {
                 echo "<div class='welcome-message'>Login Fallito</div>";
             }
-        } else {
-            echo "<div class='welcome-message'>Login Fallito</div>";
-        }
+            } else {
+                echo "<div class='welcome-message'>Login Fallito</div>";
+            }
 
         $stmt->close();
         $conn->close();
         ?>
-        <button class="btn-home" onclick="window.location.href='gioco.php';">vai ai Giochi</button>
-        <div class="footer">elmalek</div>
+        
     </div>
 </body>
 </html>
