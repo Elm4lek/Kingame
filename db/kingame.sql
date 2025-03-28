@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mar 27, 2025 alle 11:52
+-- Creato il: Mar 28, 2025 alle 09:13
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -1644,7 +1644,69 @@ INSERT INTO `pm_tecniche` (`Pokedex`, `MT`) VALUES
 (18, 'MT413'),
 (18, 'MT416'),
 (18, 'MT432'),
-(18, 'MT445');
+(18, 'MT445'),
+(19, 'MT015'),
+(19, 'MT058'),
+(19, 'MT059'),
+(19, 'MT085'),
+(19, 'MT086'),
+(19, 'MT087'),
+(19, 'MT091'),
+(19, 'MT092'),
+(19, 'MT104'),
+(19, 'MT156'),
+(19, 'MT164'),
+(19, 'MT168'),
+(19, 'MT182'),
+(19, 'MT203'),
+(19, 'MT207'),
+(19, 'MT213'),
+(19, 'MT214'),
+(19, 'MT216'),
+(19, 'MT218'),
+(19, 'MT231'),
+(19, 'MT237'),
+(19, 'MT240'),
+(19, 'MT241'),
+(19, 'MT247'),
+(19, 'MT263'),
+(19, 'MT269'),
+(19, 'MT290'),
+(19, 'MT351'),
+(19, 'MT363'),
+(19, 'MT445'),
+(19, 'MT447'),
+(19, 'MT451'),
+(20, 'MT014'),
+(20, 'MT015'),
+(20, 'MT046'),
+(20, 'MT058'),
+(20, 'MT059'),
+(20, 'MT063'),
+(20, 'MT070'),
+(20, 'MT085'),
+(20, 'MT087'),
+(20, 'MT091'),
+(20, 'MT092'),
+(20, 'MT104'),
+(20, 'MT164'),
+(20, 'MT168'),
+(20, 'MT182'),
+(20, 'MT203'),
+(20, 'MT207'),
+(20, 'MT214'),
+(20, 'MT216'),
+(20, 'MT218'),
+(20, 'MT231'),
+(20, 'MT237'),
+(20, 'MT241'),
+(20, 'MT247'),
+(20, 'MT249'),
+(20, 'MT263'),
+(20, 'MT269'),
+(20, 'MT290'),
+(20, 'MT363'),
+(20, 'MT416');
 
 -- --------------------------------------------------------
 
@@ -2276,9 +2338,25 @@ CREATE TABLE `stanze` (
 
 CREATE TABLE `testi` (
   `name` varchar(20) NOT NULL,
-  `ITA` varchar(200) DEFAULT NULL,
-  `ENG` varchar(200) DEFAULT NULL
+  `ITA` varchar(25) DEFAULT NULL,
+  `ENG` varchar(25) DEFAULT NULL,
+  `testo_ITA` varchar(200) NOT NULL,
+  `testo_ENG` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `testi`
+--
+
+INSERT INTO `testi` (`name`, `ITA`, `ENG`, `testo_ITA`, `testo_ENG`) VALUES
+('atkX_name', 'Attacco X', 'X attack', '0', '0'),
+('fullRestore_name', 'Ricarica Totale', 'Full Restore', '0', '0'),
+('iperPoz_name', 'Iperpozione', 'Hyper potion', '0', '0'),
+('maxPoz_name', 'Pozione MAX', 'MAX Potion', '0', '0'),
+('maxRev_name', 'Revitalizzante MAX', 'MAX Revive', '0', '0'),
+('poz_name', 'Pozione', 'Potion', '0', '0'),
+('rev_name', 'Revitalizzante', 'Revive', '0', '0'),
+('supPoz_name', 'Superpozione', 'Superpotion', '0', '0');
 
 -- --------------------------------------------------------
 
@@ -2290,9 +2368,10 @@ CREATE TABLE `utenti` (
   `UserName` varchar(20) NOT NULL,
   `NickName` varchar(20) NOT NULL,
   `Email` varchar(20) NOT NULL,
-  `Password` varchar(6) NOT NULL,
+  `Password` varchar(150) NOT NULL,
   `Data_registrazione` date NOT NULL,
-  `ISO` varchar(2) DEFAULT NULL
+  `ISO` varchar(2) DEFAULT NULL,
+  `img_profile` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
