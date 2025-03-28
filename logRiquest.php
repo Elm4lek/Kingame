@@ -42,7 +42,7 @@ include 'menu.php';
 
             if (md5($password) === $dbSecPassword) {
                 echo "<div class='welcome-message'>Benvenuto, $nickname!</div>";
-                echo '<button class="btn-home" onclick="window.location.href=\'gioco.php\';">vai ai Giochi</button>';
+                echo '<button class="btn-home" onclick="window.location.href=\'giochi.php\';">vai ai Giochi</button>';
                 $_SESSION['fname'] = $nickname;
                 $_SESSION['fpassword'] = $password;
             } else {

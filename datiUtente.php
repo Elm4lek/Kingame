@@ -11,17 +11,14 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $_SESSION['nickname'] = $row["NickName"];
-        $_SESSION['username'] = $row["UserName"];
-        $_SESSION['data_reg'] = $row["Data_registrazione"];
-        $_SESSION['n_giochi'] = $row["COUNT(User)"];
-        $_SESSION['punteggio'] = $row["SUM(Punteggio)"];
-        
-    }
+    $row = $result->fetch_assoc();
+    $_SESSION['nickname'] = $row["NickName"];
+    $_SESSION['username'] = $row["UserName"];
+    $_SESSION['data_reg'] = $row["Data_registrazione"];
+    $_SESSION['n_giochi'] = $row["COUNT(User)"];
+    $_SESSION['punteggio'] = $row["SUM(Punteggio)"];
 } else {
-    echo "utente non trovato";
+    echo "Utente non trovato";
 }
-
 $conn->close();
 ?>

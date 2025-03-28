@@ -1,9 +1,9 @@
 <?php
 include 'menu.php';
-/*if (!isset($_SESSION['fname'])) {
+if (!isset($_SESSION['fname'])) {
     header("Location: index.php");
     exit();
-}*/
+}
 ?>
 <!DOCTYPE html>
 <html lang='en'>

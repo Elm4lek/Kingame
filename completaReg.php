@@ -1,6 +1,9 @@
 <?php
 include 'menu.php';
-
+if (!isset($_POST['nome'])) {
+    header("Location: registrazione.php");
+    exit();
+}
 $json_url = "https://restcountries.com/v3.1/all";
 
 $ch = curl_init($json_url);
@@ -59,7 +62,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
         <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>">
         <input type="hidden" name="password" value="<?php echo md5($_POST['password']); ?>">
       </select>
-
+      
       <input type="submit" value="Registrati" id="submitBtn">
    </form>
 </div>

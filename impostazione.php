@@ -1,12 +1,15 @@
 <?php
 include 'menu.php';
-session_start();
+if (!isset($_SESSION['fname'])) {
+    header("Location: index.php");
+    exit();
+}
 
-$nickname = $_SESSION['nickname'];
-$username = $_SESSION['username'];
-$data_reg = $_SESSION['data_reg'];
-$n_giochi = $_SESSION['n_giochi'];
-$punteggio = $_SESSION['punteggio'];
+$nickname = isset($_SESSION['nickname']) ? $_SESSION['nickname'] : 'N/A';
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : 'N/A';
+$data_reg = isset($_SESSION['data_reg']) ? $_SESSION['data_reg'] : 'N/A';
+$n_giochi = isset($_SESSION['n_giochi']) ? $_SESSION['n_giochi'] : 0;
+$punteggio = isset($_SESSION['punteggio']) ? $_SESSION['punteggio'] : 0;
 ?>
 
 <!DOCTYPE html>
@@ -113,7 +116,7 @@ $punteggio = $_SESSION['punteggio'];
         <div class="card">
             <div class="card-header">
                 <div class="left-section">
-                    <img class="card-img-left" src="https://avatars.githubusercontent.com/u/161753396?v=4" alt="Avatar">
+                    <img class="card-img-left" src="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/blu.png" alt="Avatar">
                     <h4 class="card-title ms-3"><?php echo $nickname;?></h4>
                 </div>
                 
