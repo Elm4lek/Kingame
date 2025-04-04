@@ -1,9 +1,11 @@
 <?php
 include 'menu.php';
-if (!isset($_POST['nome'])) {
+print_r($_POST);
+if (!isset($_POST['username'])) {
     header("Location: registrazione.php");
     exit();
 }
+
 $json_url = "https://restcountries.com/v3.1/all";
 
 $ch = curl_init($json_url);
@@ -24,6 +26,8 @@ $countries = json_decode($response, true);
 if (json_last_error() !== JSON_ERROR_NONE) {
     die('Errore nella decodifica JSON: ' . json_last_error_msg());
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -57,8 +61,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
             echo '</option>'; 
         }
         ?>
-        <input type="hidden" name="nome" value="<?php echo $_POST['nome']; ?>">
-        <input type="hidden" name="cognome" value="<?php echo $_POST['cognome']; ?>">
+        <input type="hidden" name="username" value="<?php echo $_POST['username']; ?>">
         <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>">
         <input type="hidden" name="password" value="<?php echo md5($_POST['password']); ?>">
       </select>

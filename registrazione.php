@@ -1,8 +1,40 @@
 <?php
+$isOk = true;
 include 'menu.php';
 if (isset($_SESSION['fname'])) {
     header("Location: index.php");
     exit();
+}
+if(isset($_POST) && !empty($_POST)){
+  $conn = new mysqli('localhost','root','', 'kingame');
+
+  $sql = "SELECT * FROM utenti WHERE UserName = '".$_POST['username']."'";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0){
+    $isOk = false;
+  }
+
+  if ($isOk) {
+    post($_POST);
+    exit;
+  }
+  $conn->close();
+}
+function post($data) {
+  $url = 'completaReg.php';
+  $options = [
+      'http' => [
+          'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+          'method' => 'POST',
+          'content' => http_build_query($data),
+      ],
+  ];
+  $context = stream_context_create($options);
+  $result = file_get_contents($url, false, $context);
+  
+  if ($result === FALSE) {
+      die('Error in request');
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -18,13 +50,15 @@ if (isset($_SESSION['fname'])) {
  <div class="form-container">
     <h2>Registrazione</h2>
 
-    <form method="POST" action="completaReg.php" id="registrationForm">
-      <label for="name">Nome</label>
-      <input type="text" id="name" name="nome" required>
-
-      <label for="surname">Cognome</label>
-      <input type="text" id="surname" name="cognome" required>
-
+    <form method="POST" action="registrazione.php" id="registrationForm">
+      
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required>
+      <?php 
+        if(!$isOk){
+          echo "<p>username usato</p>";
+        }
+      ?>
       <label for="email">Email</label>
       <input type="email" id="email" name="email" required>
 
