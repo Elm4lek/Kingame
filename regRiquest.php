@@ -5,9 +5,7 @@ if ($conn->connect_error) {
     die("Connessione fallita: " . $conn->connect_error);
 }
 
-$nome = $_POST['nome'];
-$cognome = $_POST['cognome'];
-$username = $nome.$cognome;
+$username = $_POST['username'];
 $nickname = $_POST['nickname'];
 $email = $_POST['email'];
 $password = $_POST['password'];
