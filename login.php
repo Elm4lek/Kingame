@@ -8,18 +8,18 @@ if (isset($_SESSION['fname'])) {
 <head>
   <style>
     .card {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            max-width: 400px;
-            background: #1e1e2f; /* Sfondo nero */
-            backdrop-filter: blur(8px);
-            border-radius: 12px;
-            padding: 20px;
-            align-items: center;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            color: white; /* Testo bianco */
+      display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  background: #1e1e2f; /* Sfondo nero */
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 20px;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  color: white; /* Testo bianco */
+  justify-self: anchor-center;
           }
     .card h2, 
     .card label {
