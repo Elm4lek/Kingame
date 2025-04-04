@@ -1,10 +1,19 @@
 <?php
 include 'menu.php';
-print_r($_POST);
-if (!isset($_POST['username'])) {
+
+if(isset($_SESSION["reg"])){
+    if (!isset($_POST['username'])) {
+        header("Location: registrazione.php");
+        exit();
+    }
+}else{
     header("Location: registrazione.php");
     exit();
 }
+
+$username = $_SESSION["reg"]["username"];
+$email = $_SESSION["reg"]["email"];
+$password = $_SESSION["reg"]["password"];
 
 $json_url = "https://restcountries.com/v3.1/all";
 
@@ -61,9 +70,9 @@ if (json_last_error() !== JSON_ERROR_NONE) {
             echo '</option>'; 
         }
         ?>
-        <input type="hidden" name="username" value="<?php echo $_POST['username']; ?>">
-        <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>">
-        <input type="hidden" name="password" value="<?php echo md5($_POST['password']); ?>">
+        <input type="hidden" name="username" value="<?php echo $username; ?>">
+        <input type="hidden" name="email" value="<?php echo $email; ?>">
+        <input type="hidden" name="password" value="<?php echo md5($password); ?>">
       </select>
       
       <input type="submit" value="Registrati" id="submitBtn">

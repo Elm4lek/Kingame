@@ -1,4 +1,5 @@
 <?php
+session_start();
 $isOk = true;
 include 'menu.php';
 if (isset($_SESSION['fname'])) {
@@ -15,26 +16,16 @@ if(isset($_POST) && !empty($_POST)){
   }
 
   if ($isOk) {
-    post($_POST);
+    $_SESSION["reg"]["username"] = $_POST["username"];
+    $_SESSION["reg"]["email"] = $_POST["email"];
+    $_SESSION["reg"]["password"] = $_POST["password"];
+    header("Location: completaReg.php");
     exit;
   }
-  $conn->close();
-}
-function post($data) {
-  $url = 'completaReg.php';
-  $options = [
-      'http' => [
-          'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-          'method' => 'POST',
-          'content' => http_build_query($data),
-      ],
-  ];
-  $context = stream_context_create($options);
-  $result = file_get_contents($url, false, $context);
-  
-  if ($result === FALSE) {
-      die('Error in request');
+  else{
+    echo "not ok";
   }
+  $conn->close();
 }
 ?>
 <!DOCTYPE html>
