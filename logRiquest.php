@@ -39,7 +39,8 @@ include 'menu.php';
         if ($stmt->num_rows > 0) {
             $stmt->bind_result($dbSecPassword);
             $stmt->fetch();
-
+            echo md5($password)."<br>";
+            echo $dbSecPassword."<br>";
             if (md5($password) === $dbSecPassword) {
                 echo "<div class='welcome-message'>Benvenuto, $nickname!</div>";
                 echo '<button class="btn-home" onclick="window.location.href=\'giochi.php\';">vai ai Giochi</button>';

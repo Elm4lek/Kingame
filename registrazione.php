@@ -8,20 +8,16 @@ if (isset($_SESSION['fname'])) {
 if(isset($_POST) && !empty($_POST)){
   $conn = new mysqli('localhost','root','', 'kingame');
 
-  $sql = "SELECT * FROM utenti WHERE UserName = ".$_POST['username'];
+  $sql = "SELECT * FROM utenti WHERE UserName = '".$_POST['username']."'";
   $result = $conn->query($sql);
   if ($result->num_rows > 0){
     $isOk = false;
-    while($row = $result->fetch_assoc()) {
-      echo "id: " . $row["UserName"];
-    }
   }
 
-  /* if ($isOk) {
+  if ($isOk) {
     post($_POST);
     exit;
-  } */
-  $stmt->close();
+  }
   $conn->close();
 }
 function post($data) {
@@ -54,7 +50,7 @@ function post($data) {
  <div class="form-container">
     <h2>Registrazione</h2>
 
-    <form method="POST" action="completaReg.php" id="registrationForm">
+    <form method="POST" action="registrazione.php" id="registrationForm">
       
       <label for="username">Username</label>
       <input type="text" id="username" name="username" required>
