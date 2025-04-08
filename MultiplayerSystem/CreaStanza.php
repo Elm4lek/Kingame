@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+};
 $haPosto = true;
 //if(empty($_SESSION['gioco'])){
 $tipo = $_POST['tipo'];

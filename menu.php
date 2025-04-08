@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +43,7 @@
       </button>
       <a class="navbar-brand" href="index.php">KinGames</a>
     </div>
-    <?php if (isset($_SESSION['fname'])): ?>
+    <?php if (isset($_SESSION['username'])): ?>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li><a href="giochi.php"  style="font-family: 'Arial', cursive">Giochi</a></li>

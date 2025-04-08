@@ -1,12 +1,14 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+};
 $conn = mysqli_connect("localhost","root","","kingame") or die (mysql_error());
 
 if ($conn->connect_error) {
     die("Connessione fallita: " . $conn->connect_error);
 }
-
-$stmt = $conn->prepare("SELECT NickName, UserName, Data_registrazione, COUNT(User), SUM(Punteggio) FROM utenti INNER JOIN sessione ON UserName = User WHERE UserName = 'Elmalek';");
+$username = $_SESSION["username"];
+$stmt = $conn->prepare("SELECT NickName, UserName, Data_registrazione, COUNT(User), SUM(Punteggio) FROM utenti INNER JOIN sessione ON UserName = User WHERE UserName = '".$username."';");
 $stmt->execute();
 $result = $stmt->get_result();
 

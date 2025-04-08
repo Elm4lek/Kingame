@@ -1,6 +1,6 @@
 <?php
 include 'menu.php';
-if (isset($_SESSION['fname'])) {
+if (isset($_SESSION['username'])) {
     header("Location: index.php");
     exit();
 }
@@ -56,10 +56,10 @@ if (isset($_SESSION['fname'])) {
     <h2>Login</h2>
     <form method="POST" action="logRiquest.php">
       <label for="username">Username</label>
-      <input type="text" id="username" name="fname" required>
+      <input type="text" id="username" name="username" required>
 
       <label for="password">Password</label>
-      <input type="password" id="password" name="fpassword" required>
+      <input type="password" id="password" name="password" required>
 
       <input type="submit" value="Login">
     </form>

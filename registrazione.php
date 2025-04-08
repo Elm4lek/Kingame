@@ -2,7 +2,7 @@
 $signUpPhase = 1;
 $isOk = true;
 include 'menu.php';
-if (isset($_SESSION['fname'])) {
+if (isset($_SESSION['username'])) {
     header("Location: index.php");
     exit();
 }
@@ -64,13 +64,9 @@ if(isset($_POST) && !empty($_POST)){
   }
   else{
     
-    $countriesJson = @file_get_contents("https://restcountries.com/v3.1/all");
-    if ($countriesJson === false) {
-        die("Errore nel recupero dei dati dei paesi.");
-    }
-    $countries = json_decode($countriesJson, true);
-    echo $countriesJson;
-    echo $countries;
+    $url = "data/States.json";
+    $response = file_get_contents($url);
+    $countries = json_decode($response, true);
     echo '
     <div class="form-container">
         <h2>Completa Registrazione</h2>

@@ -18,20 +18,20 @@ include 'menu.php';
             die("Connessione fallita: " . $conn->connect_error);
         }
 
-        if (!empty($_POST['fname']) && !empty($_POST['fpassword'])) {
-            $nickname = trim($_POST['fname']);
-            $password = trim($_POST['fpassword']);
+        if (!empty($_POST['username']) && !empty($_POST['password'])) {
+            $nickname = trim($_POST['username']);
+            $password = trim($_POST['password']);
         } else {
-            if (isset($_SESSION['fname']) && isset($_SESSION['fpassword'])) {
-                $nickname = $_SESSION['fname'];
-                $password = $_SESSION['fpassword'];
+            if (isset($_SESSION['username']) && isset($_SESSION['password'])) {
+                $nickname = $_SESSION['username'];
+                $password = $_SESSION['password'];
             } else {
                 echo 'Sessione scaduta o non valida';
                 exit;
             }
         }
 
-        $stmt = $conn->prepare("SELECT password FROM utenti WHERE NickName = ?");
+        $stmt = $conn->prepare("SELECT password FROM utenti WHERE Username = ?");
         $stmt->bind_param("s", $nickname);
         $stmt->execute();
         $stmt->store_result();
@@ -39,13 +39,11 @@ include 'menu.php';
         if ($stmt->num_rows > 0) {
             $stmt->bind_result($dbSecPassword);
             $stmt->fetch();
-            echo md5($password)."<br>";
-            echo $dbSecPassword."<br>";
             if (md5($password) === $dbSecPassword) {
                 echo "<div class='welcome-message'>Benvenuto, $nickname!</div>";
                 echo '<button class="btn-home" onclick="window.location.href=\'giochi.php\';">vai ai Giochi</button>';
-                $_SESSION['fname'] = $nickname;
-                $_SESSION['fpassword'] = $password;
+                $_SESSION['username'] = $nickname;
+                $_SESSION['password'] = $password;
             } else {
                 echo "<div class='welcome-message'>Login Fallito</div>";
             }
@@ -55,6 +53,17 @@ include 'menu.php';
 
         $stmt->close();
         $conn->close();
+        $url = 'datiUtente.php';
+
+        // use key 'http' even if you send the request to https://...
+        $options = [
+            'http' => [
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'POST',
+            ],
+        ];
+
+        $context = stream_context_create($options);
         ?>
         
     </div>

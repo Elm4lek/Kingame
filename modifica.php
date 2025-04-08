@@ -1,6 +1,6 @@
 <?php
 include 'menu.php';
-if (!isset($_SESSION['fname'])) {
+if (!isset($_SESSION['username'])) {
     header("Location: index.php");
     exit();
 }

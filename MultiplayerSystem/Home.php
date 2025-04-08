@@ -6,6 +6,8 @@ num: <input type="text" name="numero">
     <input type="submit" value="crea stanza"> 
 </form>
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+};
 $_SESSION["nome"] = "nome"
 ?>
