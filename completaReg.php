@@ -1,7 +1,7 @@
 <?php
 include 'menu.php';
 
-if(isset($_SESSION["reg"])){
+/* if(isset($_SESSION["reg"])){
     if (!isset($_POST['username'])) {
         header("Location: registrazione.php");
         exit();
@@ -10,11 +10,10 @@ if(isset($_SESSION["reg"])){
     header("Location: registrazione.php");
     exit();
 }
-
+ */
 $username = $_SESSION["reg"]["username"];
 $email = $_SESSION["reg"]["email"];
 $password = $_SESSION["reg"]["password"];
-
 $json_url = "https://restcountries.com/v3.1/all";
 
 $ch = curl_init($json_url);

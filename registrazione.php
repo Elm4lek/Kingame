@@ -1,5 +1,5 @@
 <?php
-session_start();
+$signUpPhase = 1;
 $isOk = true;
 include 'menu.php';
 if (isset($_SESSION['fname'])) {
@@ -7,6 +7,7 @@ if (isset($_SESSION['fname'])) {
     exit();
 }
 if(isset($_POST) && !empty($_POST)){
+
   $conn = new mysqli('localhost','root','', 'kingame');
 
   $sql = "SELECT * FROM utenti WHERE UserName = '".$_POST['username']."'";
@@ -16,14 +17,10 @@ if(isset($_POST) && !empty($_POST)){
   }
 
   if ($isOk) {
-    $_SESSION["reg"]["username"] = $_POST["username"];
-    $_SESSION["reg"]["email"] = $_POST["email"];
-    $_SESSION["reg"]["password"] = $_POST["password"];
-    header("Location: completaReg.php");
-    exit;
-  }
-  else{
-    echo "not ok";
+    $username = $_POST["username"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $signUpPhase = 2;
   }
   $conn->close();
 }
@@ -37,34 +34,76 @@ if(isset($_POST) && !empty($_POST)){
   <title>Registrazione</title>
 </head>
 <body>
+<?php
+  if($signUpPhase == 1){
+  echo '<div class="form-container">
+      <h2>Registrazione</h2>
 
- <div class="form-container">
-    <h2>Registrazione</h2>
+      <form method="POST" action="registrazione.php" id="registrationForm">
+        
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>';
+          if(!$isOk){
+            echo "<p>username usato</p>";
+          }
 
-    <form method="POST" action="registrazione.php" id="registrationForm">
-      
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" required>
-      <?php 
-        if(!$isOk){
-          echo "<p>username usato</p>";
-        }
-      ?>
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
+        echo '<label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
 
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
 
-      <label for="cpassword">Conferma Password</label>
-      <input type="password" id="cpassword" name="cpassword" oninput="checkEquality()" required>
+        <label for="cpassword">Conferma Password</label>
+        <input type="password" id="cpassword" name="cpassword" oninput="checkEquality()" required>
 
-      <input type="submit" value="Registrati" id="submitBtn" disabled>
+        <input type="submit" value="Registrati" id="submitBtn" disabled>
 
-      <a href="index.php" class="home-link">Torna alla Home</a>
-   </form>
-  </div>
+        <a href="index.php" class="home-link">Torna alla Home</a>
+    </form>
+    </div>';
+  }
+  else{
+    
+    $countriesJson = @file_get_contents("https://restcountries.com/v3.1/all");
+    if ($countriesJson === false) {
+        die("Errore nel recupero dei dati dei paesi.");
+    }
+    $countries = json_decode($countriesJson, true);
+    echo $countriesJson;
+    echo $countries;
+    echo '
+    <div class="form-container">
+        <h2>Completa Registrazione</h2>
+        <form method="POST" action="regRiquest.php" id="registrationForm">
+          <label for="name">Nome Utente</label>
+          <input type="text" id="nome" name="nickname" required>
+          
+          <label for="paesi">Seleziona il tuo Paese</label>
+          <select name="paese" id="paese">';
+    
+            foreach($countries as $country) {
+                if ($country['cca2'] === 'IL') {
+                    continue;
+                }
+                echo '<option value="';
+                echo $country['cca2'];
+                echo '">';
+                echo $country['name']['common'];
+                echo '</option>'; 
+            }
+      echo '
+            <input type="hidden" name="username" value="'.$username.'">
+            <input type="hidden" name="email" value="'.$email.'">
+            <input type="hidden" name="password" value="'.md5($password).'">
+          </select>
+          
+          <input type="submit" value="Registrati" id="submitBtn">
+       </form>
+    </div>';
+        
+  }
   
+?>
 </body>
 </html>
 

@@ -148,7 +148,7 @@ function disegnaCacciatore() {
 	}
 }
 
-setInterval(disegnaCacciatore, 210);
+setInterval(disegnaCacciatore, 500);
 
 /*function disegnaSecondoCacciatore() {
 	var deltaX = ominoX - secondoCacciatoreX;
