@@ -118,7 +118,7 @@ $punteggio = isset($_SESSION['punteggio']) ? $_SESSION['punteggio'] : 0;
         <div class="card">
             <div class="card-header">
                 <div class="left-section">
-                    <img class="card-img-left" src=<?php echo $foto_profilo ?>alt="Avatar">
+                    <img class="card-img-left" src="<?php echo $foto_profilo ?>" alt="Avatar">
                     <h4 class="card-title ms-3"><?php echo $nickname;?></h4>
                 </div>
                 

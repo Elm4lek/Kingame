@@ -12,11 +12,10 @@ $password = $_POST['password'];
 $paese = $_POST['paese'];
 $foto_profilo = $_POST['foto'];
 
-$sql = "INSERT INTO utenti (UserName, NickName, Email, Password, ISO,Data_registrazione, img_profilo) VALUES ('".$username."','".$nickname."', '".$email."', '".$password."', '".$paese."','".date("Y-m-d")."','".$foto_profilo."',)";
+$sql = "INSERT INTO utenti (UserName, NickName, Email, Password, ISO,Data_registrazione, img_profile) VALUES ('".$username."','".$nickname."', '".$email."', '".$password."', '".$paese."','".date("Y-m-d")."','".$foto_profilo."')";
 
 $conn->query($sql);
 
-$stmt->close();
 $conn->close();
 ?>
 
