@@ -11,15 +11,12 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 $paese = $_POST['paese'];
 
-$stmt = $conn->prepare("INSERT INTO utenti (UserName, NickName, Email, Password, ISO) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("sssss", $username, $nickname, $email, $password, $paese);
+$conn = new mysqli('localhost','root','', 'kingame');
 
-if ($stmt->execute()) {
-} else {
-    echo "Errore: " . $stmt->error;
-}
+$sql = "INSERT INTO utenti (UserName, NickName, Email, Password, ISO,Data_registrazione) VALUES ('".$username."','".$nickname."', '".$email."', '".$password."', '".$paese."','".date("Y-m-d")."')";
 
-$stmt->close();
+$conn->query($sql);
+
 $conn->close();
 ?>
 
