@@ -9,6 +9,7 @@ if (!isset($_SESSION['username'])) {
 $nickname = isset($_SESSION['nickname']) ? $_SESSION['nickname'] : 'N/A';
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'N/A';
 $data_reg = isset($_SESSION['data_reg']) ? $_SESSION['data_reg'] : 'N/A';
+$foto_profilo = isset($_SESSION['img_profilo']) ? $_SESSION['img_profilo'] : 'N/A';
 $n_giochi = isset($_SESSION['n_giochi']) ? $_SESSION['n_giochi'] : 0;
 $punteggio = isset($_SESSION['punteggio']) ? $_SESSION['punteggio'] : 0;
 ?>
@@ -117,7 +118,7 @@ $punteggio = isset($_SESSION['punteggio']) ? $_SESSION['punteggio'] : 0;
         <div class="card">
             <div class="card-header">
                 <div class="left-section">
-                    <img class="card-img-left" src="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/blu.png" alt="Avatar">
+                    <img class="card-img-left" src=<?php echo $foto_profilo ?>alt="Avatar">
                     <h4 class="card-title ms-3"><?php echo $nickname;?></h4>
                 </div>
                 

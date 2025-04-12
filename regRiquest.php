@@ -10,13 +10,13 @@ $nickname = $_POST['nickname'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 $paese = $_POST['paese'];
+$foto_profilo = $_POST['foto'];
 
-$conn = new mysqli('localhost','root','', 'kingame');
-
-$sql = "INSERT INTO utenti (UserName, NickName, Email, Password, ISO,Data_registrazione) VALUES ('".$username."','".$nickname."', '".$email."', '".$password."', '".$paese."','".date("Y-m-d")."')";
+$sql = "INSERT INTO utenti (UserName, NickName, Email, Password, ISO,Data_registrazione, img_profilo) VALUES ('".$username."','".$nickname."', '".$email."', '".$password."', '".$paese."','".date("Y-m-d")."','".$foto_profilo."',)";
 
 $conn->query($sql);
 
+$stmt->close();
 $conn->close();
 ?>
 

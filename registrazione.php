@@ -70,6 +70,16 @@ if(isset($_POST) && !empty($_POST)){
     echo '
     <div class="form-container">
         <h2>Completa Registrazione</h2>
+
+      <header>
+          <!-- Aggiungi il CSS di Select2 -->
+          <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
+          <!-- Aggiungi il JS di Select2 -->
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+      </header>
+
         <form method="POST" action="regRiquest.php" id="registrationForm">
           <label for="name">Nome Utente</label>
           <input type="text" id="nome" name="nickname" required>
@@ -91,7 +101,27 @@ if(isset($_POST) && !empty($_POST)){
             <input type="hidden" name="username" value="'.$username.'">
             <input type="hidden" name="email" value="'.$email.'">
             <input type="hidden" name="password" value="'.md5($password).'">
-          </select>
+            </select>
+
+            <label for="paesi">Seleziona il tuo personaggio</label> 
+            <select name="foto" id="foto">
+              <option value="imag1" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/1.png">1</option>
+              <option value="imag2" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/2.png">2</option>
+              <option value="imag3" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/3.png">3</option>
+              <option value="imag4" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/4.png">4</option>
+              <option value="imag5" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/5.png">5</option>
+              <option value="imag6" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/6.png">6</option>
+              <option value="imag7" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/7.png">7</option>
+              <option value="imag8" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/8.png">8</option>
+              <option value="imag9" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/9.png">9</option>
+              <option value="imag10" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/10.png">10</option>
+              <option value="imag11" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/11.png">11</option>
+              <option value="imag12" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/12.png">12</option>
+              <option value="imag13" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/13.png">13</option>
+              <option value="imag14" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/14.png">14</option>
+              <option value="imag15" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/15.png">15</option>
+              <option value="imag16" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/16.png">16</option>
+            </select>
           
           <input type="submit" value="Registrati" id="submitBtn">
        </form>
@@ -143,6 +173,17 @@ if(isset($_POST) && !empty($_POST)){
   document.querySelectorAll('input').forEach(input => {
     input.addEventListener('input', () => {
       validateForm();
+    });
+  });
+
+  
+  $(document).ready(function() {
+    $('#foto').select2({
+      templateResult: function(data) {
+        if (!data.id) { return data.text; }
+        var $result = $('<span><img src="' + $(data.element).data('image') + '" style="width: 140px; height: 140px; margin-right: 10px;" />' + data.text + '</span>');
+        return $result;
+      }
     });
   });
 </script>
