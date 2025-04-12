@@ -54,7 +54,7 @@ if (isset($_SESSION['username'])) {
 <body>
 <div class="card">  
     <h2>Login</h2>
-    <form method="POST" action="logRiquest.php">
+    <form method="POST" action="logRequest.php">
       <label for="username">Username</label>
       <input type="text" id="username" name="username" required>
 
