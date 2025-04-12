@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mar 28, 2025 alle 09:13
+-- Creato il: Apr 12, 2025 alle 08:28
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -2538,6 +2538,12 @@ ALTER TABLE `pm_img_npc`
   ADD CONSTRAINT `pm_img_npc_ibfk_1` FOREIGN KEY (`NPC_ID`) REFERENCES `pm_npc` (`NPC_ID`);
 
 --
+-- Limiti per la tabella `pm_mossa`
+--
+ALTER TABLE `pm_mossa`
+  ADD CONSTRAINT `pm_mossa_ibfk_1` FOREIGN KEY (`Tipo`) REFERENCES `pm_tipo` (`Tipo`);
+
+--
 -- Limiti per la tabella `pm_npc`
 --
 ALTER TABLE `pm_npc`
@@ -2551,6 +2557,57 @@ ALTER TABLE `pm_npc`
   ADD CONSTRAINT `pm_npc_ibfk_7` FOREIGN KEY (`Prebattaglia`) REFERENCES `testi` (`name`),
   ADD CONSTRAINT `pm_npc_ibfk_8` FOREIGN KEY (`PrimoKO`) REFERENCES `testi` (`name`),
   ADD CONSTRAINT `pm_npc_ibfk_9` FOREIGN KEY (`UltimoKO`) REFERENCES `testi` (`name`);
+
+--
+-- Limiti per la tabella `pm_squadra`
+--
+ALTER TABLE `pm_squadra`
+  ADD CONSTRAINT `pm_squadra_ibfk_1` FOREIGN KEY (`Pokedex`) REFERENCES `pokemon` (`Pokedex`),
+  ADD CONSTRAINT `pm_squadra_ibfk_2` FOREIGN KEY (`Mossa1`) REFERENCES `pm_mossa` (`MT`),
+  ADD CONSTRAINT `pm_squadra_ibfk_3` FOREIGN KEY (`Mossa2`) REFERENCES `pm_mossa` (`MT`),
+  ADD CONSTRAINT `pm_squadra_ibfk_4` FOREIGN KEY (`Mossa3`) REFERENCES `pm_mossa` (`MT`),
+  ADD CONSTRAINT `pm_squadra_ibfk_5` FOREIGN KEY (`Mossa4`) REFERENCES `pm_mossa` (`MT`),
+  ADD CONSTRAINT `pm_squadra_ibfk_6` FOREIGN KEY (`Trainer_ID`) REFERENCES `pm_trainer` (`Trainer_ID`);
+
+--
+-- Limiti per la tabella `pm_tecniche`
+--
+ALTER TABLE `pm_tecniche`
+  ADD CONSTRAINT `pm_tecniche_ibfk_1` FOREIGN KEY (`MT`) REFERENCES `pm_mossa` (`MT`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pm_tecniche_ibfk_2` FOREIGN KEY (`Pokedex`) REFERENCES `pokemon` (`Pokedex`) ON DELETE CASCADE;
+
+--
+-- Limiti per la tabella `pm_user`
+--
+ALTER TABLE `pm_user`
+  ADD CONSTRAINT `pm_user_ibfk_1` FOREIGN KEY (`Trainer_ID`) REFERENCES `pm_trainer` (`Trainer_ID`),
+  ADD CONSTRAINT `pm_user_ibfk_2` FOREIGN KEY (`ID`) REFERENCES `utenti` (`UserName`);
+
+--
+-- Limiti per la tabella `pokemon`
+--
+ALTER TABLE `pokemon`
+  ADD CONSTRAINT `pokemon_ibfk_1` FOREIGN KEY (`tipo1`) REFERENCES `pm_tipo` (`Tipo`),
+  ADD CONSTRAINT `pokemon_ibfk_2` FOREIGN KEY (`tipo2`) REFERENCES `pm_tipo` (`Tipo`);
+
+--
+-- Limiti per la tabella `sessione`
+--
+ALTER TABLE `sessione`
+  ADD CONSTRAINT `sessione_ibfk_1` FOREIGN KEY (`Stanza`) REFERENCES `stanze` (`Id`),
+  ADD CONSTRAINT `sessione_ibfk_2` FOREIGN KEY (`User`) REFERENCES `utenti` (`UserName`) ON DELETE CASCADE;
+
+--
+-- Limiti per la tabella `stanze`
+--
+ALTER TABLE `stanze`
+  ADD CONSTRAINT `stanze_ibfk_1` FOREIGN KEY (`Gioco`) REFERENCES `giochi` (`ID`);
+
+--
+-- Limiti per la tabella `utenti`
+--
+ALTER TABLE `utenti`
+  ADD CONSTRAINT `utenti_ibfk_1` FOREIGN KEY (`ISO`) REFERENCES `nazioni` (`ISO`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
