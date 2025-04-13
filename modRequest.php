@@ -12,21 +12,25 @@ if ($conn->connect_error) {
 
 $newNickname = $_POST['nome'];
 $newEmail = $_POST['email'];
-$newPwd = $_POST['password'];
+$newPwd = MD5($_POST['password']);
 $newFoto = $_POST['foto'];
 
 $username = $_SESSION["username"];
 
+$stmt = $conn->prepare("UPDATE utenti SET NickName = ?, Email = ?, Password = ?, img_profile = ? WHERE UserName = ?");
 
-echo "UPDATE utenti SET NickName = ".$newNickname.", Email = ".$newEmail.", Password = ".$newPwd.", img_profile = ".$newFoto." WHERE UserName = '".$username."';";
-$stmt = $conn->prepare("UPDATE utenti SET NickName = ".$newNickname.", Email = ".$newEmail.", Password = ".$newPwd.", img_profile = ".$newFoto." WHERE UserName = '".$username."';");
-if ($stmt->execute()) {
-} else {
-    echo "Errore: " . $stmt->error;
+if ($stmt === false) {
+    echo "Errore nella prepare: " . $conn->error;
+    exit();
 }
 
-$stmt->close();
-$conn->close();
+$stmt->bind_param("sssss", $newNickname, $newEmail, $newPwd, $newFoto, $username);
+
+if ($stmt->execute()) {
+    
+} else {
+    echo "Errore nell'execute: " . $stmt->error;
+}
 ?>
 
 <!DOCTYPE html>

@@ -1,6 +1,10 @@
 <?php
 $signUpPhase = 1;
 $isOk = true;
+$usernameError = "";
+$emailError = "";
+$passwordError = "";
+
 include 'menu.php';
 if (isset($_SESSION['username'])) {
     header("Location: index.php");
@@ -14,13 +18,37 @@ if(isset($_POST) && !empty($_POST)){
   $result = $conn->query($sql);
   if ($result->num_rows > 0){
     $isOk = false;
+    $usernameError = "Username già in uso.";
   }
 
   if ($isOk) {
     $username = $_POST["username"];
     $email = $_POST["email"];
     $password = $_POST["password"];
+
+    if (strlen($password) < 10) {
+      $isOk = false;
+      $passwordError = "La password deve essere lunga almeno 10 caratteri.";
+  }
+
+    /* controllo se email esiste con mailboxlayer ( abbiamo solo 100 richieste al mese )*/
+    /* $api_servizio = '450240d968ea204feb43a86ea8b0f6dc';  
+    $email_encoded = urlencode($email);
+    $mailboxlayer_url = "https://apilayer.net/api/check?access_key={$api_servizio}&email={$email_encoded}&smtp=1&format=1";
+
+    $check_response = file_get_contents($mailboxlayer_url);
+    $check_data = json_decode($check_response, true);
+
+    if (!$check_data['format_valid'] || !$check_data['smtp_check']) {
+        $isOk = false;
+        $emailError = "Email non valida o inesistente.";
+    } */
+    /*------------------------------------------*/
+
+    if ($isOk) {
+
     $signUpPhase = 2;
+    }
   }
   $conn->close();
 }
@@ -43,20 +71,29 @@ if(isset($_POST) && !empty($_POST)){
         
         <label for="username">Username</label>
         <input type="text" id="username" name="username" required>';
-          if(!$isOk){
-            echo "<p>username usato</p>";
-          }
+        
+        if (!empty($usernameError)) {
+          echo "<p style='color:red;'>$usernameError</p>";
+        }
+      
 
         echo '<label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" required>';
 
-        <label for="password">Password</label>
+        if (!empty($emailError)) {
+          echo "<p style='color:red;'>$emailError</p>";
+        }
+
+        echo '<label for="password">Password</label>
         <input type="password" id="password" name="password" required>
 
         <label for="cpassword">Conferma Password</label>
-        <input type="password" id="cpassword" name="cpassword" oninput="checkEquality()" required>
+        <input type="password" id="cpassword" name="cpassword" oninput="checkEquality()" required>';
+        if (!empty($passwordError)) {
+          echo "<p style='color:red;'>$passwordError</p>";
+        }
 
-        <input type="submit" value="Registrati" id="submitBtn" disabled>
+        echo '<input type="submit" value="Registrati" id="submitBtn" disabled>
 
         <a href="index.php" class="home-link">Torna alla Home</a>
     </form>
@@ -104,24 +141,12 @@ if(isset($_POST) && !empty($_POST)){
             </select>
 
             <label for="paesi">Seleziona il tuo personaggio</label> 
-            <select name="foto" id="foto">
-              <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/1.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/1.png">1</option>
-              <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/2.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/2.png">2</option>
-              <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/3.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/3.png">3</option>
-              <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/4.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/4.png">4</option>
-              <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/5.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/5.png">5</option>
-              <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/6.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/6.png">6</option>
-              <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/7.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/7.png">7</option>
-              <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/8.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/8.png">8</option>
-              <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/9.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/9.png">9</option>
-              <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/10.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/10.png">10</option>
-              <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/11.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/11.png">11</option>
-              <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/12.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/12.png">12</option>
-              <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/13.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/13.png">13</option>
-              <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/14.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/14.png">14</option>
-              <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/15.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/15.png">15</option>
-              <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/16.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/16.png">16</option>
-            </select>
+            <select name="foto" id="foto">';
+            for ($i = 1; $i <= 16; $i++) {
+                $img_url = "https://raw.githubusercontent.com/Elm4lek/kingame_img/main/img_profilo/{$i}.png";
+                echo "<option value='$img_url' data-image='$img_url'>$i</option>";
+            }
+            echo '</select>
           
           <input type="submit" value="Registrati" id="submitBtn">
        </form>
@@ -154,6 +179,26 @@ if(isset($_POST) && !empty($_POST)){
     }
   }
 
+  function validatePasswordLength() {
+    const password = document.getElementById('password').value;
+    const passwordErrorDiv = document.getElementById('passwordLengthError');
+
+    if (password.length < 10) {
+        if (!passwordErrorDiv) {
+            const newPasswordErrorDiv = document.createElement('div');
+            newPasswordErrorDiv.id = 'passwordLengthError';
+            newPasswordErrorDiv.style.color = 'red';
+            newPasswordErrorDiv.textContent = 'La password deve essere lunga almeno 10 caratteri';
+            document.getElementById('password').parentNode.insertBefore(newPasswordErrorDiv, document.getElementById('password').nextSibling);
+        }
+    } else {
+        if (passwordErrorDiv) {
+            passwordErrorDiv.remove();
+        }
+    }
+}
+
+
   function validateForm() {
     const form = document.getElementById('registrationForm');
     const submitBtn = document.getElementById('submitBtn');
@@ -164,6 +209,8 @@ if(isset($_POST) && !empty($_POST)){
     const allFieldsFilled = Array.from(form.elements).every((input) => {
       return input.value.trim() !== '' || !input.required;
     });
+
+    const passwordValid = password.length >= 10;
 
     // Abilita il pulsante solo se i campi sono pieni e le password coincidono
     submitBtn.disabled = !(allFieldsFilled && password === cpassword);

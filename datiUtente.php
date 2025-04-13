@@ -8,7 +8,7 @@ if ($conn->connect_error) {
     die("Connessione fallita: " . $conn->connect_error);
 }
 $username = $_SESSION["username"];
-$stmt = $conn->prepare("SELECT NickName, UserName, Data_registrazione, img_profile,COUNT(User), SUM(Punteggio) FROM utenti INNER JOIN sessione ON UserName = User WHERE UserName = '".$username."';");
+$stmt = $conn->prepare("SELECT NickName, UserName, Data_registrazione, img_profile,COUNT(User), SUM(Punteggio), email, ISO FROM utenti INNER JOIN sessione ON UserName = User WHERE UserName = '".$username."';");
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -20,6 +20,8 @@ if ($result->num_rows > 0) {
     $_SESSION['img_profilo'] = $row["img_profile"];
     $_SESSION['n_giochi'] = $row["COUNT(User)"];
     $_SESSION['punteggio'] = $row["SUM(Punteggio)"];
+    $_SESSION['email'] = $row["email"];
+    $_SESSION['ISO'] = $row["ISO"];
 } else {
     echo "Utente non trovato";
 }

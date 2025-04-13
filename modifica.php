@@ -4,6 +4,33 @@ if (!isset($_SESSION['username'])) {
     header("Location: index.php");
     exit();
 }
+
+$nickname = isset($_SESSION['nickname']) ? $_SESSION['nickname'] : 'N/A';
+$foto_profilo = isset($_SESSION['img_profilo']) ? $_SESSION['img_profilo'] : 'N/A';
+$email = isset($_SESSION['email']) ? $_SESSION['email'] : 'N/A';
+
+preg_match('/img_profilo\/(.*?)\.png/', $foto_profilo, $matches);
+
+if (isset($matches[1])) {
+    $foto = $matches[1];
+    echo $valore; 
+}
+
+$emailError = "";
+$passwordError = "";
+
+/* controllo se email esiste con mailboxlayer ( abbiamo solo 100 richieste al mese )*/
+    /* $api_servizio = '450240d968ea204feb43a86ea8b0f6dc';  
+    $email_encoded = urlencode($email);
+    $mailboxlayer_url = "https://apilayer.net/api/check?access_key={$api_servizio}&email={$email_encoded}&smtp=1&format=1";
+
+    $check_response = file_get_contents($mailboxlayer_url);
+    $check_data = json_decode($check_response, true);
+
+    if (!$check_data['format_valid'] || !$check_data['smtp_check']) {
+        $emailError = "Email non valida o inesistente.";
+    } */
+    /*------------------------------------------*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,35 +97,36 @@ if (!isset($_SESSION['username'])) {
 <div class="form-container">
   <h2>Modifica il tuo profilo</h2>
 
-  <form method="POST" action="modRequest.php" id="registrationForm">
+  <form method="POST" action="modRequest.php" id="modificaform">
     <label for="name">NickName</label>
-    <input type="text" id="name" name="nome" required>
+    <input type="text" id="name" name="nome" value="<?php echo $nickname; ?>" required>
 
     <label for="email">Email</label>
-    <input type="email" id="email" name="email" required>
+    <input type="email" id="email" name="email" value="<?php echo $email; ?>" required>
+    <?php 
+    if (!empty($emailError)) {
+          echo "<p style='color:red;'>$emailError</p>";
+    }
+    ?>
 
     <label for="password">Password</label>
     <input type="password" id="password" name="password" required>
 
+    <?php 
+    if (!empty($passwordError)) {
+          echo "<p style='color:red;'>$passwordError</p>";
+    }
+    ?>
+    
+
     <label for="paesi">Seleziona il tuo personaggio</label> 
-      <select name="foto" id="foto">
-      <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/1.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/1.png">1</option>
-      <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/2.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/2.png">2</option>
-      <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/3.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/3.png">3</option>
-      <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/4.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/4.png">4</option>
-      <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/5.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/5.png">5</option>
-      <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/6.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/6.png">6</option>
-      <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/7.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/7.png">7</option>
-      <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/8.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/8.png">8</option>
-      <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/9.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/9.png">9</option>
-      <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/10.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/10.png">10</option>
-      <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/11.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/11.png">11</option>
-      <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/12.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/12.png">12</option>
-      <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/13.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/13.png">13</option>
-      <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/14.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/14.png">14</option>
-      <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/15.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/15.png">15</option>
-      <option value="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/16.png" data-image="https://raw.githubusercontent.com/Elm4lek/kingame_img/refs/heads/main/img_profilo/16.png">16</option>
-      </select>
+      <select name="foto" id="foto" value="<?php echo $foto; ?>">
+      <?php
+        for ($i = 1; $i <= 16; $i++) {
+            $img_url = "https://raw.githubusercontent.com/Elm4lek/kingame_img/main/img_profilo/{$i}.png";
+            echo "<option value='$img_url' data-image='$img_url'>$i</option>";
+        }
+        ?>
 
     <input type="submit" value="Modifica" id="submitBtn">
 
@@ -110,6 +138,54 @@ if (!isset($_SESSION['username'])) {
 </html>
 
 <script>
+
+
+function validatePasswordLength() {
+    const password = document.getElementById('password').value;
+    const passwordErrorDiv = document.getElementById('passwordLengthError');
+
+    if (password.length < 10) {
+        if (!passwordErrorDiv) {
+            const newPasswordErrorDiv = document.createElement('div');
+            newPasswordErrorDiv.id = 'passwordLengthError';
+            newPasswordErrorDiv.style.color = 'red';
+            newPasswordErrorDiv.textContent = 'La password deve essere lunga almeno 10 caratteri';
+            document.getElementById('password').parentNode.insertBefore(newPasswordErrorDiv, document.getElementById('password').nextSibling);
+        }
+    } else {
+        if (passwordErrorDiv) {
+            passwordErrorDiv.remove();
+        }
+    }
+}
+
+function validateForm() {
+    const form = document.getElementById('modificaform');
+    const submitBtn = document.getElementById('submitBtn');
+    const password = document.getElementById('password').value;
+    const cpassword = document.getElementById('email').value;
+
+    // Controlla se tutti i campi obbligatori sono riempiti
+    const allFieldsFilled = Array.from(form.elements).every((input) => {
+      return input.value.trim() !== '' || !input.required;
+    });
+
+    const passwordValid = password.length >= 10;
+
+    // Abilita il pulsante solo se i campi sono pieni e le password coincidono
+    submitBtn.disabled = !(allFieldsFilled && passwordValid);
+  }
+
+  // Aggiungi event listener per tutti i campi di input
+  document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('input', () => {
+      validateForm();
+      validatePasswordLength();
+    });
+  });
+
+
+
   $(document).ready(function() {
     $('#foto').select2({
       templateResult: function(data) {
