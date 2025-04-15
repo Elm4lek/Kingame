@@ -1,6 +1,7 @@
-function createMove(name, description, pp, effectFunction) {
+function createMove(name, type, description, pp, effectFunction) {
     return {
         name: name,
+        type:type,
         description: description,
         pp: pp,
         ppRest: pp,
@@ -19,10 +20,10 @@ function atkMove(name, description, pp, damageFormula) {
     };
 }
 
-export const bite = createMove("bite", "creates damage", 10, (attacker, target) => attacker.atk);
-export const hit = createMove("hit", "creates damage", 10, (attacker, target) => attacker.atk * 2);
-export const cut = createMove("cut", "cuts HP in half", 10, (attacker, target) => target.hp / 2);
-export const agility = createMove("Agility", "Raises the user's Speed by two stages.", 30, 
+export const bite = createMove("bite", "fisico", "creates damage", 10, (attacker, target) => attacker.atk);
+export const hit = createMove("hit", "fisico", "creates damage", 10, (attacker, target) => attacker.atk * 2);
+export const cut = createMove("cut", "fisico", "cuts HP in half", 10, (attacker, target) => target.hp / 2);
+export const agility = createMove("agility", "stato", "Raises the user's Speed by two stages.", 30, 
     (target) => changeStatStage(target, "vel", 2) // Calls function to increase speed stage by +2
     );
     

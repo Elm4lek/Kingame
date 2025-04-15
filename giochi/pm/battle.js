@@ -1,6 +1,5 @@
 import * as Funcs from './functions.js';
 import * as move from './moves.js';
-
 function changeStatStage(target,stat,stageIncrease){
     // Calculate new stage after applying the increase/decrease
     let newStage = target.statStages[stat] + stageIncrease;
@@ -236,16 +235,15 @@ var pm = {
     spDef: 50,
     movelist: [],
     statList: [],
-    statStages: [
-        atk = 0,
-        def = 0,
-        spd = 0,
-        spAtk = 0,
-        spDef = 0,
-        dmg = 0,
-        evs = 0,
-        dmg = 0,
-    ],
+    statStages: {
+        atk: 0,
+        def: 0,
+        spd: 0,
+        spAtk: 0,
+        spDef: 0,
+        dmg: 0,
+        evs: 0
+    },  
     status:STATUS.NORMAL
 };
 
@@ -260,19 +258,27 @@ var enemy = {
     spDef: 50,
     movelist: [],
     statList: [],
-    statStages: [
-        atk = 0,
-        def = 0,
-        spd = 0,
-        spAtk = 0,
-        spDef = 0,
-        dmg = 0,
-        evs = 0,
-        dmg = 0,
-    ],
+    statStages: {
+        atk: 0,
+        def: 0,
+        spd: 0,
+        spAtk: 0,
+        spDef: 0,
+        dmg: 0,
+        evs: 0
+    }
+    ,
     status:STATUS.NORMAL
 };
-pm.movelist.push(move.agility(pm));
+enemy.movelist.push(move.agility);
+enemy.movelist.push(move.bite);
+enemy.movelist.push(move.cut);
+enemy.movelist.push(move.hit);
+
+pm.movelist.push(move.agility);
+pm.movelist.push(move.bite);
+pm.movelist.push(move.cut);
+pm.movelist.push(move.hit);
 
 function select(choice){
     cancel();
@@ -283,6 +289,13 @@ function select(choice){
             break;
         case 'Pokemon': pokemon();
             break;
+    }
+}
+
+function cancel(){
+    var box = document.getElementById("dialog-box");
+    while (box.firstChild) {
+        box.removeChild(box.lastChild);
     }
 }
 
@@ -297,14 +310,14 @@ function fight() {
         fightMove.addEventListener("click", (event) => {
             if(checkMovesStatus())
                 if(fightMove.move.ppRest>0){
-                    selectMove(fightMove);
+                    selectMove(fightMove.move);
                     fightMove.move.ppRest --;                    
                 }
                 else{
                     cantUseMove("PP is 0");
                 }
             else{
-                selectMove(struggle(pm))
+                selectMove(struggle);
             }
         });
 
@@ -322,17 +335,21 @@ function fight() {
     }
 }
 
-function cancel(){
-    var box = document.getElementById("dialog-box");
-    while (box.firstChild) {
-        box.removeChild(box.lastChild);
-    }
+function canMove(target){
+    if(!target.status.isMoveUsable())   return false;//if the pokemon status' function isMoveUsable() returns false, this function return false
+    target.statList.forEach(element => {
+        if(!element.isMoveUsable())     return false;//if one of all conditions of the pokemon's function isMoveUsable() returns false, this function return false
+    });
+    
+    return true;//if none conditions is met, then returns true
 }
 
-function selectMove(name){
-
+function selectMove(move){
+    
+    let name = move.name;
     dialogBoxText(pm.name+" HAVE USED "+name);
 }
+
 function cantUseMove(reason){
     dialogBoxText(reason)
 }
@@ -347,3 +364,17 @@ function checkMovesStatus(){
     }
     return false
 }
+
+function init(){
+    cancel();
+    document.getElementById("enemyName").innerHTML = enemy.name;
+    document.getElementById("currentName").innerHTML = pm.name;
+    document.getElementById("enemyHP").innerHTML = enemy.hp;
+    document.getElementById("currentHP").innerHTML = pm.hp;
+}
+
+init();
+
+window.select = select;
+window.fight = fight;
+window.cancel = cancel;

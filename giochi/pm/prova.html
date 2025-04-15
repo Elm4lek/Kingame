@@ -1,5 +1,6 @@
-<html><head>
-    <script type="text/javascript" src="myJs.js"></script>
+<html>
+<head>
+    <script type="module" src="battle.js"></script>
     <link rel="stylesheet" href="myCss.css">
 </head>
 
@@ -10,17 +11,57 @@
         height: 75%;">
             <div class="half-container">
                 <div class="description-box">
+                    <div class="half-container" style="
+                    align-items: baseline;
+                    justify-content: flex-start;
+                    padding-top: 20px;
+                    padding-left: 20px;
+                    ">
+                        <div id="enemyName"></div>
+                    </div>
+                    <div class="half-container" style="
+                    align-items: baseline;
+                    ">
+                        <progress id="enemyHP" value="100" max="100" style="
+                        width: 90%;
+                        height: 30%;
+                        border: 5px solid darkslategrey;
+                        border-radius: 10px;
+                        background-color: darkslategrey;
+                        "></progress>
+                    </div>
                 </div>
-                <div style="
+                <div id="enemyImg" style="
                 width: 45%;
                 height: 100%;">
                 </div>
             </div>
             <div class="half-container">
-                <div style="
+                <div id="currentImg" style="
                 width: 45%;
                 height: 100%;"></div>
-                <div class="description-box"></div>
+                <div class="description-box">
+                    <div class="half-container" style="
+                    align-items: baseline;
+                    justify-content: flex-start;
+                    padding-top: 20px;
+                    padding-left: 20px;
+                    ">
+                        <div id="currentName"style="
+                        ">piplup</div>
+                    </div>
+                    <div class="half-container" style="
+                    align-items: baseline;
+                    ">
+                        <progress id="currentHP" value="100" max="100" style="
+                        width: 90%;
+                        height: 30%;
+                        border: 5px solid darkslategrey;
+                        border-radius: 10px;
+                        background-color: darkslategrey;
+                        "></progress>
+                    </div>
+                </div>
             </div>
         </div>
     
@@ -37,6 +78,5 @@
         <div id="choice4" class="choice text-container" onclick="select('Cancel')"> Cancel </div>
     </div>
 
-
-
-</body></html>
+</body>
+</html>

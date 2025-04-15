@@ -8,11 +8,6 @@ body{
     width:  75%;
     background-color: aquamarine;
 }
-#content{
-    height:  100%;
-    width:  75%;
-    background-color: aquamarine;
-}
 .dialog-box-background{
     position:  relative;
     margin: auto;
@@ -65,7 +60,6 @@ body{
 .half-container {
     height: 50%;
     width: 100%;
-    background: aqua;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
