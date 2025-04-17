@@ -3,17 +3,15 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 12, 2025 alle 08:41
--- Versione del server: 10.4.28-MariaDB
--- Versione PHP: 8.2.4
+-- Creato il: Apr 17, 2025 alle 10:29
+-- Versione del server: 10.4.32-MariaDB
+-- Versione PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-DROP DATABASE IF EXISTS kingame;
-CREATE DATABASE kingame;
-USE kingame;
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -22,6 +20,8 @@ USE kingame;
 --
 -- Database: `kingame`
 --
+CREATE DATABASE IF NOT EXISTS `kingame` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `kingame`;
 
 -- --------------------------------------------------------
 
@@ -1708,7 +1708,303 @@ INSERT INTO `pm_tecniche` (`Pokedex`, `MT`) VALUES
 (20, 'MT269'),
 (20, 'MT290'),
 (20, 'MT363'),
-(20, 'MT416');
+(20, 'MT416'),
+(21, 'MT019'),
+(21, 'MT092'),
+(21, 'MT104'),
+(21, 'MT156'),
+(21, 'MT168'),
+(21, 'MT182'),
+(21, 'MT203'),
+(21, 'MT211'),
+(21, 'MT213'),
+(21, 'MT216'),
+(21, 'MT218'),
+(21, 'MT237'),
+(21, 'MT240'),
+(21, 'MT241'),
+(21, 'MT263'),
+(21, 'MT290'),
+(21, 'MT332'),
+(21, 'MT355'),
+(21, 'MT365'),
+(21, 'MT432'),
+(22, 'MT019'),
+(22, 'MT063'),
+(22, 'MT092'),
+(22, 'MT104'),
+(22, 'MT164'),
+(22, 'MT168'),
+(22, 'MT182'),
+(22, 'MT203'),
+(22, 'MT211'),
+(22, 'MT216'),
+(22, 'MT218'),
+(22, 'MT237'),
+(22, 'MT263'),
+(22, 'MT290'),
+(22, 'MT332'),
+(22, 'MT365'),
+(22, 'MT416'),
+(22, 'MT432'),
+(23, 'MT070'),
+(23, 'MT089'),
+(23, 'MT091'),
+(23, 'MT092'),
+(23, 'MT104'),
+(23, 'MT157'),
+(23, 'MT164'),
+(23, 'MT168'),
+(23, 'MT182'),
+(23, 'MT188'),
+(23, 'MT207'),
+(23, 'MT216'),
+(23, 'MT218'),
+(23, 'MT231'),
+(23, 'MT237'),
+(23, 'MT259'),
+(23, 'MT263'),
+(23, 'MT289'),
+(23, 'MT371'),
+(23, 'MT398'),
+(24, 'MT070'),
+(24, 'MT089'),
+(24, 'MT091'),
+(24, 'MT092'),
+(24, 'MT104'),
+(24, 'MT157'),
+(24, 'MT164'),
+(24, 'MT168'),
+(24, 'MT182'),
+(24, 'MT188'),
+(24, 'MT207'),
+(24, 'MT216'),
+(24, 'MT218'),
+(24, 'MT231'),
+(24, 'MT237'),
+(24, 'MT259'),
+(24, 'MT263'),
+(24, 'MT289'),
+(24, 'MT371'),
+(24, 'MT398'),
+(25, 'MT070'),
+(25, 'MT085'),
+(25, 'MT086'),
+(25, 'MT087'),
+(25, 'MT092'),
+(25, 'MT113'),
+(25, 'MT148'),
+(25, 'MT164'),
+(25, 'MT182'),
+(25, 'MT207'),
+(25, 'MT231'),
+(25, 'MT237'),
+(25, 'MT249'),
+(25, 'MT263'),
+(25, 'MT264'),
+(25, 'MT280'),
+(25, 'MT351'),
+(25, 'MT374'),
+(25, 'MT451'),
+(26, 'MT063'),
+(26, 'MT070'),
+(26, 'MT085'),
+(26, 'MT086'),
+(26, 'MT087'),
+(26, 'MT092'),
+(26, 'MT113'),
+(26, 'MT148'),
+(26, 'MT164'),
+(26, 'MT182'),
+(26, 'MT207'),
+(26, 'MT231'),
+(26, 'MT237'),
+(26, 'MT249'),
+(26, 'MT263'),
+(26, 'MT264'),
+(26, 'MT280'),
+(26, 'MT351'),
+(26, 'MT374'),
+(26, 'MT451'),
+(27, 'MT015'),
+(27, 'MT089'),
+(27, 'MT091'),
+(27, 'MT092'),
+(27, 'MT104'),
+(27, 'MT157'),
+(27, 'MT201'),
+(27, 'MT203'),
+(27, 'MT216'),
+(27, 'MT231'),
+(27, 'MT237'),
+(27, 'MT249'),
+(27, 'MT263'),
+(27, 'MT264'),
+(27, 'MT280'),
+(27, 'MT317'),
+(27, 'MT360'),
+(27, 'MT421'),
+(27, 'MT446'),
+(28, 'MT015'),
+(28, 'MT089'),
+(28, 'MT091'),
+(28, 'MT092'),
+(28, 'MT104'),
+(28, 'MT157'),
+(28, 'MT201'),
+(28, 'MT203'),
+(28, 'MT216'),
+(28, 'MT231'),
+(28, 'MT237'),
+(28, 'MT249'),
+(28, 'MT263'),
+(28, 'MT264'),
+(28, 'MT280'),
+(28, 'MT317'),
+(28, 'MT360'),
+(28, 'MT421'),
+(28, 'MT446'),
+(29, 'MT015'),
+(29, 'MT091'),
+(29, 'MT092'),
+(29, 'MT104'),
+(29, 'MT168'),
+(29, 'MT182'),
+(29, 'MT188'),
+(29, 'MT216'),
+(29, 'MT218'),
+(29, 'MT231'),
+(29, 'MT237'),
+(29, 'MT249'),
+(29, 'MT263'),
+(29, 'MT398'),
+(29, 'MT421'),
+(30, 'MT015'),
+(30, 'MT091'),
+(30, 'MT092'),
+(30, 'MT104'),
+(30, 'MT168'),
+(30, 'MT182'),
+(30, 'MT188'),
+(30, 'MT216'),
+(30, 'MT218'),
+(30, 'MT231'),
+(30, 'MT237'),
+(30, 'MT249'),
+(30, 'MT263'),
+(30, 'MT398'),
+(30, 'MT421'),
+(31, 'MT046'),
+(31, 'MT058'),
+(31, 'MT059'),
+(31, 'MT063'),
+(31, 'MT089'),
+(31, 'MT091'),
+(31, 'MT092'),
+(31, 'MT157'),
+(31, 'MT168'),
+(31, 'MT182'),
+(31, 'MT188'),
+(31, 'MT201'),
+(31, 'MT231'),
+(31, 'MT237'),
+(31, 'MT249'),
+(31, 'MT259'),
+(31, 'MT264'),
+(31, 'MT269'),
+(31, 'MT280'),
+(31, 'MT317'),
+(31, 'MT374'),
+(31, 'MT398'),
+(31, 'MT416'),
+(31, 'MT444'),
+(32, 'MT015'),
+(32, 'MT091'),
+(32, 'MT092'),
+(32, 'MT104'),
+(32, 'MT168'),
+(32, 'MT182'),
+(32, 'MT188'),
+(32, 'MT216'),
+(32, 'MT218'),
+(32, 'MT231'),
+(32, 'MT237'),
+(32, 'MT249'),
+(32, 'MT263'),
+(32, 'MT398'),
+(32, 'MT421'),
+(33, 'MT015'),
+(33, 'MT091'),
+(33, 'MT092'),
+(33, 'MT104'),
+(33, 'MT168'),
+(33, 'MT182'),
+(33, 'MT188'),
+(33, 'MT216'),
+(33, 'MT218'),
+(33, 'MT231'),
+(33, 'MT237'),
+(33, 'MT249'),
+(33, 'MT263'),
+(33, 'MT398'),
+(33, 'MT421'),
+(34, 'MT046'),
+(34, 'MT058'),
+(34, 'MT059'),
+(34, 'MT063'),
+(34, 'MT089'),
+(34, 'MT091'),
+(34, 'MT092'),
+(34, 'MT157'),
+(34, 'MT168'),
+(34, 'MT182'),
+(34, 'MT188'),
+(34, 'MT201'),
+(34, 'MT231'),
+(34, 'MT237'),
+(34, 'MT249'),
+(34, 'MT259'),
+(34, 'MT264'),
+(34, 'MT269'),
+(34, 'MT280'),
+(34, 'MT317'),
+(34, 'MT374'),
+(34, 'MT398'),
+(34, 'MT416'),
+(34, 'MT444'),
+(35, 'MT070'),
+(35, 'MT094'),
+(35, 'MT104'),
+(35, 'MT113'),
+(35, 'MT115'),
+(35, 'MT138'),
+(35, 'MT156'),
+(35, 'MT182'),
+(35, 'MT218'),
+(35, 'MT231'),
+(35, 'MT237'),
+(35, 'MT247'),
+(35, 'MT249'),
+(35, 'MT263'),
+(35, 'MT264'),
+(35, 'MT347'),
+(36, 'MT063'),
+(36, 'MT070'),
+(36, 'MT094'),
+(36, 'MT104'),
+(36, 'MT113'),
+(36, 'MT115'),
+(36, 'MT138'),
+(36, 'MT156'),
+(36, 'MT182'),
+(36, 'MT218'),
+(36, 'MT231'),
+(36, 'MT237'),
+(36, 'MT247'),
+(36, 'MT249'),
+(36, 'MT263'),
+(36, 'MT264'),
+(36, 'MT347');
 
 -- --------------------------------------------------------
 
@@ -2557,6 +2853,464 @@ ALTER TABLE `pm_npc`
   ADD CONSTRAINT `pm_npc_ibfk_7` FOREIGN KEY (`Prebattaglia`) REFERENCES `testi` (`name`),
   ADD CONSTRAINT `pm_npc_ibfk_8` FOREIGN KEY (`PrimoKO`) REFERENCES `testi` (`name`),
   ADD CONSTRAINT `pm_npc_ibfk_9` FOREIGN KEY (`UltimoKO`) REFERENCES `testi` (`name`);
+--
+-- Database: `phpmyadmin`
+--
+CREATE DATABASE IF NOT EXISTS `phpmyadmin` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `phpmyadmin`;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__bookmark`
+--
+
+CREATE TABLE `pma__bookmark` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `dbase` varchar(255) NOT NULL DEFAULT '',
+  `user` varchar(255) NOT NULL DEFAULT '',
+  `label` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `query` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Bookmarks';
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__central_columns`
+--
+
+CREATE TABLE `pma__central_columns` (
+  `db_name` varchar(64) NOT NULL,
+  `col_name` varchar(64) NOT NULL,
+  `col_type` varchar(64) NOT NULL,
+  `col_length` text DEFAULT NULL,
+  `col_collation` varchar(64) NOT NULL,
+  `col_isNull` tinyint(1) NOT NULL,
+  `col_extra` varchar(255) DEFAULT '',
+  `col_default` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Central list of columns';
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__column_info`
+--
+
+CREATE TABLE `pma__column_info` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `column_name` varchar(64) NOT NULL DEFAULT '',
+  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `mimetype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `transformation` varchar(255) NOT NULL DEFAULT '',
+  `transformation_options` varchar(255) NOT NULL DEFAULT '',
+  `input_transformation` varchar(255) NOT NULL DEFAULT '',
+  `input_transformation_options` varchar(255) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Column information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__designer_settings`
+--
+
+CREATE TABLE `pma__designer_settings` (
+  `username` varchar(64) NOT NULL,
+  `settings_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Settings related to Designer';
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__export_templates`
+--
+
+CREATE TABLE `pma__export_templates` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL,
+  `export_type` varchar(10) NOT NULL,
+  `template_name` varchar(64) NOT NULL,
+  `template_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved export templates';
+
+--
+-- Dump dei dati per la tabella `pma__export_templates`
+--
+
+INSERT INTO `pma__export_templates` (`id`, `username`, `export_type`, `template_name`, `template_data`) VALUES
+(1, 'root', 'database', 'kingame', '{\"quick_or_custom\":\"quick\",\"what\":\"sql\",\"structure_or_data_forced\":\"0\",\"table_select[]\":[\"giochi\",\"nazioni\",\"pm_borsa\",\"pm_img\",\"pm_img_npc\",\"pm_mossa\",\"pm_npc\",\"pm_oggetti\",\"pm_squadra\",\"pm_tecniche\",\"pm_tipo\",\"pm_trainer\",\"pm_user\",\"pokemon\",\"sessione\",\"stanze\",\"testi\",\"utenti\"],\"table_structure[]\":[\"giochi\",\"nazioni\",\"pm_borsa\",\"pm_img\",\"pm_img_npc\",\"pm_mossa\",\"pm_npc\",\"pm_oggetti\",\"pm_squadra\",\"pm_tecniche\",\"pm_tipo\",\"pm_trainer\",\"pm_user\",\"pokemon\",\"sessione\",\"stanze\",\"testi\",\"utenti\"],\"table_data[]\":[\"giochi\",\"nazioni\",\"pm_borsa\",\"pm_img\",\"pm_img_npc\",\"pm_mossa\",\"pm_npc\",\"pm_oggetti\",\"pm_squadra\",\"pm_tecniche\",\"pm_tipo\",\"pm_trainer\",\"pm_user\",\"pokemon\",\"sessione\",\"stanze\",\"testi\",\"utenti\"],\"aliases_new\":\"\",\"output_format\":\"sendit\",\"filename_template\":\"@DATABASE@\",\"remember_template\":\"on\",\"charset\":\"utf-8\",\"compression\":\"none\",\"maxsize\":\"\",\"codegen_structure_or_data\":\"data\",\"codegen_format\":\"0\",\"csv_separator\":\",\",\"csv_enclosed\":\"\\\"\",\"csv_escaped\":\"\\\"\",\"csv_terminated\":\"AUTO\",\"csv_null\":\"NULL\",\"csv_columns\":\"something\",\"csv_structure_or_data\":\"data\",\"excel_null\":\"NULL\",\"excel_columns\":\"something\",\"excel_edition\":\"win\",\"excel_structure_or_data\":\"data\",\"json_structure_or_data\":\"data\",\"json_unicode\":\"something\",\"latex_caption\":\"something\",\"latex_structure_or_data\":\"structure_and_data\",\"latex_structure_caption\":\"Struttura della tabella @TABLE@\",\"latex_structure_continued_caption\":\"Struttura della tabella @TABLE@ (continua)\",\"latex_structure_label\":\"tab:@TABLE@-structure\",\"latex_relation\":\"something\",\"latex_comments\":\"something\",\"latex_mime\":\"something\",\"latex_columns\":\"something\",\"latex_data_caption\":\"Contenuto della tabella @TABLE@\",\"latex_data_continued_caption\":\"Contenuto della tabella @TABLE@ (continua)\",\"latex_data_label\":\"tab:@TABLE@-data\",\"latex_null\":\"\\\\textit{NULL}\",\"mediawiki_structure_or_data\":\"structure_and_data\",\"mediawiki_caption\":\"something\",\"mediawiki_headers\":\"something\",\"htmlword_structure_or_data\":\"structure_and_data\",\"htmlword_null\":\"NULL\",\"ods_null\":\"NULL\",\"ods_structure_or_data\":\"data\",\"odt_structure_or_data\":\"structure_and_data\",\"odt_relation\":\"something\",\"odt_comments\":\"something\",\"odt_mime\":\"something\",\"odt_columns\":\"something\",\"odt_null\":\"NULL\",\"pdf_report_title\":\"\",\"pdf_structure_or_data\":\"structure_and_data\",\"phparray_structure_or_data\":\"data\",\"sql_include_comments\":\"something\",\"sql_header_comment\":\"\",\"sql_use_transaction\":\"something\",\"sql_compatibility\":\"NONE\",\"sql_structure_or_data\":\"structure_and_data\",\"sql_create_table\":\"something\",\"sql_auto_increment\":\"something\",\"sql_create_view\":\"something\",\"sql_procedure_function\":\"something\",\"sql_create_trigger\":\"something\",\"sql_backquotes\":\"something\",\"sql_type\":\"INSERT\",\"sql_insert_syntax\":\"both\",\"sql_max_query_size\":\"50000\",\"sql_hex_for_binary\":\"something\",\"sql_utc_time\":\"something\",\"texytext_structure_or_data\":\"structure_and_data\",\"texytext_null\":\"NULL\",\"xml_structure_or_data\":\"data\",\"xml_export_events\":\"something\",\"xml_export_functions\":\"something\",\"xml_export_procedures\":\"something\",\"xml_export_tables\":\"something\",\"xml_export_triggers\":\"something\",\"xml_export_views\":\"something\",\"xml_export_contents\":\"something\",\"yaml_structure_or_data\":\"data\",\"\":null,\"lock_tables\":null,\"as_separate_files\":null,\"csv_removeCRLF\":null,\"excel_removeCRLF\":null,\"json_pretty_print\":null,\"htmlword_columns\":null,\"ods_columns\":null,\"sql_dates\":null,\"sql_relation\":null,\"sql_mime\":null,\"sql_disable_fk\":null,\"sql_views_as_tables\":null,\"sql_metadata\":null,\"sql_create_database\":null,\"sql_drop_table\":null,\"sql_if_not_exists\":null,\"sql_simple_view_export\":null,\"sql_view_current_user\":null,\"sql_or_replace_view\":null,\"sql_truncate\":null,\"sql_delayed\":null,\"sql_ignore\":null,\"texytext_columns\":null}'),
+(2, 'root', '', 'kingame', ''),
+(3, 'root', 'server', 'kingame', '{\"quick_or_custom\":\"quick\",\"what\":\"sql\",\"db_select[]\":[\"kingame\",\"phpmyadmin\",\"test\"],\"aliases_new\":\"\",\"output_format\":\"sendit\",\"filename_template\":\"@SERVER@\",\"remember_template\":\"on\",\"charset\":\"utf-8\",\"compression\":\"none\",\"maxsize\":\"\",\"codegen_structure_or_data\":\"data\",\"codegen_format\":\"0\",\"csv_separator\":\",\",\"csv_enclosed\":\"\\\"\",\"csv_escaped\":\"\\\"\",\"csv_terminated\":\"AUTO\",\"csv_null\":\"NULL\",\"csv_columns\":\"something\",\"csv_structure_or_data\":\"data\",\"excel_null\":\"NULL\",\"excel_columns\":\"something\",\"excel_edition\":\"win\",\"excel_structure_or_data\":\"data\",\"json_structure_or_data\":\"data\",\"json_unicode\":\"something\",\"latex_caption\":\"something\",\"latex_structure_or_data\":\"structure_and_data\",\"latex_structure_caption\":\"Struttura della tabella @TABLE@\",\"latex_structure_continued_caption\":\"Struttura della tabella @TABLE@ (continua)\",\"latex_structure_label\":\"tab:@TABLE@-structure\",\"latex_relation\":\"something\",\"latex_comments\":\"something\",\"latex_mime\":\"something\",\"latex_columns\":\"something\",\"latex_data_caption\":\"Contenuto della tabella @TABLE@\",\"latex_data_continued_caption\":\"Contenuto della tabella @TABLE@ (continua)\",\"latex_data_label\":\"tab:@TABLE@-data\",\"latex_null\":\"\\\\textit{NULL}\",\"mediawiki_structure_or_data\":\"data\",\"mediawiki_caption\":\"something\",\"mediawiki_headers\":\"something\",\"htmlword_structure_or_data\":\"structure_and_data\",\"htmlword_null\":\"NULL\",\"ods_null\":\"NULL\",\"ods_structure_or_data\":\"data\",\"odt_structure_or_data\":\"structure_and_data\",\"odt_relation\":\"something\",\"odt_comments\":\"something\",\"odt_mime\":\"something\",\"odt_columns\":\"something\",\"odt_null\":\"NULL\",\"pdf_report_title\":\"\",\"pdf_structure_or_data\":\"data\",\"phparray_structure_or_data\":\"data\",\"sql_include_comments\":\"something\",\"sql_header_comment\":\"\",\"sql_use_transaction\":\"something\",\"sql_compatibility\":\"NONE\",\"sql_structure_or_data\":\"structure_and_data\",\"sql_create_table\":\"something\",\"sql_auto_increment\":\"something\",\"sql_create_view\":\"something\",\"sql_create_trigger\":\"something\",\"sql_backquotes\":\"something\",\"sql_type\":\"INSERT\",\"sql_insert_syntax\":\"both\",\"sql_max_query_size\":\"50000\",\"sql_hex_for_binary\":\"something\",\"sql_utc_time\":\"something\",\"texytext_structure_or_data\":\"structure_and_data\",\"texytext_null\":\"NULL\",\"yaml_structure_or_data\":\"data\",\"\":null,\"as_separate_files\":null,\"csv_removeCRLF\":null,\"excel_removeCRLF\":null,\"json_pretty_print\":null,\"htmlword_columns\":null,\"ods_columns\":null,\"sql_dates\":null,\"sql_relation\":null,\"sql_mime\":null,\"sql_disable_fk\":null,\"sql_views_as_tables\":null,\"sql_metadata\":null,\"sql_drop_database\":null,\"sql_drop_table\":null,\"sql_if_not_exists\":null,\"sql_simple_view_export\":null,\"sql_view_current_user\":null,\"sql_or_replace_view\":null,\"sql_procedure_function\":null,\"sql_truncate\":null,\"sql_delayed\":null,\"sql_ignore\":null,\"texytext_columns\":null}');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__favorite`
+--
+
+CREATE TABLE `pma__favorite` (
+  `username` varchar(64) NOT NULL,
+  `tables` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Favorite tables';
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__history`
+--
+
+CREATE TABLE `pma__history` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL DEFAULT '',
+  `db` varchar(64) NOT NULL DEFAULT '',
+  `table` varchar(64) NOT NULL DEFAULT '',
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp(),
+  `sqlquery` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='SQL history for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__navigationhiding`
+--
+
+CREATE TABLE `pma__navigationhiding` (
+  `username` varchar(64) NOT NULL,
+  `item_name` varchar(64) NOT NULL,
+  `item_type` varchar(64) NOT NULL,
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Hidden items of navigation tree';
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__pdf_pages`
+--
+
+CREATE TABLE `pma__pdf_pages` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `page_nr` int(10) UNSIGNED NOT NULL,
+  `page_descr` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='PDF relation pages for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__recent`
+--
+
+CREATE TABLE `pma__recent` (
+  `username` varchar(64) NOT NULL,
+  `tables` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Recently accessed tables';
+
+--
+-- Dump dei dati per la tabella `pma__recent`
+--
+
+INSERT INTO `pma__recent` (`username`, `tables`) VALUES
+('root', '[{\"db\":\"kingame\",\"table\":\"pm_tecniche\"},{\"db\":\"kingame\",\"table\":\"pm_img\"}]');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__relation`
+--
+
+CREATE TABLE `pma__relation` (
+  `master_db` varchar(64) NOT NULL DEFAULT '',
+  `master_table` varchar(64) NOT NULL DEFAULT '',
+  `master_field` varchar(64) NOT NULL DEFAULT '',
+  `foreign_db` varchar(64) NOT NULL DEFAULT '',
+  `foreign_table` varchar(64) NOT NULL DEFAULT '',
+  `foreign_field` varchar(64) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Relation table';
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__savedsearches`
+--
+
+CREATE TABLE `pma__savedsearches` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL DEFAULT '',
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `search_name` varchar(64) NOT NULL DEFAULT '',
+  `search_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved searches';
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__table_coords`
+--
+
+CREATE TABLE `pma__table_coords` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `pdf_page_number` int(11) NOT NULL DEFAULT 0,
+  `x` float UNSIGNED NOT NULL DEFAULT 0,
+  `y` float UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table coordinates for phpMyAdmin PDF output';
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__table_info`
+--
+
+CREATE TABLE `pma__table_info` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `display_field` varchar(64) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__table_uiprefs`
+--
+
+CREATE TABLE `pma__table_uiprefs` (
+  `username` varchar(64) NOT NULL,
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL,
+  `prefs` text NOT NULL,
+  `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tables'' UI preferences';
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__tracking`
+--
+
+CREATE TABLE `pma__tracking` (
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL,
+  `version` int(10) UNSIGNED NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_updated` datetime NOT NULL,
+  `schema_snapshot` text NOT NULL,
+  `schema_sql` text DEFAULT NULL,
+  `data_sql` longtext DEFAULT NULL,
+  `tracking` set('UPDATE','REPLACE','INSERT','DELETE','TRUNCATE','CREATE DATABASE','ALTER DATABASE','DROP DATABASE','CREATE TABLE','ALTER TABLE','RENAME TABLE','DROP TABLE','CREATE INDEX','DROP INDEX','CREATE VIEW','ALTER VIEW','DROP VIEW') DEFAULT NULL,
+  `tracking_active` int(1) UNSIGNED NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Database changes tracking for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__userconfig`
+--
+
+CREATE TABLE `pma__userconfig` (
+  `username` varchar(64) NOT NULL,
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `config_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User preferences storage for phpMyAdmin';
+
+--
+-- Dump dei dati per la tabella `pma__userconfig`
+--
+
+INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
+('root', '2025-04-17 08:28:47', '{\"Console\\/Mode\":\"show\",\"lang\":\"it\"}');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__usergroups`
+--
+
+CREATE TABLE `pma__usergroups` (
+  `usergroup` varchar(64) NOT NULL,
+  `tab` varchar(64) NOT NULL,
+  `allowed` enum('Y','N') NOT NULL DEFAULT 'N'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User groups with configured menu items';
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `pma__users`
+--
+
+CREATE TABLE `pma__users` (
+  `username` varchar(64) NOT NULL,
+  `usergroup` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Users and their assignments to user groups';
+
+--
+-- Indici per le tabelle scaricate
+--
+
+--
+-- Indici per le tabelle `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `pma__central_columns`
+--
+ALTER TABLE `pma__central_columns`
+  ADD PRIMARY KEY (`db_name`,`col_name`);
+
+--
+-- Indici per le tabelle `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `db_name` (`db_name`,`table_name`,`column_name`);
+
+--
+-- Indici per le tabelle `pma__designer_settings`
+--
+ALTER TABLE `pma__designer_settings`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indici per le tabelle `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_user_type_template` (`username`,`export_type`,`template_name`);
+
+--
+-- Indici per le tabelle `pma__favorite`
+--
+ALTER TABLE `pma__favorite`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indici per le tabelle `pma__history`
+--
+ALTER TABLE `pma__history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `username` (`username`,`db`,`table`,`timevalue`);
+
+--
+-- Indici per le tabelle `pma__navigationhiding`
+--
+ALTER TABLE `pma__navigationhiding`
+  ADD PRIMARY KEY (`username`,`item_name`,`item_type`,`db_name`,`table_name`);
+
+--
+-- Indici per le tabelle `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  ADD PRIMARY KEY (`page_nr`),
+  ADD KEY `db_name` (`db_name`);
+
+--
+-- Indici per le tabelle `pma__recent`
+--
+ALTER TABLE `pma__recent`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indici per le tabelle `pma__relation`
+--
+ALTER TABLE `pma__relation`
+  ADD PRIMARY KEY (`master_db`,`master_table`,`master_field`),
+  ADD KEY `foreign_field` (`foreign_db`,`foreign_table`);
+
+--
+-- Indici per le tabelle `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_savedsearches_username_dbname` (`username`,`db_name`,`search_name`);
+
+--
+-- Indici per le tabelle `pma__table_coords`
+--
+ALTER TABLE `pma__table_coords`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`pdf_page_number`);
+
+--
+-- Indici per le tabelle `pma__table_info`
+--
+ALTER TABLE `pma__table_info`
+  ADD PRIMARY KEY (`db_name`,`table_name`);
+
+--
+-- Indici per le tabelle `pma__table_uiprefs`
+--
+ALTER TABLE `pma__table_uiprefs`
+  ADD PRIMARY KEY (`username`,`db_name`,`table_name`);
+
+--
+-- Indici per le tabelle `pma__tracking`
+--
+ALTER TABLE `pma__tracking`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`version`);
+
+--
+-- Indici per le tabelle `pma__userconfig`
+--
+ALTER TABLE `pma__userconfig`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indici per le tabelle `pma__usergroups`
+--
+ALTER TABLE `pma__usergroups`
+  ADD PRIMARY KEY (`usergroup`,`tab`,`allowed`);
+
+--
+-- Indici per le tabelle `pma__users`
+--
+ALTER TABLE `pma__users`
+  ADD PRIMARY KEY (`username`,`usergroup`);
+
+--
+-- AUTO_INCREMENT per le tabelle scaricate
+--
+
+--
+-- AUTO_INCREMENT per la tabella `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT per la tabella `pma__history`
+--
+ALTER TABLE `pma__history`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  MODIFY `page_nr` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- Database: `test`
+--
+CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `test`;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
