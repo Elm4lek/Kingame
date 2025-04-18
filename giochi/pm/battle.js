@@ -1,5 +1,11 @@
 import * as Funcs from './functions.js';
 import * as move from './moves.js';
+
+var playerTeam = [];
+var enemyTeam = [];
+var currentPlayerPokemon = 0;
+var currentEnemyPokemon = 0;
+
 function changeStatStage(target,stat,stageIncrease){
     // Calculate new stage after applying the increase/decrease
     let newStage = target.statStages[stat] + stageIncrease;
@@ -26,6 +32,17 @@ function createStateCondition(name,minTurns,maxTurns,onStatApply,isMoveUsable,on
     }
 } 
 
+const side = {
+    PLAYER : 'player',
+    ENEMY : 'enemy',
+};
+
+const moveType = {
+    FIGHT : 'Fight',
+    BAG : 'Bag',
+    POKEMON : 'Pokemon',
+};
+
 //Basic status of a pokemon
 const STATUS={
     NORMAL : createStateCondition(
@@ -46,7 +63,7 @@ const STATUS={
         () => true, // Always allow moves
         (target) => {
             target.hp -= target.maxHp/8;
-        }, // At the end of the round pm lose 1⁄8 of the maximum HP 
+        }, // At the end of the round pokemon lose 1⁄8 of the maximum HP 
         (target) => {}, // No expiration effect
         (target) => {} // No effect on switch-out
     ),
@@ -224,15 +241,23 @@ const STAT_MULTIPLIERS = {
     "5": 3.5,
     "6": 4
 };
-var pm = {
+
+var pokemon = {
     name: "pilpup",
     maxHp: 100,
     hp: 100,
     atk: 50,
+    modAtk:50,
     def: 50,
+    modDef: 50,
     spd: 21,
+    modSpd: 21,
     spAtk: 50,
+    modSpAtk: 50,
     spDef: 50,
+    modSpDef: 50,
+    evs : 0,
+    modEvs: 0,
     movelist: [],
     statList: [],
     statStages: {
@@ -246,16 +271,29 @@ var pm = {
     },  
     status:STATUS.NORMAL
 };
+pokemon.movelist.push(move.agility);
+pokemon.movelist.push(move.bite);
+pokemon.movelist.push(move.cut);
+pokemon.movelist.push(move.hit);
+
+playerTeam.push(pokemon);
 
 var enemy = {
     name:"pikachu",
     maxHp: 100,
     hp: 100,
     atk: 50,
+    modAtk:50,
     def: 50,
+    modDef: 50,
     spd: 21,
+    modSpd: 21,
     spAtk: 50,
+    modSpAtk: 50,
     spDef: 50,
+    modSpDef: 50,
+    evs : 0,
+    modEvs: 0,
     movelist: [],
     statList: [],
     statStages: {
@@ -275,19 +313,16 @@ enemy.movelist.push(move.bite);
 enemy.movelist.push(move.cut);
 enemy.movelist.push(move.hit);
 
-pm.movelist.push(move.agility);
-pm.movelist.push(move.bite);
-pm.movelist.push(move.cut);
-pm.movelist.push(move.hit);
+enemyTeam.push(enemyTeam[currentEnemyPokemon]);
 
 function select(choice){
     cancel();
     switch(choice){
-        case 'Fight': fight();
+        case moveType.FIGHT: fight();
             break;
-        case 'Bag': bag();
+        case moveType.BAG: bag();
             break;
-        case 'Pokemon': pokemon();
+        case moveType.POKEMON: pokemon();
             break;
     }
 }
@@ -301,23 +336,23 @@ function cancel(){
 
 function fight() {
     var box = document.getElementById("dialog-box");
-    for (let i = 0; i < pm.movelist.length; i++) { // Usa 'let' invece di 'var'
-        let fightMove = document.createElement("div"); // Usa 'let'
+    for (let i = 0; i < playerTeam[currentPlayerPokemon].movelist.length; i++) {  
+        let fightMove = document.createElement("div"); 
         fightMove.id = "move" + (i);
-        fightMove.move = pm.movelist[i];
+        fightMove.move = playerTeam[currentPlayerPokemon].movelist[i];
         fightMove.innerHTML = fightMove.move.name;
         fightMove.classList.add("move-botton", "text-container");
         fightMove.addEventListener("click", (event) => {
             if(checkMovesStatus())
                 if(fightMove.move.ppRest>0){
-                    selectMove(fightMove.move);
+                    selectMove(fightMove.move,moveType.FIGHT);
                     fightMove.move.ppRest --;                    
                 }
                 else{
                     cantUseMove("PP is 0");
                 }
             else{
-                selectMove(struggle);
+                selectMove(struggle,moveType.FIGHT);
             }
         });
 
@@ -334,20 +369,75 @@ function fight() {
         box.appendChild(fightMove);
     }
 }
+function getModifiedStats(target) {
+    const statsToModify = ["atk", "def", "spd", "spAtk", "spDef","evs"];
+    const modifiedStats = target;
 
+    for (let stat of target) {
+        modifiedStats.push(stat);
+    }
+    for (let stat of statsToModify) {
+        const stage = target.statStages[stat];
+        const multiplier = STAT_MULTIPLIERS[stage.toString()];
+        modifiedStats[stat] = target[stat] * multiplier;
+    }
+
+    return modifiedStats;
+}
 function canMove(target){
-    if(!target.status.isMoveUsable())   return false;//if the pokemon status' function isMoveUsable() returns false, this function return false
+    if(!target.status.isMoveUsable())   return [false,target.status];//if the pokemon status' function isMoveUsable() returns false, this function return false
     target.statList.forEach(element => {
-        if(!element.isMoveUsable())     return false;//if one of all conditions of the pokemon's function isMoveUsable() returns false, this function return false
+        if(!element.isMoveUsable())     return [false,element];//if one of all conditions of the pokemon's function isMoveUsable() returns false, this function return false
     });
     
     return true;//if none conditions is met, then returns true
 }
 
-function selectMove(move){
-    
-    let name = move.name;
-    dialogBoxText(pm.name+" HAVE USED "+name);
+
+function selectEnemyMove(){
+    let i = Funcs.getRandomInt(0,enemyTeam[currentEnemyPokemon].movelist.length);
+    return [enemyTeam[currentEnemyPokemon].movelist[i], moveType.FIGHT];
+}
+
+function movesFirst(playerMove,EnemyMove){
+
+}
+
+function selectFightMove(move, attaker, target){
+    if(target === side.ENEMY){
+
+    }
+}
+
+function selectMove(playerMove,playerMoveType){
+
+   /*  let pokemon = getModifiedStats(playerTeam[currentPlayerPokemon]);
+    let enemy = getModifiedStats(enemyTeam[currentEnemyPokemon]);
+    let eMove = enemyMove();
+    let [canMovePokemon, pmState] = canMove(pokemon);
+    let [canMoveEnemy, enemyState] = canMove(enemy);
+    if(move.priority < eMove.priority){
+        enemyMove();
+        move(target,enemy);
+    }else if(move.priority > eMove.priority){
+        move(target,enemy);
+        enemyMove();
+    }else if(pokemon.spd > enemy.spd){
+        move(target,enemy);
+        enemyMove();
+    }else{
+        enemyMove();
+        move(target,enemy);
+    } */
+   
+    let [enemyMove,enemyMoveType]  = selectEnemyMove();
+    if(enemyMoveType == moveType.FIGHT && playerMoveType == moveType.FIGHT){
+        movesFirst(playerMove,enemyMove);
+    }else if(playerMoveType == moveType.FIGHT){
+        selectFightMove(playerMove, playerTeam[currentPlayerPokemon], side.ENEMY);
+    }else if(enemyMoveType == moveType.FIGHT){
+        selectFightMove(enemyMove, enemyTeam[currentEnemyPokemon], side.PLAYER);
+    }
 }
 
 function cantUseMove(reason){
@@ -359,7 +449,7 @@ function dialogBoxText(text){
 }
 function checkMovesStatus(){
     for( let i = 0; i < 4; i++){
-        if(pm.movelist[i].ppRest>0)
+        if(pokemon.movelist[i].ppRest>0)
             return true
     }
     return false
@@ -367,10 +457,10 @@ function checkMovesStatus(){
 
 function init(){
     cancel();
-    document.getElementById("enemyName").innerHTML = enemy.name;
-    document.getElementById("currentName").innerHTML = pm.name;
-    document.getElementById("enemyHP").innerHTML = enemy.hp;
-    document.getElementById("currentHP").innerHTML = pm.hp;
+    document.getElementById("enemyName").innerHTML = enemyTeam[currentEnemyPokemon].name;
+    document.getElementById("currentName").innerHTML = playerTeam[currentPlayerPokemon].name;
+    document.getElementById("enemyHP").innerHTML = enemyTeam[currentEnemyPokemon].hp;
+    document.getElementById("currentHP").innerHTML = playerTeam[currentPlayerPokemon].hp;
 }
 
 init();
