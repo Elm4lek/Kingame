@@ -8,7 +8,7 @@ if ($conn->connect_error) {
     die("Connessione fallita: " . $conn->connect_error);
 }
 $username = $_SESSION["username"];
-$stmt = $conn->prepare("SELECT NickName, UserName, Data_registrazione, img_profile,COUNT(User), SUM(Punteggio), email, ISO FROM utenti INNER JOIN sessione ON UserName = User WHERE UserName = '".$username."';");
+$stmt = $conn->prepare("SELECT NickName, UserName, Data_registrazione, img_profile,COUNT(User), SUM(Punteggio), email, ISO FROM utenti LEFT JOIN sessione ON UserName = User WHERE UserName = '".$username."';");
 $stmt->execute();
 $result = $stmt->get_result();
 
