@@ -51,7 +51,9 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profilo<span class="caret"></span></a>
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true" style="padding: 5px;">
+          <img src=<?php echo "'".$_SESSION["img_profilo"]."'"?> width="40" height="40" style="border-radius: 50%;">
+        </a>
           <ul class="dropdown-menu">
               <li><a href="impostazione.php">Impostazioni</a></li>
             <li><a href="logout.php">Logout</a></li>
