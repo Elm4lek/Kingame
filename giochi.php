@@ -1,5 +1,4 @@
 <?php
-include 'datiUtente.php';
 include 'menu.php';
 if (!isset($_SESSION['username'])) {
     header("Location: index.php");

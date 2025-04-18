@@ -1,6 +1,9 @@
 <?php if (session_status() == PHP_SESSION_NONE) {
     session_start();
-}; ?>
+}; 
+
+include 'datiUtente.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
