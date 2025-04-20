@@ -1,3 +1,6 @@
+html{
+    text-transform: uppercase;
+}
 body{
     margin: 0;
     display: flex;
@@ -82,5 +85,12 @@ body{
 }
 .hp-fill{
     height: 100%;
-    background-color: forestgreen;
+}
+@keyframes changeWidth {
+    from { width: var(--start-width); }
+    to { width: var(--end-width); }
+}
+
+.change-bar-width {
+    animation: changeWidth 0.5s ease-in-out forwards;
 }

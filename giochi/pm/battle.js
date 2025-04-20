@@ -34,19 +34,33 @@ function changeStatStage(target,stat,stageIncrease){
 }
 
 //Create default state conditions
-function createStateCondition(name,minTurns,maxTurns,onStatApply,isMoveUsable,onTurnProgress,onRemove,onSwitchOut){
-    return{
-        name : name,
-        turnCount:0,
-        minTurns:minTurns,
-        maxTurns:maxTurns,
+function createStateCondition(name, minTurns, maxTurns, onStatApply, isMoveUsable, onTurnProgress, onRemove, onSwitchOut) {
+    // Use an object to store properties
+    const stat = {
+        name: name,
+        turnCount: 0,
+        minTurns: minTurns,
+        maxTurns: maxTurns,
         onStatApply: onStatApply || ((target) => {}), // Default to empty function
         isMoveUsable: isMoveUsable || (() => true), // Default to always usable
-        onTurnProgress: onTurnProgress || ((target) => {}), // Default empty function
-        onRemove: onRemove || ((target) => {}), // Default empty function
+        onTurnProgress: function(target) {
+            // We use a regular function here to ensure `this` refers to the current object
+            onTurnProgress(target); 
+            this.turnCount++;
+            if (this.turnCount >= this.maxTurns) {
+                this.onRemove(target); // Call onRemove with target as argument
+            }
+        },
+        onRemove: onRemove || ((target) => {
+            changeStatus(target, STATUS.NORMAL);
+        }), // Default change stat to normal
         onSwitchOut: onSwitchOut || ((target) => {}) // Default empty function
-    }
-} 
+    };
+
+    // Return the object
+    return stat;
+}
+
 
 const side = {
     PLAYER : 'player',
@@ -68,7 +82,7 @@ const STATUS={
         (target) => {}, // No effect when applied
         () => true, // Always allow moves
         (target) => {}, // Nothing happens on turn progress
-        (target) => {}, // No expiration effect
+        null, // No expiration effect
         (target) => {} // No effect on switch-out
     ),
     POISON : createStateCondition(
@@ -80,7 +94,7 @@ const STATUS={
         (target) => {
             target.hp -= target.maxHp/8;
         }, // At the end of the round pokemon lose 1⁄8 of the maximum HP 
-        (target) => {}, // No expiration effect
+        null, // No expiration effect
         (target) => {} // No effect on switch-out
     ),
     BADLY_POISON: createStateCondition(
@@ -96,7 +110,7 @@ const STATUS={
             target.hp -= (target.maxHp / 16) * target.status.damageCounter;
             target.status.damageCounter = Math.min(target.status.damageCounter + 1, 15); // Increase, max at 15
         },
-        (target) => {}, // No expiration effect
+        null, // No expiration effect
         (target) => {
             target.status.damageCounter = 1; // Reset damage counter on switch-out
         }
@@ -123,7 +137,7 @@ const STATUS={
         (target) => {}, // No effect when applied
         () => {false}, // Never allow moves
         (target) => {}, // Nothing happens on turn progress
-        (target) => {}, // Nothing happens on remove
+        null, // Nothing happens on remove
         (target) => {} // No effect on switch-out
     ),
     PARALYSIS : createStateCondition(
@@ -139,6 +153,7 @@ const STATUS={
         (target) => {}, // Nothing happens on turn progress
         (target) => {
             changeStatStage(target,"spd",2)// reset speed
+            changeStatus(target,STATUS.NORMAL)
         }, 
         (target) => {} // No effect on switch-out
     ),
@@ -155,6 +170,7 @@ const STATUS={
         }, 
         (target) => {
             changeStatStage(target,"atk",2)// reset speed
+            changeStatus(target,STATUS.NORMAL)
         }, 
         (target) => {} // No effect on switch-out
     ),
@@ -169,7 +185,7 @@ const STATUS={
                 changeStatus(target,STATUS.NORMAL);
             }
         }, 
-        (target) => {}, // Nothing happens on remove
+        null, // Nothing happens on remove
         (target) => {} // No effect on switch-out
     ),
     FROSTBITE : createStateCondition(
@@ -189,6 +205,7 @@ const STATUS={
         }, 
         (target) => {
             changeStatStage(target,"spAtk",2)// reset speed
+            changeStatus(target,STATUS.NORMAL)
         }, 
         (target) => {} // No effect on switch-out
     ),
@@ -203,7 +220,7 @@ const STATUS={
         }, // When apply cancel all stat in
         () => false, // Never allow moves
         (target) => {}, // Nothing happens on turn progress
-        (target) => {}, // No expiration effect
+        null, // No expiration effect
         (target) => {} // No effect on switch-out
     ),
 };
@@ -432,6 +449,20 @@ function movesFirst(playerMove,enemyMove){
     return Math.random() < 0.5 ? -1 : 1;
 }
 function viewHP(targetSide){
+    let hpPercent = [
+        {
+            val:100,
+            changeColor: (bar)=>{bar.style["background-color"] = "limegreen";}
+        },
+        {
+            val:50,
+            changeColor: (bar)=>{bar.style["background-color"] = "gold";}
+        },
+        {
+            val:10,
+            changeColor: (bar)=>{bar.style["background-color"] = "red";}
+        }
+    ]
     let id;
     let target;
     if(targetSide === side.ENEMY){
@@ -444,7 +475,35 @@ function viewHP(targetSide){
     }
     let hpBar = document.getElementById(id);
     let value = Math.round(target.hp/target.maxHp*100);
-    hpBar.style.width = value+"%";
+    let endWidth = getComputedStyle(hpBar).getPropertyValue("--end-width");
+    if (!endWidth.trim()) {
+        endWidth = "100%"; // o qualunque valore default
+    }
+    
+    // Prima imposti i valori dinamici
+    hpBar.style.setProperty("--start-width", endWidth);
+    hpBar.style.setProperty("--end-width", value+"%");
+    hpBar.width = value+"%";
+    console.log("startWidth:"+endWidth);
+    console.log("endWidth:"+value);
+
+    // Aggiungi la classe che innesca l’animazione
+    hpBar.classList.add("change-bar-width");
+
+    // Rimuovi la classe quando l'animazione è finita
+    hpBar.addEventListener("animationend", function handler() {
+        hpBar.classList.remove("change-bar-width");
+        hpBar.style.width = hpBar.width;
+        hpBar.removeEventListener("animationend", handler); // rimuovi anche il listener per evitare duplicazioni
+    });
+    for(let percent of hpPercent){
+        if(value <= percent.val){
+            percent.changeColor(hpBar);
+        }
+        else{
+            return;
+        }
+    }
 }
 function selectFightMove(move, attaker, targetSide){
     var attakerCanMove = canMove(attaker);
@@ -452,12 +511,9 @@ function selectFightMove(move, attaker, targetSide){
         battleQueue.push(createDialogEvent(attaker.name+" IS "+attakerCanMove[1]+","+attaker.name+" CAN'T MOVE!"));
         return;
     }
-    if(targetSide === side.ENEMY){
-        var target = enemyTeam[currentEnemyPokemon];
-    }
-    else{
-        var target = playerTeam[currentPlayerPokemon];
-    }
+    let attakerSide;
+    let target = targetSide === side.ENEMY?enemyTeam[currentEnemyPokemon]:playerTeam[currentPlayerPokemon];
+    attakerSide = targetSide === side.ENEMY?side.PLAYER:side.ENEMY;
     battleQueue.push(createDialogEvent(attaker.name+" USED "+move.name));
     let accStage = attaker.statStages.acc ?? 0;// fallback if doesn't exist
     let accStageMultiplier = STAT_MULTIPLIERS[accStage.toString()] ?? 1;// fallback if doesn't exist
@@ -471,6 +527,7 @@ function selectFightMove(move, attaker, targetSide){
         target.hp -= Math.min(dmg, target.hp);
         battleQueue.push(createAnimationEvent(() =>viewHP(targetSide)));
         battleQueue.push(createDialogEvent("created damege"));
+        battleQueue.push(createAnimationEvent(() =>viewHP(attakerSide)))
     }
     else{
         battleQueue.push(createDialogEvent(target.name+" avoided, attak faild!"));
@@ -516,7 +573,14 @@ function selectMove(playerMove,playerMoveType){
         selectFightMove(enemyMove, enemyTeam[currentEnemyPokemon], side.PLAYER);
         checkFainting(enemyTeam[currentEnemyPokemon]);
     }
-    console.log(battleQueue);
+    playerTeam[currentPlayerPokemon].status.onTurnProgress();
+    enemyTeam[currentEnemyPokemon].status.onTurnProgress();
+    for(let stat of playerTeam[currentPlayerPokemon].statList){
+        stat.onTurnProgress();
+    }
+    for(let stat of enemyTeam[currentEnemyPokemon].statList){
+        stat.onTurnProgress();
+    }
     battleQueue.push(createDialogEvent("select a move"));
     showBattleQueue(0);
 }
@@ -547,7 +611,7 @@ function init(){
     cancel();
     document.getElementById("enemyName").innerHTML = enemyTeam[currentEnemyPokemon].name;
     document.getElementById("currentName").innerHTML = playerTeam[currentPlayerPokemon].name;
-    
+
     viewHP(side.ENEMY);
     viewHP(side.PLAYER);
 }
@@ -569,6 +633,7 @@ function showBattleQueue(i = 0) {
 
     if (currentEvent.type === "animation") {
         // Esegui subito e vai al prossimo
+        
         currentEvent.play(); // usa ?. nel caso play non esista
         showBattleQueue(i + 1);
     } else if (currentEvent.type === "dialog") {
