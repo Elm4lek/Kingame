@@ -54,7 +54,8 @@ include 'datiUtente.php';
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true" style="padding: 5px;">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true" style="padding: 5px;display: flex;align-items: center;">
+        <p style="margin: 10px;"><?php echo $_SESSION["nickname"]?></p>
           <img src=<?php echo "'".$_SESSION["img_profilo"]."'"?> width="40" height="40" style="border-radius: 50%;">
         </a>
           <ul class="dropdown-menu">
