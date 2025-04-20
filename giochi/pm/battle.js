@@ -5,7 +5,22 @@ var playerTeam = [];
 var enemyTeam = [];
 var currentPlayerPokemon = 0;
 var currentEnemyPokemon = 0;
-
+var battleQueue = [];
+var showingEvents = false;
+var playerCanMove = true;
+function createDialogEvent(text) {
+    return {
+        type: "dialog",
+        text,
+        play: () => showDialog(text)  // you define `showDialog()`
+    };
+}
+function createAnimationEvent(animationFn) {
+    return {
+        type: "animation",
+        play: animationFn
+    };
+}
 function changeStatStage(target,stat,stageIncrease){
     // Calculate new stage after applying the increase/decrease
     let newStage = target.statStages[stat] + stageIncrease;
@@ -249,8 +264,8 @@ const STAT_MULTIPLIERS = {
 
 var pokemon = {
     name: "pilpup",
-    maxHp: 100,
-    hp: 100,
+    maxHp: 500,
+    hp: 500,
     atk: 50,
     modAtk:50,
     def: 50,
@@ -275,7 +290,7 @@ var pokemon = {
     },  
     status:STATUS.NORMAL
 };
-pokemon.movelist.push(move.agility);
+/* pokemon.movelist.push(move.agility); */
 pokemon.movelist.push(move.bite);
 pokemon.movelist.push(move.cut);
 pokemon.movelist.push(move.hit);
@@ -284,8 +299,8 @@ playerTeam.push(pokemon);
 
 var enemy = {
     name:"pikachu",
-    maxHp: 100,
-    hp: 100,
+    maxHp: 500,
+    hp: 500,
     atk: 50,
     modAtk:50,
     def: 50,
@@ -310,7 +325,7 @@ var enemy = {
     },
     status:STATUS.NORMAL
 };
-enemy.movelist.push(move.agility);
+/* enemy.movelist.push(move.agility); */
 enemy.movelist.push(move.bite);
 enemy.movelist.push(move.cut);
 enemy.movelist.push(move.hit);
@@ -318,18 +333,25 @@ enemy.movelist.push(move.hit);
 enemyTeam.push(enemy);
 
 function select(choice){
-    cancel();
-    switch(choice){
-        case moveType.FIGHT: fight();
-            break;
-        case moveType.BAG: bag();
-            break;
-        case moveType.POKEMON: pokemon();
-            break;
+    if(playerCanMove){
+        cancel();
+        switch(choice){
+            case moveType.FIGHT: fight();
+                break;
+            case moveType.BAG: bag();
+                break;
+            case moveType.POKEMON: pokemon();
+                break;
+        }
     }
 }
 
 function cancel(){
+    clearDialogBox();
+    showDialog("select a move");
+}
+
+function clearDialogBox(){
     var box = document.getElementById("dialog-box");
     while (box.firstChild) {
         box.removeChild(box.lastChild);
@@ -337,6 +359,7 @@ function cancel(){
 }
 
 function fight() {
+    clearDialogBox();
     var box = document.getElementById("dialog-box");
     for (let i = 0; i < playerTeam[currentPlayerPokemon].movelist.length; i++) {  
         let fightMove = document.createElement("div"); 
@@ -351,7 +374,7 @@ function fight() {
                     fightMove.move.ppRest --;                    
                 }
                 else{
-                    cantUseMove("PP is 0");
+                    showDialog("PP is 0");
                 }
             else{
                 selectMove(struggle,moveType.FIGHT);
@@ -398,7 +421,8 @@ function canMove(target){
 
 
 function selectEnemyMove(){
-    let i = Funcs.getRandomInt(0,enemyTeam[currentEnemyPokemon].movelist.length);
+    let i = Funcs.getRandomInt(0,enemyTeam[currentEnemyPokemon].movelist.length-1);
+    console.log("enemy move index :"+i);
     return [enemyTeam[currentEnemyPokemon].movelist[i], moveType.FIGHT];
 }
 
@@ -420,25 +444,21 @@ function viewHP(targetSide){
     }
     let hpBar = document.getElementById(id);
     let value = Math.round(target.hp/target.maxHp*100);
-    console.log("hp percent:"+value);
     hpBar.style.width = value+"%";
 }
 function selectFightMove(move, attaker, targetSide){
     var attakerCanMove = canMove(attaker);
     if(Array.isArray(attakerCanMove)){
-        cantUseMove(attaker.name+" IS "+attakerCanMove[1]+","+attaker.name+" CAN'T MOVE!");
+        battleQueue.push(createDialogEvent(attaker.name+" IS "+attakerCanMove[1]+","+attaker.name+" CAN'T MOVE!"));
         return;
     }
-    console.log("can move");
     if(targetSide === side.ENEMY){
         var target = enemyTeam[currentEnemyPokemon];
-        console.log("target enemy");
     }
     else{
         var target = playerTeam[currentPlayerPokemon];
-        console.log("target target");
     }
-    
+    battleQueue.push(createDialogEvent(attaker.name+" USED "+move.name));
     let accStage = attaker.statStages.acc ?? 0;// fallback if doesn't exist
     let accStageMultiplier = STAT_MULTIPLIERS[accStage.toString()] ?? 1;// fallback if doesn't exist
     let evaStage = target.statStages?.evs ?? 0;// fallback if doesn't exist
@@ -446,22 +466,20 @@ function selectFightMove(move, attaker, targetSide){
     let baseAccuracy = move.accuracy;
     let finalAccuracy = baseAccuracy * (accStageMultiplier / evaStageMultiplier)/100;
     
-    console.log("final accuracy:"+finalAccuracy);
     if(Funcs.probability(finalAccuracy)){
-        console.log("attack sucsesfull");
         let dmg = move.use(attaker, target);
-        console.log("target hp:"+ target.hp);
         target.hp -= Math.min(dmg, target.hp);
-        console.log("target hp:"+ target.hp);
-        viewHP(targetSide);
+        battleQueue.push(createAnimationEvent(() =>viewHP(targetSide)));
+        battleQueue.push(createDialogEvent("created damege"));
     }
     else{
-        console.log("attack failed");
+        battleQueue.push(createDialogEvent(target.name+" avoided, attak faild!"));
     }
 }
 
 function selectMove(playerMove,playerMoveType){
     let [enemyMove,enemyMoveType]  = selectEnemyMove();
+    console.log(enemyMove);
     if(enemyMoveType == moveType.FIGHT && playerMoveType == moveType.FIGHT){
         // Determine turn order
         let actionOrder = movesFirst(playerMove, enemyMove);
@@ -479,32 +497,38 @@ function selectMove(playerMove,playerMoveType){
         selectFightMove(firstActor.move, firstActor.pokemon, firstActor.targetSide);
 
         // Check if first Pokémon fainted from second move
-        if (firstActor.pokemon.hp === 0) {
-            changeStatus(firstActor.pokemon, STATUS.FAINTING);
-        }
+        
+        checkFainting(firstActor.pokemon);
         // Check if second Pokémon is still alive
-        if (secondActor.pokemon.hp === 0) {
-            changeStatus(secondActor.pokemon, STATUS.FAINTING);
+        if (checkFainting(secondActor.pokemon)) {
         } else {
             // Execute second move
             selectFightMove(secondActor.move, secondActor.pokemon, secondActor.targetSide);
 
             // Check again if first Pokémon fainted from second move
-            if (firstActor.pokemon.hp === 0) {
-                changeStatus(firstActor.pokemon, STATUS.FAINTING);
-            }
-            if (secondActor.pokemon.hp === 0) {
-                changeStatus(secondActor.pokemon, STATUS.FAINTING);
-            } 
+            checkFainting(firstActor.pokemon);
+            checkFainting(secondActor.pokemon);
         }
     }else if(playerMoveType == moveType.FIGHT){
         selectFightMove(playerMove, playerTeam[currentPlayerPokemon], side.ENEMY);
+        checkFainting(playerTeam[currentPlayerPokemon]);
     }else if(enemyMoveType == moveType.FIGHT){
         selectFightMove(enemyMove, enemyTeam[currentEnemyPokemon], side.PLAYER);
+        checkFainting(enemyTeam[currentEnemyPokemon]);
     }
+    console.log(battleQueue);
+    battleQueue.push(createDialogEvent("select a move"));
+    showBattleQueue(0);
 }
-
-function cantUseMove(reason){
+function checkFainting(target){
+    if (target.hp === 0) {
+        battleQueue.push(createDialogEvent(target.name+" is fainting"));
+        changeStatus(target, STATUS.FAINTING);
+        return true;
+    }
+    return false;
+}
+function showDialog(reason){
     dialogBoxText(reason)
 }
 function dialogBoxText(text){
@@ -523,9 +547,47 @@ function init(){
     cancel();
     document.getElementById("enemyName").innerHTML = enemyTeam[currentEnemyPokemon].name;
     document.getElementById("currentName").innerHTML = playerTeam[currentPlayerPokemon].name;
+    
     viewHP(side.ENEMY);
     viewHP(side.PLAYER);
 }
+
+function showBattleQueue(i = 0) {
+    if (i >= battleQueue.length) {
+        showingEvents = false;
+        playerCanMove = true;
+        while(battleQueue.length > 0) {
+            battleQueue.pop();
+        }
+        return;
+    }
+
+    showingEvents = true;
+    playerCanMove = false;
+
+    const currentEvent = battleQueue[i];
+
+    if (currentEvent.type === "animation") {
+        // Esegui subito e vai al prossimo
+        currentEvent.play(); // usa ?. nel caso play non esista
+        showBattleQueue(i + 1);
+    } else if (currentEvent.type === "dialog") {
+        currentEvent.play?.();
+    
+        const onClick = () => {
+            document.removeEventListener('click', onClick);
+            showBattleQueue(i + 1);
+        };
+    
+        // Delay per ignorare il click che ha fatto partire tutto
+        setTimeout(() => {
+            document.addEventListener('click', onClick);
+        }, 50); // anche solo 50ms bastano
+    }
+    
+}
+
+
 
 init();
 

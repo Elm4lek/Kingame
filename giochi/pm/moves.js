@@ -26,7 +26,7 @@ function atkMove(name, description, pp, damageFormula) {
 export const bite = createMove("bite", "fisico", 3,"creates damage", 100, 10,"enemy", (attacker, target) => {return attacker.modAtk});
 export const hit = createMove("hit", "fisico", 3,"creates damage", 80, 10,"enemy", (attacker, target) => {return attacker.modAtk * 2});
 export const cut = createMove("cut", "fisico", 3,"cuts HP in half", 50, 10,"enemy", (attacker, target) => {return target.hp / 2});
-export const agility = createMove("agility", 1,"stato", "Raises the user's Speed by two stages.",100, 30, "self",
+export const agility = createMove("agility","stato", 1, "Raises the user's Speed by two stages.",100, 30, "self",
     (target) => changeStatStage(target, "vel", 2) // Calls function to increase speed stage by +2
     );
     
