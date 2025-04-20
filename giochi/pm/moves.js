@@ -1,3 +1,5 @@
+import {changeStatStage} from './battle.js';
+
 function createMove(name, type, priority, description, accuracy, pp, target, effectFunction) {
     return {
         name: name,
@@ -30,8 +32,7 @@ export const agility = createMove("agility","stato", 1, "Raises the user's Speed
     (target) => changeStatStage(target, "vel", 2) // Calls function to increase speed stage by +2
     );
     
-export const struggle = createMove("struggle", "", 0, (attacker, target) => {
+export const struggle = createMove("struggle","fisico", 3,"", 100, Infinity,"enemy",(attacker, target) => {
     attacker.hp -= Math.min(Math.round(attacker.maxHp/4),attacker.hp);
     return attacker.modAtk/2});
 
-    

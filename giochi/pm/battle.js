@@ -1,6 +1,6 @@
 import * as Funcs from './functions.js';
 import * as move from './moves.js';
-
+import { moveType } from './const.js';
 var playerTeam = [];
 var enemyTeam = [];
 var currentPlayerPokemon = 0;
@@ -22,6 +22,7 @@ function createAnimationEvent(animationFn) {
     };
 }
 function changeStatStage(target,stat,stageIncrease){
+    let change = stageIncrease > 0 ? "incremented" : "decremented";
     // Calculate new stage after applying the increase/decrease
     let newStage = target.statStages[stat] + stageIncrease;
 
@@ -31,6 +32,7 @@ function changeStatStage(target,stat,stageIncrease){
     // Update the Pokémon's stat stage
     target.statStages[stat] = newStage;
     updateStats(target,true);
+    battleQueue.push(createDialogEvent(target.name+"'s "+stat+" "+change));
 }
 
 //Create default state conditions
@@ -41,13 +43,17 @@ function createStateCondition(name, minTurns, maxTurns, onStatApply, isMoveUsabl
         turnCount: 0,
         minTurns: minTurns,
         maxTurns: maxTurns,
-        onStatApply: onStatApply || ((target) => {}), // Default to empty function
+        onStatApply: function(target) {
+            onStatApply(target); 
+            let turns = Funcs.getRandomInt(minTurns,maxTurns);
+            this.turns = turns;
+        }, // set turns
         isMoveUsable: isMoveUsable || (() => true), // Default to always usable
         onTurnProgress: function(target) {
             // We use a regular function here to ensure `this` refers to the current object
             onTurnProgress(target); 
             this.turnCount++;
-            if (this.turnCount >= this.maxTurns) {
+            if (this.turnCount >= this.turns) {
                 this.onRemove(target); // Call onRemove with target as argument
             }
         },
@@ -67,7 +73,7 @@ const side = {
     ENEMY : 'enemy',
 };
 
-const moveType = {
+const selectType = {
     FIGHT : 'Fight',
     BAG : 'Bag',
     POKEMON : 'Pokemon',
@@ -228,6 +234,8 @@ const STATUS={
 function applyStatChange(target, statChange) {
     target.statList = target.statList || [];
     target.statList.push(statChange);
+    statChange.onStatApply(target);
+    battleQueue.push(createDialogEvent(target.name+" IS "+status.name));
 }
 // Stat Changes 
 const STAT_CHANGES = {
@@ -259,8 +267,8 @@ const STAT_CHANGES = {
 //Change status
 function changeStatus(target, status){
     target.status = status;//set status of the pokemon to the new stat
-    target.status.turns = Funcs.getRandomInt(status.minTurns,status.maxTurns);//get a random value to be the num of duration
     status.onStatApply(target);//apply the function of the state
+    battleQueue.push(createDialogEvent(target.name+" IS "+status.name));
 }
 // Define the mapping from stat stages (-6 to +6) to multipliers
 const STAT_MULTIPLIERS = {
@@ -278,6 +286,30 @@ const STAT_MULTIPLIERS = {
     "5": 3.5,
     "6": 4
 };
+function createMove(name, type, priority, description, accuracy, pp, target, effectFunction) {
+    return {
+        name: name,
+        type:type,
+        priority : priority,
+        description: description,
+        accuracy: accuracy,
+        pp: pp,
+        ppRest: pp,
+        target :target,
+        use: effectFunction
+    };
+}
+
+const bite = createMove("bite", "fisico", 0,"creates damage", 100, 10,"enemy", (attacker, target) => {return attacker.modAtk});
+const hit = createMove("hit", "fisico", 0,"creates damage", 80, 10,"enemy", (attacker, target) => {return attacker.modAtk * 2});
+const cut = createMove("cut", "fisico", 0,"cuts HP in half", 50, 10,"enemy", (attacker, target) => {return target.hp / 2});
+const agility = createMove("agility","stato", 3, "Raises the user's Speed by two stages.",100, 30, "self",
+    (target) => changeStatStage(target, "vel", 2) // Calls function to increase speed stage by +2
+    );
+    
+const struggle = createMove("struggle","fisico", 0,"", 100, Infinity,"enemy",(attacker, target) => {
+    attacker.hp -= Math.min(Math.round(attacker.maxHp/4),attacker.hp);
+    return attacker.modAtk/2});
 
 var pokemon = {
     name: "pilpup",
@@ -307,10 +339,10 @@ var pokemon = {
     },  
     status:STATUS.NORMAL
 };
-/* pokemon.movelist.push(move.agility); */
-pokemon.movelist.push(move.bite);
-pokemon.movelist.push(move.cut);
-pokemon.movelist.push(move.hit);
+pokemon.movelist.push(agility);
+pokemon.movelist.push(bite);
+pokemon.movelist.push(cut);
+pokemon.movelist.push(hit);
 
 playerTeam.push(pokemon);
 
@@ -342,10 +374,10 @@ var enemy = {
     },
     status:STATUS.NORMAL
 };
-/* enemy.movelist.push(move.agility); */
-enemy.movelist.push(move.bite);
-enemy.movelist.push(move.cut);
-enemy.movelist.push(move.hit);
+enemy.movelist.push(agility);
+enemy.movelist.push(bite);
+enemy.movelist.push(cut);
+enemy.movelist.push(hit);
 
 enemyTeam.push(enemy);
 
@@ -353,11 +385,11 @@ function select(choice){
     if(playerCanMove){
         cancel();
         switch(choice){
-            case moveType.FIGHT: fight();
+            case selectType.FIGHT: fight();
                 break;
-            case moveType.BAG: bag();
+            case selectType.BAG: bag();
                 break;
-            case moveType.POKEMON: pokemon();
+            case selectType.POKEMON: pokemon();
                 break;
         }
     }
@@ -387,14 +419,14 @@ function fight() {
         fightMove.addEventListener("click", (event) => {
             if(checkMovesStatus())
                 if(fightMove.move.ppRest>0){
-                    selectMove(fightMove.move,moveType.FIGHT);
+                    selectMove(fightMove.move,selectType.FIGHT);
                     fightMove.move.ppRest --;                    
                 }
                 else{
                     showDialog("PP is 0");
                 }
             else{
-                selectMove(struggle,moveType.FIGHT);
+                selectMove(struggle,selectType.FIGHT);
             }
         });
 
@@ -440,7 +472,7 @@ function canMove(target){
 function selectEnemyMove(){
     let i = Funcs.getRandomInt(0,enemyTeam[currentEnemyPokemon].movelist.length-1);
     console.log("enemy move index :"+i);
-    return [enemyTeam[currentEnemyPokemon].movelist[i], moveType.FIGHT];
+    return [enemyTeam[currentEnemyPokemon].movelist[i], selectType.FIGHT];
 }
 
 function movesFirst(playerMove,enemyMove){
@@ -505,39 +537,54 @@ function viewHP(targetSide){
         }
     }
 }
-function selectFightMove(move, attaker, targetSide){
-    var attakerCanMove = canMove(attaker);
-    if(Array.isArray(attakerCanMove)){
-        battleQueue.push(createDialogEvent(attaker.name+" IS "+attakerCanMove[1]+","+attaker.name+" CAN'T MOVE!"));
+function selectFightMove(move, attacker, targetSide) {
+    // Check if the attacker can move
+    const attackerCanMove = canMove(attacker);
+    if (Array.isArray(attackerCanMove)) {
+        battleQueue.push(createDialogEvent(`${attacker.name} is ${attackerCanMove[1]}, ${attacker.name} can't move!`));
         return;
     }
-    let attakerSide;
-    let target = targetSide === side.ENEMY?enemyTeam[currentEnemyPokemon]:playerTeam[currentPlayerPokemon];
-    attakerSide = targetSide === side.ENEMY?side.PLAYER:side.ENEMY;
-    battleQueue.push(createDialogEvent(attaker.name+" USED "+move.name));
-    let accStage = attaker.statStages.acc ?? 0;// fallback if doesn't exist
-    let accStageMultiplier = STAT_MULTIPLIERS[accStage.toString()] ?? 1;// fallback if doesn't exist
-    let evaStage = target.statStages?.evs ?? 0;// fallback if doesn't exist
-    let evaStageMultiplier = STAT_MULTIPLIERS[evaStage.toString()] ?? 1;// fallback if doesn't exist
-    let baseAccuracy = move.accuracy;
-    let finalAccuracy = baseAccuracy * (accStageMultiplier / evaStageMultiplier)/100;
-    
-    if(Funcs.probability(finalAccuracy)){
-        let dmg = move.use(attaker, target);
-        target.hp -= Math.min(dmg, target.hp);
-        battleQueue.push(createAnimationEvent(() =>viewHP(targetSide)));
-        battleQueue.push(createDialogEvent("created damege"));
-        battleQueue.push(createAnimationEvent(() =>viewHP(attakerSide)))
+
+    const target = targetSide === side.ENEMY ? enemyTeam[currentEnemyPokemon] : playerTeam[currentPlayerPokemon];
+    const attackerSide = targetSide === side.ENEMY ? side.PLAYER : side.ENEMY;
+
+    battleQueue.push(createDialogEvent(`${attacker.name} used ${move.name}`));
+
+    const accStage = attacker.statStages?.acc ?? 0;
+    const accMultiplier = STAT_MULTIPLIERS[accStage.toString()] ?? 1;
+    const baseAccuracy = move.accuracy;
+
+    if (move.type === moveType.state) {
+        const finalAccuracy = (baseAccuracy * accMultiplier) / 100;
+        if (Funcs.probability(finalAccuracy)) {
+            move.use(attacker, target);
+        } else {
+            battleQueue.push(createDialogEvent(`${attacker.name} failed!`));
+        }
+        return;
     }
-    else{
-        battleQueue.push(createDialogEvent(target.name+" avoided, attak faild!"));
+
+    // For damaging moves
+    const evaStage = target.statStages?.evs ?? 0;
+    const evaMultiplier = STAT_MULTIPLIERS[evaStage.toString()] ?? 1;
+    const finalAccuracy = (baseAccuracy * accMultiplier / evaMultiplier) / 100;
+
+    if (Funcs.probability(finalAccuracy)) {
+        const dmg = move.use(attacker, target);
+        target.hp -= Math.min(dmg, target.hp);
+
+        battleQueue.push(createAnimationEvent(() => viewHP(targetSide)));
+        battleQueue.push(createDialogEvent("Created damage"));
+        battleQueue.push(createAnimationEvent(() => viewHP(attackerSide)));
+    } else {
+        battleQueue.push(createDialogEvent(`${target.name} avoided the attack!`));
     }
 }
 
 function selectMove(playerMove,playerMoveType){
     let [enemyMove,enemyMoveType]  = selectEnemyMove();
     console.log(enemyMove);
-    if(enemyMoveType == moveType.FIGHT && playerMoveType == moveType.FIGHT){
+    if(enemyMoveType == selectType.FIGHT && playerMoveType == selectType.FIGHT){
         // Determine turn order
         let actionOrder = movesFirst(playerMove, enemyMove);
 
@@ -566,10 +613,10 @@ function selectMove(playerMove,playerMoveType){
             checkFainting(firstActor.pokemon);
             checkFainting(secondActor.pokemon);
         }
-    }else if(playerMoveType == moveType.FIGHT){
+    }else if(playerMoveType == selectType.FIGHT){
         selectFightMove(playerMove, playerTeam[currentPlayerPokemon], side.ENEMY);
         checkFainting(playerTeam[currentPlayerPokemon]);
-    }else if(enemyMoveType == moveType.FIGHT){
+    }else if(enemyMoveType == selectType.FIGHT){
         selectFightMove(enemyMove, enemyTeam[currentEnemyPokemon], side.PLAYER);
         checkFainting(enemyTeam[currentEnemyPokemon]);
     }
