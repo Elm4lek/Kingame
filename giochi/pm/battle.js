@@ -1,5 +1,4 @@
 import * as Funcs from './functions.js';
-import * as move from './moves.js';
 import { moveType } from './const.js';
 var playerTeam = [];
 var enemyTeam = [];
