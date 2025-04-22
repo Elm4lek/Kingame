@@ -7,6 +7,7 @@ var currentEnemyPokemon = 0;
 var battleQueue = [];
 var showingEvents = false;
 var playerCanMove = true;
+var currentSelect = "";
 function createDialogEvent(text) {
     return {
         type: "dialog",
@@ -310,76 +311,6 @@ const struggle = createMove("struggle","fisico", 0,"", 100, Infinity,"enemy",(at
     attacker.hp -= Math.min(Math.round(attacker.maxHp/4),attacker.hp);
     return attacker.modAtk/2});
 
-var pokemon = {
-    name: "pilpup",
-    maxHp: 500,
-    hp: 500,
-    atk: 50,
-    modAtk:50,
-    def: 50,
-    modDef: 50,
-    spd: 21,
-    modSpd: 21,
-    spAtk: 50,
-    modSpAtk: 50,
-    spDef: 50,
-    modSpDef: 50,
-    movelist: [],
-    statList: [],
-    statStages: {
-        atk: 0,
-        def: 0,
-        spd: 0,
-        spAtk: 0,
-        spDef: 0,
-        dmg: 0,
-        evs: 0,
-        acc:0,
-    },  
-    status:STATUS.NORMAL
-};
-pokemon.movelist.push(agility);
-pokemon.movelist.push(bite);
-pokemon.movelist.push(cut);
-pokemon.movelist.push(hit);
-
-playerTeam.push(pokemon);
-
-var enemy = {
-    name:"pikachu",
-    maxHp: 500,
-    hp: 500,
-    atk: 50,
-    modAtk:50,
-    def: 50,
-    modDef: 50,
-    spd: 21,
-    modSpd: 21,
-    spAtk: 50,
-    modSpAtk: 50,
-    spDef: 50,
-    modSpDef: 50,
-    movelist: [],
-    statList: [],
-    statStages: {
-        atk: 0,
-        def: 0,
-        spd: 0,
-        spAtk: 0,
-        spDef: 0,
-        dmg: 0,
-        evs: 0,
-        acc:0,
-    },
-    status:STATUS.NORMAL
-};
-enemy.movelist.push(agility);
-enemy.movelist.push(bite);
-enemy.movelist.push(cut);
-enemy.movelist.push(hit);
-
-enemyTeam.push(enemy);
-
 function select(choice){
     if(playerCanMove){
         cancel();
@@ -396,6 +327,11 @@ function select(choice){
 
 function cancel(){
     clearDialogBox();
+    let bag = document.getElementById("bag");
+    if(bag){
+        let parent = bag.parentElement;
+        parent.removeChild(bag);
+    }
     showDialog("select a move");
 }
 
@@ -408,6 +344,7 @@ function clearDialogBox(){
 
 function fight() {
     clearDialogBox();
+    currentSelect = selectType.FIGHT;
     var box = document.getElementById("dialog-box");
     for (let i = 0; i < playerTeam[currentPlayerPokemon].movelist.length; i++) {  
         let fightMove = document.createElement("div"); 
@@ -418,14 +355,14 @@ function fight() {
         fightMove.addEventListener("click", (event) => {
             if(checkMovesStatus())
                 if(fightMove.move.ppRest>0){
-                    selectMove(fightMove.move,selectType.FIGHT);
+                    selectMove(fightMove.move);
                     fightMove.move.ppRest --;                    
                 }
                 else{
                     showDialog("PP is 0");
                 }
             else{
-                selectMove(struggle,selectType.FIGHT);
+                selectMove(struggle);
             }
         });
 
@@ -479,7 +416,7 @@ function movesFirst(playerMove,enemyMove){
     if (playerTeam[currentPlayerPokemon].speed !== enemyTeam[currentEnemyPokemon].speed) return playerTeam[currentPlayerPokemon].speed - enemyTeam[currentEnemyPokemon].speed;
     return Math.random() < 0.5 ? -1 : 1;
 }
-function viewHP(targetSide){
+function viewHp(target, id){
     let hpPercent = [
         {
             val:100,
@@ -494,21 +431,12 @@ function viewHP(targetSide){
             changeColor: (bar)=>{bar.style["background-color"] = "red";}
         }
     ]
-    let id;
-    let target;
-    if(targetSide === side.ENEMY){
-        id = "enemyHP";
-        target = enemyTeam[currentEnemyPokemon];
-    }
-    else{
-        id = "currentHP"; 
-        target = playerTeam[currentPlayerPokemon];
-    }
+    
     let hpBar = document.getElementById(id);
     let value = Math.round(target.hp/target.maxHp*100);
     let endWidth = getComputedStyle(hpBar).getPropertyValue("--end-width");
     if (!endWidth.trim()) {
-        endWidth = "100%"; // o qualunque valore default
+        endWidth = "100%"; // max if wasn't setted
     }
     
     // Prima imposti i valori dinamici
@@ -520,21 +448,39 @@ function viewHP(targetSide){
 
     // Aggiungi la classe che innesca l’animazione
     hpBar.classList.add("change-bar-width");
-
+    for(let percent of hpPercent){
+        if(value <= percent.val){
+            percent.changeColor(hpBar);
+        }
+        else{
+            return hpBar;
+        }
+    }
+    return hpBar;
+}
+function viewCurrentHP(targetSide){
+    
+    let id;
+    let target;
+    if(targetSide === side.ENEMY){
+        id = "enemyHP";
+        target = enemyTeam[currentEnemyPokemon];
+    }
+    else{
+        id = "currentHP"; 
+        target = playerTeam[currentPlayerPokemon];
+    }
+    changeHPFill(target,id);
+}
+function changeHPFill(target,id){
+    let hpBar = viewHp(target,id);
+    
     // Rimuovi la classe quando l'animazione è finita
     hpBar.addEventListener("animationend", function handler() {
         hpBar.classList.remove("change-bar-width");
         hpBar.style.width = hpBar.width;
         hpBar.removeEventListener("animationend", handler); // rimuovi anche il listener per evitare duplicazioni
     });
-    for(let percent of hpPercent){
-        if(value <= percent.val){
-            percent.changeColor(hpBar);
-        }
-        else{
-            return;
-        }
-    }
 }
 function selectFightMove(move, attacker, targetSide) {
     // Check if the attacker can move
@@ -572,18 +518,18 @@ function selectFightMove(move, attacker, targetSide) {
         const dmg = move.use(attacker, target);
         target.hp -= Math.min(dmg, target.hp);
 
-        battleQueue.push(createAnimationEvent(() => viewHP(targetSide)));
+        battleQueue.push(createAnimationEvent(() => viewCurrentHP(targetSide)));
         battleQueue.push(createDialogEvent("Created damage"));
-        battleQueue.push(createAnimationEvent(() => viewHP(attackerSide)));
+        battleQueue.push(createAnimationEvent(() => viewCurrentHP(attackerSide)));
     } else {
         battleQueue.push(createDialogEvent(`${target.name} avoided the attack!`));
     }
 }
 
-function selectMove(playerMove,playerMoveType){
+function selectMove(playerMove){
     let [enemyMove,enemyMoveType]  = selectEnemyMove();
     console.log(enemyMove);
-    if(enemyMoveType == selectType.FIGHT && playerMoveType == selectType.FIGHT){
+    if(enemyMoveType == selectType.FIGHT && currentSelect == selectType.FIGHT){
         // Determine turn order
         let actionOrder = movesFirst(playerMove, enemyMove);
 
@@ -607,18 +553,14 @@ function selectMove(playerMove,playerMoveType){
         } else {
             // Execute second move
             selectFightMove(secondActor.move, secondActor.pokemon, secondActor.targetSide);
-
-            // Check again if first Pokémon fainted from second move
-            checkFainting(firstActor.pokemon);
-            checkFainting(secondActor.pokemon);
         }
-    }else if(playerMoveType == selectType.FIGHT){
+    }else if(currentSelect == selectType.FIGHT){
         selectFightMove(playerMove, playerTeam[currentPlayerPokemon], side.ENEMY);
-        checkFainting(playerTeam[currentPlayerPokemon]);
     }else if(enemyMoveType == selectType.FIGHT){
         selectFightMove(enemyMove, enemyTeam[currentEnemyPokemon], side.PLAYER);
-        checkFainting(enemyTeam[currentEnemyPokemon]);
     }
+    checkFainting(playerTeam[currentPlayerPokemon]);
+    checkFainting(enemyTeam[currentEnemyPokemon]);
     playerTeam[currentPlayerPokemon].status.onTurnProgress();
     enemyTeam[currentEnemyPokemon].status.onTurnProgress();
     for(let stat of playerTeam[currentPlayerPokemon].statList){
@@ -638,6 +580,118 @@ function checkFainting(target){
     }
     return false;
 }
+function pokemon(){
+    currentSelect = selectType.POKEMON;
+    showPokemon();
+}
+function showPokemon(){
+    let bagItems = showBag();
+    bagItems.dataset.selected = "";
+    bagItems.className = "pokemon-list";
+    for(let [i,pokemon] of playerTeam.entries()){
+        if(i === currentPlayerPokemon && currentSelect === selectType.POKEMON) continue;
+        let canSelect = true;
+        if(currentSelect === selectType.POKEMON && pokemon.status === STATUS.FAINTING) canSelect = false;
+        let div = document.createElement("div");
+        div.className = "bag-item";
+        div.id = "pokemon"+i;
+        bagItems.appendChild(div);
+        if(canSelect){
+            div.addEventListener('click', ()=>{
+                let lastSelected = document.getElementById(bagItems.dataset.selected);
+                if (lastSelected) {
+                    lastSelected.classList.remove("item-selected");
+                }
+                bagItems.dataset.selected = div.id;
+                div.classList.add("item-selected");
+                let button = document.getElementById("select");
+                if(!button){
+                    button = document.createElement("input");
+                    button.type = "button";
+                    button.id="select";
+                    button.className="button";
+                    button.value="SELECT";
+                    let bagBottom = document.getElementById("bag-bottom");
+                    bagBottom.appendChild(button);
+                }
+                button.addEventListener('click', ()=>{
+                    changePokemon(side.PLAYER,i);
+                });
+
+            });
+        }
+
+        let img = document.createElement("div");
+        img.className = "list-img";
+        div.appendChild(img);      
+
+        let details = document.createElement("div");
+        details.className= "list-details";  
+        div.appendChild(details);
+        
+        let name = document.createElement("div");
+        name.className = "half-container description-name";
+        name.innerHTML = pokemon.name;
+        details.appendChild(name);
+        let hp = document.createElement("div");
+        hp.className = "half-container";
+        hp.style["align-items"] = "baseline";
+        details.appendChild(hp);
+
+        let hpBar = document.createElement("div");
+        hpBar.className = "hp-bar";
+        hp.appendChild(hpBar);
+
+        let hpFill = document.createElement("div");
+        hpFill.id = "pokemon"+i+"HP";
+        hpFill.className = "hp-fill";
+        hpBar.appendChild(hpFill);
+        viewHp(pokemon,hpFill.id);
+    }
+}
+//show the default layer of bag
+function showBag(){
+    let content = document.getElementById("content");
+    let bag = document.createElement("div");
+    bag.id = "bag";
+    content.appendChild(bag);
+
+    let bagLeft = document.createElement("div");
+    bagLeft.id = "bag-left";
+    let bagRight = document.createElement("div");
+    bagRight.id = "bag-right";
+    bag.appendChild(bagLeft);
+    bag.appendChild(bagRight);
+
+    let bagItems = document.createElement("div");
+    bagItems.id = "bag-items";
+    let bagBottom = document.createElement("div");
+    bagBottom.id = "bag-bottom";
+    bagRight.appendChild(bagItems);
+    bagRight.appendChild(bagBottom);
+
+    return bagItems;
+}
+function changePokemon(targetSide,i){
+    let team = targetSide === side.PLAYER ? playerTeam : enemyTeam;
+    let currentPokemon = targetSide === side.PLAYER ? currentPlayerPokemon : currentEnemyPokemon;
+    let nameId = targetSide === side.PLAYER ? "currentName" : "enemyName";
+    let hpId = targetSide === side.PLAYER ? "currentHP" : "enemyHP";
+    team[currentPokemon].status.onSwitchOut(team[currentPokemon]);
+
+    for(let stat of team[currentPokemon].statList){
+        stat.onSwitchOut(team[currentPokemon]);
+    }
+    targetSide === side.PLAYER ? currentPlayerPokemon = i : currentEnemyPokemon = i;
+
+    let name = document.getElementById(nameId);
+    name.innerHTML = team[currentPokemon].name;
+    viewHp(team[currentPokemon],hpId);
+
+    battleQueue.push(createDialogEvent("changed pokemon"));
+    cancel();
+    selectMove(null);
+}
 function showDialog(reason){
     dialogBoxText(reason)
 }
@@ -647,19 +701,103 @@ function dialogBoxText(text){
 }
 function checkMovesStatus(){
     for( let i = 0; i < 4; i++){
-        if(pokemon.movelist[i].ppRest>0)
-            return true
+        if(playerTeam[currentPlayerPokemon].movelist[i].ppRest>0)
+            return true;
     }
-    return false
+    return false;
 }
 
 function init(){
     cancel();
-    document.getElementById("enemyName").innerHTML = enemyTeam[currentEnemyPokemon].name;
-    document.getElementById("currentName").innerHTML = playerTeam[currentPlayerPokemon].name;
+        
+    let pokemon = {
+        name: "pilpup",
+        maxHp: 10,
+        hp: 10,
+        atk: 50,
+        modAtk:50,
+        def: 50,
+        modDef: 50,
+        spd: 21,
+        modSpd: 21,
+        spAtk: 50,
+        modSpAtk: 50,
+        spDef: 50,
+        modSpDef: 50,
+        movelist: [],
+        statList: [],
+        statStages: {
+            atk: 0,
+            def: 0,
+            spd: 0,
+            spAtk: 0,
+            spDef: 0,
+            dmg: 0,
+            evs: 0,
+            acc:0,
+        },  
+        status:STATUS.NORMAL
+    };
+    pokemon.movelist.push(agility);
+    pokemon.movelist.push(bite);
+    pokemon.movelist.push(cut);
+    pokemon.movelist.push(hit);
 
-    viewHP(side.ENEMY);
-    viewHP(side.PLAYER);
+    playerTeam.push(pokemon);
+    playerTeam.push(pokemon);
+    playerTeam.push(pokemon);
+
+    let enemy = {
+        name:"pikachu",
+        maxHp: 500,
+        hp: 500,
+        atk: 50,
+        modAtk:50,
+        def: 50,
+        modDef: 50,
+        spd: 21,
+        modSpd: 21,
+        spAtk: 50,
+        modSpAtk: 50,
+        spDef: 50,
+        modSpDef: 50,
+        movelist: [],
+        statList: [],
+        statStages: {
+            atk: 0,
+            def: 0,
+            spd: 0,
+            spAtk: 0,
+            spDef: 0,
+            dmg: 0,
+            evs: 0,
+            acc:0,
+        },
+        status:STATUS.NORMAL
+    };
+    enemy.movelist.push(agility);
+    enemy.movelist.push(bite);
+    enemy.movelist.push(cut);
+    enemy.movelist.push(hit);
+
+    enemyTeam.push(enemy);
+        document.getElementById("enemyName").innerHTML = enemyTeam[currentEnemyPokemon].name;
+        document.getElementById("currentName").innerHTML = playerTeam[currentPlayerPokemon].name;
+
+    viewCurrentHP(side.ENEMY);
+    viewCurrentHP(side.PLAYER);
+    let enemyPokemonCount = document.getElementById("enemyPokemonCount");
+    for(let i in enemyTeam){
+        let pokeball = document.createElement("div");
+        pokeball.className = "pokeball";
+        enemyPokemonCount.appendChild(pokeball);
+    }
+    let playerPokemonCount = document.getElementById("playerPokemonCount");
+    for(let i in playerTeam){
+        let pokeball = document.createElement("div");
+        pokeball.className = "pokeball";
+        playerPokemonCount.appendChild(pokeball);
+    }
 }
 
 function showBattleQueue(i = 0) {

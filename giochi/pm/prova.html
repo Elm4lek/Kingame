@@ -1,5 +1,4 @@
-<html>
-<head>
+<html><head>
     <script type="module" src="battle.js"></script>
     <link rel="stylesheet" href="myCss.css">
 </head>
@@ -11,18 +10,14 @@
         height: 75%;">
             <div class="half-container">
                 <div class="description-box">
-                    <div class="half-container" style="
-                    align-items: baseline;
-                    justify-content: flex-start;
-                    padding-top: 20px;
-                    padding-left: 20px;
-                    ">
-                        <div id="enemyName"></div>
+                    <div class="half-container description-name">
+                        <div id="enemyName">pikachu</div>
                     </div>
                     <div class="half-container" style="align-items: baseline;">
                         <div class="hp-bar">
-                            <div class="hp-fill" id="enemyHP"></div>
+                            <div class="hp-fill" id="enemyHP" style="--start-width: 35%; --end-width: 35%; background-color: gold; width: 35%;"></div>
                         </div>
+                        <div id="enemyPokemonCount"  style="width:100%;display: ruby;"></div>
                     </div>
                 </div>
                 <div id="enemyImg" style="
@@ -35,19 +30,14 @@
                 width: 45%;
                 height: 100%;"></div>
                 <div class="description-box">
-                    <div class="half-container" style="
-                    align-items: baseline;
-                    justify-content: flex-start;
-                    padding-top: 20px;
-                    padding-left: 20px;
-                    ">
-                        <div id="currentName"style="
-                        ">piplup</div>
+                    <div class="half-container description-name">
+                        <div id="currentName">pilpup</div>
                     </div>
                     <div class="half-container" style="align-items: baseline;">
                         <div class="hp-bar">
-                            <div class="hp-fill" id="currentHP"></div>
+                            <div class="hp-fill" id="currentHP" style="--start-width: 45%; --end-width: 45%; background-color: gold; width: 45%;"></div>
                         </div>
+                        <div id="playerPokemonCount" style="width:100%;display: ruby;"></div>
                     </div>
                 </div>
             </div>
@@ -55,7 +45,7 @@
     
         <div class="dialog-box-background">
             <div class="dialog-box-border">
-                <div id="dialog-box" class="text-container"></div>
+                <div id="dialog-box" class="text-container">select a move</div>
             </div>
         </div>
     </div>
