@@ -11,6 +11,8 @@ $data_reg = isset($_SESSION['data_reg']) ? $_SESSION['data_reg'] : 'N/A';
 $foto_profilo = isset($_SESSION['img_profilo']) ? $_SESSION['img_profilo'] : 'N/A';
 $n_giochi = isset($_SESSION['n_giochi']) ? $_SESSION['n_giochi'] : 0;
 $punteggio = isset($_SESSION['punteggio']) ? $_SESSION['punteggio'] : 0;
+$email = isset($_SESSION['email']) ? $_SESSION['email'] : 'N/A';
+$nazione = isset($_SESSION['nazione']) ? $_SESSION['nazione'] : 'N/A';
 ?>
 
 <!DOCTYPE html>
@@ -127,12 +129,14 @@ $punteggio = isset($_SESSION['punteggio']) ? $_SESSION['punteggio'] : 0;
             </div>
 
             <div class="card-body">
-                <div class="info-row">
-                    <span>🔷 <strong>Username:</strong> <?php echo $username;?></span>
-                    <span>🎮 <strong>Giochi giocati:</strong> <?php echo $n_giochi;?></span>
-                    <span>⭐ <strong>Punti accumulati:</strong> <?php echo $punteggio;?></span>
-                    <span>📅 <strong>Account creato nel:</strong> <?php echo $data_reg;?></span>
-                </div>
+            <div class="info-row">
+                <span>🔷 <strong>Username:</strong> <?php echo $username;?></span>
+                <span>🎮 <strong>Giochi giocati:</strong> <?php echo $n_giochi;?></span>
+                <span>⭐ <strong>Punti accumulati:</strong> <?php echo $punteggio;?></span>
+                <span>📅 <strong>Account creato nel:</strong> <?php echo $data_reg;?></span>
+                <span>📧 <strong>Email:</strong> <?php echo $email;?></span>
+                <span>🌍 <strong>Paese:</strong> <?php echo $nazione;?></span>
+            </div>
             </div>
         </div>
     </div>

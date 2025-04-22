@@ -51,6 +51,7 @@ include 'datiUtente.php';
       <ul class="nav navbar-nav">
         <li><a href="giochi.php"  style="font-family: 'Arial', cursive">Giochi</a></li>
         <li><a href="chisiamo.php" style="font-family: 'Arial', cursive">Chi siamo</a></li>
+        <li><a href="classifica.php" style="font-family: 'Arial', cursive">Classifica</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">

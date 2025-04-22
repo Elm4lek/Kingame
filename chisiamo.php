@@ -44,7 +44,7 @@ if (!isset($_SESSION['username'])) {
         width: 80%;
         margin-bottom: 30%;
     }
-    img{
+    .card img {
         width: 200px;
         height: 200px;
     }

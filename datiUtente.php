@@ -9,7 +9,7 @@ if(isset($_SESSION)){
         die("Connessione fallita: " . $conn->connect_error);
     }
     $username = $_SESSION["username"];
-    $stmt = $conn->prepare("SELECT NickName, UserName, Data_registrazione, img_profile,COUNT(User), SUM(Punteggio), email, ISO FROM utenti LEFT JOIN sessione ON UserName = User WHERE UserName = '".$username."';");
+    $stmt = $conn->prepare("SELECT NickName, UserName, Data_registrazione, img_profile,COUNT(User), SUM(Punteggio), email, Nome_Nazione FROM utenti LEFT JOIN sessione ON UserName = User LEFT JOIN nazioni ON nazioni.ISO = utenti.ISO WHERE UserName = '".$username."';");
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -22,7 +22,7 @@ if(isset($_SESSION)){
         $_SESSION['n_giochi'] = $row["COUNT(User)"];
         $_SESSION['punteggio'] = $row["SUM(Punteggio)"];
         $_SESSION['email'] = $row["email"];
-        $_SESSION['ISO'] = $row["ISO"];
+        $_SESSION['nazione'] = $row["Nome_Nazione"];
     } else {
         echo "Utente non trovato";
     }
