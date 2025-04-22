@@ -1,0 +1,284 @@
+/* Base Styles */
+:root {
+    --primary-color: #6c4675;
+    --secondary-color: #432f48;
+    --accent-gold: #FFD700;
+    --accent-silver: #C0C0C0;
+    --accent-bronze: #cd7f32;
+    --text-light: #ffffff;
+    --text-dark: #333333;
+    --bg-gradient-start: #6c4675;
+    --bg-gradient-end: #432f48;
+    --select-bg: #ffffff;
+    --select-text: #333333;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Helvetica', sans-serif;
+    background: linear-gradient(-45deg, var(--bg-gradient-start), var(--secondary-color), var(--primary-color), var(--bg-gradient-end));
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    color: var(--text-light);
+    min-height: 100vh;
+    padding: 2rem;
+    line-height: 1.6;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Ranking Container */
+.ranking-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.ranking-header {
+    padding: 1.5rem 2rem;
+    background: rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.ranking-header h1 {
+    font-size: 4.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+
+/* Filter Form */
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    padding: 0.5rem 0;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-group label {
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.filter-group select {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--select-text);
+    background-color: var(--select-bg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 180px;
+    font-size: 1.5rem;
+}
+
+.filter-group select:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.filter-group select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
+}
+
+.filter-group select option {
+    color: var(--text-dark);
+    background-color: var(--select-bg);
+    padding: 0.5rem;
+}
+
+/* Ranking Table */
+.ranking-content {
+    padding: 1rem;
+}
+
+.ranking-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.5rem;
+    margin: 1rem 0;
+}
+
+.ranking-table th {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.5rem;
+    color: var(--text-light);
+}
+
+.ranking-table td {
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    color: var(--text-light);
+    text-align: center;
+    vertical-align: middle;
+}
+
+.ranking-table td:nth-child(1) {
+    width: 60px;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.ranking-table td:nth-child(2) {
+    width: 80px;
+}
+
+.ranking-table td:nth-child(3) {
+    text-align: left;
+    padding-left: 1.5rem;
+    font-weight: 500;
+}
+
+.ranking-table td:nth-child(4) {
+    width: 100px;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.ranking-table tr:not(.no-data):hover td {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Medal Positions */
+.ranking-table .medal-1 {
+    background: linear-gradient(135deg, var(--accent-gold), #e6c200);
+}
+
+.ranking-table .medal-2 {
+    background: linear-gradient(135deg, var(--accent-silver), #a8a8a8);
+}
+
+.ranking-table .medal-3 {
+    background: linear-gradient(135deg, var(--accent-bronze), #b26e34);
+}
+
+.ranking-table .medal-1 td,
+.ranking-table .medal-2 td,
+.ranking-table .medal-3 td {
+    color: var(--text-dark);
+    font-weight: bold;
+}
+
+/* Bandiere Nazionali */
+.country-flag {
+    width: 48px;
+    height: 36px;
+    object-fit: cover;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Player Avatar */
+.player-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+.ranking-table tr:hover .player-avatar {
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* No Data Message */
+.no-data {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .ranking-header h1 {
+        font-size: 2rem;
+    }
+    
+    .filter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-group select {
+        width: 100%;
+    }
+    
+    .ranking-table th, 
+    .ranking-table td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .player-avatar,
+    .country-flag {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Fix per il menu */
+body {
+    padding-top: 70px; /* Aggiungi spazio per il menu */
+}
+
+.navbar-inverse {
+    background-color: #330033;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+}
+
+.ranking-container {
+    margin-top: 40px; /* Spazio aggiuntivo sotto il menu */
+}
+
+/* Fix per mobile */
+@media (max-width: 768px) {
+    body {
+        padding-top: 60px;
+    }
+    
+    .ranking-container {
+        margin-top: 30px;
+    }
+}
