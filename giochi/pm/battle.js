@@ -5,8 +5,10 @@ var enemyTeam = [];
 var currentPlayerPokemon = 0;
 var currentEnemyPokemon = 0;
 var battleQueue = [];
-var showingEvents = false;
+var isShowingEvents = false;
 var playerCanMove = true;
+var isBattleEnd = false;
+
 var currentSelect = "";
 function createDialogEvent(text) {
     return {
@@ -57,9 +59,9 @@ function createStateCondition(name, minTurns, maxTurns, onStatApply, isMoveUsabl
                 this.onRemove(target); // Call onRemove with target as argument
             }
         },
-        onRemove: onRemove || ((target) => {
+        onRemove: onRemove || function(target){
             changeStatus(target, STATUS.NORMAL);
-        }), // Default change stat to normal
+        }, // Default change stat to normal
         onSwitchOut: onSwitchOut || ((target) => {}) // Default empty function
     };
 
@@ -81,154 +83,184 @@ const selectType = {
 
 //Basic status of a pokemon
 const STATUS={
-    NORMAL : createStateCondition(
-        "NORMAL",
-        Infinity, // Infinite duration for normal status
-        Infinity, // Infinite duration
-        (target) => {}, // No effect when applied
-        () => true, // Always allow moves
-        (target) => {}, // Nothing happens on turn progress
-        null, // No expiration effect
-        (target) => {} // No effect on switch-out
-    ),
-    POISON : createStateCondition(
-        "POISON",
-        Infinity, // can't be removed automaticaly
-        Infinity, // Infinite duration
-        (target) => {}, // No effect when applied
-        () => true, // Always allow moves
-        (target) => {
-            target.hp -= target.maxHp/8;
-        }, // At the end of the round pokemon lose 1⁄8 of the maximum HP 
-        null, // No expiration effect
-        (target) => {} // No effect on switch-out
-    ),
-    BADLY_POISON: createStateCondition(
-        "BADLY_POISON",
-        Infinity, // Can't be removed automatically
-        Infinity,
-        (target) => {
-            target.status.damageCounter = 1; // Start damage counter at 1
-        },
-        () => true, // Moves always usable
-        (target) => {
-            // Lose HP based on damage counter, max 15/16 HP
-            target.hp -= (target.maxHp / 16) * target.status.damageCounter;
-            target.status.damageCounter = Math.min(target.status.damageCounter + 1, 15); // Increase, max at 15
-        },
-        null, // No expiration effect
-        (target) => {
-            target.status.damageCounter = 1; // Reset damage counter on switch-out
-        }
-    ),
-    DROWSY : createStateCondition(
-        "DROWSY",
-        2, // Duration 2 turns
-        2, 
-        (target) => {
-            changeStatStage(target,"dmg",-1)//increase reviced demage for 1 stage
-        }, 
-        () => {true}, // Always allow moves
-        (target) => {}, // Nothing happens on turn progress
-        (target) => {
-            changeStatus(target,STATUS.SLEEP);//change the status to sleep
-            changeStatStage(target,"dmg",1);//reset the change of demage
-        }, 
-        (target) => {} // No effect on switch-out
-    ),
-    SLEEP : createStateCondition(
-        "SLEEP",
-        1, 
-        3, 
-        (target) => {}, // No effect when applied
-        () => {false}, // Never allow moves
-        (target) => {}, // Nothing happens on turn progress
-        null, // Nothing happens on remove
-        (target) => {} // No effect on switch-out
-    ),
-    PARALYSIS : createStateCondition(
-        "PARALYSIS",
-        Infinity, 
-        Infinity, 
-        (target) => {
-            changeStatStage(target,"spd",-2)// Speed decremented for two stage
-        }, 
-        () => {
-            !Funcs.probability(1/4)// 25% of probability return false
-        }, 
-        (target) => {}, // Nothing happens on turn progress
-        (target) => {
-            changeStatStage(target,"spd",2)// reset speed
-            changeStatus(target,STATUS.NORMAL)
-        }, 
-        (target) => {} // No effect on switch-out
-    ),
-    BURN : createStateCondition(
-        "BURN",
-        Infinity, 
-        Infinity, 
-        (target) => {
-            changeStatStage(target,"atk",-2)// Atk decremented for two stage
-        }, 
-        () => {true},//Always allows moves 
-        (target) => {
-            target.hp -= (target.maxHp / 16);//Lose 1/16 of max HP
-        }, 
-        (target) => {
-            changeStatStage(target,"atk",2)// reset speed
-            changeStatus(target,STATUS.NORMAL)
-        }, 
-        (target) => {} // No effect on switch-out
-    ),
-    FREEZE : createStateCondition(
-        "FREEZE",
-        Infinity, 
-        Infinity, 
-        (target) => {}, //Nothing happend when apply
-        () => {false},//Never allows moves 
-        (target) => {
-            if(Funcs.probability(1/5)){
-                changeStatus(target,STATUS.NORMAL);
+    NORMAL : {
+        name: "NORMAL",
+        set : () => createStateCondition(
+            "NORMAL",
+            Infinity, // Infinite duration for normal status
+            Infinity, // Infinite duration
+            (target) => {}, // No effect when applied
+            () => true, // Always allow moves
+            (target) => {}, // Nothing happens on turn progress
+            null, // No expiration effect
+            (target) => {} // No effect on switch-out
+        )
+    },
+    POISON : {
+        name: "POISON",
+        set : () => createStateCondition(
+            "POISON",
+            Infinity, // can't be removed automaticaly
+            Infinity, // Infinite duration
+            (target) => {}, // No effect when applied
+            () => true, // Always allow moves
+            (target) => {
+                target.hp -= target.maxHp/8;
+            }, // At the end of the round pokemon lose 1⁄8 of the maximum HP 
+            null, // No expiration effect
+            (target) => {} // No effect on switch-out
+        )
+    },
+    BADLY_POISON: {
+        name: "BADLY POISON",
+        set : () => createStateCondition(
+            "BADLY POISON",
+            Infinity, // Can't be removed automatically
+            Infinity,
+            (target) => {
+                target.status.damageCounter = 1; // Start damage counter at 1
+            },
+            () => true, // Moves always usable
+            (target) => {
+                // Lose HP based on damage counter, max 15/16 HP
+                target.hp -= (target.maxHp / 16) * target.status.damageCounter;
+                target.status.damageCounter = Math.min(target.status.damageCounter + 1, 15); // Increase, max at 15
+            },
+            null, // No expiration effect
+            (target) => {
+                target.status.damageCounter = 1; // Reset damage counter on switch-out
             }
-        }, 
-        null, // Nothing happens on remove
-        (target) => {} // No effect on switch-out
-    ),
-    FROSTBITE : createStateCondition(
-        "FROSTBITE",
-        Infinity, 
-        Infinity, 
-        (target) => {
-            changeStatStage(target,"spAtk",-2)// Atk decremented for two stage
-        }, 
-        () => {true},//Always allows moves 
-        (target) => {
-            target.hp -= (target.maxHp / 16);//Lose 1/16 of max HP
-            
-            if(Funcs.probability(1/3)){
-                changeStatus(target,STATUS.NORMAL);
-            }
-        }, 
-        (target) => {
-            changeStatStage(target,"spAtk",2)// reset speed
-            changeStatus(target,STATUS.NORMAL)
-        }, 
-        (target) => {} // No effect on switch-out
-    ),
-    FAINTING : createStateCondition(
-        "FAINTING",
-        Infinity, // Infinite duration for normal status
-        Infinity, // Infinite duration
-        (target) => {
-            while (target.firstChild) {
-                target.removeChild(target.lastChild);
-            }
-        }, // When apply cancel all stat in
-        () => false, // Never allow moves
-        (target) => {}, // Nothing happens on turn progress
-        null, // No expiration effect
-        (target) => {} // No effect on switch-out
-    ),
+        )
+    },
+    DROWSY : {
+        name: "DROWSY",
+        set : () => createStateCondition(
+            "DROWSY",
+            2, // Duration 2 turns
+            2, 
+            (target) => {
+                changeStatStage(target,"dmg",-1)//increase reviced demage for 1 stage
+            }, 
+            () => {true}, // Always allow moves
+            (target) => {}, // Nothing happens on turn progress
+            (target) => {
+                changeStatus(target,STATUS.SLEEP);//change the status to sleep
+                changeStatStage(target,"dmg",1);//reset the change of demage
+            }, 
+            (target) => {} // No effect on switch-out
+        )
+    },
+    SLEEP : {
+        name: "SLEEP",
+        set : () => createStateCondition(
+            "SLEEP",
+            1, 
+            3, 
+            (target) => {}, // No effect when applied
+            () => {false}, // Never allow moves
+            (target) => {}, // Nothing happens on turn progress
+            null, // Nothing happens on remove
+            (target) => {} // No effect on switch-out
+        )
+    },
+    PARALYSIS : {
+        name: "PARALYSIS",
+        set : () => createStateCondition(
+            "PARALYSIS",
+            Infinity, 
+            Infinity, 
+            (target) => {
+                changeStatStage(target,"spd",-2)// Speed decremented for two stage
+            }, 
+            () => {
+                !Funcs.probability(1/4)// 25% of probability return false
+            }, 
+            (target) => {}, // Nothing happens on turn progress
+            (target) => {
+                changeStatStage(target,"spd",2)// reset speed
+                changeStatus(target,STATUS.NORMAL)
+            }, 
+            (target) => {} // No effect on switch-out
+        )
+    },
+    BURN : {
+        name: "BURN",
+        set : () => createStateCondition(
+            "BURN",
+            Infinity, 
+            Infinity, 
+            (target) => {
+                changeStatStage(target,"atk",-2)// Atk decremented for two stage
+            }, 
+            () => {true},//Always allows moves 
+            (target) => {
+                target.hp -= (target.maxHp / 16);//Lose 1/16 of max HP
+            }, 
+            (target) => {
+                changeStatStage(target,"atk",2)// reset speed
+                changeStatus(target,STATUS.NORMAL)
+            }, 
+            (target) => {} // No effect on switch-out
+        )
+    },
+    FREEZE : {
+        name: "FREEZE",
+        set : () => createStateCondition(
+            "FREEZE",
+            Infinity, 
+            Infinity, 
+            (target) => {}, //Nothing happend when apply
+            () => {false},//Never allows moves 
+            (target) => {
+                if(Funcs.probability(1/5)){
+                    changeStatus(target,STATUS.NORMAL);
+                }
+            }, 
+            null, // Nothing happens on remove
+            (target) => {} // No effect on switch-out
+        )
+    },
+    FROSTBITE :{
+        name: "FROSTBITE",
+        set : () => createStateCondition(
+            "FROSTBITE",
+            Infinity, 
+            Infinity, 
+            (target) => {
+                changeStatStage(target,"spAtk",-2)// Atk decremented for two stage
+            }, 
+            () => {true},//Always allows moves 
+            (target) => {
+                target.hp -= (target.maxHp / 16);//Lose 1/16 of max HP
+                
+                if(Funcs.probability(1/3)){
+                    changeStatus(target,STATUS.NORMAL);
+                }
+            }, 
+            (target) => {
+                changeStatStage(target,"spAtk",2)// reset speed
+                changeStatus(target,STATUS.NORMAL)
+            }, 
+            (target) => {} // No effect on switch-out
+        )
+    },
+    FAINTING : {
+        name: "FAINTING",
+        set : () => createStateCondition(
+            "FAINTING",
+            Infinity, // Infinite duration for normal status
+            Infinity, // Infinite duration
+            (target) => {
+                while (target.firstChild) {
+                    target.removeChild(target.lastChild);
+                }
+            }, // When apply cancel all stat in
+            () => false, // Never allow moves
+            (target) => {}, // Nothing happens on turn progress
+            null, // No expiration effect
+            (target) => {} // No effect on switch-out
+        )
+    },
 };
 // Function to apply a stat change
 function applyStatChange(target, statChange) {
@@ -246,7 +278,7 @@ const STAT_CHANGES = {
         (target) => {},
         () => {true},
         (target) => {
-            if (target.status === STATUS.SLEEP) {
+            if (target.status.name === STATUS.SLEEP.name) {
                 target.hp -= target.maxHp / 4; // Lose 1/4 HP each turn
             } else {
                 // Remove Nightmare when the Pokémon wakes up
@@ -266,8 +298,8 @@ const STAT_CHANGES = {
 };
 //Change status
 function changeStatus(target, status){
-    target.status = status;//set status of the pokemon to the new stat
-    status.onStatApply(target);//apply the function of the state
+    target.status = status.set();//set status of the pokemon to the new stat
+    target.status.onStatApply(target);//apply the function of the state
     battleQueue.push(createDialogEvent(target.name+" IS "+status.name));
 }
 // Define the mapping from stat stages (-6 to +6) to multipliers
@@ -302,7 +334,7 @@ function createMove(name, type, priority, description, accuracy, pp, target, eff
 
 const bite = createMove("bite", "fisico", 0,"creates damage", 100, 10,"enemy", (attacker, target) => {return attacker.modAtk});
 const hit = createMove("hit", "fisico", 0,"creates damage", 80, 10,"enemy", (attacker, target) => {return attacker.modAtk * 2});
-const cut = createMove("cut", "fisico", 0,"cuts HP in half", 50, 10,"enemy", (attacker, target) => {return target.hp / 2});
+const cut = createMove("cut", "fisico", 0,"cuts HP in half", 50, 10,"enemy", (attacker, target) => {return target.maxHp / 2});
 const agility = createMove("agility","stato", 3, "Raises the user's Speed by two stages.",100, 30, "self",
     (target) => changeStatStage(target, "vel", 2) // Calls function to increase speed stage by +2
     );
@@ -443,8 +475,8 @@ function viewHp(target, id){
     hpBar.style.setProperty("--start-width", endWidth);
     hpBar.style.setProperty("--end-width", value+"%");
     hpBar.width = value+"%";
-    console.log("startWidth:"+endWidth);
-    console.log("endWidth:"+value);
+/*     console.log("startWidth:"+endWidth);
+    console.log("endWidth:"+value); */
 
     // Aggiungi la classe che innesca l’animazione
     hpBar.classList.add("change-bar-width");
@@ -491,7 +523,7 @@ function selectFightMove(move, attacker, targetSide) {
     }
 
     const target = targetSide === side.ENEMY ? enemyTeam[currentEnemyPokemon] : playerTeam[currentPlayerPokemon];
-    const attackerSide = targetSide === side.ENEMY ? side.PLAYER : side.ENEMY;
+    const attackerSide = getOppositeSide(targetSide);
 
     battleQueue.push(createDialogEvent(`${attacker.name} used ${move.name}`));
 
@@ -527,8 +559,9 @@ function selectFightMove(move, attacker, targetSide) {
 }
 
 function selectMove(playerMove){
+    battleQueue.push(createAnimationEvent(()=>cancel()));
+    playerCanMove = false;
     let [enemyMove,enemyMoveType]  = selectEnemyMove();
-    console.log(enemyMove);
     if(enemyMoveType == selectType.FIGHT && currentSelect == selectType.FIGHT){
         // Determine turn order
         let actionOrder = movesFirst(playerMove, enemyMove);
@@ -547,39 +580,79 @@ function selectMove(playerMove){
 
         // Check if first Pokémon fainted from second move
         
-        checkFainting(firstActor.pokemon);
-        // Check if second Pokémon is still alive
-        if (checkFainting(secondActor.pokemon)) {
-        } else {
-            // Execute second move
-            selectFightMove(secondActor.move, secondActor.pokemon, secondActor.targetSide);
+        checkFainting(firstActor.pokemon,getOppositeSide(firstActor.targetSide));
+        if(!isBattleEnd){
+            // Check if second Pokémon is still alive
+            checkFainting(secondActor.pokemon, getOppositeSide(secondActor.targetSide));
+            if(!isFainting(firstActor.pokemon)&&!isFainting(secondActor.pokemon)){
+                // Execute second move
+                selectFightMove(secondActor.move, secondActor.pokemon, secondActor.targetSide);
+            }
         }
     }else if(currentSelect == selectType.FIGHT){
         selectFightMove(playerMove, playerTeam[currentPlayerPokemon], side.ENEMY);
     }else if(enemyMoveType == selectType.FIGHT){
         selectFightMove(enemyMove, enemyTeam[currentEnemyPokemon], side.PLAYER);
     }
-    checkFainting(playerTeam[currentPlayerPokemon]);
-    checkFainting(enemyTeam[currentEnemyPokemon]);
-    playerTeam[currentPlayerPokemon].status.onTurnProgress();
-    enemyTeam[currentEnemyPokemon].status.onTurnProgress();
-    for(let stat of playerTeam[currentPlayerPokemon].statList){
-        stat.onTurnProgress();
+    // Check if second Pokémon is still alive
+    checkFainting(enemyTeam[currentEnemyPokemon], side.ENEMY);
+    if(!isBattleEnd){
+        checkFainting(playerTeam[currentPlayerPokemon], side.PLAYER);
+
+        playerTeam[currentPlayerPokemon].status.onTurnProgress();
+        enemyTeam[currentEnemyPokemon].status.onTurnProgress();
+        for(let stat of playerTeam[currentPlayerPokemon].statList){
+            stat.onTurnProgress();
+        }
+        for(let stat of enemyTeam[currentEnemyPokemon].statList){
+            stat.onTurnProgress();
+        }
+        battleQueue.push(createDialogEvent("select a move"));
     }
-    for(let stat of enemyTeam[currentEnemyPokemon].statList){
-        stat.onTurnProgress();
-    }
-    battleQueue.push(createDialogEvent("select a move"));
+    console.log("battle queue",battleQueue);
     showBattleQueue(0);
 }
-function checkFainting(target){
-    if (target.hp === 0) {
-        battleQueue.push(createDialogEvent(target.name+" is fainting"));
+
+function checkFainting(target,targetSide){
+    if(isFainting(target)){
         changeStatus(target, STATUS.FAINTING);
+        battleQueue.push(createDialogEvent(target.name+" is fainting"));
+        handleFainting(targetSide);
+    }
+}
+
+function isFainting(target){
+    if (target.hp === 0) {
         return true;
     }
     return false;
 }
+
+function handleFainting(targetSide) {
+    let team = getTeam(targetSide);
+    console.log("handle fainting");
+    if (isTeamDefeated(team)) {
+        console.log("end battle");
+        endBattle(targetSide);
+    }
+    else{
+        console.log("change pokemon");
+        battleQueue.push(createAnimationEvent(()=>pokemon()));
+    }
+}
+
+function isTeamDefeated(team){
+    for(let pokemon of team){
+        if(!isFainting(pokemon)) return false;
+    }
+    return true;
+}
+
+function getTeam(side){
+    console.log(side);
+    return side === side.PLAYER ? playerTeam : enemyTeam;
+}
+
 function pokemon(){
     currentSelect = selectType.POKEMON;
     showPokemon();
@@ -591,7 +664,7 @@ function showPokemon(){
     for(let [i,pokemon] of playerTeam.entries()){
         if(i === currentPlayerPokemon && currentSelect === selectType.POKEMON) continue;
         let canSelect = true;
-        if(currentSelect === selectType.POKEMON && pokemon.status === STATUS.FAINTING) canSelect = false;
+        if(currentSelect === selectType.POKEMON && pokemon.status.name === STATUS.FAINTING.name) canSelect = false;
         let div = document.createElement("div");
         div.className = "bag-item";
         div.id = "pokemon"+i;
@@ -673,7 +746,7 @@ function showBag(){
     return bagItems;
 }
 function changePokemon(targetSide,i){
-    let team = targetSide === side.PLAYER ? playerTeam : enemyTeam;
+    let team = getTeam(targetSide);
     let currentPokemon = targetSide === side.PLAYER ? currentPlayerPokemon : currentEnemyPokemon;
     let nameId = targetSide === side.PLAYER ? "currentName" : "enemyName";
     let hpId = targetSide === side.PLAYER ? "currentHP" : "enemyHP";
@@ -690,7 +763,8 @@ function changePokemon(targetSide,i){
 
     battleQueue.push(createDialogEvent("changed pokemon"));
     cancel();
-    selectMove(null);
+    console.log("is showing envents:"+isShowingEvents);
+    if(!isShowingEvents) selectMove(null);
 }
 function showDialog(reason){
     dialogBoxText(reason)
@@ -706,14 +780,16 @@ function checkMovesStatus(){
     }
     return false;
 }
-
+function getOppositeSide(side){
+    return side === side.ENEMY ? side.PLAYER : side.ENEMY;
+}
 function init(){
     cancel();
         
     let pokemon = {
         name: "pilpup",
-        maxHp: 10,
-        hp: 10,
+        maxHp: 500,
+        hp: 500,
         atk: 50,
         modAtk:50,
         def: 50,
@@ -733,19 +809,11 @@ function init(){
             spAtk: 0,
             spDef: 0,
             dmg: 0,
-            evs: 0,
+            evs: -6,
             acc:0,
         },  
-        status:STATUS.NORMAL
+        //status:STATUS.NORMAL.set()
     };
-    pokemon.movelist.push(agility);
-    pokemon.movelist.push(bite);
-    pokemon.movelist.push(cut);
-    pokemon.movelist.push(hit);
-
-    playerTeam.push(pokemon);
-    playerTeam.push(pokemon);
-    playerTeam.push(pokemon);
 
     let enemy = {
         name:"pikachu",
@@ -773,16 +841,44 @@ function init(){
             evs: 0,
             acc:0,
         },
-        status:STATUS.NORMAL
+        status:STATUS.NORMAL.set()
     };
-    enemy.movelist.push(agility);
+    
+    let pm1 = structuredClone(pokemon);
+    pm1.status = STATUS.NORMAL.set();
+    let pm2 = structuredClone(pokemon);
+    pm2.status = STATUS.NORMAL.set();
+    pokemon.status = STATUS.NORMAL.set();
+
+    pm1.movelist.push(agility);
+    pm1.movelist.push(bite);
+    pm1.movelist.push(cut);
+    pm1.movelist.push(hit);
+    
+    pm2.movelist.push(agility);
+    pm2.movelist.push(bite);
+    pm2.movelist.push(cut);
+    pm2.movelist.push(hit);
+    
+    pokemon.movelist.push(agility);
+    pokemon.movelist.push(bite);
+    pokemon.movelist.push(cut);
+    pokemon.movelist.push(hit);
+    playerTeam.push(pokemon);
+
+/*     enemy.movelist.push(agility);
     enemy.movelist.push(bite);
+    enemy.movelist.push(hit); */
     enemy.movelist.push(cut);
-    enemy.movelist.push(hit);
+    
+
+    playerTeam.push(pm1);
+    playerTeam.push(pm2);
 
     enemyTeam.push(enemy);
-        document.getElementById("enemyName").innerHTML = enemyTeam[currentEnemyPokemon].name;
-        document.getElementById("currentName").innerHTML = playerTeam[currentPlayerPokemon].name;
+
+    document.getElementById("enemyName").innerHTML = enemyTeam[currentEnemyPokemon].name;
+    document.getElementById("currentName").innerHTML = playerTeam[currentPlayerPokemon].name;
 
     viewCurrentHP(side.ENEMY);
     viewCurrentHP(side.PLAYER);
@@ -802,7 +898,7 @@ function init(){
 
 function showBattleQueue(i = 0) {
     if (i >= battleQueue.length) {
-        showingEvents = false;
+        isShowingEvents = false;
         playerCanMove = true;
         while(battleQueue.length > 0) {
             battleQueue.pop();
@@ -810,15 +906,18 @@ function showBattleQueue(i = 0) {
         return;
     }
 
-    showingEvents = true;
+    isShowingEvents = true;
     playerCanMove = false;
 
     const currentEvent = battleQueue[i];
 
+    console.log(i+"event : ", currentEvent);
+    console.log("player can move : "+playerCanMove);
     if (currentEvent.type === "animation") {
         // Esegui subito e vai al prossimo
         
         currentEvent.play(); // usa ?. nel caso play non esista
+        
         showBattleQueue(i + 1);
     } else if (currentEvent.type === "dialog") {
         currentEvent.play?.();
@@ -836,7 +935,11 @@ function showBattleQueue(i = 0) {
     
 }
 
-
+function endBattle(side){
+    playerCanMove = false;
+    isBattleEnd = true
+    battleQueue.push(createDialogEvent(side+" win"));
+}
 
 init();
 
