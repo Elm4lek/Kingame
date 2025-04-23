@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 17, 2025 alle 10:29
+-- Creato il: Apr 23, 2025 alle 10:21
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `kingame`
 --
-CREATE DATABASE IF NOT EXISTS `kingame` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `kingame`;
 
 -- --------------------------------------------------------
 
@@ -2004,7 +2002,1049 @@ INSERT INTO `pm_tecniche` (`Pokedex`, `MT`) VALUES
 (36, 'MT249'),
 (36, 'MT263'),
 (36, 'MT264'),
-(36, 'MT347');
+(36, 'MT347'),
+(37, 'MT053'),
+(37, 'MT104'),
+(37, 'MT126'),
+(37, 'MT164'),
+(37, 'MT182'),
+(37, 'MT207'),
+(37, 'MT237'),
+(37, 'MT241'),
+(37, 'MT261'),
+(37, 'MT279'),
+(37, 'MT284'),
+(37, 'MT334'),
+(38, 'MT046'),
+(38, 'MT053'),
+(38, 'MT063'),
+(38, 'MT126'),
+(38, 'MT164'),
+(38, 'MT182'),
+(38, 'MT203'),
+(38, 'MT207'),
+(38, 'MT241'),
+(38, 'MT261'),
+(38, 'MT263'),
+(38, 'MT284'),
+(38, 'MT334'),
+(38, 'MT347'),
+(38, 'MT416'),
+(39, 'MT094'),
+(39, 'MT113'),
+(39, 'MT115'),
+(39, 'MT138'),
+(39, 'MT148'),
+(39, 'MT156'),
+(39, 'MT164'),
+(39, 'MT182'),
+(39, 'MT204'),
+(39, 'MT207'),
+(39, 'MT218'),
+(39, 'MT237'),
+(39, 'MT247'),
+(39, 'MT264'),
+(39, 'MT276'),
+(40, 'MT058'),
+(40, 'MT059'),
+(40, 'MT063'),
+(40, 'MT094'),
+(40, 'MT113'),
+(40, 'MT115'),
+(40, 'MT138'),
+(40, 'MT148'),
+(40, 'MT156'),
+(40, 'MT182'),
+(40, 'MT203'),
+(40, 'MT204'),
+(40, 'MT237'),
+(40, 'MT247'),
+(40, 'MT263'),
+(40, 'MT264'),
+(40, 'MT270'),
+(40, 'MT353'),
+(40, 'MT416'),
+(40, 'MT446'),
+(41, 'MT019'),
+(41, 'MT092'),
+(41, 'MT104'),
+(41, 'MT164'),
+(41, 'MT168'),
+(41, 'MT188'),
+(41, 'MT247'),
+(41, 'MT263'),
+(41, 'MT269'),
+(41, 'MT270'),
+(41, 'MT279'),
+(41, 'MT297'),
+(41, 'MT332'),
+(41, 'MT334'),
+(41, 'MT343'),
+(41, 'MT355'),
+(41, 'MT365'),
+(42, 'MT019'),
+(42, 'MT063'),
+(42, 'MT092'),
+(42, 'MT104'),
+(42, 'MT168'),
+(42, 'MT182'),
+(42, 'MT188'),
+(42, 'MT207'),
+(42, 'MT218'),
+(42, 'MT247'),
+(42, 'MT263'),
+(42, 'MT269'),
+(42, 'MT279'),
+(42, 'MT289'),
+(42, 'MT297'),
+(42, 'MT332'),
+(42, 'MT334'),
+(42, 'MT343'),
+(42, 'MT355'),
+(42, 'MT365'),
+(42, 'MT416'),
+(43, 'MT014'),
+(43, 'MT015'),
+(43, 'MT076'),
+(43, 'MT092'),
+(43, 'MT104'),
+(43, 'MT148'),
+(43, 'MT164'),
+(43, 'MT182'),
+(43, 'MT188'),
+(43, 'MT202'),
+(43, 'MT204'),
+(43, 'MT207'),
+(43, 'MT237'),
+(43, 'MT263'),
+(43, 'MT270'),
+(43, 'MT331'),
+(43, 'MT412'),
+(43, 'MT447'),
+(44, 'MT014'),
+(44, 'MT015'),
+(44, 'MT076'),
+(44, 'MT092'),
+(44, 'MT104'),
+(44, 'MT148'),
+(44, 'MT164'),
+(44, 'MT182'),
+(44, 'MT188'),
+(44, 'MT202'),
+(44, 'MT204'),
+(44, 'MT207'),
+(44, 'MT237'),
+(44, 'MT263'),
+(44, 'MT270'),
+(44, 'MT331'),
+(44, 'MT374'),
+(44, 'MT409'),
+(44, 'MT412'),
+(44, 'MT447'),
+(45, 'MT014'),
+(45, 'MT015'),
+(45, 'MT063'),
+(45, 'MT076'),
+(45, 'MT092'),
+(45, 'MT104'),
+(45, 'MT148'),
+(45, 'MT164'),
+(45, 'MT182'),
+(45, 'MT188'),
+(45, 'MT202'),
+(45, 'MT204'),
+(45, 'MT207'),
+(45, 'MT237'),
+(45, 'MT263'),
+(45, 'MT270'),
+(45, 'MT331'),
+(45, 'MT374'),
+(45, 'MT409'),
+(45, 'MT412'),
+(45, 'MT447'),
+(46, 'MT015'),
+(46, 'MT076'),
+(46, 'MT089'),
+(46, 'MT091'),
+(46, 'MT104'),
+(46, 'MT148'),
+(46, 'MT164'),
+(46, 'MT182'),
+(46, 'MT188'),
+(46, 'MT202'),
+(46, 'MT204'),
+(46, 'MT207'),
+(46, 'MT237'),
+(46, 'MT270'),
+(46, 'MT290'),
+(46, 'MT331'),
+(46, 'MT386'),
+(46, 'MT404'),
+(46, 'MT412'),
+(46, 'MT447'),
+(47, 'MT015'),
+(47, 'MT076'),
+(47, 'MT089'),
+(47, 'MT091'),
+(47, 'MT092'),
+(47, 'MT104'),
+(47, 'MT148'),
+(47, 'MT164'),
+(47, 'MT182'),
+(47, 'MT188'),
+(47, 'MT202'),
+(47, 'MT204'),
+(47, 'MT207'),
+(47, 'MT237'),
+(47, 'MT270'),
+(47, 'MT290'),
+(47, 'MT331'),
+(47, 'MT386'),
+(47, 'MT404'),
+(47, 'MT412'),
+(47, 'MT447'),
+(48, 'MT076'),
+(48, 'MT092'),
+(48, 'MT104'),
+(48, 'MT148'),
+(48, 'MT164'),
+(48, 'MT168'),
+(48, 'MT182'),
+(48, 'MT188'),
+(48, 'MT202'),
+(48, 'MT204'),
+(48, 'MT207'),
+(48, 'MT237'),
+(48, 'MT263'),
+(48, 'MT270'),
+(48, 'MT382'),
+(49, 'MT063'),
+(49, 'MT076'),
+(49, 'MT092'),
+(49, 'MT104'),
+(49, 'MT148'),
+(49, 'MT164'),
+(49, 'MT168'),
+(49, 'MT182'),
+(49, 'MT188'),
+(49, 'MT202'),
+(49, 'MT204'),
+(49, 'MT207'),
+(49, 'MT237'),
+(49, 'MT263'),
+(49, 'MT270'),
+(49, 'MT297'),
+(49, 'MT318'),
+(49, 'MT369'),
+(49, 'MT382'),
+(50, 'MT015'),
+(50, 'MT088'),
+(50, 'MT089'),
+(50, 'MT091'),
+(50, 'MT104'),
+(50, 'MT113'),
+(50, 'MT118'),
+(50, 'MT157'),
+(50, 'MT164'),
+(50, 'MT182'),
+(50, 'MT201'),
+(50, 'MT204'),
+(50, 'MT207'),
+(50, 'MT240'),
+(50, 'MT249'),
+(50, 'MT446'),
+(51, 'MT015'),
+(51, 'MT063'),
+(51, 'MT088'),
+(51, 'MT089'),
+(51, 'MT091'),
+(51, 'MT104'),
+(51, 'MT113'),
+(51, 'MT118'),
+(51, 'MT157'),
+(51, 'MT164'),
+(51, 'MT182'),
+(51, 'MT201'),
+(51, 'MT204'),
+(51, 'MT207'),
+(51, 'MT240'),
+(51, 'MT249'),
+(51, 'MT446'),
+(52, 'MT015'),
+(52, 'MT103'),
+(52, 'MT113'),
+(52, 'MT138'),
+(52, 'MT164'),
+(52, 'MT168'),
+(52, 'MT182'),
+(52, 'MT184'),
+(52, 'MT201'),
+(52, 'MT207'),
+(52, 'MT216'),
+(52, 'MT246'),
+(52, 'MT247'),
+(52, 'MT279'),
+(52, 'MT421'),
+(53, 'MT015'),
+(53, 'MT063'),
+(53, 'MT103'),
+(53, 'MT113'),
+(53, 'MT138'),
+(53, 'MT164'),
+(53, 'MT168'),
+(53, 'MT182'),
+(53, 'MT184'),
+(53, 'MT201'),
+(53, 'MT207'),
+(53, 'MT216'),
+(53, 'MT246'),
+(53, 'MT247'),
+(53, 'MT279'),
+(53, 'MT287'),
+(53, 'MT416'),
+(53, 'MT421'),
+(54, 'MT057'),
+(54, 'MT058'),
+(54, 'MT059'),
+(54, 'MT070'),
+(54, 'MT094'),
+(54, 'MT103'),
+(54, 'MT113'),
+(54, 'MT127'),
+(54, 'MT148'),
+(54, 'MT156'),
+(54, 'MT207'),
+(54, 'MT214'),
+(54, 'MT240'),
+(54, 'MT250'),
+(54, 'MT330'),
+(54, 'MT347'),
+(54, 'MT352'),
+(55, 'MT057'),
+(55, 'MT058'),
+(55, 'MT059'),
+(55, 'MT063'),
+(55, 'MT070'),
+(55, 'MT094'),
+(55, 'MT103'),
+(55, 'MT113'),
+(55, 'MT127'),
+(55, 'MT148'),
+(55, 'MT156'),
+(55, 'MT207'),
+(55, 'MT214'),
+(55, 'MT240'),
+(55, 'MT250'),
+(55, 'MT330'),
+(55, 'MT347'),
+(55, 'MT352'),
+(56, 'MT002'),
+(56, 'MT070'),
+(56, 'MT089'),
+(56, 'MT091'),
+(56, 'MT103'),
+(56, 'MT164'),
+(56, 'MT184'),
+(56, 'MT201'),
+(56, 'MT218'),
+(56, 'MT246'),
+(56, 'MT249'),
+(56, 'MT259'),
+(56, 'MT264'),
+(56, 'MT276'),
+(56, 'MT446'),
+(57, 'MT002'),
+(57, 'MT007'),
+(57, 'MT008'),
+(57, 'MT009'),
+(57, 'MT036'),
+(57, 'MT067'),
+(57, 'MT070'),
+(57, 'MT089'),
+(57, 'MT091'),
+(57, 'MT103'),
+(57, 'MT164'),
+(57, 'MT184'),
+(57, 'MT201'),
+(57, 'MT218'),
+(57, 'MT246'),
+(57, 'MT249'),
+(57, 'MT251'),
+(57, 'MT259'),
+(57, 'MT264'),
+(57, 'MT276'),
+(57, 'MT446'),
+(58, 'MT046'),
+(58, 'MT052'),
+(58, 'MT053'),
+(58, 'MT113'),
+(58, 'MT126'),
+(58, 'MT164'),
+(58, 'MT182'),
+(58, 'MT204'),
+(58, 'MT207'),
+(58, 'MT241'),
+(58, 'MT257'),
+(58, 'MT261'),
+(58, 'MT307'),
+(58, 'MT424'),
+(59, 'MT044'),
+(59, 'MT046'),
+(59, 'MT052'),
+(59, 'MT053'),
+(59, 'MT063'),
+(59, 'MT113'),
+(59, 'MT126'),
+(59, 'MT164'),
+(59, 'MT182'),
+(59, 'MT204'),
+(59, 'MT207'),
+(59, 'MT241'),
+(59, 'MT257'),
+(59, 'MT261'),
+(59, 'MT307'),
+(59, 'MT424'),
+(60, 'MT055'),
+(60, 'MT056'),
+(60, 'MT057'),
+(60, 'MT058'),
+(60, 'MT059'),
+(60, 'MT104'),
+(60, 'MT127'),
+(60, 'MT145'),
+(60, 'MT164'),
+(60, 'MT182'),
+(60, 'MT203'),
+(60, 'MT207'),
+(60, 'MT216'),
+(60, 'MT240'),
+(60, 'MT246'),
+(60, 'MT250'),
+(60, 'MT346'),
+(60, 'MT352'),
+(61, 'MT055'),
+(61, 'MT056'),
+(61, 'MT057'),
+(61, 'MT058'),
+(61, 'MT059'),
+(61, 'MT089'),
+(61, 'MT104'),
+(61, 'MT127'),
+(61, 'MT145'),
+(61, 'MT164'),
+(61, 'MT182'),
+(61, 'MT203'),
+(61, 'MT207'),
+(61, 'MT216'),
+(61, 'MT240'),
+(61, 'MT246'),
+(61, 'MT249'),
+(61, 'MT250'),
+(61, 'MT264'),
+(61, 'MT346'),
+(61, 'MT352'),
+(62, 'MT003'),
+(62, 'MT055'),
+(62, 'MT056'),
+(62, 'MT057'),
+(62, 'MT058'),
+(62, 'MT059'),
+(62, 'MT063'),
+(62, 'MT089'),
+(62, 'MT104'),
+(62, 'MT127'),
+(62, 'MT145'),
+(62, 'MT164'),
+(62, 'MT182'),
+(62, 'MT203'),
+(62, 'MT207'),
+(62, 'MT216'),
+(62, 'MT240'),
+(62, 'MT246'),
+(62, 'MT249'),
+(62, 'MT250'),
+(62, 'MT264'),
+(62, 'MT276'),
+(62, 'MT346'),
+(62, 'MT352'),
+(63, 'MT094'),
+(63, 'MT100'),
+(63, 'MT104'),
+(63, 'MT113'),
+(63, 'MT115'),
+(63, 'MT138'),
+(63, 'MT148'),
+(63, 'MT168'),
+(63, 'MT182'),
+(63, 'MT184'),
+(63, 'MT203'),
+(63, 'MT214'),
+(63, 'MT247'),
+(63, 'MT277'),
+(63, 'MT347'),
+(64, 'MT060'),
+(64, 'MT093'),
+(64, 'MT094'),
+(64, 'MT100'),
+(64, 'MT104'),
+(64, 'MT113'),
+(64, 'MT115'),
+(64, 'MT138'),
+(64, 'MT148'),
+(64, 'MT168'),
+(64, 'MT182'),
+(64, 'MT184'),
+(64, 'MT203'),
+(64, 'MT214'),
+(64, 'MT247'),
+(64, 'MT277'),
+(64, 'MT347'),
+(64, 'MT427'),
+(65, 'MT060'),
+(65, 'MT063'),
+(65, 'MT093'),
+(65, 'MT094'),
+(65, 'MT100'),
+(65, 'MT104'),
+(65, 'MT113'),
+(65, 'MT115'),
+(65, 'MT137'),
+(65, 'MT138'),
+(65, 'MT148'),
+(65, 'MT168'),
+(65, 'MT182'),
+(65, 'MT184'),
+(65, 'MT203'),
+(65, 'MT214'),
+(65, 'MT247'),
+(65, 'MT277'),
+(65, 'MT347'),
+(65, 'MT427'),
+(66, 'MT012'),
+(66, 'MT089'),
+(66, 'MT104'),
+(66, 'MT113'),
+(66, 'MT182'),
+(66, 'MT233'),
+(66, 'MT249'),
+(66, 'MT259'),
+(66, 'MT264'),
+(66, 'MT276'),
+(66, 'MT279'),
+(66, 'MT370'),
+(66, 'MT411'),
+(67, 'MT012'),
+(67, 'MT089'),
+(67, 'MT104'),
+(67, 'MT113'),
+(67, 'MT182'),
+(67, 'MT223'),
+(67, 'MT233'),
+(67, 'MT249'),
+(67, 'MT259'),
+(67, 'MT264'),
+(67, 'MT276'),
+(67, 'MT279'),
+(67, 'MT370'),
+(67, 'MT411'),
+(68, 'MT012'),
+(68, 'MT063'),
+(68, 'MT089'),
+(68, 'MT104'),
+(68, 'MT113'),
+(68, 'MT182'),
+(68, 'MT223'),
+(68, 'MT233'),
+(68, 'MT249'),
+(68, 'MT259'),
+(68, 'MT264'),
+(68, 'MT276'),
+(68, 'MT279'),
+(68, 'MT370'),
+(68, 'MT411'),
+(69, 'MT014'),
+(69, 'MT015'),
+(69, 'MT021'),
+(69, 'MT051'),
+(69, 'MT075'),
+(69, 'MT076'),
+(69, 'MT077'),
+(69, 'MT092'),
+(69, 'MT104'),
+(69, 'MT113'),
+(69, 'MT148'),
+(69, 'MT164'),
+(69, 'MT188'),
+(69, 'MT202'),
+(69, 'MT241'),
+(69, 'MT402'),
+(69, 'MT412'),
+(69, 'MT447'),
+(70, 'MT014'),
+(70, 'MT015'),
+(70, 'MT021'),
+(70, 'MT051'),
+(70, 'MT075'),
+(70, 'MT076'),
+(70, 'MT077'),
+(70, 'MT078'),
+(70, 'MT092'),
+(70, 'MT104'),
+(70, 'MT113'),
+(70, 'MT148'),
+(70, 'MT164'),
+(70, 'MT188'),
+(70, 'MT202'),
+(70, 'MT241'),
+(70, 'MT367'),
+(70, 'MT402'),
+(70, 'MT412'),
+(70, 'MT438'),
+(70, 'MT447'),
+(71, 'MT014'),
+(71, 'MT015'),
+(71, 'MT021'),
+(71, 'MT051'),
+(71, 'MT063'),
+(71, 'MT075'),
+(71, 'MT076'),
+(71, 'MT077'),
+(71, 'MT078'),
+(71, 'MT092'),
+(71, 'MT104'),
+(71, 'MT113'),
+(71, 'MT148'),
+(71, 'MT164'),
+(71, 'MT188'),
+(71, 'MT202'),
+(71, 'MT241'),
+(71, 'MT345'),
+(71, 'MT367'),
+(71, 'MT402'),
+(71, 'MT412'),
+(71, 'MT438'),
+(71, 'MT447'),
+(72, 'MT041'),
+(72, 'MT051'),
+(72, 'MT061'),
+(72, 'MT062'),
+(72, 'MT092'),
+(72, 'MT104'),
+(72, 'MT113'),
+(72, 'MT145'),
+(72, 'MT182'),
+(72, 'MT188'),
+(72, 'MT196'),
+(72, 'MT216'),
+(72, 'MT236'),
+(72, 'MT240'),
+(72, 'MT250'),
+(72, 'MT279'),
+(72, 'MT303'),
+(72, 'MT426'),
+(73, 'MT041'),
+(73, 'MT051'),
+(73, 'MT061'),
+(73, 'MT062'),
+(73, 'MT092'),
+(73, 'MT104'),
+(73, 'MT113'),
+(73, 'MT127'),
+(73, 'MT145'),
+(73, 'MT182'),
+(73, 'MT188'),
+(73, 'MT196'),
+(73, 'MT216'),
+(73, 'MT236'),
+(73, 'MT240'),
+(73, 'MT250'),
+(73, 'MT279'),
+(73, 'MT303'),
+(73, 'MT426'),
+(74, 'MT010'),
+(74, 'MT088'),
+(74, 'MT101'),
+(74, 'MT104'),
+(74, 'MT113'),
+(74, 'MT182'),
+(74, 'MT201'),
+(74, 'MT231'),
+(74, 'MT249'),
+(74, 'MT264'),
+(74, 'MT371'),
+(74, 'MT444'),
+(74, 'MT446'),
+(75, 'MT010'),
+(75, 'MT021'),
+(75, 'MT088'),
+(75, 'MT089'),
+(75, 'MT101'),
+(75, 'MT104'),
+(75, 'MT113'),
+(75, 'MT182'),
+(75, 'MT197'),
+(75, 'MT201'),
+(75, 'MT205'),
+(75, 'MT231'),
+(75, 'MT249'),
+(75, 'MT264'),
+(75, 'MT350'),
+(75, 'MT371'),
+(75, 'MT444'),
+(75, 'MT446'),
+(76, 'MT010'),
+(76, 'MT021'),
+(76, 'MT063'),
+(76, 'MT088'),
+(76, 'MT089'),
+(76, 'MT101'),
+(76, 'MT104'),
+(76, 'MT113'),
+(76, 'MT120'),
+(76, 'MT182'),
+(76, 'MT197'),
+(76, 'MT201'),
+(76, 'MT205'),
+(76, 'MT231'),
+(76, 'MT249'),
+(76, 'MT264'),
+(76, 'MT342'),
+(76, 'MT350'),
+(76, 'MT371'),
+(76, 'MT444'),
+(76, 'MT446'),
+(77, 'MT021'),
+(77, 'MT052'),
+(77, 'MT053'),
+(77, 'MT104'),
+(77, 'MT113'),
+(77, 'MT126'),
+(77, 'MT172'),
+(77, 'MT182'),
+(77, 'MT231'),
+(77, 'MT241'),
+(77, 'MT275'),
+(77, 'MT349'),
+(77, 'MT436'),
+(78, 'MT021'),
+(78, 'MT052'),
+(78, 'MT053'),
+(78, 'MT063'),
+(78, 'MT104'),
+(78, 'MT113'),
+(78, 'MT126'),
+(78, 'MT129'),
+(78, 'MT172'),
+(78, 'MT182'),
+(78, 'MT231'),
+(78, 'MT241'),
+(78, 'MT275'),
+(78, 'MT349'),
+(78, 'MT436'),
+(79, 'MT061'),
+(79, 'MT093'),
+(79, 'MT094'),
+(79, 'MT113'),
+(79, 'MT138'),
+(79, 'MT174'),
+(79, 'MT196'),
+(79, 'MT207'),
+(79, 'MT231'),
+(79, 'MT236'),
+(79, 'MT240'),
+(79, 'MT250'),
+(79, 'MT258'),
+(79, 'MT275'),
+(79, 'MT281'),
+(79, 'MT303'),
+(79, 'MT347'),
+(79, 'MT359'),
+(79, 'MT361'),
+(79, 'MT434'),
+(80, 'MT061'),
+(80, 'MT063'),
+(80, 'MT093'),
+(80, 'MT094'),
+(80, 'MT113'),
+(80, 'MT138'),
+(80, 'MT174'),
+(80, 'MT196'),
+(80, 'MT207'),
+(80, 'MT231'),
+(80, 'MT236'),
+(80, 'MT240'),
+(80, 'MT250'),
+(80, 'MT258'),
+(80, 'MT275'),
+(80, 'MT281'),
+(80, 'MT303'),
+(80, 'MT347'),
+(80, 'MT359'),
+(80, 'MT361'),
+(80, 'MT416'),
+(80, 'MT419'),
+(80, 'MT434'),
+(81, 'MT021'),
+(81, 'MT085'),
+(81, 'MT086'),
+(81, 'MT087'),
+(81, 'MT104'),
+(81, 'MT113'),
+(81, 'MT120'),
+(81, 'MT182'),
+(81, 'MT209'),
+(81, 'MT231'),
+(81, 'MT367'),
+(81, 'MT371'),
+(81, 'MT393'),
+(81, 'MT429'),
+(81, 'MT430'),
+(81, 'MT435'),
+(82, 'MT021'),
+(82, 'MT063'),
+(82, 'MT085'),
+(82, 'MT086'),
+(82, 'MT087'),
+(82, 'MT104'),
+(82, 'MT113'),
+(82, 'MT120'),
+(82, 'MT182'),
+(82, 'MT209'),
+(82, 'MT231'),
+(82, 'MT319'),
+(82, 'MT367'),
+(82, 'MT371'),
+(82, 'MT393'),
+(82, 'MT429'),
+(82, 'MT430'),
+(82, 'MT435'),
+(83, 'MT014'),
+(83, 'MT015'),
+(83, 'MT019'),
+(83, 'MT064'),
+(83, 'MT104'),
+(83, 'MT113'),
+(83, 'MT163'),
+(83, 'MT182'),
+(83, 'MT207'),
+(83, 'MT231'),
+(83, 'MT251'),
+(83, 'MT275'),
+(83, 'MT314'),
+(83, 'MT332'),
+(83, 'MT369'),
+(83, 'MT375'),
+(83, 'MT403'),
+(83, 'MT430'),
+(84, 'MT019'),
+(84, 'MT064'),
+(84, 'MT065'),
+(84, 'MT104'),
+(84, 'MT113'),
+(84, 'MT129'),
+(84, 'MT182'),
+(84, 'MT203'),
+(84, 'MT207'),
+(84, 'MT231'),
+(84, 'MT253'),
+(84, 'MT276'),
+(84, 'MT290'),
+(84, 'MT314'),
+(84, 'MT332'),
+(84, 'MT403'),
+(84, 'MT430'),
+(85, 'MT019'),
+(85, 'MT063'),
+(85, 'MT064'),
+(85, 'MT065'),
+(85, 'MT097'),
+(85, 'MT104'),
+(85, 'MT113'),
+(85, 'MT129'),
+(85, 'MT161'),
+(85, 'MT182'),
+(85, 'MT203'),
+(85, 'MT207'),
+(85, 'MT231'),
+(85, 'MT253'),
+(85, 'MT276'),
+(85, 'MT290'),
+(85, 'MT314'),
+(85, 'MT332'),
+(85, 'MT403'),
+(85, 'MT416'),
+(85, 'MT430'),
+(86, 'MT029'),
+(86, 'MT061'),
+(86, 'MT104'),
+(86, 'MT115'),
+(86, 'MT127'),
+(86, 'MT182'),
+(86, 'MT196'),
+(86, 'MT207'),
+(86, 'MT216'),
+(86, 'MT236'),
+(86, 'MT240'),
+(86, 'MT250'),
+(86, 'MT258'),
+(86, 'MT291'),
+(86, 'MT303'),
+(86, 'MT345'),
+(86, 'MT346'),
+(86, 'MT390'),
+(86, 'MT420'),
+(86, 'MT453'),
+(87, 'MT029'),
+(87, 'MT061'),
+(87, 'MT104'),
+(87, 'MT115'),
+(87, 'MT127'),
+(87, 'MT182'),
+(87, 'MT196'),
+(87, 'MT207'),
+(87, 'MT216'),
+(87, 'MT236'),
+(87, 'MT240'),
+(87, 'MT250'),
+(87, 'MT258'),
+(87, 'MT291'),
+(87, 'MT303'),
+(87, 'MT345'),
+(87, 'MT346'),
+(87, 'MT390'),
+(87, 'MT416'),
+(87, 'MT419'),
+(87, 'MT420'),
+(87, 'MT453'),
+(88, 'MT089'),
+(88, 'MT092'),
+(88, 'MT113'),
+(88, 'MT124'),
+(88, 'MT139'),
+(88, 'MT151'),
+(88, 'MT182'),
+(88, 'MT188'),
+(88, 'MT216'),
+(88, 'MT247'),
+(88, 'MT259'),
+(88, 'MT269'),
+(88, 'MT280'),
+(88, 'MT283'),
+(88, 'MT374'),
+(88, 'MT426'),
+(88, 'MT441'),
+(89, 'MT063'),
+(89, 'MT089'),
+(89, 'MT092'),
+(89, 'MT113'),
+(89, 'MT124'),
+(89, 'MT139'),
+(89, 'MT151'),
+(89, 'MT182'),
+(89, 'MT188'),
+(89, 'MT216'),
+(89, 'MT247'),
+(89, 'MT259'),
+(89, 'MT262'),
+(89, 'MT269'),
+(89, 'MT280'),
+(89, 'MT283'),
+(89, 'MT374'),
+(89, 'MT399'),
+(89, 'MT426'),
+(89, 'MT441'),
+(90, 'MT029'),
+(90, 'MT061'),
+(90, 'MT104'),
+(90, 'MT112'),
+(90, 'MT120'),
+(90, 'MT182'),
+(90, 'MT196'),
+(90, 'MT218'),
+(90, 'MT236'),
+(90, 'MT240'),
+(90, 'MT250'),
+(90, 'MT258'),
+(90, 'MT303'),
+(90, 'MT319'),
+(90, 'MT333'),
+(90, 'MT346'),
+(90, 'MT420'),
+(91, 'MT029'),
+(91, 'MT061'),
+(91, 'MT063'),
+(91, 'MT104'),
+(91, 'MT112'),
+(91, 'MT120'),
+(91, 'MT182'),
+(91, 'MT196'),
+(91, 'MT218'),
+(91, 'MT236'),
+(91, 'MT240'),
+(91, 'MT250'),
+(91, 'MT258'),
+(91, 'MT303'),
+(91, 'MT319'),
+(91, 'MT333'),
+(91, 'MT346'),
+(91, 'MT416'),
+(91, 'MT420'),
+(92, 'MT092'),
+(92, 'MT109'),
+(92, 'MT122'),
+(92, 'MT171'),
+(92, 'MT180'),
+(92, 'MT182'),
+(92, 'MT188'),
+(92, 'MT203'),
+(92, 'MT207'),
+(92, 'MT247'),
+(92, 'MT259'),
+(92, 'MT269'),
+(92, 'MT287'),
+(92, 'MT289'),
+(92, 'MT374'),
+(92, 'MT399'),
+(93, 'MT092'),
+(93, 'MT095'),
+(93, 'MT109'),
+(93, 'MT122'),
+(93, 'MT171'),
+(93, 'MT174'),
+(93, 'MT180'),
+(93, 'MT182'),
+(93, 'MT188'),
+(93, 'MT203'),
+(93, 'MT207'),
+(93, 'MT247'),
+(93, 'MT259'),
+(93, 'MT269'),
+(93, 'MT287'),
+(93, 'MT289'),
+(93, 'MT325'),
+(93, 'MT374'),
+(93, 'MT399'),
+(94, 'MT092'),
+(94, 'MT095'),
+(94, 'MT109'),
+(94, 'MT122'),
+(94, 'MT171'),
+(94, 'MT174'),
+(94, 'MT180'),
+(94, 'MT182'),
+(94, 'MT188'),
+(94, 'MT194'),
+(94, 'MT203'),
+(94, 'MT207'),
+(94, 'MT247'),
+(94, 'MT259'),
+(94, 'MT269'),
+(94, 'MT287'),
+(94, 'MT289'),
+(94, 'MT325'),
+(94, 'MT374'),
+(94, 'MT399'),
+(94, 'MT421');
 
 -- --------------------------------------------------------
 
@@ -2853,464 +3893,6 @@ ALTER TABLE `pm_npc`
   ADD CONSTRAINT `pm_npc_ibfk_7` FOREIGN KEY (`Prebattaglia`) REFERENCES `testi` (`name`),
   ADD CONSTRAINT `pm_npc_ibfk_8` FOREIGN KEY (`PrimoKO`) REFERENCES `testi` (`name`),
   ADD CONSTRAINT `pm_npc_ibfk_9` FOREIGN KEY (`UltimoKO`) REFERENCES `testi` (`name`);
---
--- Database: `phpmyadmin`
---
-CREATE DATABASE IF NOT EXISTS `phpmyadmin` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
-USE `phpmyadmin`;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__bookmark`
---
-
-CREATE TABLE `pma__bookmark` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `dbase` varchar(255) NOT NULL DEFAULT '',
-  `user` varchar(255) NOT NULL DEFAULT '',
-  `label` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `query` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Bookmarks';
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__central_columns`
---
-
-CREATE TABLE `pma__central_columns` (
-  `db_name` varchar(64) NOT NULL,
-  `col_name` varchar(64) NOT NULL,
-  `col_type` varchar(64) NOT NULL,
-  `col_length` text DEFAULT NULL,
-  `col_collation` varchar(64) NOT NULL,
-  `col_isNull` tinyint(1) NOT NULL,
-  `col_extra` varchar(255) DEFAULT '',
-  `col_default` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Central list of columns';
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__column_info`
---
-
-CREATE TABLE `pma__column_info` (
-  `id` int(5) UNSIGNED NOT NULL,
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `table_name` varchar(64) NOT NULL DEFAULT '',
-  `column_name` varchar(64) NOT NULL DEFAULT '',
-  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `mimetype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `transformation` varchar(255) NOT NULL DEFAULT '',
-  `transformation_options` varchar(255) NOT NULL DEFAULT '',
-  `input_transformation` varchar(255) NOT NULL DEFAULT '',
-  `input_transformation_options` varchar(255) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Column information for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__designer_settings`
---
-
-CREATE TABLE `pma__designer_settings` (
-  `username` varchar(64) NOT NULL,
-  `settings_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Settings related to Designer';
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__export_templates`
---
-
-CREATE TABLE `pma__export_templates` (
-  `id` int(5) UNSIGNED NOT NULL,
-  `username` varchar(64) NOT NULL,
-  `export_type` varchar(10) NOT NULL,
-  `template_name` varchar(64) NOT NULL,
-  `template_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved export templates';
-
---
--- Dump dei dati per la tabella `pma__export_templates`
---
-
-INSERT INTO `pma__export_templates` (`id`, `username`, `export_type`, `template_name`, `template_data`) VALUES
-(1, 'root', 'database', 'kingame', '{\"quick_or_custom\":\"quick\",\"what\":\"sql\",\"structure_or_data_forced\":\"0\",\"table_select[]\":[\"giochi\",\"nazioni\",\"pm_borsa\",\"pm_img\",\"pm_img_npc\",\"pm_mossa\",\"pm_npc\",\"pm_oggetti\",\"pm_squadra\",\"pm_tecniche\",\"pm_tipo\",\"pm_trainer\",\"pm_user\",\"pokemon\",\"sessione\",\"stanze\",\"testi\",\"utenti\"],\"table_structure[]\":[\"giochi\",\"nazioni\",\"pm_borsa\",\"pm_img\",\"pm_img_npc\",\"pm_mossa\",\"pm_npc\",\"pm_oggetti\",\"pm_squadra\",\"pm_tecniche\",\"pm_tipo\",\"pm_trainer\",\"pm_user\",\"pokemon\",\"sessione\",\"stanze\",\"testi\",\"utenti\"],\"table_data[]\":[\"giochi\",\"nazioni\",\"pm_borsa\",\"pm_img\",\"pm_img_npc\",\"pm_mossa\",\"pm_npc\",\"pm_oggetti\",\"pm_squadra\",\"pm_tecniche\",\"pm_tipo\",\"pm_trainer\",\"pm_user\",\"pokemon\",\"sessione\",\"stanze\",\"testi\",\"utenti\"],\"aliases_new\":\"\",\"output_format\":\"sendit\",\"filename_template\":\"@DATABASE@\",\"remember_template\":\"on\",\"charset\":\"utf-8\",\"compression\":\"none\",\"maxsize\":\"\",\"codegen_structure_or_data\":\"data\",\"codegen_format\":\"0\",\"csv_separator\":\",\",\"csv_enclosed\":\"\\\"\",\"csv_escaped\":\"\\\"\",\"csv_terminated\":\"AUTO\",\"csv_null\":\"NULL\",\"csv_columns\":\"something\",\"csv_structure_or_data\":\"data\",\"excel_null\":\"NULL\",\"excel_columns\":\"something\",\"excel_edition\":\"win\",\"excel_structure_or_data\":\"data\",\"json_structure_or_data\":\"data\",\"json_unicode\":\"something\",\"latex_caption\":\"something\",\"latex_structure_or_data\":\"structure_and_data\",\"latex_structure_caption\":\"Struttura della tabella @TABLE@\",\"latex_structure_continued_caption\":\"Struttura della tabella @TABLE@ (continua)\",\"latex_structure_label\":\"tab:@TABLE@-structure\",\"latex_relation\":\"something\",\"latex_comments\":\"something\",\"latex_mime\":\"something\",\"latex_columns\":\"something\",\"latex_data_caption\":\"Contenuto della tabella @TABLE@\",\"latex_data_continued_caption\":\"Contenuto della tabella @TABLE@ (continua)\",\"latex_data_label\":\"tab:@TABLE@-data\",\"latex_null\":\"\\\\textit{NULL}\",\"mediawiki_structure_or_data\":\"structure_and_data\",\"mediawiki_caption\":\"something\",\"mediawiki_headers\":\"something\",\"htmlword_structure_or_data\":\"structure_and_data\",\"htmlword_null\":\"NULL\",\"ods_null\":\"NULL\",\"ods_structure_or_data\":\"data\",\"odt_structure_or_data\":\"structure_and_data\",\"odt_relation\":\"something\",\"odt_comments\":\"something\",\"odt_mime\":\"something\",\"odt_columns\":\"something\",\"odt_null\":\"NULL\",\"pdf_report_title\":\"\",\"pdf_structure_or_data\":\"structure_and_data\",\"phparray_structure_or_data\":\"data\",\"sql_include_comments\":\"something\",\"sql_header_comment\":\"\",\"sql_use_transaction\":\"something\",\"sql_compatibility\":\"NONE\",\"sql_structure_or_data\":\"structure_and_data\",\"sql_create_table\":\"something\",\"sql_auto_increment\":\"something\",\"sql_create_view\":\"something\",\"sql_procedure_function\":\"something\",\"sql_create_trigger\":\"something\",\"sql_backquotes\":\"something\",\"sql_type\":\"INSERT\",\"sql_insert_syntax\":\"both\",\"sql_max_query_size\":\"50000\",\"sql_hex_for_binary\":\"something\",\"sql_utc_time\":\"something\",\"texytext_structure_or_data\":\"structure_and_data\",\"texytext_null\":\"NULL\",\"xml_structure_or_data\":\"data\",\"xml_export_events\":\"something\",\"xml_export_functions\":\"something\",\"xml_export_procedures\":\"something\",\"xml_export_tables\":\"something\",\"xml_export_triggers\":\"something\",\"xml_export_views\":\"something\",\"xml_export_contents\":\"something\",\"yaml_structure_or_data\":\"data\",\"\":null,\"lock_tables\":null,\"as_separate_files\":null,\"csv_removeCRLF\":null,\"excel_removeCRLF\":null,\"json_pretty_print\":null,\"htmlword_columns\":null,\"ods_columns\":null,\"sql_dates\":null,\"sql_relation\":null,\"sql_mime\":null,\"sql_disable_fk\":null,\"sql_views_as_tables\":null,\"sql_metadata\":null,\"sql_create_database\":null,\"sql_drop_table\":null,\"sql_if_not_exists\":null,\"sql_simple_view_export\":null,\"sql_view_current_user\":null,\"sql_or_replace_view\":null,\"sql_truncate\":null,\"sql_delayed\":null,\"sql_ignore\":null,\"texytext_columns\":null}'),
-(2, 'root', '', 'kingame', ''),
-(3, 'root', 'server', 'kingame', '{\"quick_or_custom\":\"quick\",\"what\":\"sql\",\"db_select[]\":[\"kingame\",\"phpmyadmin\",\"test\"],\"aliases_new\":\"\",\"output_format\":\"sendit\",\"filename_template\":\"@SERVER@\",\"remember_template\":\"on\",\"charset\":\"utf-8\",\"compression\":\"none\",\"maxsize\":\"\",\"codegen_structure_or_data\":\"data\",\"codegen_format\":\"0\",\"csv_separator\":\",\",\"csv_enclosed\":\"\\\"\",\"csv_escaped\":\"\\\"\",\"csv_terminated\":\"AUTO\",\"csv_null\":\"NULL\",\"csv_columns\":\"something\",\"csv_structure_or_data\":\"data\",\"excel_null\":\"NULL\",\"excel_columns\":\"something\",\"excel_edition\":\"win\",\"excel_structure_or_data\":\"data\",\"json_structure_or_data\":\"data\",\"json_unicode\":\"something\",\"latex_caption\":\"something\",\"latex_structure_or_data\":\"structure_and_data\",\"latex_structure_caption\":\"Struttura della tabella @TABLE@\",\"latex_structure_continued_caption\":\"Struttura della tabella @TABLE@ (continua)\",\"latex_structure_label\":\"tab:@TABLE@-structure\",\"latex_relation\":\"something\",\"latex_comments\":\"something\",\"latex_mime\":\"something\",\"latex_columns\":\"something\",\"latex_data_caption\":\"Contenuto della tabella @TABLE@\",\"latex_data_continued_caption\":\"Contenuto della tabella @TABLE@ (continua)\",\"latex_data_label\":\"tab:@TABLE@-data\",\"latex_null\":\"\\\\textit{NULL}\",\"mediawiki_structure_or_data\":\"data\",\"mediawiki_caption\":\"something\",\"mediawiki_headers\":\"something\",\"htmlword_structure_or_data\":\"structure_and_data\",\"htmlword_null\":\"NULL\",\"ods_null\":\"NULL\",\"ods_structure_or_data\":\"data\",\"odt_structure_or_data\":\"structure_and_data\",\"odt_relation\":\"something\",\"odt_comments\":\"something\",\"odt_mime\":\"something\",\"odt_columns\":\"something\",\"odt_null\":\"NULL\",\"pdf_report_title\":\"\",\"pdf_structure_or_data\":\"data\",\"phparray_structure_or_data\":\"data\",\"sql_include_comments\":\"something\",\"sql_header_comment\":\"\",\"sql_use_transaction\":\"something\",\"sql_compatibility\":\"NONE\",\"sql_structure_or_data\":\"structure_and_data\",\"sql_create_table\":\"something\",\"sql_auto_increment\":\"something\",\"sql_create_view\":\"something\",\"sql_create_trigger\":\"something\",\"sql_backquotes\":\"something\",\"sql_type\":\"INSERT\",\"sql_insert_syntax\":\"both\",\"sql_max_query_size\":\"50000\",\"sql_hex_for_binary\":\"something\",\"sql_utc_time\":\"something\",\"texytext_structure_or_data\":\"structure_and_data\",\"texytext_null\":\"NULL\",\"yaml_structure_or_data\":\"data\",\"\":null,\"as_separate_files\":null,\"csv_removeCRLF\":null,\"excel_removeCRLF\":null,\"json_pretty_print\":null,\"htmlword_columns\":null,\"ods_columns\":null,\"sql_dates\":null,\"sql_relation\":null,\"sql_mime\":null,\"sql_disable_fk\":null,\"sql_views_as_tables\":null,\"sql_metadata\":null,\"sql_drop_database\":null,\"sql_drop_table\":null,\"sql_if_not_exists\":null,\"sql_simple_view_export\":null,\"sql_view_current_user\":null,\"sql_or_replace_view\":null,\"sql_procedure_function\":null,\"sql_truncate\":null,\"sql_delayed\":null,\"sql_ignore\":null,\"texytext_columns\":null}');
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__favorite`
---
-
-CREATE TABLE `pma__favorite` (
-  `username` varchar(64) NOT NULL,
-  `tables` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Favorite tables';
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__history`
---
-
-CREATE TABLE `pma__history` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `username` varchar(64) NOT NULL DEFAULT '',
-  `db` varchar(64) NOT NULL DEFAULT '',
-  `table` varchar(64) NOT NULL DEFAULT '',
-  `timevalue` timestamp NOT NULL DEFAULT current_timestamp(),
-  `sqlquery` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='SQL history for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__navigationhiding`
---
-
-CREATE TABLE `pma__navigationhiding` (
-  `username` varchar(64) NOT NULL,
-  `item_name` varchar(64) NOT NULL,
-  `item_type` varchar(64) NOT NULL,
-  `db_name` varchar(64) NOT NULL,
-  `table_name` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Hidden items of navigation tree';
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__pdf_pages`
---
-
-CREATE TABLE `pma__pdf_pages` (
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `page_nr` int(10) UNSIGNED NOT NULL,
-  `page_descr` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='PDF relation pages for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__recent`
---
-
-CREATE TABLE `pma__recent` (
-  `username` varchar(64) NOT NULL,
-  `tables` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Recently accessed tables';
-
---
--- Dump dei dati per la tabella `pma__recent`
---
-
-INSERT INTO `pma__recent` (`username`, `tables`) VALUES
-('root', '[{\"db\":\"kingame\",\"table\":\"pm_tecniche\"},{\"db\":\"kingame\",\"table\":\"pm_img\"}]');
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__relation`
---
-
-CREATE TABLE `pma__relation` (
-  `master_db` varchar(64) NOT NULL DEFAULT '',
-  `master_table` varchar(64) NOT NULL DEFAULT '',
-  `master_field` varchar(64) NOT NULL DEFAULT '',
-  `foreign_db` varchar(64) NOT NULL DEFAULT '',
-  `foreign_table` varchar(64) NOT NULL DEFAULT '',
-  `foreign_field` varchar(64) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Relation table';
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__savedsearches`
---
-
-CREATE TABLE `pma__savedsearches` (
-  `id` int(5) UNSIGNED NOT NULL,
-  `username` varchar(64) NOT NULL DEFAULT '',
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `search_name` varchar(64) NOT NULL DEFAULT '',
-  `search_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved searches';
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__table_coords`
---
-
-CREATE TABLE `pma__table_coords` (
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `table_name` varchar(64) NOT NULL DEFAULT '',
-  `pdf_page_number` int(11) NOT NULL DEFAULT 0,
-  `x` float UNSIGNED NOT NULL DEFAULT 0,
-  `y` float UNSIGNED NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table coordinates for phpMyAdmin PDF output';
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__table_info`
---
-
-CREATE TABLE `pma__table_info` (
-  `db_name` varchar(64) NOT NULL DEFAULT '',
-  `table_name` varchar(64) NOT NULL DEFAULT '',
-  `display_field` varchar(64) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table information for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__table_uiprefs`
---
-
-CREATE TABLE `pma__table_uiprefs` (
-  `username` varchar(64) NOT NULL,
-  `db_name` varchar(64) NOT NULL,
-  `table_name` varchar(64) NOT NULL,
-  `prefs` text NOT NULL,
-  `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tables'' UI preferences';
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__tracking`
---
-
-CREATE TABLE `pma__tracking` (
-  `db_name` varchar(64) NOT NULL,
-  `table_name` varchar(64) NOT NULL,
-  `version` int(10) UNSIGNED NOT NULL,
-  `date_created` datetime NOT NULL,
-  `date_updated` datetime NOT NULL,
-  `schema_snapshot` text NOT NULL,
-  `schema_sql` text DEFAULT NULL,
-  `data_sql` longtext DEFAULT NULL,
-  `tracking` set('UPDATE','REPLACE','INSERT','DELETE','TRUNCATE','CREATE DATABASE','ALTER DATABASE','DROP DATABASE','CREATE TABLE','ALTER TABLE','RENAME TABLE','DROP TABLE','CREATE INDEX','DROP INDEX','CREATE VIEW','ALTER VIEW','DROP VIEW') DEFAULT NULL,
-  `tracking_active` int(1) UNSIGNED NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Database changes tracking for phpMyAdmin';
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__userconfig`
---
-
-CREATE TABLE `pma__userconfig` (
-  `username` varchar(64) NOT NULL,
-  `timevalue` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `config_data` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User preferences storage for phpMyAdmin';
-
---
--- Dump dei dati per la tabella `pma__userconfig`
---
-
-INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
-('root', '2025-04-17 08:28:47', '{\"Console\\/Mode\":\"show\",\"lang\":\"it\"}');
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__usergroups`
---
-
-CREATE TABLE `pma__usergroups` (
-  `usergroup` varchar(64) NOT NULL,
-  `tab` varchar(64) NOT NULL,
-  `allowed` enum('Y','N') NOT NULL DEFAULT 'N'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User groups with configured menu items';
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `pma__users`
---
-
-CREATE TABLE `pma__users` (
-  `username` varchar(64) NOT NULL,
-  `usergroup` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Users and their assignments to user groups';
-
---
--- Indici per le tabelle scaricate
---
-
---
--- Indici per le tabelle `pma__bookmark`
---
-ALTER TABLE `pma__bookmark`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indici per le tabelle `pma__central_columns`
---
-ALTER TABLE `pma__central_columns`
-  ADD PRIMARY KEY (`db_name`,`col_name`);
-
---
--- Indici per le tabelle `pma__column_info`
---
-ALTER TABLE `pma__column_info`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `db_name` (`db_name`,`table_name`,`column_name`);
-
---
--- Indici per le tabelle `pma__designer_settings`
---
-ALTER TABLE `pma__designer_settings`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indici per le tabelle `pma__export_templates`
---
-ALTER TABLE `pma__export_templates`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `u_user_type_template` (`username`,`export_type`,`template_name`);
-
---
--- Indici per le tabelle `pma__favorite`
---
-ALTER TABLE `pma__favorite`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indici per le tabelle `pma__history`
---
-ALTER TABLE `pma__history`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `username` (`username`,`db`,`table`,`timevalue`);
-
---
--- Indici per le tabelle `pma__navigationhiding`
---
-ALTER TABLE `pma__navigationhiding`
-  ADD PRIMARY KEY (`username`,`item_name`,`item_type`,`db_name`,`table_name`);
-
---
--- Indici per le tabelle `pma__pdf_pages`
---
-ALTER TABLE `pma__pdf_pages`
-  ADD PRIMARY KEY (`page_nr`),
-  ADD KEY `db_name` (`db_name`);
-
---
--- Indici per le tabelle `pma__recent`
---
-ALTER TABLE `pma__recent`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indici per le tabelle `pma__relation`
---
-ALTER TABLE `pma__relation`
-  ADD PRIMARY KEY (`master_db`,`master_table`,`master_field`),
-  ADD KEY `foreign_field` (`foreign_db`,`foreign_table`);
-
---
--- Indici per le tabelle `pma__savedsearches`
---
-ALTER TABLE `pma__savedsearches`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `u_savedsearches_username_dbname` (`username`,`db_name`,`search_name`);
-
---
--- Indici per le tabelle `pma__table_coords`
---
-ALTER TABLE `pma__table_coords`
-  ADD PRIMARY KEY (`db_name`,`table_name`,`pdf_page_number`);
-
---
--- Indici per le tabelle `pma__table_info`
---
-ALTER TABLE `pma__table_info`
-  ADD PRIMARY KEY (`db_name`,`table_name`);
-
---
--- Indici per le tabelle `pma__table_uiprefs`
---
-ALTER TABLE `pma__table_uiprefs`
-  ADD PRIMARY KEY (`username`,`db_name`,`table_name`);
-
---
--- Indici per le tabelle `pma__tracking`
---
-ALTER TABLE `pma__tracking`
-  ADD PRIMARY KEY (`db_name`,`table_name`,`version`);
-
---
--- Indici per le tabelle `pma__userconfig`
---
-ALTER TABLE `pma__userconfig`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indici per le tabelle `pma__usergroups`
---
-ALTER TABLE `pma__usergroups`
-  ADD PRIMARY KEY (`usergroup`,`tab`,`allowed`);
-
---
--- Indici per le tabelle `pma__users`
---
-ALTER TABLE `pma__users`
-  ADD PRIMARY KEY (`username`,`usergroup`);
-
---
--- AUTO_INCREMENT per le tabelle scaricate
---
-
---
--- AUTO_INCREMENT per la tabella `pma__bookmark`
---
-ALTER TABLE `pma__bookmark`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT per la tabella `pma__column_info`
---
-ALTER TABLE `pma__column_info`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT per la tabella `pma__export_templates`
---
-ALTER TABLE `pma__export_templates`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT per la tabella `pma__history`
---
-ALTER TABLE `pma__history`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT per la tabella `pma__pdf_pages`
---
-ALTER TABLE `pma__pdf_pages`
-  MODIFY `page_nr` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT per la tabella `pma__savedsearches`
---
-ALTER TABLE `pma__savedsearches`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- Database: `test`
---
-CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `test`;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
