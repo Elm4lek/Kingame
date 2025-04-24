@@ -456,6 +456,23 @@ function movesFirst(playerMove,enemyMove){
     if (playerTeam[currentPlayerPokemon].speed !== enemyTeam[currentEnemyPokemon].speed) return playerTeam[currentPlayerPokemon].speed - enemyTeam[currentEnemyPokemon].speed;
     return Math.random() < 0.5 ? -1 : 1;
 }
+function viewHpInstant(target, id) {
+    const hpBar = document.getElementById(id);
+    const value = Math.round(target.hp / target.maxHp * 100);
+
+    hpBar.style.width = value + "%";
+    hpBar.style.setProperty("--end-width", value + "%");
+
+    if (value <= 10) {
+        hpBar.style["background-color"] = "red";
+    } else if (value <= 50) {
+        hpBar.style["background-color"] = "gold";
+    } else {
+        hpBar.style["background-color"] = "limegreen";
+    }
+
+    return hpBar;
+}
 function viewHp(target, id){
     let hpPercent = [
         {
@@ -573,25 +590,32 @@ function selectMove(playerMove){
     if(enemyMoveType == selectType.FIGHT && currentSelect == selectType.FIGHT){
         // Determine turn order
         let actionOrder = movesFirst(playerMove, enemyMove);
-
+        console.log("action order:",actionOrder);
         // Define actors based on order
         let firstActor = actionOrder > 0 
             ? { move: playerMove, pokemon: playerTeam[currentPlayerPokemon], targetSide: side.ENEMY }
             : { move: enemyMove, pokemon: enemyTeam[currentEnemyPokemon], targetSide: side.PLAYER };
+            console.log("first actor:",firstActor);
 
         let secondActor = actionOrder > 0 
             ? { move: enemyMove, pokemon: enemyTeam[currentEnemyPokemon], targetSide: side.PLAYER }
             : { move: playerMove, pokemon: playerTeam[currentPlayerPokemon], targetSide: side.ENEMY };
+            console.log("second actor:",secondActor);
 
         // Execute first move
         selectFightMove(firstActor.move, firstActor.pokemon, firstActor.targetSide);
+        
+        console.log("first actor selected fight move");
 
         // Check if first Pokémon fainted from second move
         
         checkFainting(firstActor.pokemon,getOppositeSide(firstActor.targetSide));
+        console.log("first actor faint checked");
         if(!isBattleEnd){
+            console.log("isn't ended battle");
             // Check if second Pokémon is still alive
             checkFainting(secondActor.pokemon, getOppositeSide(secondActor.targetSide));
+            console.log("second actor faint checked");
             if(!isFainting(firstActor.pokemon)&&!isFainting(secondActor.pokemon)){
                 // Execute second move
                 selectFightMove(secondActor.move, secondActor.pokemon, secondActor.targetSide);
@@ -600,18 +624,18 @@ function selectMove(playerMove){
             }
         }
     }else{
+        console.log("debug "+603);
         if(currentSelect == selectType.FIGHT){
             selectFightMove(playerMove, playerTeam[currentPlayerPokemon], side.ENEMY);
         }else if(enemyMoveType == selectType.FIGHT){
+            console.log("debug "+603);
             selectFightMove(enemyMove, enemyTeam[currentEnemyPokemon], side.PLAYER);
         }
         checkFainting(enemyTeam[currentEnemyPokemon], side.ENEMY);
         if(!isBattleEnd) checkFainting(playerTeam[currentPlayerPokemon], side.PLAYER);
     }
     // Check if second Pokémon is still alive
-    checkFainting(enemyTeam[currentEnemyPokemon], side.ENEMY);
     if(!isBattleEnd){
-        checkFainting(playerTeam[currentPlayerPokemon], side.PLAYER);
 
         playerTeam[currentPlayerPokemon].status.onTurnProgress();
         enemyTeam[currentEnemyPokemon].status.onTurnProgress();
@@ -627,9 +651,11 @@ function selectMove(playerMove){
 }
 
 function checkFainting(target,targetSide){
+    console.log("checking status of fainting of target:",target);
     if(isFainting(target)){
         changeStatus(target, STATUS.FAINTING);
-        battleQueue.push(createDialogEvent(target.name+" is fainting"));
+        console.log("check fainting "+target.name+" is fainting");
+        console.log("tagetSide:",targetSide);
         handleFainting(targetSide);
     }
 }
@@ -642,7 +668,9 @@ function isFainting(target){
 }
 
 function handleFainting(targetSide) {
+    console.log("debug change pokemon");
     let team = getTeam(targetSide);
+    console.log("side : ",team);
     console.log("handle fainting");
     if (isTeamDefeated(team)) {
         console.log("end battle");
@@ -661,16 +689,18 @@ function isTeamDefeated(team){
     return true;
 }
 
-function getTeam(side){
-    console.log(side);
-    return side === side.PLAYER ? playerTeam : enemyTeam;
+function getTeam(targetSide){
+    return targetSide === side.PLAYER ? playerTeam : enemyTeam;
 }
 
 function pokemon(){
+    console.log("called pokemon()");
     currentSelect = selectType.POKEMON;
     showPokemon();
 }
 function showPokemon(){
+    
+    console.log("show pokemon");
     let bagItems = showBag();
     bagItems.dataset.selected = "";
     bagItems.className = "pokemon-list";
@@ -701,6 +731,7 @@ function showPokemon(){
                     bagBottom.appendChild(button);
                 }
                 button.addEventListener('click', ()=>{
+                    console.log("is showing events:"+isShowingEvents);
                     if(isShowingEvents)
                         forcedChangePokemon(side.PLAYER,i);
                     else
@@ -735,7 +766,7 @@ function showPokemon(){
         hpFill.id = "pokemon"+i+"HP";
         hpFill.className = "hp-fill";
         hpBar.appendChild(hpFill);
-        viewHp(pokemon,hpFill.id);
+        viewHpInstant(pokemon,hpFill.id);
     }
 }
 //show the default layer of bag
@@ -762,10 +793,14 @@ function showBag(){
     return bagItems;
 }
 function changePokemon(targetSide,i){
+    console.log("debug change pokemon");
+    console.log("pokemon side:",targetSide);
     let team = getTeam(targetSide);
+    console.log(team);
     let currentPokemon = targetSide === side.PLAYER ? currentPlayerPokemon : currentEnemyPokemon;
     let nameId = targetSide === side.PLAYER ? "currentName" : "enemyName";
     let hpId = targetSide === side.PLAYER ? "currentHP" : "enemyHP";
+    console.log(team[currentPokemon]);
     team[currentPokemon].status.onSwitchOut(team[currentPokemon]);
 
     for(let stat of team[currentPokemon].statList){
@@ -786,6 +821,8 @@ function selectedChangePokemon(targetSide,i){
     selectMove(null);
 }
 function forcedChangePokemon(targetSide,i){
+    
+    console.log(" forced change pokemon side:",targetSide);
     changePokemon(targetSide,i);    
     showBattleQueue(currentQueueIndex+1);
 }
@@ -803,8 +840,8 @@ function checkMovesStatus(){
     }
     return false;
 }
-function getOppositeSide(side){
-    return side === side.ENEMY ? side.PLAYER : side.ENEMY;
+function getOppositeSide(oppositeSide){
+    return oppositeSide === side.ENEMY ? side.PLAYER : side.ENEMY;
 }
 function init(){
     cancel();
@@ -937,7 +974,7 @@ function showBattleQueue(i = 0) {
 
     console.log(i+" event:",currentEvent);
 
-    if( currentEvent.type === "changePokemon"){
+    if(currentEvent.type === "changePokemon"){
         pokemon();
         currentQueueIndex = i;
     }
