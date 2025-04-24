@@ -9,6 +9,8 @@ var isShowingEvents = false;
 var playerCanMove = true;
 var isBattleEnd = false;
 
+var currentQueueIndex = 0;
+
 var currentSelect = "";
 function createDialogEvent(text) {
     return {
@@ -17,10 +19,17 @@ function createDialogEvent(text) {
         play: () => showDialog(text)  // you define `showDialog()`
     };
 }
-function createAnimationEvent(animationFn) {
+function createAnimationEvent(animationFn, isBlocked = false) {
     return {
         type: "animation",
-        play: animationFn
+        play: animationFn,
+        isBlocked : isBlocked,
+    };
+}
+function changePokemonEvent(side) {
+    return {
+        type: "changePokemon",
+        side: side
     };
 }
 function changeStatStage(target,stat,stageIncrease){
@@ -364,7 +373,6 @@ function cancel(){
         let parent = bag.parentElement;
         parent.removeChild(bag);
     }
-    showDialog("select a move");
 }
 
 function clearDialogBox(){
@@ -587,12 +595,18 @@ function selectMove(playerMove){
             if(!isFainting(firstActor.pokemon)&&!isFainting(secondActor.pokemon)){
                 // Execute second move
                 selectFightMove(secondActor.move, secondActor.pokemon, secondActor.targetSide);
+                checkFainting(firstActor.pokemon,getOppositeSide(firstActor.targetSide));
+                checkFainting(secondActor.pokemon, getOppositeSide(secondActor.targetSide));
             }
         }
-    }else if(currentSelect == selectType.FIGHT){
-        selectFightMove(playerMove, playerTeam[currentPlayerPokemon], side.ENEMY);
-    }else if(enemyMoveType == selectType.FIGHT){
-        selectFightMove(enemyMove, enemyTeam[currentEnemyPokemon], side.PLAYER);
+    }else{
+        if(currentSelect == selectType.FIGHT){
+            selectFightMove(playerMove, playerTeam[currentPlayerPokemon], side.ENEMY);
+        }else if(enemyMoveType == selectType.FIGHT){
+            selectFightMove(enemyMove, enemyTeam[currentEnemyPokemon], side.PLAYER);
+        }
+        checkFainting(enemyTeam[currentEnemyPokemon], side.ENEMY);
+        if(!isBattleEnd) checkFainting(playerTeam[currentPlayerPokemon], side.PLAYER);
     }
     // Check if second Pokémon is still alive
     checkFainting(enemyTeam[currentEnemyPokemon], side.ENEMY);
@@ -607,7 +621,6 @@ function selectMove(playerMove){
         for(let stat of enemyTeam[currentEnemyPokemon].statList){
             stat.onTurnProgress();
         }
-        battleQueue.push(createDialogEvent("select a move"));
     }
     console.log("battle queue",battleQueue);
     showBattleQueue(0);
@@ -637,7 +650,7 @@ function handleFainting(targetSide) {
     }
     else{
         console.log("change pokemon");
-        battleQueue.push(createAnimationEvent(()=>pokemon()));
+        battleQueue.push(changePokemonEvent(targetSide));
     }
 }
 
@@ -688,7 +701,10 @@ function showPokemon(){
                     bagBottom.appendChild(button);
                 }
                 button.addEventListener('click', ()=>{
-                    changePokemon(side.PLAYER,i);
+                    if(isShowingEvents)
+                        forcedChangePokemon(side.PLAYER,i);
+                    else
+                        selectedChangePokemon(side.PLAYER,i);
                 });
 
             });
@@ -764,7 +780,14 @@ function changePokemon(targetSide,i){
     battleQueue.push(createDialogEvent("changed pokemon"));
     cancel();
     console.log("is showing envents:"+isShowingEvents);
-    if(!isShowingEvents) selectMove(null);
+}
+function selectedChangePokemon(targetSide,i){
+    changePokemon(targetSide,i);
+    selectMove(null);
+}
+function forcedChangePokemon(targetSide,i){
+    changePokemon(targetSide,i);    
+    showBattleQueue(currentQueueIndex+1);
 }
 function showDialog(reason){
     dialogBoxText(reason)
@@ -903,6 +926,7 @@ function showBattleQueue(i = 0) {
         while(battleQueue.length > 0) {
             battleQueue.pop();
         }
+        showDialog("select a move");
         return;
     }
 
@@ -911,9 +935,13 @@ function showBattleQueue(i = 0) {
 
     const currentEvent = battleQueue[i];
 
-    console.log(i+"event : ", currentEvent);
-    console.log("player can move : "+playerCanMove);
-    if (currentEvent.type === "animation") {
+    console.log(i+" event:",currentEvent);
+
+    if( currentEvent.type === "changePokemon"){
+        pokemon();
+        currentQueueIndex = i;
+    }
+    else if (currentEvent.type === "animation") {
         // Esegui subito e vai al prossimo
         
         currentEvent.play(); // usa ?. nel caso play non esista
