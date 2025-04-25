@@ -474,6 +474,8 @@ function viewHpInstant(target, id) {
     return hpBar;
 }
 function viewHp(target, id){
+    console.log("view hp");
+    
     let hpPercent = [
         {
             val:100,
@@ -516,7 +518,7 @@ function viewHp(target, id){
     return hpBar;
 }
 function viewCurrentHP(targetSide){
-    
+    console.log("view current hp");
     let id;
     let target;
     if(targetSide === side.ENEMY){
@@ -530,14 +532,18 @@ function viewCurrentHP(targetSide){
     changeHPFill(target,id);
 }
 function changeHPFill(target,id){
+    console.log("change hp fill");
     let hpBar = viewHp(target,id);
-    
+    console.log("start-width", getComputedStyle(hpBar).getPropertyValue("--start-width"));
+    console.log("end-width", getComputedStyle(hpBar).getPropertyValue("--end-width"));
     // Rimuovi la classe quando l'animazione è finita
     hpBar.addEventListener("animationend", function handler() {
         hpBar.classList.remove("change-bar-width");
         hpBar.style.width = hpBar.width;
+        console.log("playd change width animation");
         hpBar.removeEventListener("animationend", handler); // rimuovi anche il listener per evitare duplicazioni
     });
+    console.log("added animation to hpBar");
 }
 function selectFightMove(move, attacker, targetSide) {
     // Check if the attacker can move
@@ -674,7 +680,7 @@ function handleFainting(targetSide) {
     console.log("handle fainting");
     if (isTeamDefeated(team)) {
         console.log("end battle");
-        endBattle(targetSide);
+        endBattle(team);
     }
     else{
         console.log("change pokemon");
@@ -794,27 +800,23 @@ function showBag(){
 }
 function changePokemon(targetSide,i){
     console.log("debug change pokemon");
-    console.log("pokemon side:",targetSide);
     let team = getTeam(targetSide);
-    console.log(team);
     let currentPokemon = targetSide === side.PLAYER ? currentPlayerPokemon : currentEnemyPokemon;
     let nameId = targetSide === side.PLAYER ? "currentName" : "enemyName";
     let hpId = targetSide === side.PLAYER ? "currentHP" : "enemyHP";
-    console.log(team[currentPokemon]);
     team[currentPokemon].status.onSwitchOut(team[currentPokemon]);
 
     for(let stat of team[currentPokemon].statList){
         stat.onSwitchOut(team[currentPokemon]);
     }
-    targetSide === side.PLAYER ? currentPlayerPokemon = i : currentEnemyPokemon = i;
+    currentPokemon = targetSide === side.PLAYER ? currentPlayerPokemon = i : currentEnemyPokemon = i;
 
     let name = document.getElementById(nameId);
     name.innerHTML = team[currentPokemon].name;
-    viewHp(team[currentPokemon],hpId);
+    viewCurrentHP(team[currentPokemon],hpId);
 
     battleQueue.push(createDialogEvent("changed pokemon"));
     cancel();
-    console.log("is showing envents:"+isShowingEvents);
 }
 function selectedChangePokemon(targetSide,i){
     changePokemon(targetSide,i);
@@ -905,9 +907,11 @@ function init(){
     };
     
     let pm1 = structuredClone(pokemon);
+    pm1.name = "aaa";
     pm1.status = STATUS.NORMAL.set();
     let pm2 = structuredClone(pokemon);
     pm2.status = STATUS.NORMAL.set();
+    pm2.name = "bbb";
     pokemon.status = STATUS.NORMAL.set();
 
     pm1.movelist.push(agility);
