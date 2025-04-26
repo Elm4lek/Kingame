@@ -46,6 +46,35 @@ function changeStatStage(target,stat,stageIncrease){
     battleQueue.push(createDialogEvent(target.name+"'s "+stat+" "+change));
 }
 
+function createBagItem(name,type,stage,description,count){
+    let item={
+        name:name,
+        type:type,
+        description:description,
+        count:count,
+    };
+
+    if(type !== "cura" || type !== "revitalizza"){
+        item.use = {
+            name: name,
+            set : () => createStateCondition(
+            name,
+            Infinity, // Infinite duration for normal status
+            Infinity, // Infinite duration
+            (target) => {
+                changeStatStage(target,type,stage);
+            }, //
+            () => true, // Always allow moves
+            (target) => {}, // Nothing happens on turn progress
+            null, // No expiration effect
+            (target) => {
+                target.statList.remove();
+            } //
+        )
+        }
+    }
+}
+
 //Create default state conditions
 function createStateCondition(name, minTurns, maxTurns, onStatApply, isMoveUsable, onTurnProgress, onRemove, onSwitchOut) {
     // Use an object to store properties
@@ -362,6 +391,8 @@ function select(choice){
                 break;
             case selectType.POKEMON: pokemon();
                 break;
+            default:
+                showDialog("select a move");
         }
     }
 }
@@ -871,8 +902,8 @@ function init(){
             spAtk: 0,
             spDef: 0,
             dmg: 0,
-            evs: -6,
-            acc:0,
+            evs: 0,
+            acc:6,
         },  
         //status:STATUS.NORMAL.set()
     };
