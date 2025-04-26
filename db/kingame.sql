@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 23, 2025 alle 10:21
+-- Creato il: Apr 26, 2025 alle 16:02
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -3676,25 +3676,77 @@ CREATE TABLE `stanze` (
 
 CREATE TABLE `testi` (
   `name` varchar(20) NOT NULL,
-  `ITA` varchar(25) DEFAULT NULL,
-  `ENG` varchar(25) DEFAULT NULL,
-  `testo_ITA` varchar(200) NOT NULL,
-  `testo_ENG` varchar(200) NOT NULL
+  `ITA` varchar(250) DEFAULT NULL,
+  `ENG` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dump dei dati per la tabella `testi`
 --
 
-INSERT INTO `testi` (`name`, `ITA`, `ENG`, `testo_ITA`, `testo_ENG`) VALUES
-('atkX_name', 'Attacco X', 'X attack', '0', '0'),
-('fullRestore_name', 'Ricarica Totale', 'Full Restore', '0', '0'),
-('iperPoz_name', 'Iperpozione', 'Hyper potion', '0', '0'),
-('maxPoz_name', 'Pozione MAX', 'MAX Potion', '0', '0'),
-('maxRev_name', 'Revitalizzante MAX', 'MAX Revive', '0', '0'),
-('poz_name', 'Pozione', 'Potion', '0', '0'),
-('rev_name', 'Revitalizzante', 'Revive', '0', '0'),
-('supPoz_name', 'Superpozione', 'Superpotion', '0', '0');
+INSERT INTO `testi` (`name`, `ITA`, `ENG`) VALUES
+('atkX2_desc', 'Aumenta l\'attacco del pokemon di 2 livelli', 'It increases the pokemon\'s attack level by 2'),
+('atkX2_name', 'Attacco X-2', 'X attack-2'),
+('atkX3_desc', 'Aumenta l\'attacco del pokemon di 3 livelli', 'It increases the pokemon\'s attack level by 3'),
+('atkX3_name', 'Attacco X-3', 'X attack-3'),
+('atkX6_desc', 'Aumenta l\'attacco del pokemon di 6 livelli', 'It increases the pokemon\'s attack level by 6'),
+('atkX6_name', 'Attacco X-6', 'X attack-6'),
+('atkX_desc', 'Aumenta l\'attacco del pokemon di un livello', 'It increases the pokemon\'s attack level by 1'),
+('atkX_name', 'Attacco X', 'X attack'),
+('difX2_desc', 'Aumenta la difesa del pokemon di 2 livelli', 'It increases the pokemon\'s defense level by 2'),
+('difX2_name', 'Difesa X-2', 'X Defend-2'),
+('difX3_desc', 'Aumenta la difesa del pokemon di 3 livelli', 'It increases the pokemon\'s defense level by 3'),
+('difX3_name', 'Difesa X-3', 'X Defend-3'),
+('difX6_desc', 'Aumenta la difesa del pokemon di 6 livelli', 'It increases the pokemon\'s defense level by 6'),
+('difX6_name', 'Difesa X-6', 'X Defend-6'),
+('difX_desc', 'Aumenta la difesa del pokemon di un livello', 'It increases the pokemon\'s defense level by 1'),
+('difX_name', 'Difesa X', 'X Defend'),
+('fullRestore_desc', 'Restituisce tutti i PS e cura di tutti gli stati dal pokemon su cui viene utilizzata', 'It restores all HP and heals anythe status effect of the selected Pokemon'),
+('fullRestore_name', 'Ricarica Totale', 'Full Restore'),
+('iperPoz_desc', 'Restituisce 120 PS al pokemon su cui viene utilizzata', 'It restores 120 HP of the selected Pokemon'),
+('iperPoz_name', 'Iperpozione', 'Hyper potion'),
+('maxPoz_desc', 'Restituisce tutti i PS al pokemon su cui viene utilizzata', 'It restores all HP of the selected Pokemon'),
+('maxPoz_name', 'Pozione MAX', 'MAX Potion'),
+('maxRev_desc', 'Restituisce tutti i PS ad un pokemon esausto', 'It restores all HP of an \r\nexhausted pokemon'),
+('maxRev_name', 'Revitalizzante MAX', 'MAX Revive'),
+('poz_desc', 'Restituisce 20 PS al pokemon su cui viene utilizzata', 'It restores 20 HP of the selected Pokemon'),
+('poz_name', 'Pozione', 'Potion'),
+('rev_desc', 'Restituisce metà PS ad un pokemon esausto', 'It restores half HP of an \r\nexhausted pokemon'),
+('rev_name', 'Revitalizzante', 'Revive'),
+('sColpo2_desc', 'Aumenta la possibilità di fare brutti colpi di 2 livelli', 'It increases the pokemon\'s chance to land a Dire Hit by 2 levels'),
+('sColpo2_name', 'SuperColpo 2', 'Dire Hit 2'),
+('sColpo3_desc', 'Aumenta la possibilità di fare brutti colpi di 3 livelli', 'It increases the pokemon\'s chance to land a Dire Hit by 3 levels'),
+('sColpo3_name', 'SuperColpo 3', 'Dire Hit 3'),
+('sColpo_desc', 'Aumenta la possibilità di fare brutti colpi di un livello', 'It increases the pokemon\'s chance to land a Dire Hit by 1 level'),
+('sColpo_name', 'SuperColpo', 'Dire Hit'),
+('sGuardia_desc', 'Previene diminuzione di statistiche del pokemon per 5 turni', 'It prevents the decrease of the pokemon specs for 5 turns'),
+('sGuardia_name', 'SuperGuardia', 'Guard Spec.'),
+('spAtk2_desc', 'Aumenta l\'attacco speciale del pokemon di 2 livelli', 'It increases the pokemon\'s special attack level by 2'),
+('spAtk3_desc', 'Aumenta l\'attacco speciale del pokemon di 3 livelli', 'It increases the pokemon\'s special attack level by 3'),
+('spAtk6_desc', 'Aumenta l\'attacco speciale del pokemon di 6 livelli', 'It increases the pokemon\'s special attack level by 6'),
+('spAtkX2_name', 'Special X-2', 'X Special-2'),
+('spAtkX3_name', 'Special X-3', 'X Special-3'),
+('spAtkX6_name', 'Special X-6', 'X Special-6'),
+('spAtkX_name', 'Special X', 'X Special'),
+('spAtk_desc', 'Aumenta l\'attacco speciale del pokemon di un livello', 'It increases the pokemon\'s special attack level by 1'),
+('spDif2_desc', 'Aumenta la difesa speeciale del pokemon di 2 livelli', 'It increases the pokemon\'s special defense level by 2'),
+('spDif3_desc', 'Aumenta la difesa speeciale del pokemon di 3 livelli', 'It increases the pokemon\'s special defense level by 3'),
+('spDif6_desc', 'Aumenta la difesa speeciale del pokemon di 6 livelli', 'It increases the pokemon\'s special defense level by 6'),
+('spDifX2_name', 'Difesa Difesa Speciale X-2', 'X Special Defend-2'),
+('spDifX3_name', 'Difesa Difesa Speciale X-3', 'X Special Defend-3'),
+('spDifX6_name', 'Difesa Difesa Speciale X-6', 'X Special Defend-6'),
+('spDifX_name', 'Difesa Speciale X', 'X Special Defend'),
+('spDif_desc', 'Aumenta la difesa speeciale del pokemon di un livello', 'It increases the pokemon\'s special defense level by 1'),
+('supPoz_desc', 'Restituisce 50 PS al pokemon su cui viene utilizzata', 'It restores 50 HP of the selected Pokemon'),
+('supPoz_name', 'Superpozione', 'Superpotion'),
+('vel2_desc', 'Aumenta la velocità del pokemon di 2 livelli', 'It increases the pokemon\'s speed level by 2'),
+('vel3_desc', 'Aumenta la velocità del pokemon di 3 livelli', 'It increases the pokemon\'s speed level by 3'),
+('vel6_desc', 'Aumenta la velocità del pokemon di 6 livelli', 'It increases the pokemon\'s speed level by 6'),
+('velX2_name', 'Velocità X-2', 'X Speed-2'),
+('velX3_name', 'Velocità X-3', 'X Speed-3'),
+('velX6_name', 'Velocità X-6', 'X Speed-6'),
+('velX_name', 'Velocità X', 'X Speed'),
+('vel_desc', 'Aumenta la velocità del pokemon di un livello', 'It increases the pokemon\'s speed level by 1');
 
 -- --------------------------------------------------------
 
