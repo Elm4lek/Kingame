@@ -59,6 +59,7 @@ function createBagItem(name,type,stage,description,count){
             name: name,
             set : () => createStateCondition(
             name,
+            "buff",
             Infinity, // Infinite duration for normal status
             Infinity, // Infinite duration
             (target) => {
@@ -68,19 +69,27 @@ function createBagItem(name,type,stage,description,count){
             (target) => {}, // Nothing happens on turn progress
             null, // No expiration effect
             (target) => {
-                target.statList.remove();
-            } //
+                target.statList = target.statList.filter(
+                    (change) => change.name !== name
+                );
+            } 
         )
         }
     }
+    else if(type === "cura"){
+        item.use = (target)=> {
+        }
+    }
+    return item;
 }
 
 //Create default state conditions
-function createStateCondition(name, minTurns, maxTurns, onStatApply, isMoveUsable, onTurnProgress, onRemove, onSwitchOut) {
+function createStateCondition(name, type, minTurns, maxTurns, onStatApply, isMoveUsable, onTurnProgress, onRemove, onSwitchOut) {
     // Use an object to store properties
     const stat = {
         name: name,
         turnCount: 0,
+        type: type,
         minTurns: minTurns,
         maxTurns: maxTurns,
         onStatApply: function(target) {
@@ -125,6 +134,7 @@ const STATUS={
         name: "NORMAL",
         set : () => createStateCondition(
             "NORMAL",
+            "state",
             Infinity, // Infinite duration for normal status
             Infinity, // Infinite duration
             (target) => {}, // No effect when applied
@@ -138,6 +148,7 @@ const STATUS={
         name: "POISON",
         set : () => createStateCondition(
             "POISON",
+            "state",
             Infinity, // can't be removed automaticaly
             Infinity, // Infinite duration
             (target) => {}, // No effect when applied
@@ -153,6 +164,7 @@ const STATUS={
         name: "BADLY POISON",
         set : () => createStateCondition(
             "BADLY POISON",
+            "state",
             Infinity, // Can't be removed automatically
             Infinity,
             (target) => {
@@ -174,6 +186,7 @@ const STATUS={
         name: "DROWSY",
         set : () => createStateCondition(
             "DROWSY",
+            "state",
             2, // Duration 2 turns
             2, 
             (target) => {
@@ -192,6 +205,7 @@ const STATUS={
         name: "SLEEP",
         set : () => createStateCondition(
             "SLEEP",
+            "state",
             1, 
             3, 
             (target) => {}, // No effect when applied
@@ -205,6 +219,7 @@ const STATUS={
         name: "PARALYSIS",
         set : () => createStateCondition(
             "PARALYSIS",
+            "state",
             Infinity, 
             Infinity, 
             (target) => {
@@ -225,6 +240,7 @@ const STATUS={
         name: "BURN",
         set : () => createStateCondition(
             "BURN",
+            "state",
             Infinity, 
             Infinity, 
             (target) => {
@@ -245,6 +261,7 @@ const STATUS={
         name: "FREEZE",
         set : () => createStateCondition(
             "FREEZE",
+            "state",
             Infinity, 
             Infinity, 
             (target) => {}, //Nothing happend when apply
@@ -262,6 +279,7 @@ const STATUS={
         name: "FROSTBITE",
         set : () => createStateCondition(
             "FROSTBITE",
+            "state",
             Infinity, 
             Infinity, 
             (target) => {
@@ -286,6 +304,7 @@ const STATUS={
         name: "FAINTING",
         set : () => createStateCondition(
             "FAINTING",
+            "state",
             Infinity, // Infinite duration for normal status
             Infinity, // Infinite duration
             (target) => {
@@ -311,6 +330,7 @@ function applyStatChange(target, statChange) {
 const STAT_CHANGES = {
     NIGHTMARE: createStateCondition(
         "Nightmare",
+        "debuff",
         Infinity,
         Infinity,
         (target) => {},
@@ -341,6 +361,36 @@ function changeStatus(target, status){
     battleQueue.push(createDialogEvent(target.name+" IS "+status.name));
 }
 // Define the mapping from stat stages (-6 to +6) to multipliers
+const HEAL_MULLTIPLIER = {
+    "1": {
+        restore : 20,
+        type : "static",
+    },
+    "2": {
+        restore : 60,
+        type : "static",
+    },
+    "3": {
+        restore : 120,
+        type : "static",
+    },
+    "4": {
+        restore : 100,
+        type : "percent",
+    },
+    "5": {
+        restore : 20,
+        type : "percent",
+        also : (target) => {
+            if(target.status != STATUS.NORMAL || target.status != STATUS.FAINTING){
+                changeStatus(target,STATUS.NORMAL);
+            }
+            target.statList = target.statList.filter(
+                (change) => change.type !== "debuff"
+            );
+        }
+    },
+}
 const STAT_MULTIPLIERS = {
     "-6": 2 / 8,
     "-5": 2 / 7,
