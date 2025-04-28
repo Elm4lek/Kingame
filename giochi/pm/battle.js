@@ -26,10 +26,10 @@ function createAnimationEvent(animationFn, isBlocked = false) {
         isBlocked : isBlocked,
     };
 }
-function changePokemonEvent(side) {
+function changePokemonEvent(targetSide) {
     return {
         type: "changePokemon",
-        side: side
+        side: targetSide
     };
 }
 function changeStatStage(target,stat,stageIncrease){
@@ -78,6 +78,26 @@ function createBagItem(name,type,stage,description,count){
     }
     else if(type === "cura"){
         item.use = (target)=> {
+            const effect = RESTORE_MULTIPLIERS[stage.toString()];
+            let restoreVal;
+            if(effect.type === "static"){
+                restoreVal = effect.restore;
+            }
+            else{
+                restoreVal = target.maxHp * effect.restore / 100;
+            }
+            target.hp += Math.min(target.maxHp-target.hp, restoreVal);
+            if(effect.also){
+                effect.also(target);
+            }
+        }
+    }else if(type === "revitalizza"){
+        item.use = (target)=> {
+            changeStatus(target,STATUS.NORMAL);
+            const effect = REVITALIZE_MULTIPLIERS[stage.toString()];
+            let restoreVal;
+            restoreVal = target.maxHp * effect.restore / 100;
+            target.hp = Math.min(target.maxHp-target.hp, restoreVal);
         }
     }
     return item;
@@ -360,8 +380,7 @@ function changeStatus(target, status){
     target.status.onStatApply(target);//apply the function of the state
     battleQueue.push(createDialogEvent(target.name+" IS "+status.name));
 }
-// Define the mapping from stat stages (-6 to +6) to multipliers
-const HEAL_MULLTIPLIER = {
+const RESTORE_MULTIPLIERS = {
     "1": {
         restore : 20,
         type : "static",
@@ -379,7 +398,7 @@ const HEAL_MULLTIPLIER = {
         type : "percent",
     },
     "5": {
-        restore : 20,
+        restore : 100,
         type : "percent",
         also : (target) => {
             if(target.status != STATUS.NORMAL || target.status != STATUS.FAINTING){
@@ -391,6 +410,15 @@ const HEAL_MULLTIPLIER = {
         }
     },
 }
+const REVITALIZE_MULTIPLIERS = {
+    "1": {
+        restore : 50,
+    },
+    "2": {
+        restore : 100,
+    }
+}
+// Define the mapping from stat stages (-6 to +6) to multipliers
 const STAT_MULTIPLIERS = {
     "-6": 2 / 8,
     "-5": 2 / 7,
@@ -462,7 +490,6 @@ function clearDialogBox(){
         box.removeChild(box.lastChild);
     }
 }
-
 function fight() {
     clearDialogBox();
     currentSelect = selectType.FIGHT;
@@ -499,6 +526,15 @@ function fight() {
 
         box.appendChild(fightMove);
     }
+}
+
+function bag(){
+    currentSelect = selectType.BAG;
+    showBag();
+}
+function pokemon(){
+    currentSelect = selectType.POKEMON;
+    showPokemon();
 }
 function updateStats(target, useStage = true) {
     let STAT_NAMES = ["Atk", "Def", "Spd", "SpAtk", "SpDef"];
@@ -761,7 +797,7 @@ function handleFainting(targetSide) {
     console.log("handle fainting");
     if (isTeamDefeated(team)) {
         console.log("end battle");
-        endBattle(team);
+        endBattle(targetSide);
     }
     else{
         console.log("change pokemon");
@@ -780,11 +816,6 @@ function getTeam(targetSide){
     return targetSide === side.PLAYER ? playerTeam : enemyTeam;
 }
 
-function pokemon(){
-    console.log("called pokemon()");
-    currentSelect = selectType.POKEMON;
-    showPokemon();
-}
 function showPokemon(){
     
     console.log("show pokemon");
@@ -962,7 +993,7 @@ function init(){
         name:"pikachu",
         maxHp: 500,
         hp: 500,
-        atk: 50,
+        atk: 150,
         modAtk:50,
         def: 50,
         modDef: 50,
@@ -1048,7 +1079,7 @@ function showBattleQueue(i = 0) {
         while(battleQueue.length > 0) {
             battleQueue.pop();
         }
-        showDialog("select a move");
+        if(!isBattleEnd) showDialog("select a move");
         return;
     }
 
@@ -1085,10 +1116,12 @@ function showBattleQueue(i = 0) {
     
 }
 
-function endBattle(side){
+function endBattle(targetSide){
     playerCanMove = false;
-    isBattleEnd = true
-    battleQueue.push(createDialogEvent(side+" win"));
+    isBattleEnd = true;
+    console.log("side:",targetSide);
+    const wonSide = getOppositeSide(targetSide);
+    battleQueue.push(createDialogEvent(wonSide+" win"));
 }
 
 init();
