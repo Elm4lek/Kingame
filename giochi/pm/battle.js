@@ -1,6 +1,7 @@
 import * as Funcs from './functions.js';
 import { moveType } from './const.js';
 var playerTeam = [];
+var playerBag = [];
 var enemyTeam = [];
 var currentPlayerPokemon = 0;
 var currentEnemyPokemon = 0;
@@ -46,7 +47,7 @@ function changeStatStage(target,stat,stageIncrease){
     battleQueue.push(createDialogEvent(target.name+"'s "+stat+" "+change));
 }
 
-function createBagItem(name,type,stage,description,count){
+function createItem(name,type,stage,description,count){
     let item={
         name:name,
         type:type,
@@ -54,26 +55,28 @@ function createBagItem(name,type,stage,description,count){
         count:count,
     };
 
-    if(type !== "cura" || type !== "revitalizza"){
-        item.use = {
-            name: name,
-            set : () => createStateCondition(
-            name,
-            "buff",
-            Infinity, // Infinite duration for normal status
-            Infinity, // Infinite duration
-            (target) => {
-                changeStatStage(target,type,stage);
-            }, //
-            () => true, // Always allow moves
-            (target) => {}, // Nothing happens on turn progress
-            null, // No expiration effect
-            (target) => {
-                target.statList = target.statList.filter(
-                    (change) => change.name !== name
-                );
-            } 
-        )
+    if(type != "cura" && type != "revitalizza"){
+        item.use =  (target) =>{
+            applyStatChange(
+                target,
+                createStateCondition(
+                    name,
+                    "buff",
+                    Infinity, // Infinite duration for normal status
+                    Infinity, // Infinite duration
+                    (target) => {
+                        changeStatStage(target,type,stage);
+                    }, //
+                    () => true, // Always allow moves
+                    (target) => {}, // Nothing happens on turn progress
+                    null, // No expiration effect
+                    (target) => {
+                        target.statList = target.statList.filter(
+                            (change) => change.name !== name
+                        );
+                    } 
+                )
+            );
         }
     }
     else if(type === "cura"){
@@ -530,7 +533,7 @@ function fight() {
 
 function bag(){
     currentSelect = selectType.BAG;
-    showBag();
+    showItem();
 }
 function pokemon(){
     currentSelect = selectType.POKEMON;
@@ -573,10 +576,8 @@ function movesFirst(playerMove,enemyMove){
     if (playerTeam[currentPlayerPokemon].speed !== enemyTeam[currentEnemyPokemon].speed) return playerTeam[currentPlayerPokemon].speed - enemyTeam[currentEnemyPokemon].speed;
     return Math.random() < 0.5 ? -1 : 1;
 }
-function viewHpInstant(target, id) {
-    const hpBar = document.getElementById(id);
+function viewHpInstant(target, hpBar) {
     const value = Math.round(target.hp / target.maxHp * 100);
-
     hpBar.style.width = value + "%";
     hpBar.style.setProperty("--end-width", value + "%");
 
@@ -747,11 +748,9 @@ function selectMove(playerMove){
             }
         }
     }else{
-        console.log("debug "+603);
         if(currentSelect == selectType.FIGHT){
             selectFightMove(playerMove, playerTeam[currentPlayerPokemon], side.ENEMY);
         }else if(enemyMoveType == selectType.FIGHT){
-            console.log("debug "+603);
             selectFightMove(enemyMove, enemyTeam[currentEnemyPokemon], side.PLAYER);
         }
         checkFainting(enemyTeam[currentEnemyPokemon], side.ENEMY);
@@ -812,103 +811,197 @@ function isTeamDefeated(team){
     return true;
 }
 
+function getSide(target){
+    let index = playerTeam.indexOf(target);
+    if (index !== -1) {
+        return side.PLAYER;
+    }
+    return side.ENEMY;
+}
+
 function getTeam(targetSide){
     return targetSide === side.PLAYER ? playerTeam : enemyTeam;
 }
-
-function showPokemon(){
-    
-    console.log("show pokemon");
-    let bagItems = showBag();
+function showItem() {
+    console.log("show bag item");
+    const bagItems = showBag();
     bagItems.dataset.selected = "";
-    bagItems.className = "pokemon-list";
-    for(let [i,pokemon] of playerTeam.entries()){
-        if(i === currentPlayerPokemon && currentSelect === selectType.POKEMON) continue;
-        let canSelect = true;
-        if(currentSelect === selectType.POKEMON && pokemon.status.name === STATUS.FAINTING.name) canSelect = false;
-        let div = document.createElement("div");
-        div.className = "bag-item";
-        div.id = "pokemon"+i;
-        bagItems.appendChild(div);
-        if(canSelect){
-            div.addEventListener('click', ()=>{
-                let lastSelected = document.getElementById(bagItems.dataset.selected);
-                if (lastSelected) {
-                    lastSelected.classList.remove("item-selected");
-                }
-                bagItems.dataset.selected = div.id;
-                div.classList.add("item-selected");
-                let button = document.getElementById("select");
-                if(!button){
-                    button = document.createElement("input");
-                    button.type = "button";
-                    button.id="select";
-                    button.className="button";
-                    button.value="SELECT";
-                    let bagBottom = document.getElementById("bag-bottom");
-                    bagBottom.appendChild(button);
-                }
-                button.addEventListener('click', ()=>{
-                    console.log("is showing events:"+isShowingEvents);
-                    if(isShowingEvents)
-                        forcedChangePokemon(side.PLAYER,i);
-                    else
-                        selectedChangePokemon(side.PLAYER,i);
-                });
+    bagItems.className = "bag-list";
 
-            });
+    playerBag.forEach((item, i) => {
+        const div = createBagItem({
+            id: "item" + i,
+            name: item.name,
+            description: item.description,
+            count: item.count,
+            onClick: () => {
+                handleSelection(bagItems, div.id);
+                addSelectButton(() => selectItem(item));
+            }
+        });
+        bagItems.appendChild(div);
+    });
+}
+
+function showPokemon(changePokemon = true, other) {
+    console.log("show pokemon");
+    const bagItems = showBag();
+    bagItems.dataset.selected = "";
+    bagItems.className = "bag-list";
+    
+
+    playerTeam.forEach((pokemon, i) => {
+        if (i === currentPlayerPokemon && currentSelect === selectType.POKEMON) return;
+        
+        const canSelect = !(currentSelect === selectType.POKEMON && pokemon.status.name === STATUS.FAINTING.name);
+        let hpFillId = "pokemon" + i + "HP";
+        let callback;
+        if(changePokemon){
+            if (isShowingEvents) callback = ()=> forcedChangePokemon(side.PLAYER, i);
+            else callback = ()=> selectedChangePokemon(side.PLAYER, i);
+        }
+        else{
+            callback = ()=> useItem(pokemon,other,hpFillId);
         }
 
-        let img = document.createElement("div");
-        img.className = "list-img";
-        div.appendChild(img);      
-
-        let details = document.createElement("div");
-        details.className= "list-details";  
-        div.appendChild(details);
-        
-        let name = document.createElement("div");
-        name.className = "half-container description-name";
-        name.innerHTML = pokemon.name;
-        details.appendChild(name);
-        let hp = document.createElement("div");
-        hp.className = "half-container";
-        hp.style["align-items"] = "baseline";
-        details.appendChild(hp);
-
-        let hpBar = document.createElement("div");
-        hpBar.className = "hp-bar";
-        hp.appendChild(hpBar);
-
-        let hpFill = document.createElement("div");
-        hpFill.id = "pokemon"+i+"HP";
-        hpFill.className = "hp-fill";
-        hpBar.appendChild(hpFill);
-        viewHpInstant(pokemon,hpFill.id);
-    }
+        const div = createBagItem({
+            id: "pokemon" + i,
+            name: pokemon.name,
+            description: null,
+            count: null,
+            hpFillId: hpFillId,
+            hpData: pokemon,
+            onClick: canSelect ? () => {
+                handleSelection(bagItems, div.id);
+                addSelectButton(callback);
+            } : null
+        });
+        bagItems.appendChild(div);
+    });
 }
-//show the default layer of bag
-function showBag(){
-    let content = document.getElementById("content");
-    let bag = document.createElement("div");
+
+function showBag() {
+    cancel();
+    const content = document.getElementById("content");
+    const bag = document.createElement("div");
     bag.id = "bag";
     content.appendChild(bag);
 
-    let bagLeft = document.createElement("div");
+    const bagLeft = document.createElement("div");
     bagLeft.id = "bag-left";
-    let bagRight = document.createElement("div");
+    const bagRight = document.createElement("div");
     bagRight.id = "bag-right";
     bag.appendChild(bagLeft);
     bag.appendChild(bagRight);
 
-    let bagItems = document.createElement("div");
+    const bagItems = document.createElement("div");
     bagItems.id = "bag-items";
-    let bagBottom = document.createElement("div");
+    const bagBottom = document.createElement("div");
     bagBottom.id = "bag-bottom";
     bagRight.appendChild(bagItems);
     bagRight.appendChild(bagBottom);
 
     return bagItems;
+}
+
+function handleSelection(container, selectedId) {
+    const lastSelected = document.getElementById(container.dataset.selected);
+    if (lastSelected) lastSelected.classList.remove("item-selected");
+    container.dataset.selected = selectedId;
+    const newSelected = document.getElementById(selectedId);
+    if (newSelected) newSelected.classList.add("item-selected");
+}
+
+function addSelectButton(callback) {
+    let button = document.getElementById("select");
+    if (!button) {
+        button = document.createElement("input");
+        button.type = "button";
+        button.id = "select";
+        button.className = "button";
+        button.value = "SELECT";
+        document.getElementById("bag-bottom").appendChild(button);
+    }
+
+    // Remove any existing listeners (to avoid stacking)
+    const newButton = button.cloneNode(true);
+    newButton.addEventListener("click", callback);
+    button.parentNode.replaceChild(newButton, button);
+    console.log(newButton.parentNode);
+}
+
+function createBagItem({ id, name, description, count, hpFillId, hpData, onClick }) {
+    const div = document.createElement("div");
+    div.className = "bag-item";
+    div.id = id;
+
+    if (onClick) {
+        div.addEventListener("click", onClick);
+    }
+
+    const img = document.createElement("div");
+    img.className = "list-img";
+    div.appendChild(img);
+
+    const details = document.createElement("div");
+    details.className = "list-details";
+    div.appendChild(details);
+
+    const nameDiv = document.createElement("div");
+    nameDiv.className = "half-container description-name";
+    nameDiv.innerHTML = name;
+    details.appendChild(nameDiv);
+
+    if (description) {
+        const descDiv = document.createElement("div");
+        descDiv.className = "half-container description-name";
+        descDiv.innerHTML = description;
+        details.appendChild(descDiv);
+    }
+
+    if (hpFillId && hpData) {
+        const hpContainer = document.createElement("div");
+        hpContainer.className = "half-container";
+        hpContainer.style.alignItems = "baseline";
+
+        const hpBar = document.createElement("div");
+        hpBar.className = "hp-bar";
+
+        const hpFill = document.createElement("div");
+        hpFill.id = hpFillId;
+        hpFill.className = "hp-fill";
+
+        hpBar.appendChild(hpFill);
+        hpContainer.appendChild(hpBar);
+        details.appendChild(hpContainer);
+        viewHpInstant(hpData, hpFill);
+    }
+
+    if (count !== null && count !== undefined) {
+        const data = document.createElement("div");
+        data.className = "list-data";
+        data.innerHTML = "X" + count;
+        div.appendChild(data);
+    } else {
+        const data = document.createElement("div");
+        data.className = "list-data";
+        div.appendChild(data);
+    }
+
+    return div;
+}
+function selectItem(item){
+    showPokemon(false, item);
+}
+function useItem(target,item,id){
+    item.use(target);
+    let team = getSide(target);
+    if(item.type === "cura" || type === "revitalizza")
+        battleQueue.push(createAnimationEvent(() => changeHPFill(target,id)));
+    battleQueue.push(createAnimationEvent(() => cancel()));
+    battleQueue.push(createDialogEvent(team+" USED "+item.name));
+    selectMove(null);
+        
 }
 function changePokemon(targetSide,i){
     console.log("debug change pokemon");
@@ -954,6 +1047,7 @@ function checkMovesStatus(){
     }
     return false;
 }
+
 function getOppositeSide(oppositeSide){
     return oppositeSide === side.ENEMY ? side.PLAYER : side.ENEMY;
 }
@@ -984,7 +1078,7 @@ function init(){
             spDef: 0,
             dmg: 0,
             evs: 0,
-            acc:6,
+            acc: 0,
         },  
         //status:STATUS.NORMAL.set()
     };
@@ -1013,7 +1107,7 @@ function init(){
             spDef: 0,
             dmg: 0,
             evs: 0,
-            acc:0,
+            acc: 0,
         },
         status:STATUS.NORMAL.set()
     };
@@ -1042,12 +1136,11 @@ function init(){
     pokemon.movelist.push(hit);
     playerTeam.push(pokemon);
 
-/*     enemy.movelist.push(agility);
+    enemy.movelist.push(agility);
     enemy.movelist.push(bite);
-    enemy.movelist.push(hit); */
+    enemy.movelist.push(hit);
     enemy.movelist.push(cut);
     
-
     playerTeam.push(pm1);
     playerTeam.push(pm2);
 
@@ -1058,6 +1151,7 @@ function init(){
 
     viewCurrentHP(side.ENEMY);
     viewCurrentHP(side.PLAYER);
+
     let enemyPokemonCount = document.getElementById("enemyPokemonCount");
     for(let i in enemyTeam){
         let pokeball = document.createElement("div");
@@ -1070,6 +1164,10 @@ function init(){
         pokeball.className = "pokeball";
         playerPokemonCount.appendChild(pokeball);
     }
+    let item = createItem("poz_name", "cura", 1, "poz_desc", 2);
+    
+    console.log(item);
+    playerBag.push(item);
 }
 
 function showBattleQueue(i = 0) {
