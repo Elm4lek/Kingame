@@ -996,12 +996,27 @@ function selectItem(item){
 function useItem(target,item,id){
     item.use(target);
     let team = getSide(target);
-    if(item.type === "cura" || type === "revitalizza")
-        battleQueue.push(createAnimationEvent(() => changeHPFill(target,id)));
-    battleQueue.push(createAnimationEvent(() => cancel()));
-    battleQueue.push(createDialogEvent(team+" USED "+item.name));
-    selectMove(null);
-        
+    if(item.type === "cura" || type === "revitalizza"){
+        changeHPFill(target,id);
+    
+        const onClick = () => {
+            document.removeEventListener('click', onClick);
+            cancel();
+            battleQueue.push(createDialogEvent(team+" USED "+item.name));
+            selectMove(null);
+            
+        };
+    
+        // Delay per ignorare il click che ha fatto partire tutto
+        setTimeout(() => {
+            document.addEventListener('click', onClick);
+        }, 50); // anche solo 50ms bastano
+    }
+    else{
+        cancel();
+        battleQueue.push(createDialogEvent(team+" USED "+item.name));
+        selectMove(null);    
+    }
 }
 function changePokemon(targetSide,i){
     console.log("debug change pokemon");
@@ -1192,13 +1207,7 @@ function showBattleQueue(i = 0) {
         pokemon();
         currentQueueIndex = i;
     }
-    else if (currentEvent.type === "animation") {
-        // Esegui subito e vai al prossimo
-        
-        currentEvent.play(); // usa ?. nel caso play non esista
-        
-        showBattleQueue(i + 1);
-    } else if (currentEvent.type === "dialog") {
+    else if (currentEvent.type === "dialog" || currentEvent.isBlocked) {
         currentEvent.play?.();
     
         const onClick = () => {
@@ -1210,7 +1219,13 @@ function showBattleQueue(i = 0) {
         setTimeout(() => {
             document.addEventListener('click', onClick);
         }, 50); // anche solo 50ms bastano
-    }
+    }else if (currentEvent.type === "animation") {
+        // Esegui subito e vai al prossimo
+        
+        currentEvent.play(); // usa ?. nel caso play non esista
+        
+        showBattleQueue(i + 1);
+    } 
     
 }
 
