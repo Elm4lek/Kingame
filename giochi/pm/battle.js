@@ -463,6 +463,7 @@ const struggle = createMove("struggle","fisico", 0,"", 100, Infinity,"enemy",(at
     return attacker.modAtk/2});
 
 function select(choice){
+    battleQueue.push(createAnimationEvent(()=>cancel()));
     if(playerCanMove){
         cancel();
         switch(choice){
@@ -708,7 +709,6 @@ function selectFightMove(move, attacker, targetSide) {
 }
 
 function selectMove(playerMove){
-    battleQueue.push(createAnimationEvent(()=>cancel()));
     playerCanMove = false;
     let [enemyMove,enemyMoveType]  = selectEnemyMove();
     if(enemyMoveType == selectType.FIGHT && currentSelect == selectType.FIGHT){
@@ -925,9 +925,8 @@ function addSelectButton(callback) {
 
     // Remove any existing listeners (to avoid stacking)
     const newButton = button.cloneNode(true);
-    newButton.addEventListener("click", callback);
+    newButton.addEventListener("click", ()=>{callback(); newButton.remove();console.log("removed button")}, { once: true });
     button.parentNode.replaceChild(newButton, button);
-    console.log(newButton.parentNode);
 }
 
 function createBagItem({ id, name, description, count, hpFillId, hpData, onClick }) {
@@ -997,24 +996,24 @@ function useItem(target,item,id){
     item.use(target);
     let team = getSide(target);
     if(item.type === "cura" || type === "revitalizza"){
+        console.log("restore item");
         changeHPFill(target,id);
+        console.log("changed hp");
     
         const onClick = () => {
             document.removeEventListener('click', onClick);
-            cancel();
             battleQueue.push(createDialogEvent(team+" USED "+item.name));
+            console.log("clicked");
             selectMove(null);
-            
         };
     
-        // Delay per ignorare il click che ha fatto partire tutto
         setTimeout(() => {
             document.addEventListener('click', onClick);
         }, 50); // anche solo 50ms bastano
     }
     else{
-        cancel();
         battleQueue.push(createDialogEvent(team+" USED "+item.name));
+        console.log("used item");
         selectMove(null);    
     }
 }
@@ -1045,7 +1044,7 @@ function selectedChangePokemon(targetSide,i){
 function forcedChangePokemon(targetSide,i){
     
     console.log(" forced change pokemon side:",targetSide);
-    changePokemon(targetSide,i);    
+    changePokemon(targetSide,i);
     showBattleQueue(currentQueueIndex+1);
 }
 function showDialog(reason){
