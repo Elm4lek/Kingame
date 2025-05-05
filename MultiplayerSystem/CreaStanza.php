@@ -7,7 +7,7 @@ $haPosto = true;
 $tipo = $_POST['tipo'];
 $gioco = $_POST['gioco'];
 $numero = $_POST['numero'];
-$nome = $_SESSION['nome'];
+$nome = $_SESSION['username'];
 
 $server = "localhost";
 $conn = new mysqli($server,"root","","kingame")  or die (mysql_error());
@@ -19,18 +19,19 @@ if($tipo == 'crea'){
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $data[] = array(
-                "stanza" => (int)$row["stanze.Id"],  
-                "gioco" => $row["giochi.Nome"],
-                "numero" => (int)$row["giochi.Numero_Giocatori"]
+                "stanza" => (int)$row["Id"],  
+                "gioco" => $row["Nome"],
+                "numero" => (int)$row["Numero_Giocatori"]
             );
         }
     }
+    $stanza = 0;
 
-    $stanza = 1;
-    if(isset($data))
-        $stanza = $data[sizeof($data)-1]['stanza']++;
-
-    $data = ['stanza' => $stanza, 'gioco' => $gioco,'num' => $numero];
+    if(isset($data)){
+        $stanza = $data[sizeof($data)-1]['stanza'];
+        $stanza++;
+    }
+    $data = ['stanza' => $stanza, 'gioco' => $gioco];
     $sessione = ['giocatore' => $nome,'stanza' => $stanza];
 }
 else{
@@ -47,7 +48,7 @@ else{
         $sessione = ['giocatore' => $nome,'stanza' => $stanza];
     }
 }
-//}
+$conn->close();
 if($haPosto){
     if($tipo == 'crea'){
         post($tipo,[$data,$sessione]);
@@ -71,24 +72,22 @@ else{
     $_SESSION['gioco'] = [];
 }
 function post($tipo, $data) {
+    // Check for errors
     $url = 'http://localhost/kingame/MultiplayerSystem/AggiornaDB.php';
+    $data = http_build_query(['tipo' => $tipo, 'data' => $data]);
+
     $options = [
         'http' => [
-            'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-            'method' => 'POST',
-            'content' => http_build_query(['tipo' => $tipo, 'data' => $data]),
+            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method'  => 'POST',
+            'content' => $data,
         ],
     ];
-    $context = stream_context_create($options);
-    $result = file_get_contents($url, false, $context);
-    
-    // Check for errors
-    if ($result === FALSE) {
-        die('Error in request');
-    }
 
-    // Output real response
-    var_dump($result);
+    $context  = stream_context_create($options);
+    $response = file_get_contents($url, false, $context);
+
+    echo $response;
 }
 
 ?>

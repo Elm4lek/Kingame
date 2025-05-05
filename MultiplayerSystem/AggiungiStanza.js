@@ -5,17 +5,17 @@ function fetchStanze(){
         if (this.readyState == 4 && this.status == 200) {
           var risposta = JSON.parse(this.responseText);
           for (var i=0; i < risposta.length; i++){
-            if(risposta[i]['numero'] != risposta[i]['giocatore'].length)
+            if(risposta[i]['numero'] != risposta[i]['giocatore'])
                 elencoStanze.push(risposta[i]); 
           }
         }
       };
-    xhttp.open("GET", "CercaStanze.php",true);
+    xhttp.open("GET", "http://localhost/kingame/MultiplayerSystem/CercaStanze.php",true);
     xhttp.send();
 }
 //
 fetchStanze();
-
+selezionaGioco();
 function selezionaGioco(){
     var gioco = document.getElementById("nomeGioco").value;
     var stanze = [];
@@ -55,7 +55,6 @@ function selezionaGioco(){
 var stanzaEsistente = false;
 
 var input = document.getElementById('inputStanza');
-console.log(input);
 input.addEventListener("input", function(event) {
     var check = document.getElementById('checkStanza');
     var value = input.value;

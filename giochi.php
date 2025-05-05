@@ -4,8 +4,7 @@ if (!isset($_SESSION['username'])) {
     header("Location: index.php");
     exit();
 }
-
-    ?>
+?>
 <!DOCTYPE html>
 
 <html lang="it">
@@ -13,6 +12,7 @@ if (!isset($_SESSION['username'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $titoloPagina; ?></title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .centro {
           
@@ -20,10 +20,11 @@ if (!isset($_SESSION['username'])) {
         flex-direction: row;
         justify-content: center;
         align-items: center;
-         gap: 4px;
+        gap: 4px;
             
         }
-        .contenitoretetris {
+        .contenitore {
+            position: relative;
             width: 200px;
             height: 200px;
             background-color: #fff;
@@ -32,65 +33,46 @@ if (!isset($_SESSION['username'])) {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
             cursor: pointer;
-            display: flex;
+            display: grid;
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            box-sizing: border-box;
+            padding: 2%;
+        }
+        .mask{
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 99;
+            height: 100%;
+            width: 100%;
+        }
+        .mask-hovered {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: -99;
+            background: black;
+        }
+        .tetris {
             background-image: url('Grafiche videogiochi/screenshot tetris.png');
             background-size: cover;
             background-position: center;
-}
-.contenitoretristris {
-            width: 200px;
-            height: 200px;
-            background-color: #fff;
-            border-radius: 20px;
-            margin: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+        }
+        .tristris {
             background-image: url('Grafiche videogiochi/screenshotTrisTris.png');
             background-size: cover;
             background-position: center;
-}
-.contenitorecacciatore {
-            width: 200px;
-            height: 200px;
-            background-color: #fff;
-            border-radius: 20px;
-            margin: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+        }
+        .cacciatore {
             background-image: url('Grafiche videogiochi/screenshotcacciatore.png');
             background-size: cover;
             background-position: center;
-}
-        .contenitore {
-            width: 200px;
-            height: 200px;
-            background-color: #fff;
-            border-radius: 20px;
-            margin: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        .contenitoretetris:hover {
-            transform: scale(1.1);
-        }
-        .contenitoretristris:hover {
-            transform: scale(1.1);
-        }
-        .contenitorecacciatore:hover {
-            transform: scale(1.1);
         }
         .contenitore:hover {
             transform: scale(1.1);
@@ -113,23 +95,56 @@ if (!isset($_SESSION['username'])) {
 
     </style>
 </head> 
-
 <body>
     <div class="centro">
-    <a href="tetris.php">
-        <div class="contenitoretetris">
-        </div>
-    </a>
-        <div class="contenitoretristris"></div>
-        <div class="contenitorecacciatore"></div>
-        
-    </div>
-    <div class="centro">
-        <div class="contenitore"></div>
-        <div class="contenitore"></div>
-        
+        <?php 
+        $conn = new mysqli('localhost','root','', 'kingame');
+
+        $sql = "SELECT * FROM `giochi`";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                echo    "<div class='contenitore' data-name='".$row["Nome"]."'>
+                        <h3>".$row["Nome"]."</h3>
+                        <form method='POST' action='MultiplayerSystem/CreaStanza.php'>
+                            <input type='hidden' name='tipo' value='crea'>
+                            <input type='hidden' name='gioco' value='".$row["ID"]."'> 
+                            <input type='hidden' name='numero' value='".$row["Numero_Giocatori"]."'> 
+                            <input type='submit' value='crea stanza'> 
+                        </form>
+                        <form method='POST' action='MultiplayerSystem/AggiungiStanza.php'>
+                            <input type='submit' value='aggiungi'> 
+                        </form>
+                        <div class='".$row["Nome"]." mask'></div>
+                    </div>";
+            }
+        }
+        $conn->close();
+    ?>
     </div>
 <?php include 'footer.php'; ?>
+<script>
+    $(document).ready(function() {
+    $('.contenitore').each(function() {
+        console.log(this);
+        if(this.dataset.name){
+            this.addEventListener("mouseover", () => {
+                const mask = this.querySelector('.mask');
+                if (mask) {
+                    mask.className = "mask-hovered";
+                }
+            });
+
+            this.addEventListener("mouseout", () => {
+                const mask = this.querySelector('.mask-hovered');
+                if (mask) {
+                    mask.className = this.dataset.name+" mask";
+                }
+            });
+        }
+    });
+    }); 
+</script>
 
 </body>
 </html>
