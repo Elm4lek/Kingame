@@ -13,20 +13,30 @@ if (session_status() == PHP_SESSION_NONE) {
 <body>
     <div class = 'container due-parti verticale grandezza-0'>
         <div class="top main container">
-            <div class="content testo-stanza" id="stanza">INSERISCI COD STANZA: </div>
+            <div class="content testo-stanza">INSERISCI COD STANZA: </div>
             <input type="text" id="inputStanza" name="inputStanza">
             <div id = "checkStanza"></div>
             <div id = "aggiungiButtonInsert"></div>
         </div>
         <div class="bottom main container">
             <select id="nomeGioco" onchange="selezionaGioco()" >
-                <option value="Tutto">Tutto</option>
-                <option value="TrisTris">TrisTris</option>
-                <option value="Sasso-carta-forbice">Sasso-carta-forbice</option>
+                <?php 
+                $data = file_get_contents("http://localhost/kingame/MultiplayerSystem/CercaStanze.php");
+                echo "<option value='Tutto'>Tutto</option>";
+                $stanze = json_decode($data);
+                $games = [];
+                foreach($stanze as $stanza){
+                    if(!in_array($stanza->gioco,$games)){
+                        echo "<option value=".$stanza->gioco." data-numero=".$stanza->numero.">".$stanza->gioco."</option>";
+                        array_push($games,$stanza->gioco);
+                    }
+                }
+                ?>
             </select>
             <div id="Stanza"></div>
             <div id = "aggiungiButtonSelect"></div>
         </div>
+        <input type="button" value="fetch" onclick="fetchStanze()"> 
     </div>
 </body>
 </html>

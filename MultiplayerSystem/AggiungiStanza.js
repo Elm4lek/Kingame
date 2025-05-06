@@ -1,24 +1,32 @@
 var elencoStanze = [];
-function fetchStanze(){
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          var risposta = JSON.parse(this.responseText);
-          for (var i=0; i < risposta.length; i++){
-            if(risposta[i]['numero'] != risposta[i]['giocatore'])
-                elencoStanze.push(risposta[i]); 
-          }
+
+async function fetchStanze() {
+    console.log("fetched");
+    elencoStanze.splice(0, elencoStanze.length);
+
+    const response = await fetch("http://localhost/kingame/MultiplayerSystem/CercaStanze.php");
+    const risposta = await response.json();
+
+    for (let i = 0; i < risposta.length; i++) {
+        if (risposta[i]['numero'] != risposta[i]['giocatore']) {
+            elencoStanze.push(risposta[i]);
         }
-      };
-    xhttp.open("GET", "http://localhost/kingame/MultiplayerSystem/CercaStanze.php",true);
-    xhttp.send();
+    }
+
+    // Dopo che i dati sono stati caricati e salvati, chiami b()
+    elaboraStanze(); // <-- funzione separata
+    
 }
 //
-setTimeout(init(),50);
-function init(){
-    fetchStanze();
+document.addEventListener("DOMContentLoaded", function(event) {
+    init()
+});
+
+async function init(){
     let element = document.getElementById("nomeGioco");
     element.value = "Tutto";
+    
+    await fetchStanze();
     selezionaGioco();
 }
 function selezionaGioco(){
@@ -41,7 +49,6 @@ function selezionaGioco(){
         stanzeList.setAttribute("onchange", 'stanzaSelezionata()');
         myParent.appendChild(stanzeList);
     }
-
     for(let i = 0; i < elencoStanze.length; i++ ){
         if(elencoStanze[i]['gioco'] === gioco || gioco === "Tutto"){
             stanze.push(elencoStanze[i]['stanza']);
