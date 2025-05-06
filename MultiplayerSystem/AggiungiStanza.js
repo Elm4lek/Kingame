@@ -14,8 +14,13 @@ function fetchStanze(){
     xhttp.send();
 }
 //
-fetchStanze();
-selezionaGioco();
+setTimeout(init(),50);
+function init(){
+    fetchStanze();
+    let element = document.getElementById("nomeGioco");
+    element.value = "Tutto";
+    selezionaGioco();
+}
 function selezionaGioco(){
     var gioco = document.getElementById("nomeGioco").value;
     var stanze = [];
@@ -112,10 +117,9 @@ function stanzaSelezionata(){
 function cambiaStanza(value){
     var parametri = {
         tipo:'aggiunta',
-        nome:'dyy',
         stanza:Number(value)
     };
-    post('CreaStanza.php',parametri);
+    post('http://localhost/kingame/MultiplayerSystem/CreaStanza.php',parametri);
 }
 
 function removeChildNode(padre){
