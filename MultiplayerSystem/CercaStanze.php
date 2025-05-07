@@ -18,6 +18,11 @@ if ($result->num_rows > 0) {
         );
     }
 }
-echo json_encode($data);
+if(empty($data)){
+    echo "[]";
+}
+else{
+    echo json_encode($data);
+}
 $conn->close();
 ?>

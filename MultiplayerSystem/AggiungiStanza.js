@@ -1,5 +1,4 @@
 var elencoStanze = [];
-
 async function fetchStanze() {
     console.log("fetched");
     elencoStanze.splice(0, elencoStanze.length);
@@ -12,10 +11,6 @@ async function fetchStanze() {
             elencoStanze.push(risposta[i]);
         }
     }
-
-    // Dopo che i dati sono stati caricati e salvati, chiami b()
-    elaboraStanze(); // <-- funzione separata
-    
 }
 //
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -72,9 +67,10 @@ input.addEventListener("input", function(event) {
     var value = input.value;
 
     var haStanza = false;
-    
+    let index;
     for(let i = 0; i < elencoStanze.length; i++){
         if(elencoStanze[i]['stanza'] === Number(value)){
+            index = i;
             haStanza = true;
         }
     }
@@ -84,7 +80,9 @@ input.addEventListener("input", function(event) {
         }
         stanzaEsistente = true;
         if(!document.getElementById('aggiungiButtonInsert').hasChildNodes()){
-            aggiungiStanza("aggiungiButtonInsert",value);
+            aggiungiStanza("aggiungiButtonInsert",{"id":value,
+                "gioco":elencoStanze[index]["gioco"],
+                "numero":elencoStanze[index]["numero"]});
         }
     }
     else{
@@ -100,21 +98,32 @@ input.addEventListener("input", function(event) {
 });
 
 function aggiungiStanza(padre, stanza){
-    console.log(stanza);
     var p = document.getElementById(padre);
     var button = document.createElement('input');
     button.setAttribute('type','button');
     button.setAttribute('value', 'AggiungiStanza');
-    button.stanza = stanza;
-    button.setAttribute('onclick','cambiaStanza(this.stanza)');
+    button.stanza = stanza.id;
+    button.addEventListener("click",function(){
+        cambiaStanza(stanza);
+    })
     p.appendChild(button);
 }
 
 function stanzaSelezionata(){
     if(document.getElementById('codStanza').length > 0){
         removeChildNode('aggiungiButtonSelect');
-        var st = $("#codStanza")[0];
-        aggiungiStanza("aggiungiButtonSelect",st.value);
+        var st = $("#codStanza")[0].value;
+        let index;
+        for(let i = 0; i < elencoStanze.length; i++){
+            if(elencoStanze[i]['stanza'] === Number(st)){
+                index = i;
+            }
+        }
+        console.log(elencoStanze[index]);
+        aggiungiStanza("aggiungiButtonSelect",{
+            "id":elencoStanze[index]["stanza"],
+            "gioco":elencoStanze[index]["gioco"],
+            "numero":elencoStanze[index]["numero"]});
     }
     else{
         removeChildNode("aggiungiButtonSelect");
@@ -124,8 +133,11 @@ function stanzaSelezionata(){
 function cambiaStanza(value){
     var parametri = {
         tipo:'aggiunta',
-        stanza:Number(value)
+        stanza:Number(value.id),
+        gioco:value.gioco,
+        numero:value.numero
     };
+    console.log(parametri);
     post('http://localhost/kingame/MultiplayerSystem/CreaStanza.php',parametri);
 }
 

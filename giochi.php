@@ -108,7 +108,7 @@ if (!isset($_SESSION['username'])) {
                         <h3>".$row["Nome"]."</h3>
                         <form method='POST' action='MultiplayerSystem/CreaStanza.php'>
                             <input type='hidden' name='tipo' value='crea'>
-                            <input type='hidden' name='gioco' value='".$row["ID"]."'> 
+                            <input type='hidden' name='gioco' value='".$row["Nome"]."'> 
                             <input type='hidden' name='numero' value='".$row["Numero_Giocatori"]."'> 
                             <input type='submit' value='crea stanza'> 
                         </form>

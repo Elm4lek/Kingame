@@ -3,7 +3,12 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 };
 $haPosto = true;
-//if(empty($_SESSION['gioco'])){
+echo "http://localhost/Kingame/MultiplayerSystem/removeSession.php?giocatore=".$_SESSION["username"]."&stanza=".$_SESSION['gioco']['stanza'];
+echo "si empty:".!empty($_SESSION['gioco']);
+print_r($_SESSION);
+if(!empty($_SESSION['gioco'])){
+    file_get_contents("http://localhost/Kingame/MultiplayerSystem/removeSession.php?giocatore=".$_SESSION["username"]."&stanza=".$_SESSION['gioco']['stanza']);
+}
 $tipo = $_POST['tipo'];
 $gioco = $_POST['gioco'];
 $numero = $_POST['numero'];
@@ -36,8 +41,7 @@ if($tipo == 'crea'){
 }
 else{
     $stanza = $_POST['stanza'];
-
-    $sql = "SELECT Numero_Giocatori FROM giochi WHERE Nome = ".$gioco; 
+    $sql = "SELECT Numero_Giocatori FROM giochi WHERE Nome = '".$gioco."'"; 
     $numero = $conn->query($sql);
     $sql = "SELECT COUNT(*) FROM sessione WHERE Stanza = ".$stanza; 
     $giocatori = $conn->query($sql);
@@ -56,11 +60,13 @@ if($haPosto){
     else{
         post($tipo,[[],$sessione]);
     }
+    print_r($_SESSION);
     $_SESSION['gioco']['stanza'] = $stanza;
     $_SESSION['gioco']['gioco'] = $gioco;
     $_SESSION['gioco']['numero'] = $numero;
     $_SESSION['gioco']['giocatore'] = $nome;
-    //header("Location: StanzaAttesa.php");
+    
+    header("Location: StanzaAttesa.php");
     exit;
 }
 else{

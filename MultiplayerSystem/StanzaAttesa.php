@@ -2,30 +2,31 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 };
-print_r($_SESSION);
 $stanza = $_SESSION['gioco']['stanza'];
-$nome = $_SESSION['gioco']['nome'];
+$nome = $_SESSION['nickname'];
 $gioco = $_SESSION['gioco']['gioco'];
 $numero = $_SESSION['gioco']['numero'];
-$giocatore = $_SESSION['gioco']['giocatore'];
+
+$data = file_get_contents("http://localhost/kingame/MultiplayerSystem/CercaGiocatori.php?stanza=".$stanza);
+$giocatore = json_decode($data);
 ?>
 <html>
     <head>
         <link rel="stylesheet" href="myStyle.css">
     </head>
     <body>
-
-        <div class="main container">
+        <?php echo "<input id='numero' type='hidden' value='".$numero."'>";?>
+        <div class="main container" style="display: block">
             <?php
                 
-                echo '<div class="content testo" id="gioco">';
-                echo 'gioco : '. $gioco;
+                echo '<div class="content testo">';
+                echo 'gioco : <p id="gioco">'. $gioco.'</p>';
                 echo '</div>';
-                echo '<div class="content testo-stanza" id="stanza">';
-                echo 'CODICE STANZA : '. $stanza;
+                echo '<div class="content testo-stanza">';
+                echo 'CODICE STANZA : <p id="stanza">'. $stanza.'</p>';
                 echo '</div>';
-                echo '<div class="content testo" id="giocatori">';
-                echo 'giocatori restanti : '. $numero - sizeOf($giocatore);
+                echo '<div class="content testo">';
+                echo 'giocatori restanti : <p id="giocatori">'. $numero - sizeOf($giocatore).'</p>';
                 echo '</div>';
             ?>
         </div>
@@ -37,10 +38,10 @@ $giocatore = $_SESSION['gioco']['giocatore'];
             <?php                
                 for($i = 0; $i < sizeOf($giocatore); $i ++){
                     echo '<div class="player-img" id="'.$i.'">';
-                    echo "<img src = '".$giocatore[$i]["img"]."'>";
+                    echo "<img src = '".$giocatore[$i]->img."'>";
                     echo '</div>';
                 }
-                for($i = 0; $i < $numero - sizeOf($giocatore); $i ++){
+                for($i = sizeOf($giocatore); $i < $numero ; $i ++){
                     echo '<div class="player-img" id="'.$i.'">';
                     echo '<img src = "https://cdn.pixabay.com/animation/2022/07/29/03/42/03-42-05-37_512.gif">';
                     echo '</div>';
@@ -53,9 +54,51 @@ $giocatore = $_SESSION['gioco']['giocatore'];
     </body>
 </html>
 <script>
-window.addEventListener("unload", function () {
-    console.log("User has left the page.");
-    const data = JSON.stringify({ event: "page_unload", timestamp: 'something'});
-    navigator.sendBeacon('prova.php', data);
-});
+    var elencoGiocatori = [];
+    var numero;
+    var stanza;
+    async function fetchGiocatori() {
+        elencoGiocatori.splice(0, elencoGiocatori.length);
+
+        const response = await fetch("http://localhost/kingame/MultiplayerSystem/CercaGiocatori.php?stanza="+stanza);
+        const risposta = await response.json();
+        for (let i = 0; i < risposta.length; i++) {
+            elencoGiocatori.push(risposta[i]);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+        
+        numero = document.getElementById('numero').value;
+        document.getElementById('numero').remove();
+        stanza = document.getElementById('stanza').innerHTML;
+        console.log("stanza:",stanza);
+        isComplete();
+        setInterval(() => {
+            isComplete()
+        }, 2500);
+    });
+
+    async function isComplete(){
+        await fetchGiocatori();
+        console.log(elencoGiocatori);
+        if(elencoGiocatori.length == numero){
+            document.location.href = "http://localhost/kingame/"+document.getElementById('gioco').innerHTML+".php";
+        }
+        else{
+            document.getElementById('giocatori').innerHTML = numero-elencoGiocatori.length;
+            for(let i = 0; i < numero-elencoGiocatori.length; i++){
+                let giocatore = document.getElementById(i.toString());
+                let img = giocatore.getElementsByTagName("img")[0];
+                img.src = elencoGiocatori[i].img;
+            }
+            for(let i = elencoGiocatori.length; i < numero; i++){
+                let giocatore = document.getElementById(i.toString());
+                let img = giocatore.getElementsByTagName("img")[0];
+                img.src = "https://cdn.pixabay.com/animation/2022/07/29/03/42/03-42-05-37_512.gif";
+            }
+
+        }
+    }
+
 </script>

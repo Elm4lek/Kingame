@@ -1,6 +1,10 @@
 <?php if (session_status() == PHP_SESSION_NONE) {
     session_start();
-}else include 'datiUtente.php';
+}
+
+if(isset($_SESSION["username"])){
+  include "datiUtente.php";
+}
 ?>
 
 <!DOCTYPE html>

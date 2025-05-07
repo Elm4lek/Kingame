@@ -62,7 +62,7 @@ img {
 }
 
 .due-parti.verticale > div {
-    height: 45%;
+    height: 40%;
     width: 100%;
 }
 
@@ -73,4 +73,7 @@ img {
 .grandezza-0 {
     height: 100%;
     width: 100%;
+}
+.content{
+    display: flex;
 }
