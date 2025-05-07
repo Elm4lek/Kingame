@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 26, 2025 alle 23:33
+-- Creato il: Mag 07, 2025 alle 17:03
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -1076,6 +1076,18 @@ CREATE TABLE `pm_npc` (
   `Finebattaglia` varchar(20) DEFAULT NULL,
   `Trainer_ID` decimal(3,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `pm_npc`
+--
+
+INSERT INTO `pm_npc` (`NPC_ID`, `Nome`, `Descrizione`, `Regione`, `Prebattaglia`, `PrimoKO`, `UltimoKO`, `Finebattaglia`, `Trainer_ID`) VALUES
+(1, 'Tomato', 'Tomato_desc', 'Kanto', 'Tomato_dialogue1', 'Tomato_dialogue2', 'Tomato_dialogue3', 'Tomato_dialogue4', 994),
+(2, 'Volo', 'Volo_desc', 'Hisui', 'Volo_dialogue1', 'Volo_dialogue2', 'Volo_dialogue3', 'Volo_dialogue4', 995),
+(3, 'Giovanni', 'Giovanni_desc', 'Kanto', 'Giovanni_dialgoue1', 'Giovanni_dialgoue2', 'Giovanni_dialgoue3', 'Giovanni_dialgoue4', 996),
+(4, 'Cynthia', 'Cynthia_desc', 'Sinnoh', 'Cynthia_dialogue1', 'Cynthia_dialogue2', 'Cynthia_dialogue3', 'Cynthia_dialogue4', 997),
+(5, 'Blue', 'Blue_desc', 'Kanto', 'Blue_dialogue1', 'Blue_dialogue2', 'Blue_dialogue3', 'Blue_dialogue4', 998),
+(6, 'Rosso', 'Rosso_desc', 'Kanto', 'Rosso_dialogue1', 'Rosso_dialogue2', 'Rosso_dialogue3', 'Rosso_dialogue4', 999);
 
 -- --------------------------------------------------------
 
@@ -3108,8 +3120,20 @@ INSERT INTO `pm_tipo` (`Tipo`, `DebolezzaNormale`, `DebolezzaFuoco`, `DebolezzaA
 
 CREATE TABLE `pm_trainer` (
   `Trainer_ID` decimal(3,0) NOT NULL,
-  `Tipo` tinyint(1) DEFAULT NULL
+  `Tipo` tinyint(1) DEFAULT NULL COMMENT '1 = utente // 0 = npc'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `pm_trainer`
+--
+
+INSERT INTO `pm_trainer` (`Trainer_ID`, `Tipo`) VALUES
+(994, 0),
+(995, 0),
+(996, 0),
+(997, 0),
+(998, 0),
+(999, 0);
 
 -- --------------------------------------------------------
 
@@ -3642,7 +3666,8 @@ INSERT INTO `pokemon` (`Pokedex`, `nome`, `PS`, `Atk`, `AtkSP`, `Dif`, `DifSP`, 
 (490, 'manaphy', 207, 167, 167, 167, 167, 167, 'acqua', 'null'),
 (491, 'darkrai', 177, 156, 205, 156, 156, 194, 'buio', 'null'),
 (492, 'shaymin', 207, 167, 167, 167, 167, 167, 'erba', 'null'),
-(493, 'arceus', 227, 189, 189, 189, 189, 189, 'normale', 'null');
+(493, 'arceus', 227, 189, 189, 189, 189, 189, 'normale', 'null'),
+(494, 'Giratina Originale', 150, 120, 120, 100, 100, 110, 'Spettro', 'Drago');
 
 -- --------------------------------------------------------
 
@@ -3694,6 +3719,16 @@ INSERT INTO `testi` (`name`, `ITA`, `ENG`) VALUES
 ('atkX6_name', 'Attacco X-6', 'X attack-6'),
 ('atkX_desc', 'Aumenta l\'attacco del pokemon di un livello', 'It increases the pokemon\'s attack level by 1'),
 ('atkX_name', 'Attacco X', 'X attack'),
+('Blue_desc', 'Blue è figlio del professor Oak, è il campione della lega Indigo nel Kanto', 'Blue is Professor Oak\'s son, he is the Champion of the Indigo league in Kanto'),
+('Blue_dialogue1', '', ''),
+('Blue_dialogue2', '', ''),
+('Blue_dialogue3', '', ''),
+('Blue_dialogue4', '', ''),
+('Cynthia_desc', 'Campionessa imbattuta della regione di Sinnoh, è anche un\'archeologa', 'Regional Champion in the Sinnoh region, she is also an archeologist'),
+('Cynthia_dialogue1', '', ''),
+('Cynthia_dialogue2', '', ''),
+('Cynthia_dialogue3', '', ''),
+('Cynthia_dialogue4', '', ''),
 ('difX2_desc', 'Aumenta la difesa del pokemon di 2 livelli', 'It increases the pokemon\'s defense level by 2'),
 ('difX2_name', 'Difesa X-2', 'X Defend-2'),
 ('difX3_desc', 'Aumenta la difesa del pokemon di 3 livelli', 'It increases the pokemon\'s defense level by 3'),
@@ -3704,6 +3739,11 @@ INSERT INTO `testi` (`name`, `ITA`, `ENG`) VALUES
 ('difX_name', 'Difesa X', 'X Defend'),
 ('fullRestore_desc', 'Restituisce tutti i PS e cura di tutti gli stati dal pokemon su cui viene utilizzata', 'It restores all HP and heals anythe status effect of the selected Pokemon'),
 ('fullRestore_name', 'Ricarica Totale', 'Full Restore'),
+('Giovanni_desc', 'Ottavo capopalestra della regione di Kanto, è anche il leader dell\'organizzazione mafiosa Team Rocket', 'Eight Gym Leader of the Kanto region, he is also the leader of the Team Rocket\'s mafia'),
+('Giovanni_dialogue1', '', ''),
+('Giovanni_dialogue2', '', ''),
+('Giovanni_dialogue3', '', ''),
+('Giovanni_dialogue4', '', ''),
 ('iperPoz_desc', 'Restituisce 120 PS al pokemon su cui viene utilizzata', 'It restores 120 HP of the selected Pokemon'),
 ('iperPoz_name', 'Iperpozione', 'Hyper potion'),
 ('maxPoz_desc', 'Restituisce tutti i PS al pokemon su cui viene utilizzata', 'It restores all HP of the selected Pokemon'),
@@ -3714,6 +3754,11 @@ INSERT INTO `testi` (`name`, `ITA`, `ENG`) VALUES
 ('poz_name', 'Pozione', 'Potion'),
 ('rev_desc', 'Restituisce metà PS ad un pokemon esausto', 'It restores half HP of an \r\nexhausted pokemon'),
 ('rev_name', 'Revitalizzante', 'Revive'),
+('Rosso_desc', '...', '...'),
+('Rosso_dialogue1', '...', '...'),
+('Rosso_dialogue2', '...', '...'),
+('Rosso_dialogue3', '...', '...'),
+('Rosso_dialogue4', '...', '...'),
 ('sColpo2_desc', 'Aumenta la possibilità di fare brutti colpi di 2 livelli', 'It increases the pokemon\'s chance to land a Dire Hit by 2 levels'),
 ('sColpo2_name', 'SuperColpo 2', 'Dire Hit 2'),
 ('sColpo3_desc', 'Aumenta la possibilità di fare brutti colpi di 3 livelli', 'It increases the pokemon\'s chance to land a Dire Hit by 3 levels'),
@@ -3740,6 +3785,11 @@ INSERT INTO `testi` (`name`, `ITA`, `ENG`) VALUES
 ('spDif_desc', 'Aumenta la difesa speeciale del pokemon di un livello', 'It increases the pokemon\'s special defense level by 1'),
 ('supPoz_desc', 'Restituisce 50 PS al pokemon su cui viene utilizzata', 'It restores 50 HP of the selected Pokemon'),
 ('supPoz_name', 'Superpozione', 'Superpotion'),
+('Tomato_desc', 'Bulletto proveniente da BiancaVilla, nella regione del Kanto', 'Little Bully who is from Pallet Town, in the Kanto region'),
+('Tomato_dialogue1', '', ''),
+('Tomato_dialogue2', '', ''),
+('Tomato_dialogue3', '', ''),
+('Tomato_dialogue4', '', ''),
 ('vel2_desc', 'Aumenta la velocità del pokemon di 2 livelli', 'It increases the pokemon\'s speed level by 2'),
 ('vel3_desc', 'Aumenta la velocità del pokemon di 3 livelli', 'It increases the pokemon\'s speed level by 3'),
 ('vel6_desc', 'Aumenta la velocità del pokemon di 6 livelli', 'It increases the pokemon\'s speed level by 6'),
@@ -3747,7 +3797,12 @@ INSERT INTO `testi` (`name`, `ITA`, `ENG`) VALUES
 ('velX3_name', 'Velocità X-3', 'X Speed-3'),
 ('velX6_name', 'Velocità X-6', 'X Speed-6'),
 ('velX_name', 'Velocità X', 'X Speed'),
-('vel_desc', 'Aumenta la velocità del pokemon di un livello', 'It increases the pokemon\'s speed level by 1');
+('vel_desc', 'Aumenta la velocità del pokemon di un livello', 'It increases the pokemon\'s speed level by 1'),
+('Volo_desc', 'Volo appartiene ad un team di ricerca della vecchia Sinnoh, è un forte lodatore del culto di Arceus, il dio di tutti i pokemon', 'Volo is part of the scouts team in the ancient Sinnoh region, he is a strong cultist of the god Arcues, the god of all pokemons'),
+('Volo_dialogue1', '', ''),
+('Volo_dialogue2', '', ''),
+('Volo_dialogue3', '', ''),
+('Volo_dialogue4', '', '');
 
 -- --------------------------------------------------------
 
@@ -3933,6 +3988,12 @@ ALTER TABLE `pm_img_npc`
   ADD CONSTRAINT `pm_img_npc_ibfk_1` FOREIGN KEY (`NPC_ID`) REFERENCES `pm_npc` (`NPC_ID`);
 
 --
+-- Limiti per la tabella `pm_mossa`
+--
+ALTER TABLE `pm_mossa`
+  ADD CONSTRAINT `pm_mossa_ibfk_1` FOREIGN KEY (`Tipo`) REFERENCES `pm_tipo` (`Tipo`);
+
+--
 -- Limiti per la tabella `pm_npc`
 --
 ALTER TABLE `pm_npc`
@@ -3946,6 +4007,57 @@ ALTER TABLE `pm_npc`
   ADD CONSTRAINT `pm_npc_ibfk_7` FOREIGN KEY (`Prebattaglia`) REFERENCES `testi` (`name`),
   ADD CONSTRAINT `pm_npc_ibfk_8` FOREIGN KEY (`PrimoKO`) REFERENCES `testi` (`name`),
   ADD CONSTRAINT `pm_npc_ibfk_9` FOREIGN KEY (`UltimoKO`) REFERENCES `testi` (`name`);
+
+--
+-- Limiti per la tabella `pm_squadra`
+--
+ALTER TABLE `pm_squadra`
+  ADD CONSTRAINT `pm_squadra_ibfk_1` FOREIGN KEY (`Pokedex`) REFERENCES `pokemon` (`Pokedex`),
+  ADD CONSTRAINT `pm_squadra_ibfk_2` FOREIGN KEY (`Mossa1`) REFERENCES `pm_mossa` (`MT`),
+  ADD CONSTRAINT `pm_squadra_ibfk_3` FOREIGN KEY (`Mossa2`) REFERENCES `pm_mossa` (`MT`),
+  ADD CONSTRAINT `pm_squadra_ibfk_4` FOREIGN KEY (`Mossa3`) REFERENCES `pm_mossa` (`MT`),
+  ADD CONSTRAINT `pm_squadra_ibfk_5` FOREIGN KEY (`Mossa4`) REFERENCES `pm_mossa` (`MT`),
+  ADD CONSTRAINT `pm_squadra_ibfk_6` FOREIGN KEY (`Trainer_ID`) REFERENCES `pm_trainer` (`Trainer_ID`);
+
+--
+-- Limiti per la tabella `pm_tecniche`
+--
+ALTER TABLE `pm_tecniche`
+  ADD CONSTRAINT `pm_tecniche_ibfk_1` FOREIGN KEY (`MT`) REFERENCES `pm_mossa` (`MT`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pm_tecniche_ibfk_2` FOREIGN KEY (`Pokedex`) REFERENCES `pokemon` (`Pokedex`) ON DELETE CASCADE;
+
+--
+-- Limiti per la tabella `pm_user`
+--
+ALTER TABLE `pm_user`
+  ADD CONSTRAINT `pm_user_ibfk_1` FOREIGN KEY (`Trainer_ID`) REFERENCES `pm_trainer` (`Trainer_ID`),
+  ADD CONSTRAINT `pm_user_ibfk_2` FOREIGN KEY (`ID`) REFERENCES `utenti` (`UserName`);
+
+--
+-- Limiti per la tabella `pokemon`
+--
+ALTER TABLE `pokemon`
+  ADD CONSTRAINT `pokemon_ibfk_1` FOREIGN KEY (`tipo1`) REFERENCES `pm_tipo` (`Tipo`),
+  ADD CONSTRAINT `pokemon_ibfk_2` FOREIGN KEY (`tipo2`) REFERENCES `pm_tipo` (`Tipo`);
+
+--
+-- Limiti per la tabella `sessione`
+--
+ALTER TABLE `sessione`
+  ADD CONSTRAINT `sessione_ibfk_1` FOREIGN KEY (`Stanza`) REFERENCES `stanze` (`Id`),
+  ADD CONSTRAINT `sessione_ibfk_2` FOREIGN KEY (`User`) REFERENCES `utenti` (`UserName`) ON DELETE CASCADE;
+
+--
+-- Limiti per la tabella `stanze`
+--
+ALTER TABLE `stanze`
+  ADD CONSTRAINT `stanze_ibfk_1` FOREIGN KEY (`Gioco`) REFERENCES `giochi` (`ID`);
+
+--
+-- Limiti per la tabella `utenti`
+--
+ALTER TABLE `utenti`
+  ADD CONSTRAINT `utenti_ibfk_1` FOREIGN KEY (`ISO`) REFERENCES `nazioni` (`ISO`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
