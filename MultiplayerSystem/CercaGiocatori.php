@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 $stanza = $_GET["stanza"];
 $server = "localhost";
 $conn = new mysqli($server,"root","","kingame")  or die (mysql_error());

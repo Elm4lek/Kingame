@@ -21,13 +21,13 @@ if (session_status() == PHP_SESSION_NONE) {
         <div class="bottom main container">
             <select id="nomeGioco" onchange="selezionaGioco()" >
                 <?php 
-                $data = file_get_contents("http://localhost/kingame/MultiplayerSystem/CercaStanze.php");
+                $data = file_get_contents("http://172.16.14.3:8080/kingame/MultiplayerSystem/CercaStanze.php");
                 echo "<option value='Tutto'>Tutto</option>";
                 $stanze = json_decode($data);
                 $games = [];
                 foreach($stanze as $stanza){
                     if(!in_array($stanza->gioco,$games)){
-                        echo "<option value=".$stanza->gioco." data-numero=".$stanza->numero.">".$stanza->gioco."</option>";
+                        echo "<option value=".$stanza->gioco." data-numero=".$stanza->numero." data-id=".$stanza->ID.">".$stanza->gioco."</option>";
                         array_push($games,$stanza->gioco);
                     }
                 }

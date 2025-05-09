@@ -247,7 +247,7 @@ function Scoreboard() {
 
     this.reset = function () {
         this.setTopscore();
-        level = lines = score = 0;
+        lines = score = 0;
         gameOver = false;
     }
 
@@ -310,16 +310,10 @@ function Scoreboard() {
         }
 
         lines += line;
-        if (lines > 10) {
-            this.addLevel();
-        }
     }
 
     this.addLevel = function () {
-        lines %= 10;
-        if (level < this.MAXLEVEL) {
-            level++;
-        }
+        let level = (level+1)%10;
     }
 
     this.getLevel = function () {
@@ -444,10 +438,9 @@ function animate(lastFrameTime) {
     var requestId = requestAnimationFrame(function () {
         animate(lastFrameTime);
     });
-                
     var time = new Date().getTime();
     var delay = scoreboard.getSpeed();
-
+    console.log(delay);
     if (lastFrameTime + delay < time) {
 
         if (!scoreboard.isGameOver()) {
@@ -467,6 +460,7 @@ function animate(lastFrameTime) {
 }
 
 function startNewGame() {
+    console.log(scoreboard.getLevel());
     initGrid();
     selectShape();
     scoreboard.reset();

@@ -3,11 +3,8 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 };
 $haPosto = true;
-echo "http://localhost/Kingame/MultiplayerSystem/removeSession.php?giocatore=".$_SESSION["username"]."&stanza=".$_SESSION['gioco']['stanza'];
-echo "si empty:".!empty($_SESSION['gioco']);
-print_r($_SESSION);
 if(!empty($_SESSION['gioco'])){
-    file_get_contents("http://localhost/Kingame/MultiplayerSystem/removeSession.php?giocatore=".$_SESSION["username"]."&stanza=".$_SESSION['gioco']['stanza']);
+    file_get_contents("http://172.16.14.3:8080/Kingame/MultiplayerSystem/removeSession.php?giocatore=".$_SESSION["username"]."&stanza=".$_SESSION['gioco']['stanza']);
 }
 $tipo = $_POST['tipo'];
 $gioco = $_POST['gioco'];
@@ -41,8 +38,12 @@ if($tipo == 'crea'){
 }
 else{
     $stanza = $_POST['stanza'];
-    $sql = "SELECT Numero_Giocatori FROM giochi WHERE Nome = '".$gioco."'"; 
-    $numero = $conn->query($sql);
+    $sql = "SELECT Numero_Giocatori FROM giochi WHERE Id = '".$gioco."'";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc(); // oppure fetch_row() se preferisci un array numerico
+        $numero = $row["Numero_Giocatori"];
+    }
     $sql = "SELECT COUNT(*) FROM sessione WHERE Stanza = ".$stanza; 
     $giocatori = $conn->query($sql);
 
@@ -52,6 +53,14 @@ else{
         $sessione = ['giocatore' => $nome,'stanza' => $stanza];
     }
 }
+$sql = "SELECT Nome FROM giochi WHERE ID = ".$gioco.""; 
+echo $sql;
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc(); // oppure fetch_row() se preferisci un array numerico
+    $gioco = $row["Nome"];
+}
+
 $conn->close();
 if($haPosto){
     if($tipo == 'crea'){
@@ -60,12 +69,10 @@ if($haPosto){
     else{
         post($tipo,[[],$sessione]);
     }
-    print_r($_SESSION);
     $_SESSION['gioco']['stanza'] = $stanza;
     $_SESSION['gioco']['gioco'] = $gioco;
     $_SESSION['gioco']['numero'] = $numero;
     $_SESSION['gioco']['giocatore'] = $nome;
-    
     header("Location: StanzaAttesa.php");
     exit;
 }
@@ -79,7 +86,7 @@ else{
 }
 function post($tipo, $data) {
     // Check for errors
-    $url = 'http://localhost/kingame/MultiplayerSystem/AggiornaDB.php';
+    $url = 'http://172.16.14.3:8080/kingame/MultiplayerSystem/AggiornaDB.php';
     $data = http_build_query(['tipo' => $tipo, 'data' => $data]);
 
     $options = [

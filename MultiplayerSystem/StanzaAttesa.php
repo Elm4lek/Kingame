@@ -6,9 +6,10 @@ $stanza = $_SESSION['gioco']['stanza'];
 $nome = $_SESSION['nickname'];
 $gioco = $_SESSION['gioco']['gioco'];
 $numero = $_SESSION['gioco']['numero'];
-
-$data = file_get_contents("http://localhost/kingame/MultiplayerSystem/CercaGiocatori.php?stanza=".$stanza);
+print_r($_SESSION);
+$data = file_get_contents("http://172.16.14.3:8080/kingame/MultiplayerSystem/CercaGiocatori.php?stanza=".$stanza);
 $giocatore = json_decode($data);
+
 ?>
 <html>
     <head>
@@ -60,7 +61,7 @@ $giocatore = json_decode($data);
     async function fetchGiocatori() {
         elencoGiocatori.splice(0, elencoGiocatori.length);
 
-        const response = await fetch("http://localhost/kingame/MultiplayerSystem/CercaGiocatori.php?stanza="+stanza);
+        const response = await fetch("http://172.16.14.3:8080/kingame/MultiplayerSystem/CercaGiocatori.php?stanza="+stanza);
         const risposta = await response.json();
         for (let i = 0; i < risposta.length; i++) {
             elencoGiocatori.push(risposta[i]);
@@ -83,7 +84,7 @@ $giocatore = json_decode($data);
         await fetchGiocatori();
         console.log(elencoGiocatori);
         if(elencoGiocatori.length == numero){
-            document.location.href = "http://localhost/kingame/"+document.getElementById('gioco').innerHTML+".php";
+            document.location.href = "http://172.16.14.3:8080/kingame/"+document.getElementById('gioco').innerHTML+".php";
         }
         else{
             document.getElementById('giocatori').innerHTML = numero-elencoGiocatori.length;
