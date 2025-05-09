@@ -7,8 +7,8 @@
     </head>
     <body>
         <?php
-        /* echo 'stanza:'.$stanza;
-        echo ' g1:'.$g1; */
+        echo '<input id="stanza" type="hidden" value="'.$_SESSION["gioco"]["stanza"].'">';
+        echo '<input id="username" type="hidden" value="'.$_SESSION["username"].'">';
         ?>
         <div id="main" class="main-content">        
             <!-- Row 0 -->
