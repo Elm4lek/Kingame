@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 07, 2025 alle 17:03
+-- Creato il: Mag 10, 2025 alle 23:22
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -3803,6 +3803,19 @@ INSERT INTO `testi` (`name`, `ITA`, `ENG`) VALUES
 ('Volo_dialogue2', '', ''),
 ('Volo_dialogue3', '', ''),
 ('Volo_dialogue4', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `tristris`
+--
+
+CREATE TABLE `tristris` (
+  `stanza` int(11) NOT NULL,
+  `giocatore` varchar(20) NOT NULL,
+  `x` int(11) NOT NULL,
+  `y` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
