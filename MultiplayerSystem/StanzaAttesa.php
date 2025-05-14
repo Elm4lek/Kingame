@@ -84,7 +84,7 @@ $giocatore = json_decode($data);
         await fetchGiocatori();
         console.log(elencoGiocatori);
         if(elencoGiocatori.length == numero){
-            document.location.href = "http://localhost/kingame/"+document.getElementById('gioco').innerHTML+".php";
+            document.location.href = "http://localhost/kingame/giochi/"+document.getElementById('gioco').innerHTML;
         }
         else{
             document.getElementById('giocatori').innerHTML = numero-elencoGiocatori.length;

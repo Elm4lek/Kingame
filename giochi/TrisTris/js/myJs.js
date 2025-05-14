@@ -2,6 +2,9 @@ var piano = new Array();
 
 var pianoV = new Array();
 
+var username;
+var stanza;
+
 for(let i = 0; i < 9; i++){
     piano[i] = new Array();
     pianoV[i] = 0;
@@ -111,9 +114,10 @@ function mossa(gPos, pPos){
         }  
     }
 }
-/* 
-function prova(){
-    var commentPresent = document.getElementById('commento').innerHTML;
-    alert(commentPresent);
-}
-setTimeout(prova,500); */
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    username = document.getElementById("username").value;
+    stanza = document.getElementById("stanza").value;
+    document.getElementById("username").remove();
+    document.getElementById("stanza").remove();
+})

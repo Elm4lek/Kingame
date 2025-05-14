@@ -1,5 +1,3 @@
-
-
 <html>
     <head>
         <script type="text/javascript" src="js/myJs.js"></script>
