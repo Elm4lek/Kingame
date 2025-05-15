@@ -4,6 +4,7 @@ var pianoV = new Array();
 
 var username;
 var stanza;
+var staGiocando;
 
 for(let i = 0; i < 9; i++){
     piano[i] = new Array();
@@ -35,7 +36,7 @@ function checkVittoria(piano){
     return false;
 }
 
-
+/* 
 function mossa(gPos, pPos){
     if(piano[gPos][pPos] === 0){
         if(giocatore){
@@ -113,11 +114,16 @@ function mossa(gPos, pPos){
                 alert('vittoria giocatore2');
         }  
     }
-}
+} */
 
 document.addEventListener("DOMContentLoaded", function(event) {
-    username = document.getElementById("username").value;
-    stanza = document.getElementById("stanza").value;
-    document.getElementById("username").remove();
-    document.getElementById("stanza").remove();
 })
+
+function init(){
+    username = document.getElementById("username").value;
+    document.getElementById("username").remove();
+    stanza = document.getElementById("stanza").value;
+    document.getElementById("stanza").remove();
+    staGiocando = (document.getElementById("inizia").value == true);
+    document.getElementById("inizia").remove()
+}

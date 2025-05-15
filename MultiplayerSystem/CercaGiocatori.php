@@ -17,6 +17,7 @@ if ($result->num_rows > 0) {
         );
     }
 }
+$_SESSION["gioco"]["giocatori"] = $data;
 echo json_encode($data);
 $conn->close();
 ?>

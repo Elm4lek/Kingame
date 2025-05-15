@@ -6,7 +6,6 @@ $stanza = $_SESSION['gioco']['stanza'];
 $nome = $_SESSION['nickname'];
 $gioco = $_SESSION['gioco']['gioco'];
 $numero = $_SESSION['gioco']['numero'];
-print_r($_SESSION);
 $data = file_get_contents("http://localhost/kingame/MultiplayerSystem/CercaGiocatori.php?stanza=".$stanza);
 $giocatore = json_decode($data);
 
@@ -19,7 +18,7 @@ $giocatore = json_decode($data);
         <?php echo "<input id='numero' type='hidden' value='".$numero."'>";?>
         <div class="main container" style="display: block">
             <?php
-                
+                print_r($_SESSION);
                 echo '<div class="content testo">';
                 echo 'gioco : <p id="gioco">'. $gioco.'</p>';
                 echo '</div>';
