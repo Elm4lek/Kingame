@@ -1,14 +1,43 @@
 <?php
-$score = $_POST["score"];
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+$json = file_get_contents('php://input');
 
-$stanza = $_SESSION["gioco"]["stanza"];
-$user = $_SESSION["username"];
+// Decodifica il JSON in un array associativo
+$post = json_decode($json, true);  // True per ottenere un array, false per un oggetto
 
-$server = "localhost";
-$conn = new mysqli($server,"root","","kingame")  or die (mysql_error());
+// Verifica se "score" è presente nel payload
+if (isset($post["score"])) {
+    $score = $post["score"];
 
-$sql = "INSERT INTO sessione(punteggio) VALUES(".$score.") WHERE User = ".$user." AND Stanza = ".$stanza.""; 
-$conn->query($sql);
+    // Controlla che score sia un numero
+    if (!is_numeric($score)) {
+        die("Score non valido");
+    }
+    $stanza = $_SESSION["gioco"]["stanza"];
+    $user = $_SESSION["username"];
 
-$conn->close();
+    $server = "localhost";
+    $conn = new mysqli($server, "root", "", "kingame");
+    echo $score;
+    if ($conn->connect_error) {
+        die("Connessione fallita: " . $conn->connect_error);
+    }
+
+    // Usa una query preparata per evitare SQL injection
+    $sql = $conn->prepare("UPDATE sessione SET punteggio = ? WHERE User = ? AND Stanza = ?");
+    $sql->bind_param("iss", $score, $user, $stanza); // Assumiamo che user e stanza siano stringhe
+
+    if ($sql->execute()) {
+        echo "Punteggio aggiornato con successo!";
+    } else {
+        echo "Errore nell'aggiornamento del punteggio: " . $conn->error;
+    }
+
+    $sql->close();
+    $conn->close();
+} else {
+    echo "Score non ricevuto.";
+}
 ?>

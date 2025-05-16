@@ -3,7 +3,7 @@
 var canvas = document.querySelector('canvas');
 canvas.width = 640;
 canvas.height = 640;
-
+var startGame = false;
 var g = canvas.getContext('2d');
 
 var right = { x: 1, y: 0 };
@@ -98,9 +98,13 @@ addEventListener('keydown', function (event) {
     }
 });
 
-addEventListener('click', function () {
-    if(scoreboard.isGameOver())
+addEventListener('click', async function () {
+    if(startGame)
         startNewGame();
+    if(scoreboard.isGameOver()){
+        let dati = await restart();
+        post("http://localhost/kingame/MultiplayerSystem/CreaStanza.php",dati);
+    }
     scoreboard.addLevel();
 });
 
@@ -487,7 +491,6 @@ function initGrid() {
 }
 
 function init() {
-    scoreboard.setGameOver();
     initGrid();
     selectShape();
     draw();
@@ -516,21 +519,69 @@ function post(path, params, method='post') {
     form.submit();
 }
 
-function gameOver(){
+async function gameOver(){
     let params = {
-        score : scoreboard.getScore()
-    }
-    $(function() {
-        $('form').submit(function() {
-            $.ajax({
-                type: 'POST',
-                url: "http://localhost:8080/kingame/giochi/updateScore.php",
-                data:params
-            });
-            return false;
-        }); 
+        score: scoreboard.getScore()
+    };
+    fetch("http://localhost/kingame/giochi/updateScore.php", {
+        method: 'POST', // Specify the HTTP method
+        headers: {
+            'Content-Type': 'application/json', // Tell the server that you're sending JSON
+        },
+        body: JSON.stringify(params), // Convert the JavaScript object to a JSON string
     })
+    .then(response => response.json()) // Parse the response as JSON
+    .then(result => {
+        console.log('Success:', result); // Handle the response
+    })
+    .catch(error => {
+        console.error('Error:', error); // Handle any errors
+    });
 
-    post("http://localhost:8080/kingame/giochi/restart.php",[]);
+}
+/* function restart() {
+    console.log("fetched");
 
+    return fetch("http://localhost/kingame/giochi/restart.php")
+        .then(response => response.text())
+        .then(text => {
+            console.log("Raw body:", text);
+            try {
+                const risposta = JSON.parse(text);
+
+                // Verifica se è un array o un oggetto
+                if (Array.isArray(risposta)) {
+                    return risposta; // è un array, ok
+                } else {
+                    return [risposta]; // è un oggetto, lo metto in un array
+                }
+
+            } catch (e) {
+                console.error("Errore nel parsing JSON:", e);
+                return [];
+            }
+        })
+        .catch(error => {
+            console.error("Error during fetch:", error);
+            return [];
+        });
+}
+ */
+
+async function restart() {
+    try {
+        const response = await fetch("http://localhost/kingame/giochi/restart.php");
+
+        // Leggi la risposta come testo (non JSON, per ora)
+        const text = await response.text(); // ricevi la risposta come testo
+        console.log("Risposta grezza:", text); // logga la risposta
+
+        // Se la risposta è corretta e JSON, parsala
+        const risposta = JSON.parse(text);
+        return risposta;
+
+    } catch (error) {
+        console.error("Errore durante il fetch:", error);
+        return null;
+    }
 }

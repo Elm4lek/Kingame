@@ -3,8 +3,11 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 };
 $haPosto = true;
+print_r($_SESSION);
+echo "<br>";
+print_r($_POST);
 if(!empty($_SESSION['gioco'])){
-    file_get_contents("http://localhost:8080/Kingame/MultiplayerSystem/removeSession.php?giocatore=".$_SESSION["username"]."&stanza=".$_SESSION['gioco']['stanza']);
+    file_get_contents("http://localhost/Kingame/MultiplayerSystem/removeSession.php?giocatore=".$_SESSION["username"]."&stanza=".$_SESSION['gioco']['stanza']);
 }
 $tipo = $_POST['tipo'];
 $gioco = $_POST['gioco'];
@@ -86,7 +89,7 @@ else{
 }
 function post($tipo, $data) {
     // Check for errors
-    $url = 'http://localhost:8080/kingame/MultiplayerSystem/AggiornaDB.php';
+    $url = 'http://localhost/kingame/MultiplayerSystem/AggiornaDB.php';
     $data = http_build_query(['tipo' => $tipo, 'data' => $data]);
 
     $options = [
