@@ -1,9 +1,22 @@
 <?php
-include 'menu.php';
-if (!isset($_SESSION['username'])) {
+include '../../menu.php';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+/* if (!isset($_SESSION['username'])) {
     header("Location: index.php");
     exit();
+} */
+
+if (!isset($_SESSION['lang'])) {
+    $_SESSION['lang'] = 'it';
 }
+if (isset($_GET['lang']) && in_array($_GET['lang'], ['it', 'en'])) {
+    $_SESSION['lang'] = $_GET['lang'];
+}
+
+$lang = $_SESSION['lang'];
+include_once "../../lang/$lang.php";
 ?>
 <!DOCTYPE html>
 <html lang='en'>

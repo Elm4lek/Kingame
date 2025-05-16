@@ -1,10 +1,20 @@
-<?php if (session_status() == PHP_SESSION_NONE) {
+<?php
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
 if(isset($_SESSION["username"])){
   include "datiUtente.php";
 }
+
+if (!isset($_SESSION['lang'])) {
+    $_SESSION['lang'] = 'it';
+}
+if (isset($_GET['lang']) && in_array($_GET['lang'], ['it', 'en'])) {
+    $_SESSION['lang'] = $_GET['lang'];
+}
+
+$lang = $_SESSION['lang'];
+include_once "lang/$lang.php";
 ?>
 
 <!DOCTYPE html>
@@ -51,10 +61,17 @@ if(isset($_SESSION["username"])){
     <?php if (isset($_SESSION['username'])): ?>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="giochi.php"  style="font-family: 'Arial', cursive">Giochi</a></li>
-        <li><a href="chisiamo.php" style="font-family: 'Arial', cursive">Chi siamo</a></li>
-        <li><a href="classifica.php" style="font-family: 'Arial', cursive">Classifica</a></li>
-      </ul>
+        <li><a href="giochi.php"  style="font-family: 'Arial', cursive"><?= $TEXT['menu_giochi'] ?></a></li>
+        <li><a href="chisiamo.php" style="font-family: 'Arial', cursive"><?= $TEXT['menu_chi_siamo'] ?></a></li>
+        <li><a href="classifica.php" style="font-family: 'Arial', cursive"><?= $TEXT['menu_classifica'] ?></a></li>
+      
+    <li style="float: right;">
+        <a href="?lang=<?= $_SESSION['lang'] === 'it' ? 'en' : 'it' ?>">
+            <?= $TEXT['change_lang'] ?>
+        </a>
+    </li>
+    
+</ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true" style="padding: 5px;display: flex;align-items: center;">
@@ -64,16 +81,27 @@ if(isset($_SESSION["username"])){
           <ul class="dropdown-menu">
               <li><a href="impostazione.php">Impostazioni</a></li>
             <li><a href="logout.php">Logout</a></li>
-          </ul>
+          
+    
+</ul>
         </li>
-      </ul>
+      
+    
+</ul>
     </div>
     <?php else: ?>
       <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         <li><a href="registrazione.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      </ul>
+      
+    <li style="float: right;">
+        <a href="?lang=<?= $_SESSION['lang'] === 'it' ? 'en' : 'it' ?>">
+            <?= $TEXT['change_lang'] ?>
+        </a>
+    </li>
+    
+</ul>
     </div>
     <?php endif; ?>
   </div>

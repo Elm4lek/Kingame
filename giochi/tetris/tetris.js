@@ -99,7 +99,9 @@ addEventListener('keydown', function (event) {
 });
 
 addEventListener('click', function () {
-    startNewGame();
+    if(scoreboard.isGameOver())
+        startNewGame();
+    scoreboard.addLevel();
 });
 
 addEventListener('keyup', function () {
@@ -157,6 +159,7 @@ function shapeHasLanded() {
     addShape(fallingShape);
     if (fallingShapeRow < 2) {
         scoreboard.setGameOver();
+        gameOver();
         scoreboard.setTopscore();
     } else {
         scoreboard.addLines(removeLines());
@@ -313,7 +316,7 @@ function Scoreboard() {
     }
 
     this.addLevel = function () {
-        let level = (level+1)%10;
+        level = (level+1)%10;
     }
 
     this.getLevel = function () {
@@ -484,9 +487,50 @@ function initGrid() {
 }
 
 function init() {
+    scoreboard.setGameOver();
     initGrid();
     selectShape();
     draw();
 }
 
 init();
+
+function post(path, params, method='post') {
+
+    const form = document.createElement('form');
+    form.method = method;
+    form.action = path;
+  
+    for (const key in params) {
+      if (params.hasOwnProperty(key)) {
+        const hiddenField = document.createElement('input');
+        hiddenField.type = 'hidden';
+        hiddenField.name = key;
+        hiddenField.value = params[key];
+  
+        form.appendChild(hiddenField);
+      }
+    }
+  
+    document.body.appendChild(form);
+    form.submit();
+}
+
+function gameOver(){
+    let params = {
+        score : scoreboard.getScore()
+    }
+    $(function() {
+        $('form').submit(function() {
+            $.ajax({
+                type: 'POST',
+                url: "http://localhost:8080/kingame/giochi/updateScore.php",
+                data:params
+            });
+            return false;
+        }); 
+    })
+
+    post("http://localhost:8080/kingame/giochi/restart.php",[]);
+
+}
