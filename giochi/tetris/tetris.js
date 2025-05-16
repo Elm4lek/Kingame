@@ -3,7 +3,7 @@
 var canvas = document.querySelector('canvas');
 canvas.width = 640;
 canvas.height = 640;
-var startGame = false;
+var startGame = true;
 var g = canvas.getContext('2d');
 
 var right = { x: 1, y: 0 };
@@ -99,9 +99,11 @@ addEventListener('keydown', function (event) {
 });
 
 addEventListener('click', async function () {
-    if(startGame)
+    if(startGame){
         startNewGame();
-    if(scoreboard.isGameOver()){
+        startGame = false;
+    }
+    else if(scoreboard.isGameOver()){
         let dati = await restart();
         post("http://localhost/kingame/MultiplayerSystem/CreaStanza.php",dati);
     }
@@ -467,7 +469,6 @@ function animate(lastFrameTime) {
 }
 
 function startNewGame() {
-    console.log(scoreboard.getLevel());
     initGrid();
     selectShape();
     scoreboard.reset();
@@ -494,6 +495,7 @@ function init() {
     initGrid();
     selectShape();
     draw();
+    console.log(scoreboard.isGameOver());
 }
 
 init();
@@ -539,34 +541,6 @@ async function gameOver(){
     });
 
 }
-/* function restart() {
-    console.log("fetched");
-
-    return fetch("http://localhost/kingame/giochi/restart.php")
-        .then(response => response.text())
-        .then(text => {
-            console.log("Raw body:", text);
-            try {
-                const risposta = JSON.parse(text);
-
-                // Verifica se è un array o un oggetto
-                if (Array.isArray(risposta)) {
-                    return risposta; // è un array, ok
-                } else {
-                    return [risposta]; // è un oggetto, lo metto in un array
-                }
-
-            } catch (e) {
-                console.error("Errore nel parsing JSON:", e);
-                return [];
-            }
-        })
-        .catch(error => {
-            console.error("Error during fetch:", error);
-            return [];
-        });
-}
- */
 
 async function restart() {
     try {

@@ -3,9 +3,6 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 };
 $haPosto = true;
-print_r($_SESSION);
-echo "<br>";
-print_r($_POST);
 if(!empty($_SESSION['gioco'])){
     file_get_contents("http://localhost/Kingame/MultiplayerSystem/removeSession.php?giocatore=".$_SESSION["username"]."&stanza=".$_SESSION['gioco']['stanza']);
 }
@@ -57,7 +54,6 @@ else{
     }
 }
 $sql = "SELECT Nome FROM giochi WHERE ID = ".$gioco.""; 
-echo $sql;
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc(); // oppure fetch_row() se preferisci un array numerico
@@ -103,7 +99,6 @@ function post($tipo, $data) {
     $context  = stream_context_create($options);
     $response = file_get_contents($url, false, $context);
 
-    echo $response;
 }
 
 ?>
