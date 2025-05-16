@@ -107,13 +107,13 @@ $passwordError = "";
 <body>
 
 <div class="form-container">
-  <h2>Modifica il tuo profilo</h2>
+  <h2><?= $TEXT['edit_button'] ?></h2>
 
   <form method="POST" action="modRequest.php" id="modificaform">
-    <label for="name">NickName</label>
+    <label for="name"><?= $TEXT['register_username'] ?></label>
     <input type="text" id="name" name="nome" value="<?php echo $nickname; ?>" required>
 
-    <label for="email">Email</label>
+    <label for="email"><?= $TEXT['register_email'] ?></label>
     <input type="email" id="email" name="email" value="<?php echo $email; ?>" required>
     <?php 
     if (!empty($emailError)) {
@@ -121,7 +121,7 @@ $passwordError = "";
     }
     ?>
 
-    <label for="password">Password</label>
+    <label for="password"><?= $TEXT['register_password'] ?></label>
     <input type="password" id="password" name="password" required>
 
     <?php 
@@ -131,7 +131,7 @@ $passwordError = "";
     ?>
     
 
-    <label for="paesi">Seleziona il tuo personaggio</label> 
+    <label for="paesi"><?= $TEXT['register_select_avatar'] ?></label> 
       <select name="foto" id="foto" value="<?php echo $foto; ?>">
       <?php
         for ($i = 1; $i <= 16; $i++) {
@@ -140,9 +140,9 @@ $passwordError = "";
         }
         ?>
 
-    <input type="submit" value="Modifica" id="submitBtn">
+    <input type="submit" value="<?= $TEXT['tasto_modifica'] ?>" id="submitBtn">
 
-    <a href="index.php" class="home-link">Torna alla Home</a>
+    <a href="index.php" class="home-link"><?= $TEXT['registration_back_home'] ?></a>
   </form>
 </div>
   

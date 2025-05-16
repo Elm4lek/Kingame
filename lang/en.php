@@ -5,6 +5,106 @@ $TEXT = [
     "menu_classifica" => "Leaderboard",
     "menu_chi_siamo" => "About Us",
     "menu_logout" => "Logout",
-    "change_lang" => "🇮🇹 Italiano"
+    "change_lang" => "🇮🇹 Italiano",
+    "home1" => "Welcome to Kingame",
+    "home2" => "A long time ago, in a galaxy far, far away, the world was threatened
+            by a shady figure: Doctor Timoti.
+            Tall, mighty, and decidedly foul-smelling, he decided to put an end to the peace in the world of the living,
+            stealing the identity of every inhabitant on the planet.
+
+            His challenge? To pit residents against each other to reclaim the prestigious title of 'citizen of the
+            world.'
+
+            But beware! The games devised by this evil villain are not for the faint of heart! Only the most skilled
+            will rise as true heroes. Those who manage to raise the name of their nation and hometown will receive praise
+            and accolades from Mayor Barnabi!
+
+            But what is the goal of these games? To bring honor to your nation, standing out in
+            numerous skill challenges and defeating ruthless opponents like never before!
+
+
+
+            Get ready for the adventure of your life!",
+    "home3" => "Once you've logged in with your account, you can select your country's flag",
+    "about1" => "Programmer since birth, forged through for-loops and imperative languages, ready to amaze you with all his knowledge.",
+    "about2" => "Always ready to support team members with ideas and make improvements whenever possible.",
+    "about3" => "High-level manager and skilled writer, able to manage conflicts with great problem-solving abilities.",
+    "about4" => "For 17 years he has fought against people's foolishness, offering private lessons in math and programming.",
+    "about5" => "A whirlwind of joy, with Brazilian music in his veins, always bringing good vibes to the team.",
+    "about6" => "From Peru with passion, always ready to give constructive advice and listen to others.",
+    "about7" => "Straight from Alberobello, a talented DB expert, capable of designing and building a working database in no time.",
+    "about8" => "The king of all Sesto San Giovanni, always ready to unleash his charm and PR hard skills.",
+    "about9" => "A skilled UX/UI designer who crafts excellent icons that enhance the player’s choices and overall gameplay experience.",
+    "register_title" => "Registration",
+    "register_username" => "Username",
+    "register_email" => "Email",
+    "register_password" => "Password",
+    "register_confirm_password" => "Confirm Password",
+    "register_button" => "Register",
+    "register_home" => "Back to Home",
+    "register_username_taken" => "Username already taken.",
+    "register_password_short" => "Password must be at least 10 characters long.",
+    "register_password_mismatch" => "Passwords do not match",
+    "register_complete_title" => "Complete Registration",
+    "register_nickname" => "User Nickname",
+    "register_select_country" => "Select your Country",
+    "register_select_avatar" => "Select your Character",
+    "registration_completed_title" => "Registration Completed",
+    "registration_completed_heading" => "Welcome!",
+    "registration_completed_message" => "Registration successful 🎉",
+    "registration_back_home" => "Back to Home",
+    "login_title" => "Login Page",
+    "login_heading" => "Login",
+    "login_username" => "Username",
+    "login_password" => "Password",
+    "login_button" => "Login",
+    "login_no_account" => "Don't have an account?",
+    "login_register_link" => "Register",
+    "welcome_title" => "Welcome",
+    "welcome_message" => "Welcome",
+    "go_to_games" => "Go to Games",
+    "login_failed" => "Login Failed",
+    "back_to_login" => "Back to Login",
+    "session_expired" => "Session expired or invalid",
+    "impostazione" => "Settings",
+    "ranking_title" => "Player Rankings",
+    "filter_label" => "View",
+    "global_ranking" => "Global Ranking",
+    "by_country" => "By Country",
+    "local_ranking" => "Local Ranking",
+    "country_label" => "Country",
+    "all_countries" => "All Countries",
+    "points" => "Points",
+    "no_data" => "No data available",
+    "profile_title" => "Player Profile",
+    "edit_button" => "Edit Profile",
+    "username" => "Username",
+    "games_played" => "Games Played",
+    "account_created" => "Account Created On",
+    "email" => "Email",
+    "country" => "Country",
+    "tasto_modifica" => "Edit",
+    "privacy_policy_title" => "Privacy Policy",
+    "privacy_policy_paragraph1" => "This Privacy Policy of GAMES S.p.A., with sole shareholder, located at Via Furlanelli, 69 - 20843 Verano Brianza (MB) (Data Controller), aims to provide clarification regarding the policy adopted by the company in terms of personal data processing for individuals regarding the services offered by our company through:",
+    "privacy_policy_paragraph2" => "the Kingame website, the social media accounts on which GAMES S.P.A has an official page (Facebook, Instagram, Twitter, TikTok, YouTube); or where advertisements are published, or through which interactions are possible via plugins present on the website www.iisaltierospinelli.it (Twitter, Facebook, YouTube, etc.). Plugins are tools that allow extending the site's functionalities. Instant messaging channels.",
+    "privacy_policy_contact" => "GAMES S.P.A has appointed the Data Protection Officer, whom you can contact by writing to",
+    "privacy_policy_authority" => "Furthermore, where the processing is based on consent, the data subject has the right to withdraw their consent at any time without affecting the lawfulness of the processing based on consent before the withdrawal. If they believe their rights have been violated, they can contact the competent supervisory authority in accordance with Article 77 of Regulation (EU) 679/2016.",
+    "terms_and_conditions" => "Terms and Conditions",
+    "identification_and_contact_info" => "Identification and contact information",
+    "terms_paragraph1" => "This website is managed by GAMES SPA. Our main office is located at Via Giacomo Leopardi 132. You can contact us by writing to the commercial address mentioned above, using the contact form on our website, sending an email to <a href='mailto:vicepresidenza@iisaltierospinelli.it'>vicepresidenza@iisaltierospinelli.it</a>, or calling the number <a href='tel:+393928547283'>3928547283</a>.",
+    "nature_of_service" => "Nature of the service",
+    "terms_paragraph2" => "GAMES SPA provides support and development of gaming content.",
+    "order_prices_payment_and_cancellation" => "Order, prices, payment methods and cancellation",
+    "terms_paragraph3" => "Buyers must be at least 18 years old. We reserve the right to refuse service to anyone for any reason and at any time. Our services are not available in jurisdictions where they are prohibited by law. In order to unlock premium features, payment must be made through our partner MOLLIE, based in the Netherlands. After placing an order, customers will receive a confirmation email with the details of the ordered services and the total cost. GAMES SPA reserves the right to cancel an order at any time, in case of unforeseen circumstances. We accept the following payment methods: Visa, Mastercard, Maestro, Payments in kind, and Paypal. All prices are subject to change without notice. All purchased DLCs will be delivered within 48 hours after receiving the invoice. Purchases are available in all countries except Niger and Chad. Customers may cancel their order within 10 hours of placing it. To cancel an order, the customer must contact us by phone at the number listed above, and one of our staff will handle the ticket management.",
+    "warranty_information" => "Warranty information",
+    "terms_paragraph4" => "All products offered by GAMES SPA are covered by a standard 24-month warranty.",
+    "right_of_withdrawal" => "Right of withdrawal",
+    "terms_paragraph5" => "Customers have the right to return within 14 days without providing any reason. This period will expire after the 15th (fifteenth) day.",
+    "safety_instructions" => "Safety information and instructions for use",
+    "terms_paragraph6" => "Our products must be used in accordance with the provided guidelines.",
+    "contacts" => "Contacts",
+    "terms_paragraph7" => "If you have any further questions regarding our terms and conditions, you can contact us at another email address: <a href='mailto:info@GAMES.com'>info@GAMES.com</a>."
+
+
 ];
 ?>

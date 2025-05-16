@@ -1,4 +1,5 @@
-<?php if (session_status() == PHP_SESSION_NONE) {
+<?php
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 if (!isset($_SESSION['lang'])) {
@@ -12,7 +13,7 @@ $lang = $_SESSION['lang'];
 include_once "lang/$lang.php";
 ?>
 <?php
-$conn = new mysqli('localhost','root','', 'kingame');
+$conn = new mysqli('localhost', 'root', '', 'kingame');
 
 if ($conn->connect_error) {
     die("Connessione fallita: " . $conn->connect_error);
@@ -25,19 +26,19 @@ $password = $_POST['password'];
 $paese = $_POST['paese'];
 $foto_profilo = $_POST['foto'];
 
-$sql = "INSERT INTO utenti (UserName, NickName, Email, Password, ISO,Data_registrazione, img_profile) VALUES ('".$username."','".$nickname."', '".$email."', '".$password."', '".$paese."','".date("Y-m-d")."','".$foto_profilo."')";
+$sql = "INSERT INTO utenti (UserName, NickName, Email, Password, ISO, Data_registrazione, img_profile) 
+        VALUES ('$username', '$nickname', '$email', '$password', '$paese', '" . date("Y-m-d") . "', '$foto_profilo')";
 
 $conn->query($sql);
-
 $conn->close();
 ?>
 
 <!DOCTYPE html>
-<html lang="it">
+<html lang="<?= $lang ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrazione Completata</title>
+    <title><?= $TEXT['registration_completed_title'] ?></title>
     <style>
         body {
             font-family: 'Gochi Hand', cursive;
@@ -84,10 +85,10 @@ $conn->close();
 <body>
 
     <div class="registration-container">
-        <h1>Benvenuto!</h1>
-        <p class="message">Registrazione effettuata con successo 🎉</p>
+        <h1><?= $TEXT['registration_completed_heading'] ?></h1>
+        <p class="message"><?= $TEXT['registration_completed_message'] ?></p>
         <form action="index.php">
-            <button type="submit" class="home-button">Torna alla Home</button>
+            <button type="submit" class="home-button"><?= $TEXT['registration_back_home'] ?></button>
         </form>
     </div>
 

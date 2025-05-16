@@ -1,4 +1,5 @@
-<?php if (session_status() == PHP_SESSION_NONE) {
+<?php
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 if (!isset($_SESSION['lang'])) {
@@ -12,11 +13,11 @@ $lang = $_SESSION['lang'];
 include_once "lang/$lang.php";
 ?>
 <!DOCTYPE html>
-<html lang="it">
+<html lang="<?= $lang ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benvenuto</title>
+    <title><?= $TEXT['welcome_title'] ?></title>
     <style>
         body {
             font-family: 'Gochi Hand', cursive;
@@ -62,70 +63,59 @@ include_once "lang/$lang.php";
 </head>
 <body>
 
-    <div class="welcome-container">
-        <?php
-        $conn = new mysqli('localhost', 'root', '', 'kingame');
+<div class="welcome-container">
+    <?php
+    $conn = new mysqli('localhost', 'root', '', 'kingame');
 
-        if ($conn->connect_error) {
-            die("Connessione fallita: " . $conn->connect_error);
-        }
+    if ($conn->connect_error) {
+        die("Connessione fallita: " . $conn->connect_error);
+    }
 
-        if (!empty($_POST['username']) && !empty($_POST['password'])) {
-            $nickname = trim($_POST['username']);
-            $password = trim($_POST['password']);
+    if (!empty($_POST['username']) && !empty($_POST['password'])) {
+        $nickname = trim($_POST['username']);
+        $password = trim($_POST['password']);
+    } else {
+        if (isset($_SESSION['username']) && isset($_SESSION['password'])) {
+            $nickname = $_SESSION['username'];
+            $password = $_SESSION['password'];
         } else {
-            if (isset($_SESSION['username']) && isset($_SESSION['password'])) {
-                $nickname = $_SESSION['username'];
-                $password = $_SESSION['password'];
-            } else {
-                echo '<div class="welcome-message">Sessione scaduta o non valida</div>';
-                exit;
-            }
+            echo '<div class="welcome-message">' . $TEXT['session_expired'] . '</div>';
+            exit;
         }
+    }
 
-        $stmt = $conn->prepare("SELECT password FROM utenti WHERE Username = ?");
-        $stmt->bind_param("s", $nickname);
-        $stmt->execute();
-        $stmt->store_result();
+    $stmt = $conn->prepare("SELECT password FROM utenti WHERE Username = ?");
+    $stmt->bind_param("s", $nickname);
+    $stmt->execute();
+    $stmt->store_result();
 
-        if ($stmt->num_rows > 0) {
-            $stmt->bind_result($dbSecPassword);
-            $stmt->fetch();
-            if (md5($password) === $dbSecPassword) {
-                echo "<div class='welcome-message'>Benvenuto, $nickname!</div>";
-                echo '<form action="giochi.php">
-                        <button class="home-button" type="submit">Vai ai Giochi</button>
-                      </form>';
-                $_SESSION['username'] = $nickname;
-                $_SESSION['password'] = $password;
-            } else {
-                echo "<div class='welcome-message'>Login Fallito</div>";
-                echo '<form action="login.php">
-                        <button class="home-button" type="submit">Torna al Login</button>
-                      </form>';
-            }
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($dbSecPassword);
+        $stmt->fetch();
+        if (md5($password) === $dbSecPassword) {
+            echo "<div class='welcome-message'>{$TEXT['welcome_message']}, $nickname!</div>";
+            echo '<form action="giochi.php">
+                    <button class="home-button" type="submit">' . $TEXT['go_to_games'] . '</button>
+                  </form>';
+            $_SESSION['username'] = $nickname;
+            $_SESSION['password'] = $password;
         } else {
-            echo "<div class='welcome-message'>Login Fallito</div>";
+            echo "<div class='welcome-message'>{$TEXT['login_failed']}</div>";
             echo '<form action="login.php">
-                        <button class="home-button" type="submit">Torna al Login</button>
-                      </form>';
+                    <button class="home-button" type="submit">' . $TEXT['back_to_login'] . '</button>
+                  </form>';
         }
+    } else {
+        echo "<div class='welcome-message'>{$TEXT['login_failed']}</div>";
+        echo '<form action="login.php">
+                <button class="home-button" type="submit">' . $TEXT['back_to_login'] . '</button>
+              </form>';
+    }
 
-        $stmt->close();
-        $conn->close();
-        $url = 'datiUtente.php';
-
-        // use key 'http' even if you send the request to https://...
-        $options = [
-            'http' => [
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-            ],
-        ];
-
-        $context = stream_context_create($options);
-        ?>
-    </div>
+    $stmt->close();
+    $conn->close();
+    ?>
+</div>
 
 </body>
 </html>

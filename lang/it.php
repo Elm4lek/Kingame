@@ -5,6 +5,107 @@ $TEXT = [
     "menu_classifica" => "Classifica",
     "menu_chi_siamo" => "Chi siamo",
     "menu_logout" => "Esci",
-    "change_lang" => "🇬🇧 English"
+    "change_lang" => "🇬🇧 English",
+    "home1" => "Benvenuto su Kingame",
+    "home2" => "Tanto tempo fa, in una galassia lontana lontana, il mondo era minacciato
+            da una losca figura: il dottor Timoti.
+            Alto, possente e deicsamente maleodorante, decise di porre fine alla tranquillità nel mondo dei vivi,
+            rubando l'identità di ogni abitante del pianeta.
+
+            La sua sfida? Mettere i residenti faccia a faccia per riconquistare il prestigioso titolo di 'cittadino del
+            mondo'.
+
+            Ma attenzione! I giochi ideati da questo villain malefico non sono per i deboli di cuore! Solo i più abili
+            potranno emergere come veri eroi. Coloro che riusciranno a portare in alto il nome della loro nazione e del
+            loro paese riceveranno l'elogio e la lode del sindaco Barnabi!
+
+            Ma qual è l'obiettivo di questi giochi? Portare in alto l'onore della propria nazione, distinguendoti in
+            numerose prove di abilità e sconfiggendo avversari spietati come non mai!
+
+
+
+            Preparati per l'avventura della tua vita! ",
+    "home3" => "Una volta effettuato l'accesso con il proprio account, potrai selezionare la bandiera del tuo paese",
+    "about1" => "Programmatore dalla nascita, nato a colpi di cicli for e di linguaggi imperitivi, pronto a stupirvi con tutta la sua conoscenza.",
+    "about2" => "Pronta a supportare i componenti nel team per eventuali idee e apportare modifiche per miglioramenti.",
+    "about3" => "Manager di alto livello e autore coi fiocchi, capace di gestire i conflitti con ottime doti di problem solving.",
+    "about4" => "Da ben 17 anni combatte contro la stupidità delle persone, dando lezioni private sulla matematica e sulla programmazione.",
+    "about5" => "Un tornado di allegria, con la musica Brasiliana nel sangue rallegra sempre le giornate del team.",
+    "about6" => "Dal Perù con furore, sempre pronto a dare consigli costruttivi e ad ascoltare gli altri.",
+    "about7" => "Direttamente da Alberobello un abile talento nel campo dei DB, capace di progettarlo e renderlo funzionante in breve tempo.",
+    "about8" => "Il king di tutta Sesto San Giovanni, pronto a sfoderare tutta la sua simpatia e le sue hard skills da PR.",
+    "about9" => "Abilissimo UX/UI Designer crea ottime icone in grado di invogliare il giocatore nella scelta e nel gameplay dei giochi.",
+    "register_title" => "Registrazione",
+    "register_username" => "Username",
+    "register_email" => "Email",
+    "register_password" => "Password",
+    "register_confirm_password" => "Conferma Password",
+    "register_button" => "Registrati",
+    "register_home" => "Torna alla Home",
+    "register_username_taken" => "Username già in uso.",
+    "register_password_short" => "La password deve essere lunga almeno 10 caratteri.",
+    "register_password_mismatch" => "Le password non coincidono",
+    "register_complete_title" => "Completa Registrazione",
+    "register_nickname" => "Nome Utente",
+    "register_select_country" => "Seleziona il tuo Paese",
+    "register_select_avatar" => "Seleziona il tuo personaggio",
+    "registration_completed_title" => "Registrazione Completata",
+    "registration_completed_heading" => "Benvenuto!",
+    "registration_completed_message" => "Registrazione effettuata con successo 🎉",
+    "registration_back_home" => "Torna alla Home",
+    "login_title" => "Pagina di Accesso",
+    "login_heading" => "Login",
+    "login_username" => "Username",
+    "login_password" => "Password",
+    "login_button" => "Accedi",
+    "login_no_account" => "Non hai un account?",
+    "login_register_link" => "Registrati",
+    "welcome_title" => "Benvenuto",
+    "welcome_message" => "Benvenuto",
+    "go_to_games" => "Vai ai Giochi",
+    "login_failed" => "Login Fallito",
+    "back_to_login" => "Torna al Login",
+    "session_expired" => "Sessione scaduta o non valida",
+    "impostazione" => "Impostazioni",
+    "ranking_title" => "Classifica Giocatori",
+    "filter_label" => "Visualizza",
+    "global_ranking" => "Classifica Globale",
+    "by_country" => "Per Nazione",
+    "local_ranking" => "Classifica Locale",
+    "country_label" => "Paese",
+    "all_countries" => "Tutti i Paesi",
+    "points" => "Punti",
+    "no_data" => "Nessun dato disponibile",
+    "profile_title" => "Profilo Giocatore",
+    "edit_button" => "Modifica Profilo",
+    "username" => "Username",
+    "games_played" => "Giochi Giocati",
+    "account_created" => "Account Creato Il",
+    "email" => "Email",
+    "country" => "Paese",
+    "tasto_modifica" => "Modifica",
+    "privacy_policy_title" => "Privacy Policy",
+    "privacy_policy_paragraph1" => "La presente Privacy Policy di GAMES S.p.A. con Socio Unico con sede in Via Furlanelli, 69 - 20843 Verano Brianza (MB) (Titolare del trattamento) ha l’obiettivo di fornire delucidazioni sulla politica adottata dalla stessa in tema di trattamento di dati personali degli interessati relativamente ai servizi erogati dalla nostra società tramite:",
+    "privacy_policy_paragraph2" => "il sito Kingame, gli account social su cui GAMES S.P.A è presente con una pagina ufficiale (Facebook, Instagram, Twitter, TikTok, YouTube); o sui quali vengono pubblicati annunci pubblicitari oppure; con i quali sono possibili interazioni tramite plug-in presenti sul sito www.iisaltierospinelli.it (Twitter, Facebook, YouTube etc.). I plug in sono strumenti che permettono di estendere le funzionalità del sito. i canali di messaggistica istantanea.",
+    "privacy_policy_contact" => "GAMES S.P.A ha nominato il responsabile della protezione dei dati a cui può rivolgersi scrivendo all’indirizzo",
+    "privacy_policy_authority" => "Inoltre, qualora il trattamento sia basato sul consenso, l’interessato ha il diritto di revocare il consenso medesimo in qualsiasi momento, senza pregiudicare la liceità del trattamento basato sul consenso prestato prima della revoca. Qualora ravvisasse una violazione dei propri diritti può rivolgersi all'autorità di controllo competente ai sensi dell’art. 77 del Regolamento UE 679/2016.",
+    "terms_and_conditions" => "Termini e Condizioni",
+    "identification_and_contact_info" => "Identificazione e informazioni di contatto",
+    "terms_paragraph1" => "Questo sito web è gestito dalla GAMES SPA. La nostra sede principale si trova in Via Giacomo Leopardi 132. Potete contattarci scrivendo all’indirizzo commerciale sopra indicato, utilizzando il modulo di contatto del nostro sito web, inviando un’e-mail a <a href='mailto:vicepresidenza@iisaltierospinelli.it'>vicepresidenza@iisaltierospinelli.it</a> o telefonando al numero <a href='tel:+393928547283'>3928547283</a>.",
+    "nature_of_service" => "Natura del servizio",
+    "terms_paragraph2" => "La GAMES SPA fornisce sostegno e sviluppo di contenuti ludici.",
+    "order_prices_payment_and_cancellation" => "Ordine, prezzi, metodi di pagamento e cancellazione",
+    "terms_paragraph3" => "Gli acquirenti devono avere almeno 18 anni. Ci riserviamo il diritto di rifiutare il servizio a chiunque per qualsiasi motivo e in qualsiasi momento. I nostri servizi non sono disponibili nelle giurisdizioni in cui sono vietati dalla legge. Per poter sbloccare le funzioni premium è necessario effettuare il pagamento attraverso il nostro partner MOLLIE, con sede legale nei Paesi Bassi. Dopo aver effettuato un ordine, i clienti riceveranno un’e-mail di conferma con il dettaglio dei servizi ordinati e del costo totale. La GAMES SPA si riserva il diritto di annullare un ordine in qualsiasi momento, in caso di circostanze impreviste. Accettiamo i seguenti metodi di pagamento: Visa, Mastercard, Maestro, Pagamenti in natura e Paypal. Tutti i prezzi sono soggetti a modifiche senza preavviso. Tutti i DLC acquistati saranno consegnati entro 48 ore dalla ricezione della fattura. L'acquisto è possibile in tutti i paesi del mondo eccetto il Niger e il Ciad. I clienti possono annullare l’ordine entro 10 ore dall’effettuazione dello stesso. Per annullare un ordine, il cliente deve poterci contattare telefonicamente al numero sopra riportato, un nostro addetto provvederà alla gestione dei ticket.",
+    "warranty_information" => "Informazioni sulla garanzia",
+    "terms_paragraph4" => "Tutti i prodotti offerti dalla GAMES SPA sono coperti da una garanzia standard della durata di 24 mesi.",
+    "right_of_withdrawal" => "Diritto di recesso",
+    "terms_paragraph5" => "I clienti hanno il diritto di reso entro 14 giorni senza fornire alcuna motivazione. Questo periodo scadrà scattata dopo il 15 (quindicesimo) giorno.",
+    "safety_instructions" => "Informazioni sulla sicurezza e istruzioni per l’uso",
+    "terms_paragraph6" => "I nostri prodotti devono essere utilizzati in conformità alle linee guida fornite.",
+    "contacts" => "Contatti",
+    "terms_paragraph7" => "Se hai ulteriori domande riguardo ai nostri termini e condizioni, puoi contattarci ad un ulteriore indirizzo mail: <a href='mailto:info@GAMES.com'>info@GAMES.com</a>."
+
+
+
 ];
 ?>

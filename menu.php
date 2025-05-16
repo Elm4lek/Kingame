@@ -45,6 +45,8 @@ include_once "lang/$lang.php";
     .navbar-inverse .navbar-nav>li>a:focus {
         background-color: #1f1f2e;
     }
+
+    
 </style>
 <body>
 
@@ -79,7 +81,7 @@ include_once "lang/$lang.php";
           <img src=<?php echo "'".$_SESSION["img_profilo"]."'"?> width="40" height="40" style="border-radius: 50%;">
         </a>
           <ul class="dropdown-menu">
-              <li><a href="impostazione.php">Impostazioni</a></li>
+              <li><a href="impostazione.php"><?= $TEXT['impostazione'] ?></a></li>
             <li><a href="logout.php">Logout</a></li>
           
     

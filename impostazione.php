@@ -1,9 +1,12 @@
-<?php if (session_status() == PHP_SESSION_NONE) {
+<?php
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 if (!isset($_SESSION['lang'])) {
     $_SESSION['lang'] = 'it';
 }
+
 if (isset($_GET['lang']) && in_array($_GET['lang'], ['it', 'en'])) {
     $_SESSION['lang'] = $_GET['lang'];
 }
@@ -11,8 +14,10 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], ['it', 'en'])) {
 $lang = $_SESSION['lang'];
 include_once "lang/$lang.php";
 ?>
+
 <?php
 include 'menu.php';
+
 if (!isset($_SESSION['username'])) {
     header("Location: index.php");
     exit();
@@ -29,12 +34,12 @@ $nazione = isset($_SESSION['nazione']) ? $_SESSION['nazione'] : 'N/A';
 ?>
 
 <!DOCTYPE html>
-<html lang="it">
+<html lang="<?= $lang ?>">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profilo Giocatore</title>
+    <title><?= $TEXT['profile_title'] ?></title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEJ6H4L6gkR6mef1Pf4hzRfEXM04Cw9TAsii9FsZ0uSks8W5s7DFAaa7QK8YF" crossorigin="anonymous">
@@ -137,19 +142,19 @@ $nazione = isset($_SESSION['nazione']) ? $_SESSION['nazione'] : 'N/A';
                 </div>
                 
                 <form method="get" action="modifica.php">
-                    <button type="submit" class="btn btn-primary">Modifica</button>
+                    <button type="submit" class="btn btn-primary"><?= $TEXT['edit_button'] ?></button>
                 </form>
             </div>
 
             <div class="card-body">
-            <div class="info-row">
-                <span>🔷 <strong>Username:</strong> <?php echo $username;?></span>
-                <span>🎮 <strong>Giochi giocati:</strong> <?php echo $n_giochi;?></span>
-                <span>⭐ <strong>Punti accumulati:</strong> <?php echo $punteggio;?></span>
-                <span>📅 <strong>Account creato nel:</strong> <?php echo $data_reg;?></span>
-                <span>📧 <strong>Email:</strong> <?php echo $email;?></span>
-                <span>🌍 <strong>Paese:</strong> <?php echo $nazione;?></span>
-            </div>
+                <div class="info-row">
+                    <span>🔷 <strong><?= $TEXT['username'] ?>:</strong> <?php echo $username;?></span>
+                    <span>🎮 <strong><?= $TEXT['games_played'] ?>:</strong> <?php echo $n_giochi;?></span>
+                    <span>⭐ <strong><?= $TEXT['points'] ?>:</strong> <?php echo $punteggio;?></span>
+                    <span>📅 <strong><?= $TEXT['account_created'] ?>:</strong> <?php echo $data_reg;?></span>
+                    <span>📧 <strong><?= $TEXT['email'] ?>:</strong> <?php echo $email;?></span>
+                    <span>🌍 <strong><?= $TEXT['country'] ?>:</strong> <?php echo $nazione;?></span>
+                </div>
             </div>
         </div>
     </div>
