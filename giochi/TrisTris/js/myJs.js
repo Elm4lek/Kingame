@@ -125,5 +125,36 @@ function init(){
     stanza = document.getElementById("stanza").value;
     document.getElementById("stanza").remove();
     staGiocando = (document.getElementById("inizia").value == true);
-    document.getElementById("inizia").remove()
+    document.getElementById("inizia").remove();
+
+}
+
+function cellClickHandler(x, y) {
+    return function () {
+        selectCell(x, y);
+    };
+}
+
+const cellListeners = {}; // store listeners for later removal
+
+function setClickPiano() {
+    for (const [x, row] of piano.entries()) {
+        for (const [y, value] of row.entries()) {
+            if (value === 0) {
+                let cell = document.getElementById(x + "-" + y);
+                const handler = cellClickHandler(x, y);
+                cellListeners[`${x}-${y}`] = handler;
+                cell.addEventListener("click", handler);
+            }
+        }
+    }
+}
+
+function unsetClickPiano() {
+    for (const [key, handler] of Object.entries(cellListeners)) {
+        const cell = document.getElementById(key);
+        if (cell) {
+            cell.removeEventListener("click", handler);
+        }
+    }
 }
