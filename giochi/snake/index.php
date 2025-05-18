@@ -17,11 +17,12 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], ['it', 'en'])) {
 $lang = $_SESSION['lang'];
 include_once "../../lang/$lang.php";
 ?>
-<!DOCTYPE html>
-<html lang='en'>
 
+<!DOCTYPE html>
+<html lang="it">
 <head>
-    <meta charset='UTF-8'>
+    <meta charset="UTF-8">
+    <title>Snake Game</title>
     <style>
         @keyframes gradientAnimation {
             0% { background-position: 0% 50%; }
@@ -37,7 +38,7 @@ include_once "../../lang/$lang.php";
 
         canvas {
             position: absolute;
-            top: 45%;
+            top: 55%;
             left: 50%;
             width: 640px;
             height: 640px;
@@ -46,11 +47,11 @@ include_once "../../lang/$lang.php";
         }
     </style>
 </head>
-
 <body>
-    <canvas>
-        <script src="tetris.js"></script>
-    </canvas>
-</body>
 
+    <canvas id="game"></canvas>
+
+    <script src="snake.js"></script>
+
+</body>
 </html>

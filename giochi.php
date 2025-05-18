@@ -87,6 +87,11 @@ if (!isset($_SESSION['username'])) {
             background-size: cover;
             background-position: center;
         }
+        .snake {
+            background-image: url('Grafiche videogiochi/snake.png');
+            background-size: cover;
+            background-position: center;
+        }
         .contenitore:hover {
             transform: scale(1.1);
         }
