@@ -34,7 +34,15 @@ CREATE TABLE `giochi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
-
+--
+-- Dump dei dati per la tabella `nazioni`
+--
+INSERT INTO `giochi` (`ID`, `Nome`, `Numero_Giocatori`) VALUES
+(1, 'tetris', 1),
+(2, 'tristris', 2),
+(3, 'cacciatore', 1),
+(4, 'snake', 1);
+-- --------------------------------------------------------
 --
 -- Struttura della tabella `nazioni`
 --
