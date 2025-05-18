@@ -126,7 +126,6 @@ function init(){
     document.getElementById("stanza").remove();
     staGiocando = (document.getElementById("inizia").value == true);
     document.getElementById("inizia").remove();
-
 }
 
 function cellClickHandler(x, y) {
@@ -137,8 +136,8 @@ function cellClickHandler(x, y) {
 
 const cellListeners = {}; // store listeners for later removal
 
-function setClickPiano() {
-    for (const [x, row] of piano.entries()) {
+function setClickPiano(trisPiano) {
+    for (const [x, row] of trisPiano.entries()) {
         for (const [y, value] of row.entries()) {
             if (value === 0) {
                 let cell = document.getElementById(x + "-" + y);
@@ -156,5 +155,63 @@ function unsetClickPiano() {
         if (cell) {
             cell.removeEventListener("click", handler);
         }
+    }
+}
+
+async function getPiano() {
+    const response = await fetch("http://localhost/kingame/giochi/tristris/getPiano.php");
+    const risposta = await response.json();
+    let piano = [];
+    for (let i = 0; i < risposta.length; i++) {
+        let cell = (risposta[i]["giocatore"] === giocatore)? 1 : 2;
+        piano[risposta[i]["x"]][risposta[i]["y"]] = cell;
+    }
+    return piano;
+}
+
+async function getUpdateCell() {
+    const newPiano = await getPiano();
+    for(const [x, value] of newPiano.entries()){
+        for(const [y, cell] of value.entries()){
+            if(piano[x][y] != cell){
+                return cell;
+            }
+        }
+    }
+}
+
+function giocatoreMove(x){
+    staGiocando = true;
+    disegnaPiano();
+    setClickPiano(x);
+}
+
+function disegnaPiano(){
+    for(let i=0; i<9; i++){
+        for(let j=0; j<9; j++){
+            let cell = piano[i][j];
+            let htmlCell = document.getElementById(i+"-"+j);
+            if(cell == 1){
+                htmlCell.className = "cell player-select";
+            }
+            if(cell == 2){
+                htmlCell.className = "cell adversary-select";
+            }
+        }
+        let vittoria = checkVittoria(piano[x]);
+        
+        if(Array.isArray(vittoria)){
+            document.getElementById(x).className = "secondary-content ";
+        }
+    }
+    document.body.className = staGiocando? "player-turn" : "adversary-turn";
+}
+
+function selectCell(x,y){
+    staGiocando = false;
+    unsetClickPiano();
+    let vittoria = checkVittoria(piano[x]);
+    if(Array.isArray(vittoria)){
+        document.getElementById(x);
     }
 }
