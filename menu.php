@@ -65,8 +65,8 @@ include_once "lang/$lang.php";
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li><a href="http://localhost/kingame/giochi.php"  style="font-family: 'Arial', cursive"><?= $TEXT['menu_giochi'] ?></a></li>
-        <li><a href="http://localhost/kingame/chisiamo.php" style="font-family: 'Arial', cursive"><?= $TEXT['menu_chi_siamo'] ?></a></li>
         <li><a href="http://localhost/kingame/classifica.php" style="font-family: 'Arial', cursive"><?= $TEXT['menu_classifica'] ?></a></li>
+        <li><a href="http://localhost/kingame/chisiamo.php" style="font-family: 'Arial', cursive"><?= $TEXT['menu_chi_siamo'] ?></a></li>
       
     <li style="float: right;">
         <a href="?lang=<?= $_SESSION['lang'] === 'it' ? 'en' : 'it' ?>">

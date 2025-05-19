@@ -29,7 +29,7 @@ $selectedCountry = isset($_GET['country']) ? $_GET['country'] : '';
 $selectedGame = isset($_GET['game']) ? $_GET['game'] : '';
 
 // Query per la classifica globale
-$query = "SELECT u.NickName, u.img_profile, SUM(s.Punteggio) AS punti, u.ISO
+$query = "SELECT u.NickName,u.UserName, u.img_profile, SUM(s.Punteggio) AS punti, u.ISO
           FROM utenti u
           JOIN sessione s ON u.UserName = s.User
           GROUP BY u.UserName
@@ -45,7 +45,7 @@ if ($filter == 'nazione') {
               ORDER BY punti DESC";
 } elseif ($filter == 'locale' && $selectedCountry != '') {
     // Classifica locale
-    $query = "SELECT u.NickName, u.img_profile, SUM(s.Punteggio) AS punti, u.ISO
+    $query = "SELECT u.NickName,u.UserName, u.img_profile, SUM(s.Punteggio) AS punti, u.ISO
               FROM utenti u
               JOIN sessione s ON u.UserName = s.User
               WHERE u.ISO = '$selectedCountry'
@@ -53,7 +53,7 @@ if ($filter == 'nazione') {
               ORDER BY punti DESC";
 } elseif ($filter == 'gioco' && $selectedGame != '') {
     // Classifica locale
-    $query = "SELECT u.NickName, u.img_profile, SUM(s.Punteggio) AS punti
+    $query = "SELECT u.NickName,u.UserName, u.img_profile, SUM(s.Punteggio) AS punti
               FROM utenti u
               Join sessione s ON u.UserName = s.USer
               Join stanze ON stanze.Id = s.Stanza
@@ -144,6 +144,7 @@ if (!$result) {
                         <?php $position = 1; ?>
                         <?php while ($row = $result->fetch_assoc()): ?>
                             <?php 
+                            $userName = $row['UserName'];
                             $name = $row['NickName'] ?? $row['Nome_Nazione'] ?? 'Anonimo';
                             $points = $row['punti'] ?? 0;
                             
@@ -162,10 +163,18 @@ if (!$result) {
                             
                             <tr class="<?= $medal ?>">
                                 <td><?= $position ?></td>
-                                <td><img src="<?= $avatar ?>" alt="<?= $name ?>" class="<?= $avatarClass ?>"></td>
-                                <td><?= htmlspecialchars($name) ?></td>
+                                <td>
+                                    <img src="<?= $avatar ?>" alt="<?= $name ?>" 
+                                        class="<?= $avatarClass ?> clickable" 
+                                        data-user-id="<?= $userName ?>">
+                                </td>
+                                <td>
+                                    <span class="clickable" data-user-id="<?= $userName ?>">
+                                        <?= htmlspecialchars($name) ?>
+                                    </span>
+                                </td>
                                 <td><?= number_format($points) ?></td>
-                            </tr>
+                        </tr>
                             
                             <?php $position++; ?>
                         <?php endwhile; ?>
@@ -182,3 +191,24 @@ if (!$result) {
 </html>
 
 <?php $conn->close(); ?>
+<script>
+document.querySelectorAll('.clickable').forEach(function(elem) {
+    elem.addEventListener('click', function() {
+        const userId = this.getAttribute('data-user-id');
+
+        // Crea un form nascosto e lo invia come POST
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'dettagliUtente.php'; // <-- Modifica qui con la tua destinazione
+
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'username';
+        input.value = userId;
+
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+    });
+});
+</script>

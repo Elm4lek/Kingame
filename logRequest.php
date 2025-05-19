@@ -93,7 +93,16 @@ include_once "lang/$lang.php";
         $stmt->bind_result($dbSecPassword);
         $stmt->fetch();
         if (md5($password) === $dbSecPassword) {
-            echo "<div class='welcome-message'>{$TEXT['welcome_message']}, $nickname!</div>";
+            
+            $stmt = $conn->prepare("SELECT NickName FROM utenti WHERE Username = ?");
+            $stmt->bind_param("s", $nickname);
+            $stmt->execute();
+            $stmt->store_result();
+            
+            $stmt->bind_result($name);
+            $stmt->fetch();
+
+            echo "<div class='welcome-message'>{$TEXT['welcome_message']}, $name!</div>";
             echo '<form action="giochi.php">
                     <button class="home-button" type="submit">' . $TEXT['go_to_games'] . '</button>
                   </form>';
