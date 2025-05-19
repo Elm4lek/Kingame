@@ -144,7 +144,6 @@ if (!$result) {
                         <?php $position = 1; ?>
                         <?php while ($row = $result->fetch_assoc()): ?>
                             <?php 
-                            $userName = $row['UserName'];
                             $name = $row['NickName'] ?? $row['Nome_Nazione'] ?? 'Anonimo';
                             $points = $row['punti'] ?? 0;
                             
@@ -154,6 +153,8 @@ if (!$result) {
                                 $avatar = "https://flagcdn.com/48x36/$iso.png";
                                 $avatarClass = 'country-flag';
                             } else {
+                                
+                                $userName = isset($row['UserName']) ? $row['UserName'] : 'N/A';
                                 $avatar = $row['img_profile'] ?? 'img/default-avatar.png';
                                 $avatarClass = 'player-avatar';
                             }
@@ -165,16 +166,16 @@ if (!$result) {
                                 <td><?= $position ?></td>
                                 <td>
                                     <img src="<?= $avatar ?>" alt="<?= $name ?>" 
-                                        class="<?= $avatarClass ?> clickable" 
+                                        class="<?= $avatarClass ?> <?= isset($userName) ? 'clickable' : '' ?>" 
                                         data-user-id="<?= $userName ?>">
                                 </td>
                                 <td>
-                                    <span class="clickable" data-user-id="<?= $userName ?>">
+                                    <span class="<?= isset($userName) ? 'clickable' : '' ?>" data-user-id="<?= $userName ?>">
                                         <?= htmlspecialchars($name) ?>
                                     </span>
                                 </td>
                                 <td><?= number_format($points) ?></td>
-                        </tr>
+                            </tr>
                             
                             <?php $position++; ?>
                         <?php endwhile; ?>
