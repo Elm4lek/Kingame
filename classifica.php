@@ -26,6 +26,7 @@ if ($conn->connect_error) {
 // Filtri per la classifica
 $filter = isset($_GET['filter']) ? $_GET['filter'] : 'global';
 $selectedCountry = isset($_GET['country']) ? $_GET['country'] : '';
+$selectedGame = isset($_GET['game']) ? $_GET['game'] : '';
 
 // Query per la classifica globale
 $query = "SELECT u.NickName, u.img_profile, SUM(s.Punteggio) AS punti, u.ISO
@@ -50,10 +51,21 @@ if ($filter == 'nazione') {
               WHERE u.ISO = '$selectedCountry'
               GROUP BY u.UserName
               ORDER BY punti DESC";
+} elseif ($filter == 'gioco' && $selectedGame != '') {
+    // Classifica locale
+    $query = "SELECT u.NickName, u.img_profile, SUM(s.Punteggio) AS punti
+              FROM utenti u
+              Join sessione s ON u.UserName = s.USer
+              Join stanze ON stanze.Id = s.Stanza
+              JOIN giochi g ON stanze.Gioco = g.ID
+              WHERE g.Nome = '$selectedGame'
+              GROUP BY u.UserName
+              ORDER BY punti DESC";
 }
 
 $result = $conn->query($query);
 $countryResult = $conn->query("SELECT ISO, Nome_Nazione FROM nazioni ORDER BY Nome_Nazione ASC");
+$gameResult = $conn->query("SELECT Id, Nome FROM giochi ORDER BY Nome");
 
 if (!$result) {
     die("Errore nella query: " . $conn->error);
@@ -82,23 +94,39 @@ if (!$result) {
                         <option value="global" <?= $filter == 'global' ? 'selected' : '' ?>><?= $TEXT['global_ranking'] ?></option>
                         <option value="nazione" <?= $filter == 'nazione' ? 'selected' : '' ?>><?= $TEXT['by_country'] ?></option>
                         <option value="locale" <?= $filter == 'locale' ? 'selected' : '' ?>><?= $TEXT['local_ranking'] ?></option>
+                        <option value="gioco" <?= $filter == 'gioco' ? 'selected' : '' ?>><?= $TEXT['game_ranking'] ?></option>
                     </select>
                 </div>
 
                 <?php if ($filter == 'locale'): ?>
-                <div class="filter-group">
-                    <label for="country"><?= $TEXT['country_label'] ?>:</label>
-                    <select name="country" id="country" onchange="this.form.submit()">
-                        <option value=""><?= $TEXT['all_countries'] ?></option>
-                        <?php while ($country = $countryResult->fetch_assoc()): ?>
-                            <option value="<?= $country['ISO'] ?>" <?= $selectedCountry == $country['ISO'] ? 'selected' : '' ?>>
-                                <?= $country['Nome_Nazione'] ?>
-                            </option>
-                        <?php endwhile; ?>
-                    </select>
-                </div>
+                    <div class="filter-group">
+                        <label for="country"><?= $TEXT['country_label'] ?>:</label>
+                        <select name="country" id="country" onchange="this.form.submit()">
+                            <option value=""><?= $TEXT['all_countries'] ?></option>
+                            <?php while ($country = $countryResult->fetch_assoc()): ?>
+                                <option value="<?= $country['ISO'] ?>" <?= $selectedCountry == $country['ISO'] ? 'selected' : '' ?>>
+                                    <?= $country['Nome_Nazione'] ?>
+                                </option>
+                            <?php endwhile; ?>
+                        </select>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($filter == 'gioco'): ?>
+                    <div class="filter-group">
+                        <label for="game"><?= $TEXT['game_label'] ?>:</label>
+                        <select name="game" id="game" onchange="this.form.submit()">
+                            <option value=""><?= $TEXT['all_games'] ?></option>
+                            <?php while ($game = $gameResult->fetch_assoc()): ?>
+                                <option value="<?= $game['Nome'] ?>" <?= $selectedGame == $game['Nome'] ? 'selected' : '' ?>>
+                                    <?= $game['Nome'] ?>
+                                </option>
+                            <?php endwhile; ?>
+                        </select>
+                    </div>
                 <?php endif; ?>
             </form>
+
         </header>
 
         <main class="ranking-content">

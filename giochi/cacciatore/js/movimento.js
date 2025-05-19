@@ -52,7 +52,7 @@ function controllaCella(x, y) {
       document.getElementById("energia").innerHTML = energia;
       piano[x][y] = SFONDO;
       countPillole--;
-      if (energia == 1400) {
+      if (energia == winValue) {
         document.getElementById("energia").innerHTML = '<img src="coppa.jpg" >';
         win();
       }
@@ -62,7 +62,7 @@ function controllaCella(x, y) {
       piano[x][y] = SFONDO;
 
       if (contFunghi > 2) {
-        gameover();
+        gameOver();
         inizializza();
       } else {
         // Blocca l'omino per 3 secondi quando tocca un fungo
@@ -78,27 +78,13 @@ function controllaCella(x, y) {
   }
 }
 
-function gameover(cause) {
-  if (
-    cause === "cacciatore" &&
-    document.getElementById("energia").innerHTML !== "Game Over"
-  ) {
-    document.getElementById("energia").innerHTML = "Game Over";
-    document.getElementById("replayButton").style.display = "block";
+function gameOver(cause) {
+  if (cause === "cacciatore" || w == 0) {
     ominoBloccato = true;
     gOverMusic();
-    setTimeout(function () {}, 0);
   }
-}
-
-function gameOver() {
-  if (w == 0 && document.getElementById("energia").innerHTML !== "GameOver") {
-    document.getElementById("energia").innerHTML = "GameOver";
-    document.getElementById("replayButton").style.display = "BLOCK";
-    ominoBloccato = true;
-    gOverMusic();
-    setTimeout(function () {}, 0);
-  }
+  document.getElementById("text").innerHTML = "GAME OVER";
+  endGame();
 }
 
 function incrementaEnergia() {
@@ -141,15 +127,22 @@ function destra() {
   var newY = (ominoY + 1 + C) % C;
   sposta(ominoX, ominoY, ominoX, newY);
 }
+function calcolaDistanza(x1, y1, x2, y2) {
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  return Math.sqrt(dx * dx + dy * dy);
+}
 
-function Cacciatore(x, y) {
+function Cacciatore() {
+  do{
+    var [x,y] = generaPosizione();
+    var distanza = calcolaDistanza(ominoX,ominoY,x,y);
+  }while(distanza<DISTANZA);
   this.x = x;
   this.y = y;
 }
 Cacciatore.prototype.muovi = function () {
-  if (ominoBloccato) {
-    return; // Se l'omino è bloccato, non muovere il cacciatore
-  }
+    // Ripristina la vecchia cella del cacciatore
 
   var nuovaPosizione = this.calcolaNuovaPosizione();
 
@@ -157,23 +150,24 @@ Cacciatore.prototype.muovi = function () {
     piano[nuovaPosizione.x][nuovaPosizione.y] !== OSTACOLO &&
     piano[nuovaPosizione.x][nuovaPosizione.y] !== FUNGO
   ) {
-    // Ripristina la vecchia cella del cacciatore
+
     document.getElementById("c" + this.x + "_" + this.y).src =
       pathImg + piano[this.x][this.y] + ".jpg";
-
     this.x = nuovaPosizione.x;
     this.y = nuovaPosizione.y;
-
-    // Disegna il cacciatore nella nuova posizione
-    document.getElementById("c" + this.x + "_" + this.y).src =
-      pathImg + "cacciatore.jpg";
+    this.disegna();
 
     // Controllo se il cacciatore ha catturato l'omino
     if (this.x === ominoX && this.y === ominoY) {
-      gameover("cacciatore");
+      gameOver("cacciatore");
       return;
     }
   }
+};
+Cacciatore.prototype.disegna = function () {
+    // Disegna il cacciatore nella nuova posizione
+    document.getElementById("c" + this.x + "_" + this.y).src =
+      pathImg + "cacciatore.jpg";
 };
 
 Cacciatore.prototype.calcolaNuovaPosizione = function () {
@@ -204,10 +198,75 @@ Cacciatore.prototype.calcolaNuovaPosizione = function () {
 };
 
 var cacciatore;
+var cacciatoreMovimento;
 function initCacciatore() {
-  cacciatore = new Cacciatore(cacciatoreX, cacciatoreY);
-
+  cacciatore = new Cacciatore();
+  
   console.log(cacciatore.calcolaNuovaPosizione());
   cacciatore.muovi();
-  setInterval("cacciatore.muovi()", 500); //500
+  cacciatore.disegna();
+  cacciatoreMovimento = setInterval("cacciatore.muovi()", 500); //500
+}
+
+function generaPosizione(){
+  do{
+    var x = Math.floor(Math.random() * R);
+    var y = Math.floor(Math.random() * C);
+  }while(piano[x][y] != 1 && piano[x][y] != 0);
+  return [x,y];
+}
+
+function endGame(){
+  document.getElementById("replayButton").style.display = "block";
+  clearInterval(cacciatoreMovimento);
+  clearInterval(timer);
+  let params = {
+      score: energia
+  };
+  fetch("http://localhost/kingame/giochi/updateScore.php", {
+      method: 'POST', // Specify the HTTP method
+      headers: {
+          'Content-Type': 'application/json', // Tell the server that you're sending JSON
+      },
+      body: JSON.stringify(params), // Convert the JavaScript object to a JSON string
+  });
+}
+
+function post(path, params, method='post') {
+
+    const form = document.createElement('form');
+    form.method = method;
+    form.action = path;
+  
+    for (const key in params) {
+      if (params.hasOwnProperty(key)) {
+        const hiddenField = document.createElement('input');
+        hiddenField.type = 'hidden';
+        hiddenField.name = key;
+        hiddenField.value = params[key];
+  
+        form.appendChild(hiddenField);
+      }
+    }
+  
+    document.body.appendChild(form);
+    form.submit();
+}
+
+async function restart() {
+    try {
+        const response = await fetch("http://localhost/kingame/giochi/restart.php");
+
+        // Leggi la risposta come testo (non JSON, per ora)
+        const text = await response.text(); // ricevi la risposta come testo
+        console.log("Risposta grezza:", text); // logga la risposta
+
+        // Se la risposta è corretta e JSON, parsala
+        const risposta = JSON.parse(text);
+        return risposta;
+
+    } catch (error) {
+        console.error("Errore durante il fetch:", error);
+        return null;
+    }
 }

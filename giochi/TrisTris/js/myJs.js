@@ -201,7 +201,8 @@ function disegnaPiano(){
         let vittoria = checkVittoria(piano[x]);
         
         if(Array.isArray(vittoria)){
-            document.getElementById(x).className = "secondary-content ";
+            for(let j of piano)
+                document.getElementById(x+"-"+j).
         }
     }
     document.body.className = staGiocando? "player-turn" : "adversary-turn";

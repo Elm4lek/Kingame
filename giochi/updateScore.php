@@ -40,4 +40,7 @@ if (isset($post["score"])) {
 } else {
     echo "Score non ricevuto.";
 }
+
+$_SESSION["gioco"]["isFinished"]=true;
+
 ?>

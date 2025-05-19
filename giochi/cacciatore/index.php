@@ -57,7 +57,7 @@ include_once "../../lang/$lang.php";
 <body onload="inizializza(); initCacciatore();" onkeydown="checkKeyDown(event);" onkeypress="checkKeyPress(event)">
     <div id="gameContainer">
         <h1>ENERGIA: <span id="energia">0</span></h1>
-        <div id="scoreDisplay">Punteggio: <span id="score">0</span></div>
+        <div id="text"></div>
         
         <div align="center">
             <div id="barra_sfondo" style="background-color: gray; width: 600px; margin: 10px">

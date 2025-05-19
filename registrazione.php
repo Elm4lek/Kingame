@@ -93,10 +93,33 @@ if ($signUpPhase == 1) {
         </form>
     </div>';
 } else {
-    $url = "data/States.json";
-    $response = file_get_contents($url);
-    $countries = json_decode($response, true);
+    $conn = new mysqli('localhost', 'root', '', 'kingame'); // Connessione al database
 
+    if ($conn->connect_error) {
+        die("Connessione fallita: " . $conn->connect_error);
+    }
+
+    // Classifica per nazione
+    $query = "SELECT ISO,Nome_Nazione
+            FROM nazioni 
+            ORDER BY Nome_Nazione";
+    
+    $result = $conn->query($query);
+    $data;
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $data[] = array(
+                "ID" => $row["ISO"],
+                "nome" => $row["Nome_Nazione"]
+            );
+        }
+    }
+    if (!$result) {
+        die("Errore nella query: " . $conn->error);
+    }
+    /* echo "<pre>";
+    print_r($data);
+    echo "</pre>"; */
     echo '
     <div class="form-container">
         <h2>' . $TEXT['register_complete_title'] . '</h2>
@@ -113,9 +136,8 @@ if ($signUpPhase == 1) {
 
             <label for="paesi">' . $TEXT['register_select_country'] . '</label>
             <select name="paese" id="paese">';
-                foreach ($countries as $country) {
-                    if ($country['cca2'] === 'IL') continue;
-                    echo '<option value="' . $country['cca2'] . '">' . $country['name']['common'] . '</option>';
+                foreach ($data as $country) {
+                    echo '<option value="' . $country['ID'] . '">' . $country['nome']. '</option>';
                 }
             echo '</select>
 

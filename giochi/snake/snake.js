@@ -163,7 +163,7 @@ function moveSnake() {
     gameState.snake.unshift(head);
     
     if (head.x === gameState.food.x && head.y === gameState.food.y) {
-        scoreboard.addScore(1);
+        scoreboard.addScore(5);
         generateFood();
     } else {
         gameState.snake.pop();

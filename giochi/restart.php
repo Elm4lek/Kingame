@@ -6,7 +6,6 @@ $tipo = "crea";
 $giocoNome = $_SESSION["gioco"]["gioco"];
 $username = $_SESSION["username"];
 $numero = $_SESSION['gioco']['numero'];
-unset($_SESSION["gioco"]);
 $server = "localhost";
 $conn = new mysqli($server,"root","","kingame")  or die (mysql_error());
 

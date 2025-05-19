@@ -296,23 +296,23 @@ function Scoreboard() {
     }
 
     this.addScore = function (sc) {
-        score += sc;
+        score += sc*(1+this.getLevel());
     }
 
     this.addLines = function (line) {
 
         switch (line) {
             case 1:
-                this.addScore(10);
+                this.addScore(5);
                 break;
             case 2:
-                this.addScore(20);
+                this.addScore(12);
                 break;
             case 3:
-                this.addScore(30);
+                this.addScore(18);
                 break;
             case 4:
-                this.addScore(40);
+                this.addScore(24);
                 break;
             default:
                 return;
@@ -539,7 +539,6 @@ async function gameOver(){
     .catch(error => {
         console.error('Error:', error); // Handle any errors
     });
-
 }
 
 async function restart() {

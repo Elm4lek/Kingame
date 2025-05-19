@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 };
 $haPosto = true;
-if(!empty($_SESSION['gioco'])){
+if(!empty($_SESSION['gioco']) && !$_SESSION["gioco"]["isFinished"]){
     file_get_contents("http://localhost/Kingame/MultiplayerSystem/removeSession.php?giocatore=".$_SESSION["username"]."&stanza=".$_SESSION['gioco']['stanza']);
 }
 $tipo = $_POST['tipo'];
@@ -15,7 +15,7 @@ $server = "localhost";
 $conn = new mysqli($server,"root","","kingame")  or die (mysql_error());
 
 if($tipo == 'crea'){
-    $sql = "SELECT * FROM stanze INNER JOIN giochi ON stanze.Gioco = giochi.ID"; 
+    $sql = "SELECT * FROM stanze INNER JOIN giochi ON stanze.Gioco = giochi.ID ORDER BY stanze.Id"; 
     $result = $conn->query($sql);
     
     if ($result->num_rows > 0) {
@@ -28,13 +28,14 @@ if($tipo == 'crea'){
         }
     }
     $stanza = 0;
-
     if(isset($data)){
         $stanza = $data[sizeof($data)-1]['stanza'];
         $stanza++;
+        
     }
     $data = ['stanza' => $stanza, 'gioco' => $gioco];
     $sessione = ['giocatore' => $nome,'stanza' => $stanza];
+
 }
 else{
     $stanza = $_POST['stanza'];
@@ -72,6 +73,7 @@ if($haPosto){
     $_SESSION['gioco']['gioco'] = $gioco;
     $_SESSION['gioco']['numero'] = $numero;
     $_SESSION['gioco']['giocatore'] = $nome;
+    $_SESSION['gioco']['isFinished'] = false;
     header("Location: StanzaAttesa.php");
     exit;
 }

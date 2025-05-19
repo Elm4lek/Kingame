@@ -17,9 +17,10 @@ var stato;
 var wMax = 600;
 var w = wMax;
 var timer;
+var winValue = 149;
 // costanti e parametri per la configurazioen del gioco
 var PILLOLA = 1;
-var DELTA_ENERGIA = 10;
+var DELTA_ENERGIA = 1;
 var FUNGO_MENO = 10;
 var OSTACOLO = 3;
 var SFONDO = 0;
@@ -30,7 +31,7 @@ var sato;
 var contFunghi;
 
 var pathImg = "img1/";
-
+var DISTANZA = 4;
 // dichiarazione variabili di lavoro
 var i = 0;
 var j = 0;
@@ -40,8 +41,6 @@ var countPillole = 0;
 var R = 10;
 var C = 20;
 //cacciatore
-var cacciatoreX = 5;
-var cacciatoreY = 5;
 var cacciatoreId = null;
 var celleAttraversate = [];
 
@@ -161,9 +160,10 @@ function inizializza() {
   music();
 }
 
-function replay() {
+async function replay() {
   // Fai il refresh della pagina
-  location.reload();
+  let dati = await restart();
+  post("http://localhost/kingame/MultiplayerSystem/CreaStanza.php",dati);
 }
 
 function clessidra() {
@@ -173,7 +173,7 @@ function clessidra() {
 
   document.getElementById("barra_tempo").style.width = w + "px";
   if (w == 0) {
-    gameOver();
+    gameOver(null);
   } else if (w <= wMax / 5) {
     document.getElementById("barra_tempo").style.backgroundColor = "red";
   } else if (w <= wMax / 3) {
@@ -185,11 +185,14 @@ function clessidra() {
 timer = setInterval("clessidra()", 300);
 
 function win() {
-  document.getElementById("energia").innerHTML = "HAI VINTO";
-  document.getElementById("replayButton").style.display = "block";
+  energia = Math.floor(energia*1.5);
+  
+  document.getElementById("energia").innerHTML = energia;
+  document.getElementById("text").innerHTML = "HAI VINTO";
   finito();
   winMusic();
   ominoBloccato = true;
+  endGame();
 }
 
 function finito() {

@@ -13,7 +13,6 @@ if (!isset($_SESSION['lang'])) {
 if (isset($_GET['lang']) && in_array($_GET['lang'], ['it', 'en'])) {
     $_SESSION['lang'] = $_GET['lang'];
 }
-
 $lang = $_SESSION['lang'];
 include_once "../../lang/$lang.php";
 ?>
@@ -37,7 +36,7 @@ include_once "../../lang/$lang.php";
 
         canvas {
             position: absolute;
-            top: 45%;
+            top: 55%;
             left: 50%;
             width: 640px;
             height: 640px;
