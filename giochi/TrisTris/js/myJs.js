@@ -159,7 +159,7 @@ function unsetClickPiano() {
 }
 
 async function getPiano() {
-    const response = await fetch("http://localhost/kingame/giochi/tristris/getPiano.php");
+    const response = await fetch("http://localhost:8080/kingame/giochi/tristris/getPiano.php");
     const risposta = await response.json();
     let piano = [];
     for (let i = 0; i < risposta.length; i++) {
