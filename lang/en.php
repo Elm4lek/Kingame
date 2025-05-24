@@ -107,8 +107,8 @@ $TEXT = [
     "safety_instructions" => "Safety information and instructions for use",
     "terms_paragraph6" => "Our products must be used in accordance with the provided guidelines.",
     "contacts" => "Contacts",
-    "terms_paragraph7" => "If you have any further questions regarding our terms and conditions, you can contact us at another email address: <a href='mailto:info@GAMES.com'>info@GAMES.com</a>."
-
-
+    "terms_paragraph7" => "If you have any further questions regarding our terms and conditions, you can contact us at another email address: <a href='mailto:info@GAMES.com'>info@GAMES.com</a>.",
+    "get_flag01"=>"Congratulation!",
+    "wrong_flag01"=>"haha nice try"
 ];
 ?>

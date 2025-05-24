@@ -148,7 +148,6 @@ $nazione = isset($data['nazione']) ? $data['nazione'] : 'N/A';
                     <span>🎮 <strong><?= $TEXT['games_played'] ?>:</strong> <?php echo $n_giochi;?></span>
                     <span>⭐ <strong><?= $TEXT['points'] ?>:</strong> <?php echo $punteggio;?></span>
                     <span>📅 <strong><?= $TEXT['account_created'] ?>:</strong> <?php echo $data_reg;?></span>
-                    <span>📧 <strong><?= $TEXT['email'] ?>:</strong> <?php echo $email;?></span>
                     <span>🌍 <strong><?= $TEXT['country'] ?>:</strong> <?php echo $nazione;?></span>
                 </div>
             </div>

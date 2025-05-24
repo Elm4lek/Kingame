@@ -2,6 +2,9 @@ var piano = new Array();
 
 var pianoV = new Array();
 
+var statoCelle=[];
+var waitAdversary;
+
 var username;
 var stanza;
 var staGiocando;
@@ -9,6 +12,9 @@ var staGiocando;
 for(let i = 0; i < 9; i++){
     piano[i] = new Array();
     pianoV[i] = 0;
+    statoCelle[i] = {
+        canMove: true
+    }
     for(let j = 0; j < 9; j++){
         piano[i][j] = 0;
     }
@@ -80,8 +86,6 @@ function mossa(gPos, pPos){
         }
         else{
             var ris1 = checkVittoria(pianoV);
-            console.log("80:"+ris1);
-            console.log(pianoV);
             if(ris1 == false){
                 for(let i = 0 ; i < 9; i++){
                     if(piano[i].length === 0)
@@ -117,15 +121,23 @@ function mossa(gPos, pPos){
 } */
 
 document.addEventListener("DOMContentLoaded", function(event) {
+    init();
 })
-
 function init(){
     username = document.getElementById("username").value;
+    console.log(document.getElementById("username"));
+    console.log(username);
     document.getElementById("username").remove();
     stanza = document.getElementById("stanza").value;
+    console.log(document.getElementById("stanza"));
+    console.log(stanza);
     document.getElementById("stanza").remove();
     staGiocando = (document.getElementById("inizia").value == true);
+    console.log(document.getElementById("inizia"));
+    console.log(staGiocando);
     document.getElementById("inizia").remove();
+    if(staGiocando)
+        setClickPiano(piano);
 }
 
 function cellClickHandler(x, y) {
@@ -137,6 +149,7 @@ function cellClickHandler(x, y) {
 const cellListeners = {}; // store listeners for later removal
 
 function setClickPiano(trisPiano) {
+    console.log("chiamata");
     for (const [x, row] of trisPiano.entries()) {
         for (const [y, value] of row.entries()) {
             if (value === 0) {
@@ -144,6 +157,7 @@ function setClickPiano(trisPiano) {
                 const handler = cellClickHandler(x, y);
                 cellListeners[`${x}-${y}`] = handler;
                 cell.addEventListener("click", handler);
+                console.log(x + "-" + y);
             }
         }
     }
@@ -159,11 +173,23 @@ function unsetClickPiano() {
 }
 
 async function getPiano() {
+<<<<<<< Updated upstream
     const response = await fetch("http://localhost:8080/kingame/giochi/tristris/getPiano.php");
+=======
+    const response = await fetch("http://localhost/kingame/giochi/tristris/getPiano.php?stanza="+stanza);
+>>>>>>> Stashed changes
     const risposta = await response.json();
-    let piano = [];
+    
+    for(let i = 0; i < 9; i++){
+        piano[i] = new Array();
+        for(let j = 0; j < 9; j++){
+            piano[i][j] = 0;
+        }
+    }
     for (let i = 0; i < risposta.length; i++) {
-        let cell = (risposta[i]["giocatore"] === giocatore)? 1 : 2;
+        console.log(risposta);
+        let cell = (risposta[i]["giocatore"] === username)? 1 : 2;
+
         piano[risposta[i]["x"]][risposta[i]["y"]] = cell;
     }
     return piano;
@@ -174,35 +200,94 @@ async function getUpdateCell() {
     for(const [x, value] of newPiano.entries()){
         for(const [y, cell] of value.entries()){
             if(piano[x][y] != cell){
-                return cell;
+                return [x,y,cell];
+            }
+        }
+    }
+    return [false,false,false];
+}
+
+async function handleAdversaryMove(){
+    let [x,y,cell] = await getUpdateCell();
+    if(!cell){
+        return false;
+    }
+    clearInterval(waitAdversary);
+    piano[x][y] = cell;
+    setStatoCell(x, false);
+}
+
+function setStatoCell(x, isPlayer){
+    let stat = checkVittoria(piano[x]);
+    if(!stat){
+        pianoV[x] = piano[x][stat[0]];
+        if(!checkVittoria(pianoV)){
+            if(isPlayer) win()
+            else lose();
+            return;
+        }
+        for(let [trisPiano,index] of piano.entries()){
+            let cellaS = checkVittoria(trisPiano); 
+            if(!cellaS){
+                statoCelle[index] = {
+                    canMove: false,
+                    v: cellaS
+                }
+            }
+            else{
+                statoCelle[index] = {
+                    canMove: true
+                }
+            }
+        }
+    }else{
+        for(let [trisPiano,index] of piano.entries()){
+            if(index == y){
+                statoCelle[index] = {
+                    canMove: true
+                }
+            }
+            else{
+                statoCelle[index] = {
+                    canMove: false
+                }
             }
         }
     }
 }
 
-function giocatoreMove(x){
+function giocatoreMove(){
     staGiocando = true;
     disegnaPiano();
-    setClickPiano(x);
+    let movePiano = [];
+    for(let [cell,index] of statoCelle.entries()){
+        if(cell.canMove)
+            movePiano.push(piano[i]);
+    }
+    setClickPiano(movePiano);
 }
 
 function disegnaPiano(){
     for(let i=0; i<9; i++){
+        let cellStat = statoCelle[i];
+        let canSelect = cellStat.canMove;
+        if(canSelect){
+            document.getElementById(i).classList.add("nonSelezionato");
+        }
+        else{
+            if(document.getElementById(i).classList.contains("nonSelezionato"))
+                document.getElementById(i).classList.remove("nonSelezionato");
+        }
         for(let j=0; j<9; j++){
             let cell = piano[i][j];
             let htmlCell = document.getElementById(i+"-"+j);
             if(cell == 1){
-                htmlCell.className = "cell player-select";
+                if(!htmlCell.classList.contains("player-select"))
+                    htmlCell.classList.add("player-select");
             }
             if(cell == 2){
                 htmlCell.className = "cell adversary-select";
             }
-        }
-        let vittoria = checkVittoria(piano[x]);
-        
-        if(Array.isArray(vittoria)){
-            for(let j of piano)
-                document.getElementById(x+"-"+j).
         }
     }
     document.body.className = staGiocando? "player-turn" : "adversary-turn";
@@ -211,8 +296,53 @@ function disegnaPiano(){
 function selectCell(x,y){
     staGiocando = false;
     unsetClickPiano();
-    let vittoria = checkVittoria(piano[x]);
-    if(Array.isArray(vittoria)){
-        document.getElementById(x);
+    piano[x][y] = 1;
+    setStatoCell(x, true);
+    disegnaPiano();
+    let vittoria = checkVittoria(pianoV);
+    if(vittoria){
+        win();
     }
+    updateCell(x,y);
+    waitAdversary = setInterval(()=>{
+        console.log("handle adversary move");
+        console.log(piano);
+        handleAdversaryMove()}
+    ,3000);
+}
+
+function updateCell(x, y){
+    let params = {
+        stanza : stanza,
+        x : x,
+        y : y,
+    }
+    post(params,"http://localhost/Kingame/giochi/tristris/update.php");
+}
+
+function win(){
+    gameOver();
+}
+function lose(){
+    gameOver();
+}
+function gameOver(){
+    clearInterval(waitAdversary);
+}
+
+async function post(params,url){
+    console.log(params,url);
+    fetch(url, {
+        method: 'POST', // Specify the HTTP method
+        headers: {
+            'Content-Type': 'application/json', // Tell the server that you're sending JSON
+        },
+        body: JSON.stringify(params), // Convert the JavaScript object to a JSON string
+    })
+    .then(result => {
+        console.log('Success:', result); // Handle the response
+    })
+    .catch(error => {
+        console.error('Error:', error); // Handle any errors
+    });
 }
