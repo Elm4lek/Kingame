@@ -21,7 +21,7 @@ if (session_status() == PHP_SESSION_NONE) {
         <div class="bottom main container">
             <select id="nomeGioco" onchange="selezionaGioco()" >
                 <?php 
-                $data = file_get_contents("http://localhost/kingame/MultiplayerSystem/CercaStanze.php");
+                $data = file_get_contents("http://localhost:8080/kingame/MultiplayerSystem/CercaStanze.php");
                 echo "<option value='Tutto'>Tutto</option>";
                 $stanze = json_decode($data);
                 $games = [];

@@ -59,7 +59,7 @@ include_once "lang/$lang.php";
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="http://localhost/kingame/index.php">KinGames</a>
+      <a class="navbar-brand" href="http://localhost:8080/kingame/index.php">KinGames</a>
     </div>
     <?php if (isset($_SESSION['username'])): ?>
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -82,8 +82,8 @@ include_once "lang/$lang.php";
           <img src=<?php echo "'".$_SESSION["img_profilo"]."'"?> width="40" height="40" style="border-radius: 50%;">
         </a>
           <ul class="dropdown-menu">
-              <li><a href="http://localhost/kingame/impostazione.php"><?= $TEXT['impostazione'] ?></a></li>
-            <li><a href="http://localhost/kingame/logout.php">Logout</a></li>
+              <li><a href="http://localhost:8080/kingame/impostazione.php"><?= $TEXT['impostazione'] ?></a></li>
+            <li><a href="http://localhost:8080/kingame/logout.php">Logout</a></li>
           
     
 </ul>
