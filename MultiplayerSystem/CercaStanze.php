@@ -1,5 +1,5 @@
 <?php
-require_once '../db_connect.php';
+require_once __DIR__ . '/../db_connect.php';
 
 $sql = "SELECT stanze.Id as id_stanza, giochi.ID as nome_gioco, numero_giocatori, count(*) as giocatori_presenti
         FROM stanze INNER JOIN giochi ON stanze.Gioco = giochi.ID INNER JOIN sessione on sessione.Stanza = stanze.Id

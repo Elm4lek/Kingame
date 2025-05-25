@@ -12,12 +12,12 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], ['it', 'en'])) {
 
 $lang = $_SESSION['lang'];
 
-$lang_file = __DIR__ . "/lang/$lang.php"; 
+$lang_file =   "/lang/$lang.php"; 
 if (file_exists($lang_file)) {
     include_once $lang_file;
 } else {
-    if (file_exists(__DIR__ . "/lang/it.php")) {
-        include_once __DIR__ . "/lang/it.php";
+    if (file_exists(  "/lang/it.php")) {
+        include_once   "/lang/it.php";
     }
 }
 

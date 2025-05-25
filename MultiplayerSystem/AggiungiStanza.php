@@ -2,12 +2,16 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 };
+require_once __DIR__ . '/../config.php';
 ?>
 
 <html>
 <head>
 <script type="text/javascript" src="AggiungiStanza.js" defer></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+  const host = '<?= host ?>'; 
+</script>
 <link rel="stylesheet" href="myStyle.css">
 </head>
 <body>
@@ -21,7 +25,7 @@ if (session_status() == PHP_SESSION_NONE) {
         <div class="bottom main container">
             <select id="nomeGioco" onchange="selezionaGioco()" >
                 <?php 
-                $data = file_get_contents("http://localhost/kingame/MultiplayerSystem/CercaStanze.php");
+                $data = file_get_contents("http://".host."/kingame/MultiplayerSystem/CercaStanze.php");
                 echo "<option value='Tutto'>Tutto</option>";
                 $stanze = json_decode($data);
                 $games = [];

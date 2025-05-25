@@ -2,6 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 };
+include "../menu.php";
 
 function getPositionalClass($i, $j) {
     $rows = ['north', 'center', 'south'];
@@ -20,6 +21,9 @@ function getCellClass($i, $j) {
 <html>
     <head>
         <script type="text/javascript" src="js/myJs.js"></script>
+        <script type="text/javascript">
+            const host = '<?= host ?>';
+        </script>
         <link rel="stylesheet" href="myCss.css">
         <style>
             html{
