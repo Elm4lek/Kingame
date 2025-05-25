@@ -1,5 +1,7 @@
 <?php
-$db_servername = "localhost";
+require_once "config.php";
+
+$db_servername = host;
 $db_username = "root";
 $db_password = ""; 
 $dbname = "kingame";
