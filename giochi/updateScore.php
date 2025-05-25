@@ -21,7 +21,6 @@ if (isset($post["score"])) {
 
     $server = "localhost";
     $conn = new mysqli($server, "root", "", "kingame");
-    echo $score;
     if ($conn->connect_error) {
         die("Connessione fallita: " . $conn->connect_error);
     }

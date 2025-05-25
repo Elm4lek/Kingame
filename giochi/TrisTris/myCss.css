@@ -159,9 +159,15 @@ html{
 }
 
 .adversary-select {
+  right: 32px;
+  top: 32px;
   width: 32px;
   height: 32px;
-  border: 3px solid black;  /* contorno */
+}
+.adversary-select:before{
+  width: 32px;
+  height: 32px;
+  border: 2px solid black;  /* contorno */
   border-radius: 50%;       /* lo rende circolare */
   background-color: transparent; /* trasparente all'interno */
 }

@@ -28,13 +28,11 @@ if (!isset($_SESSION['username'])) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .centro {
-          
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 4px;
-            
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
         }
         .contenitore {
             position: relative;

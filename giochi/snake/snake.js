@@ -117,7 +117,7 @@ async function handleRestart() {
         // Verifica se i dati sono validi prima di procedere
         if (data && typeof data === 'object') {
             if (data.multiplayer || (data.tipo && data.gioco)) {
-                post("http://localhost:8080/kingame/MultiplayerSystem/CreaStanza.php", data);
+                post("http://localhost/kingame/MultiplayerSystem/CreaStanza.php", data);
                 return;
             }
         }
@@ -306,7 +306,7 @@ function Scoreboard() {
 async function gameOver() {
     const params = { score: scoreboard.getScore() };
     try {
-        const response = await fetch("http://localhost:8080/kingame/giochi/updateScore.php", {
+        const response = await fetch("http://localhost/kingame/giochi/updateScore.php", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(params)
@@ -331,7 +331,7 @@ async function gameOver() {
 
 async function restart() {
     try {
-        const response = await fetch("http://localhost:8080/kingame/giochi/restart.php");
+        const response = await fetch("http://localhost/kingame/giochi/restart.php");
         const text = await response.text();
         console.log("Risposta grezza:", text);
         

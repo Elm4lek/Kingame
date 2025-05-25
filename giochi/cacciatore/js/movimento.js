@@ -223,7 +223,7 @@ function endGame(){
   let params = {
       score: energia
   };
-  fetch("http://localhost:8080/kingame/giochi/updateScore.php", {
+  fetch("http://localhost/kingame/giochi/updateScore.php", {
       method: 'POST', // Specify the HTTP method
       headers: {
           'Content-Type': 'application/json', // Tell the server that you're sending JSON
@@ -255,7 +255,7 @@ function post(path, params, method='post') {
 
 async function restart() {
     try {
-        const response = await fetch("http://localhost:8080/kingame/giochi/restart.php");
+        const response = await fetch("http://localhost/kingame/giochi/restart.php");
 
         // Leggi la risposta come testo (non JSON, per ora)
         const text = await response.text(); // ricevi la risposta come testo
