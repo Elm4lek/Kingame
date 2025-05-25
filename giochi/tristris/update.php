@@ -11,11 +11,7 @@
     $x = $post["x"];
     $y = $post["y"];
     
-    $conn = mysqli_connect("localhost","root","","kingame") or die (mysql_error());
-
-    if ($conn->connect_error) {
-        die("Connessione fallita: " . $conn->connect_error);
-    }
+    require_once '../../db_connect.php';
     $username = $_SESSION["username"];
     echo "INSERT INTO tristris(stanza,giocatore,x,y) VALUES(".$stanza.",'".$username."',".$x.",".$y.");";
     $stmt = $conn->prepare("INSERT INTO tristris(stanza,giocatore,x,y) VALUES(".$stanza.",'".$username."',".$x.",".$y.");");

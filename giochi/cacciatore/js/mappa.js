@@ -163,7 +163,7 @@ function inizializza() {
 async function replay() {
   // Fai il refresh della pagina
   let dati = await restart();
-  post("http://localhost:8080/kingame/MultiplayerSystem/CreaStanza.php",dati);
+  post("http://localhost/kingame/MultiplayerSystem/CreaStanza.php",dati);
 }
 
 function clessidra() {

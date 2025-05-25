@@ -109,6 +109,10 @@ $TEXT = [
     "contacts" => "Contacts",
     "terms_paragraph7" => "If you have any further questions regarding our terms and conditions, you can contact us at another email address: <a href='mailto:info@GAMES.com'>info@GAMES.com</a>.",
     "get_flag01"=>"Congratulation!",
-    "wrong_flag01"=>"haha nice try"
+    "wrong_flag01"=>"haha nice try",
+    "profile_updated_success_message" => "Your profile has been updated successfully! 🎉",
+    "profile_updated_error_generic" => "An error occurred while updating the profile.",
+    "profile_updated_success_heading" => "Profile Updated",
+    "profile_updated_error_heading" => "Update Error",
 ];
 ?>

@@ -4,11 +4,7 @@
     }
     $stanza = $_GET["stanza"];
     
-    $conn = mysqli_connect("localhost","root","","kingame") or die (mysql_error());
-
-    if ($conn->connect_error) {
-        die("Connessione fallita: " . $conn->connect_error);
-    }
+    require_once '../../db_connect.php';
     $username = $_SESSION["username"];
     $stmt = $conn->prepare("SELECT * FROM tristris WHERE stanza=".$stanza.";");
     $stmt->execute();

@@ -3,7 +3,7 @@ async function fetchStanze() {
     console.log("fetched");
     elencoStanze.splice(0, elencoStanze.length);
 
-    const response = await fetch("http://localhost:8080/kingame/MultiplayerSystem/CercaStanze.php");
+    const response = await fetch("http://localhost/kingame/MultiplayerSystem/CercaStanze.php");
     const risposta = await response.json();
 
     for (let i = 0; i < risposta.length; i++) {
@@ -138,7 +138,7 @@ function cambiaStanza(value){
         numero:value.numero
     };
     console.log(parametri);
-    post('http://localhost:8080/kingame/MultiplayerSystem/CreaStanza.php',parametri);
+    post('http://localhost/kingame/MultiplayerSystem/CreaStanza.php',parametri);
 }
 
 function removeChildNode(padre){

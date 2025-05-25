@@ -4,24 +4,23 @@ if (session_status() == PHP_SESSION_NONE) {
 };
 $haPosto = true;
 if(!empty($_SESSION['gioco']) && !$_SESSION["gioco"]["isFinished"]){
-    file_get_contents("http://localhost:8080/Kingame/MultiplayerSystem/removeSession.php?giocatore=".$_SESSION["username"]."&stanza=".$_SESSION['gioco']['stanza']);
+    file_get_contents("http://localhost/Kingame/MultiplayerSystem/removeSession.php?giocatore=".$_SESSION["username"]."&stanza=".$_SESSION['gioco']['stanza']);
 }
 $tipo = $_POST['tipo'];
 $gioco = $_POST['gioco'];
 $numero = $_POST['numero'];
 $nome = $_SESSION['username'];
 
-$server = "localhost";
-$conn = new mysqli($server,"root","","kingame")  or die (mysql_error());
+require_once '../db_connect.php';
 
 if($tipo == 'crea'){
-    $sql = "SELECT * FROM stanze INNER JOIN giochi ON stanze.Gioco = giochi.ID ORDER BY stanze.Id"; 
+    $sql = "SELECT * FROM stanze INNER JOIN giochi ON stanze.Gioco = giochi.ID ORDER BY stanze.Id";
     $result = $conn->query($sql);
-    
+
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $data[] = array(
-                "stanza" => (int)$row["Id"],  
+                "stanza" => (int)$row["Id"],
                 "gioco" => $row["Nome"],
                 "numero" => (int)$row["Numero_Giocatori"]
             );
@@ -31,7 +30,7 @@ if($tipo == 'crea'){
     if(isset($data)){
         $stanza = $data[sizeof($data)-1]['stanza'];
         $stanza++;
-        
+
     }
     $data = ['stanza' => $stanza, 'gioco' => $gioco];
     $sessione = ['giocatore' => $nome,'stanza' => $stanza];
@@ -42,22 +41,22 @@ else{
     $sql = "SELECT Numero_Giocatori FROM giochi WHERE Id = '".$gioco."'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc(); // oppure fetch_row() se preferisci un array numerico
+        $row = $result->fetch_assoc();
         $numero = $row["Numero_Giocatori"];
     }
-    $sql = "SELECT COUNT(*) FROM sessione WHERE Stanza = ".$stanza; 
+    $sql = "SELECT COUNT(*) FROM sessione WHERE Stanza = ".$stanza;
     $giocatori = $conn->query($sql);
 
-    if($giocatori === $numero){
+    if($giocatori === $numero){ // Mantenuta la logica originale di confronto
         $haPosto = false;
     }else{
         $sessione = ['giocatore' => $nome,'stanza' => $stanza];
     }
 }
-$sql = "SELECT Nome FROM giochi WHERE ID = ".$gioco.""; 
+$sql = "SELECT Nome FROM giochi WHERE ID = ".$gioco."";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc(); // oppure fetch_row() se preferisci un array numerico
+    $row = $result->fetch_assoc();
     $gioco = $row["Nome"];
 }
 
@@ -87,7 +86,7 @@ else{
 }
 function post($tipo, $data) {
     // Check for errors
-    $url = 'http://localhost:8080/kingame/MultiplayerSystem/AggiornaDB.php';
+    $url = 'http://localhost/kingame/MultiplayerSystem/AggiornaDB.php';
     $data = http_build_query(['tipo' => $tipo, 'data' => $data]);
 
     $options = [

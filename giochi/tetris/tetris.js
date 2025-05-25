@@ -105,7 +105,7 @@ addEventListener('click', async function () {
     }
     else if(scoreboard.isGameOver()){
         let dati = await restart();
-        post("http://localhost:8080/kingame/MultiplayerSystem/CreaStanza.php",dati);
+        post("http://localhost/kingame/MultiplayerSystem/CreaStanza.php",dati);
     }
     scoreboard.addLevel();
 });
@@ -525,7 +525,7 @@ async function gameOver(){
     let params = {
         score: scoreboard.getScore()
     };
-    fetch("http://localhost:8080/kingame/giochi/updateScore.php", {
+    fetch("http://localhost/kingame/giochi/updateScore.php", {
         method: 'POST', // Specify the HTTP method
         headers: {
             'Content-Type': 'application/json', // Tell the server that you're sending JSON
@@ -543,7 +543,7 @@ async function gameOver(){
 
 async function restart() {
     try {
-        const response = await fetch("http://localhost:8080/kingame/giochi/restart.php");
+        const response = await fetch("http://localhost/kingame/giochi/restart.php");
 
         // Leggi la risposta come testo (non JSON, per ora)
         const text = await response.text(); // ricevi la risposta come testo

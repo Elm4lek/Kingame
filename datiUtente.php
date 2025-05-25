@@ -2,7 +2,7 @@
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
-};
+}
 if (!isset($_SESSION['lang'])) {
     $_SESSION['lang'] = 'it';
 }
@@ -11,33 +11,64 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], ['it', 'en'])) {
 }
 
 $lang = $_SESSION['lang'];
-include_once "lang/$lang.php";
-?>
-<?php
-if(isset($_SESSION)){
-    $conn = mysqli_connect("localhost","root","","kingame") or die (mysql_error());
 
-    if ($conn->connect_error) {
-        die("Connessione fallita: " . $conn->connect_error);
+$lang_file = __DIR__ . "/lang/$lang.php"; 
+if (file_exists($lang_file)) {
+    include_once $lang_file;
+} else {
+    if (file_exists(__DIR__ . "/lang/it.php")) {
+        include_once __DIR__ . "/lang/it.php";
     }
-    $username = $_SESSION["username"];
-    $stmt = $conn->prepare("SELECT NickName, UserName, Data_registrazione, img_profile,COUNT(User), SUM(Punteggio), email, Nome_Nazione FROM utenti LEFT JOIN sessione ON UserName = User LEFT JOIN nazioni ON nazioni.ISO = utenti.ISO WHERE UserName = '".$username."';");
-    $stmt->execute();
-    $result = $stmt->get_result();
+}
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $_SESSION['nickname'] = $row["NickName"];
-        $_SESSION['username'] = $row["UserName"];
-        $_SESSION['data_reg'] = $row["Data_registrazione"];
-        $_SESSION['img_profilo'] = $row["img_profile"];
-        $_SESSION['n_giochi'] = $row["COUNT(User)"];
-        $_SESSION['punteggio'] = $row["SUM(Punteggio)"];
-        $_SESSION['email'] = $row["email"];
-        $_SESSION['nazione'] = $row["Nome_Nazione"];
-    } else {
-        echo "Utente non trovato";
+if (isset($_SESSION["username"])) {
+    require_once 'db_connect.php'; 
+
+
+    $username_session = $_SESSION["username"];
+
+    $sql = "SELECT
+                utenti.NickName,
+                utenti.UserName,
+                utenti.Data_registrazione,
+                utenti.img_profile,
+                COUNT(sessione.User) AS NumGiochi,
+                SUM(sessione.Punteggio) AS TotPunteggio,
+                utenti.email,
+                nazioni.Nome_Nazione
+            FROM utenti
+            LEFT JOIN sessione ON utenti.UserName = sessione.User
+            LEFT JOIN nazioni ON nazioni.ISO = utenti.ISO
+            WHERE utenti.UserName = ?
+            GROUP BY
+                utenti.NickName,
+                utenti.UserName,
+                utenti.Data_registrazione,
+                utenti.img_profile,
+                utenti.email,
+                nazioni.Nome_Nazione";
+
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt) {
+        $stmt->bind_param("s", $username_session);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $_SESSION['nickname'] = $row["NickName"];
+            $_SESSION['username'] = $row["UserName"];
+            $_SESSION['data_reg'] = $row["Data_registrazione"];
+            $_SESSION['img_profilo'] = $row["img_profile"];
+            $_SESSION['n_giochi'] = $row["NumGiochi"];
+            $_SESSION['punteggio'] = $row["TotPunteggio"];
+            $_SESSION['email'] = $row["email"];
+            $_SESSION['nazione'] = $row["Nome_Nazione"];
+        } else {
+            echo "Utente non trovato";
+        }
+        $stmt->close();
     }
-    $conn->close();
 }
 ?>

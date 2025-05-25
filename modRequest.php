@@ -1,4 +1,5 @@
-<?php if (session_status() == PHP_SESSION_NONE) {
+<?php
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 if (!isset($_SESSION['lang'])) {
@@ -9,84 +10,53 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], ['it', 'en'])) {
 }
 
 $lang = $_SESSION['lang'];
-include_once "lang/$lang.php";
+include_once "lang/$lang.php"; 
 ?>
 <?php
+require_once 'db_connect.php'; 
 
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-};
+$update_successful = false;
+$error_message = '';
 
-$conn = new mysqli('localhost','root','', 'Kingame');
+if (isset($_SESSION["username"]) && isset($_POST['nome'], $_POST['email'], $_POST['password'], $_POST['foto'])) {
+    $newNickname = $_POST['nome'];
+    $newEmail = $_POST['email'];
+    $newPwd = MD5($_POST['password']); 
+    $newFoto = $_POST['foto'];
+    $username = $_SESSION["username"];
 
-if ($conn->connect_error) {
-    die("Connessione fallita: " . $conn->connect_error);
-}
+    $stmt = $conn->prepare("UPDATE utenti SET NickName = ?, Email = ?, Password = ?, img_profile = ? WHERE UserName = ?");
 
-$newNickname = $_POST['nome'];
-$newEmail = $_POST['email'];
-$newPwd = MD5($_POST['password']);
-$newFoto = $_POST['foto'];
+    if ($stmt === false) {
+        $error_message = "Errore nella preparazione della query: " . $conn->error;
+    } else {
+        $stmt->bind_param("sssss", $newNickname, $newEmail, $newPwd, $newFoto, $username);
 
-$username = $_SESSION["username"];
-
-$stmt = $conn->prepare("UPDATE utenti SET NickName = ?, Email = ?, Password = ?, img_profile = ? WHERE UserName = ?");
-
-if ($stmt === false) {
-    echo "Errore nella prepare: " . $conn->error;
-    exit();
-}
-
-$stmt->bind_param("sssss", $newNickname, $newEmail, $newPwd, $newFoto, $username);
-
-if ($stmt->execute()) {
-    
+        if ($stmt->execute()) {
+            $update_successful = true;
+            $_SESSION['nickname'] = $newNickname; 
+            $_SESSION['img_profilo'] = $newFoto; 
+            $_SESSION['email'] = $newEmail; 
+        } else {
+            $error_message = "Errore durante l'aggiornamento del profilo: " . $stmt->error;
+            
+        }
+        $stmt->close();
+    }
 } else {
-    echo "Errore nell'execute: " . $stmt->error;
-}
-?>
-
-<?php
-
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-};
-
-$conn = new mysqli('localhost','root','', 'Kingame');
-
-if ($conn->connect_error) {
-    die("Connessione fallita: " . $conn->connect_error);
+    $error_message = "Dati mancanti per l'aggiornamento del profilo o sessione non valida.";
 }
 
-$newNickname = $_POST['nome'];
-$newEmail = $_POST['email'];
-$newPwd = MD5($_POST['password']);
-$newFoto = $_POST['foto'];
+$conn->close();
 
-$username = $_SESSION["username"];
 
-$stmt = $conn->prepare("UPDATE utenti SET NickName = ?, Email = ?, Password = ?, img_profile = ? WHERE UserName = ?");
-
-if ($stmt === false) {
-    echo "Errore nella prepare: " . $conn->error;
-    exit();
-}
-
-$stmt->bind_param("sssss", $newNickname, $newEmail, $newPwd, $newFoto, $username);
-
-if ($stmt->execute()) {
-    
-} else {
-    echo "Errore nell'execute: " . $stmt->error;
-}
 ?>
 
 <!DOCTYPE html>
-<html lang="it">
-<head>
+<html lang="<?= $lang ?>"> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profilo modificato</title>
+    <title><?= $TEXT['profile_updated_title'] ?? 'Profilo Modificato' ?></title>
     <style>
         body {
             font-family: 'Gochi Hand', cursive;
@@ -107,12 +77,15 @@ if ($stmt->execute()) {
             width: 100%;
         }
         h1 {
-            color: #4CAF50;
+            color: #4CAF50; 
             font-size: 2.5em;
             margin-bottom: 20px;
         }
+        .error-heading { 
+             color: #D8000C; 
+        }
         .message {
-            color: #4CAF50;
+            color: #333; 
             font-size: 1.2em;
             margin-bottom: 30px;
         }
@@ -124,6 +97,8 @@ if ($stmt->execute()) {
             border-radius: 4px;
             font-size: 16px;
             cursor: pointer;
+            text-decoration: none;
+            display: inline-block; 
         }
         .home-button:hover {
             background-color: #45a049;
@@ -133,13 +108,18 @@ if ($stmt->execute()) {
 <body>
 
     <div class="profile-update-container">
-        <h1>Profilo Modificato</h1>
-        <p class="message">Il tuo profilo è stato aggiornato con successo! 🎉</p>
-        <form action="index.php">
-            <button type="submit" class="home-button">Torna alla Home</button>
-        </form>
+        <?php if ($update_successful): ?>
+            <h1><?= $TEXT['profile_updated_success_heading'] ?? 'Profilo Modificato' ?></h1>
+            <p class="message"><?= $TEXT['profile_updated_success_message'] ?? 'Il tuo profilo è stato aggiornato con successo! 🎉' ?></p>
+            <form action="index.php" method="get"> <button type="submit" class="home-button"><?= $TEXT['registration_back_home'] ?? 'Torna alla Home' ?></button>
+            </form>
+        <?php else: ?>
+            <h1 class="error-heading"><?= $TEXT['profile_updated_error_heading'] ?? 'Errore Aggiornamento' ?></h1>
+            <p class="message"><?= htmlspecialchars($error_message ?: ($TEXT['profile_updated_error_generic'] ?? 'Si è verificato un errore durante l\'aggiornamento del profilo.')) ?></p>
+            <form action="modifica.php" method="get"> <button type="submit" class="home-button"><?= $TEXT['registration_back_home'] ?? 'Torna alla Modifica' ?></button>
+            </form>
+        <?php endif; ?>
     </div>
 
 </body>
 </html>
-

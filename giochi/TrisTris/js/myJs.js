@@ -174,7 +174,7 @@ function unsetClickPiano() {
 
 async function getPiano() {
 <<<<<<< Updated upstream
-    const response = await fetch("http://localhost:8080/kingame/giochi/tristris/getPiano.php");
+    const response = await fetch("http://localhost/kingame/giochi/tristris/getPiano.php");
 =======
     const response = await fetch("http://localhost/kingame/giochi/tristris/getPiano.php?stanza="+stanza);
 >>>>>>> Stashed changes

@@ -13,11 +13,7 @@ $lang = $_SESSION['lang'];
 include_once "lang/$lang.php";
 ?>
 <?php
-$conn = new mysqli('localhost', 'root', '', 'kingame');
-
-if ($conn->connect_error) {
-    die("Connessione fallita: " . $conn->connect_error);
-}
+require_once 'db_connect.php';
 
 $username = $_POST['username'];
 $nickname = $_POST['nickname'];

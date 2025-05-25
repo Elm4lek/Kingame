@@ -109,7 +109,11 @@ $TEXT = [
     "contacts" => "Contatti",
     "terms_paragraph7" => "Se hai ulteriori domande riguardo ai nostri termini e condizioni, puoi contattarci ad un ulteriore indirizzo mail: <a href='mailto:info@GAMES.com'>info@GAMES.com</a>.",
     "get_flag01"=>"Congratulazione!",
-    "wrong_flag01"=>"haha ci hai provato"
+    "wrong_flag01"=>"haha ci hai provato",
+    "profile_updated_success_message" => "Il tuo profilo e stato aggiornato con successo! 🎉",
+    "profile_updated_error_generic" => "Si è verificato un errore durante l'aggiornamento del profilo.",
+    "profile_updated_success_heading" => "Profilo Modificato",
+    "profile_updated_error_heading" => "Errore Aggiornamento",
 
 
 
