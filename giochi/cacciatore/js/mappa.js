@@ -1,4 +1,5 @@
 // omino
+
 var ominoX = 0;
 var ominoY = 0;
 var ominoBloccato = false;
@@ -163,7 +164,7 @@ function inizializza() {
 async function replay() {
   // Fai il refresh della pagina
   let dati = await restart();
-  post("http://localhost/kingame/MultiplayerSystem/CreaStanza.php",dati);
+  post("http://"+host+"/kingame/MultiplayerSystem/CreaStanza.php",dati);
 }
 
 function clessidra() {

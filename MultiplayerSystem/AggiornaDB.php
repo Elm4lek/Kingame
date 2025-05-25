@@ -1,20 +1,11 @@
 <?php
-// Create connection
-$conn = new mysqli("localhost", "root", "", "kingame");
+require_once __DIR__ . '/../db_connect.php';
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Get data from POST request
 $tipo = $_POST['tipo'];
 $data = $_POST['data'];
 echo "<pre>";
 print_r($data);
 echo "</pre>";
-// Debugging: Print received data
-// var_dump($tipo, $data);
 
 if ($tipo == 'crea') {
     aggiungiStanza($data);
@@ -46,7 +37,7 @@ function aggiungiGiocatore($data) {
     $giocatore = $data[1]['giocatore'];
     $stanza = $data[1]['stanza'];
 
-    $sql = "INSERT INTO sessione (Stanza, User) 
+    $sql = "INSERT INTO sessione (Stanza, User)
             VALUES (".$stanza.", '".$giocatore."')";
     echo $sql;
     if ($conn->query($sql) === TRUE) {
@@ -56,7 +47,6 @@ function aggiungiGiocatore($data) {
     }
 }
 
-// Close connection
 $conn->close();
 
 ?>

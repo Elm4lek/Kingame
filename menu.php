@@ -15,6 +15,8 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], ['it', 'en'])) {
 
 $lang = $_SESSION['lang'];
 include_once "lang/$lang.php";
+
+require_once 'config.php';
 ?>
 
 <!DOCTYPE html>
@@ -59,14 +61,14 @@ include_once "lang/$lang.php";
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="http://localhost/kingame/index.php">KinGames</a>
+      <a class="navbar-brand" href="http://<?= host ?>/kingame/index.php">KinGames</a>
     </div>
     <?php if (isset($_SESSION['username'])): ?>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="http://localhost/kingame/giochi.php"  style="font-family: 'Arial', cursive"><?= $TEXT['menu_giochi'] ?></a></li>
-        <li><a href="http://localhost/kingame/classifica.php" style="font-family: 'Arial', cursive"><?= $TEXT['menu_classifica'] ?></a></li>
-        <li><a href="http://localhost/kingame/chisiamo.php" style="font-family: 'Arial', cursive"><?= $TEXT['menu_chi_siamo'] ?></a></li>
+        <li><a href="http://<?= host ?>/kingame/giochi.php"  style="font-family: 'Arial', cursive"><?= $TEXT['menu_giochi'] ?></a></li>
+        <li><a href="http://<?= host ?>/kingame/classifica.php" style="font-family: 'Arial', cursive"><?= $TEXT['menu_classifica'] ?></a></li>
+        <li><a href="http://<?= host ?>/kingame/chisiamo.php" style="font-family: 'Arial', cursive"><?= $TEXT['menu_chi_siamo'] ?></a></li>
       
     <li style="float: right;">
         <a href="?lang=<?= $_SESSION['lang'] === 'it' ? 'en' : 'it' ?>">
@@ -82,8 +84,8 @@ include_once "lang/$lang.php";
           <img src=<?php echo "'".$_SESSION["img_profilo"]."'"?> width="40" height="40" style="border-radius: 50%;">
         </a>
           <ul class="dropdown-menu">
-              <li><a href="http://localhost/kingame/impostazione.php"><?= $TEXT['impostazione'] ?></a></li>
-            <li><a href="http://localhost/kingame/logout.php">Logout</a></li>
+              <li><a href="http://<?= host ?>/kingame/impostazione.php"><?= $TEXT['impostazione'] ?></a></li>
+            <li><a href="http://<?= host ?>/kingame/logout.php">Logout</a></li>
           
     
 </ul>

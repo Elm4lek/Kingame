@@ -6,8 +6,7 @@ $tipo = "crea";
 $giocoNome = $_SESSION["gioco"]["gioco"];
 $username = $_SESSION["username"];
 $numero = $_SESSION['gioco']['numero'];
-$server = "localhost";
-$conn = new mysqli($server,"root","","kingame")  or die (mysql_error());
+require_once '../db_connect.php';
 
 $sql = "SELECT Id FROM giochi WHERE Nome = '".$giocoNome."'"; 
 $result = $conn->query($sql);

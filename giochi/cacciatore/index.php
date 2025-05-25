@@ -53,6 +53,9 @@ include_once "../../lang/$lang.php";
     </style>
     <script type="text/javascript" src="js/mappa.js"></script>
     <script type="text/javascript" src="js/movimento.js"></script>
+    <script type="text/javascript">
+        const host = '<?= host ?>';
+    </script>
 </head>
 <body onload="inizializza(); initCacciatore();" onkeydown="checkKeyDown(event);" onkeypress="checkKeyPress(event)">
     <div id="gameContainer">

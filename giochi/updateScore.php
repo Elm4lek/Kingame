@@ -19,11 +19,7 @@ if (isset($post["score"])) {
     $stanza = $_SESSION["gioco"]["stanza"];
     $user = $_SESSION["username"];
 
-    $server = "localhost";
-    $conn = new mysqli($server, "root", "", "kingame");
-    if ($conn->connect_error) {
-        die("Connessione fallita: " . $conn->connect_error);
-    }
+    require_once '../db_connect.php';
 
     // Usa una query preparata per evitare SQL injection
     $sql = $conn->prepare("UPDATE sessione SET punteggio = ? WHERE User = ? AND Stanza = ?");

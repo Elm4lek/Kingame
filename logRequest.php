@@ -65,11 +65,7 @@ include_once "lang/$lang.php";
 
 <div class="welcome-container">
     <?php
-    $conn = new mysqli('localhost', 'root', '', 'kingame');
-
-    if ($conn->connect_error) {
-        die("Connessione fallita: " . $conn->connect_error);
-    }
+    require_once 'db_connect.php'; 
 
     if (!empty($_POST['username']) && !empty($_POST['password'])) {
         $nickname = trim($_POST['username']);
@@ -77,9 +73,10 @@ include_once "lang/$lang.php";
     } else {
         if (isset($_SESSION['username']) && isset($_SESSION['password'])) {
             $nickname = $_SESSION['username'];
-            $password = $_SESSION['password'];
+            $password = $_SESSION['password']; 
         } else {
-            echo '<div class="welcome-message">' . $TEXT['session_expired'] . '</div>';
+            echo '<div class="welcome-message">' . ($TEXT['session_expired'] ?? 'Sessione scaduta o dati non forniti.') . '</div>';
+            echo '<form action="login.php"><button class="home-button" type="submit">' . ($TEXT['back_to_login'] ?? 'Torna al Login') . '</button></form>';
             exit;
         }
     }
@@ -92,22 +89,30 @@ include_once "lang/$lang.php";
     if ($stmt->num_rows > 0) {
         $stmt->bind_result($dbSecPassword);
         $stmt->fetch();
-        if (md5($password) === $dbSecPassword) {
-            
+        if (md5($password) === $dbSecPassword) { 
+            $stmt->close(); 
             $stmt = $conn->prepare("SELECT NickName FROM utenti WHERE Username = ?");
             $stmt->bind_param("s", $nickname);
             $stmt->execute();
-            $stmt->store_result();
-            
-            $stmt->bind_result($name);
-            $stmt->fetch();
+            $stmt->store_result(); 
 
-            echo "<div class='welcome-message'>{$TEXT['welcome_message']}, $name!</div>";
-            echo '<form action="giochi.php">
-                    <button class="home-button" type="submit">' . $TEXT['go_to_games'] . '</button>
-                  </form>';
-            $_SESSION['username'] = $nickname;
-            $_SESSION['password'] = $password;
+            if ($stmt->num_rows > 0) { 
+                $stmt->bind_result($name);
+                $stmt->fetch();
+
+                echo "<div class='welcome-message'>{$TEXT['welcome_message']}, " . htmlspecialchars($name) . "!</div>";
+                echo '<form action="giochi.php">
+                        <button class="home-button" type="submit">' . $TEXT['go_to_games'] . '</button>
+                      </form>';
+                $_SESSION['username'] = $nickname;
+                $_SESSION['password'] = $password; 
+            } else {
+                echo "<div class='welcome-message'>{$TEXT['login_failed']}</div>";
+                echo '<form action="login.php">
+                        <button class="home-button" type="submit">' . $TEXT['back_to_login'] . '</button>
+                      </form>';
+            }
+
         } else {
             echo "<div class='welcome-message'>{$TEXT['login_failed']}</div>";
             echo '<form action="login.php">
@@ -121,7 +126,9 @@ include_once "lang/$lang.php";
               </form>';
     }
 
-    $stmt->close();
+    if (isset($stmt) && $stmt instanceof mysqli_stmt) { 
+        $stmt->close();
+    }
     $conn->close();
     ?>
 </div>

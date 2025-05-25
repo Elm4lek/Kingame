@@ -44,6 +44,9 @@ include_once "../../lang/$lang.php";
             background-color: #000;
         }
     </style>
+    <script type="text/javascript">
+            const host = '<?= host ?>'; 
+    </script>
 </head>
 
 <body>

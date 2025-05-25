@@ -169,7 +169,7 @@ function unsetClickPiano() {
 }
 
 async function getPiano() {
-    const response = await fetch("http://localhost/kingame/giochi/tristris/getPiano.php?stanza="+stanza);
+    const response = await fetch("http://"+host+"/kingame/giochi/tristris/getPiano.php?stanza="+stanza);
     const risposta = await response.json();
     let piano = [];
     for(let i = 0; i < 9; i++){
@@ -320,7 +320,7 @@ function updateCell(x, y){
         x : x,
         y : y,
     }
-    post(params,"http://localhost/Kingame/giochi/tristris/update.php");
+    post(params,"http://"+host+"/Kingame/giochi/tristris/update.php");
 }
 
 function win(){

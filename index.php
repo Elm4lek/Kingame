@@ -11,7 +11,9 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], ['it', 'en'])) {
 $lang = $_SESSION['lang'];
 include_once "lang/$lang.php";
 ?>
-<?php include 'menu.php'; ?>
+<?php 
+include 'menu.php'; 
+?>
 
 <!DOCTYPE html>
 

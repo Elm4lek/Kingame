@@ -28,11 +28,13 @@ if (!isset($_SESSION['username'])) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .centro {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 4px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+
         }
         .contenitore {
             position: relative;
@@ -110,11 +112,11 @@ if (!isset($_SESSION['username'])) {
         }
 
     </style>
-</head> 
+</head>
 <body>
     <div class="centro">
-        <?php 
-        $conn = new mysqli('localhost','root','', 'kingame');
+        <?php
+        require_once 'db_connect.php'; // Connessione al database tramite db_connect.php
 
         $sql = "SELECT * FROM `giochi`";
         $result = $conn->query($sql);
@@ -124,12 +126,12 @@ if (!isset($_SESSION['username'])) {
                         <h3>".$row["Nome"]."</h3>
                         <form method='POST' action='MultiplayerSystem/CreaStanza.php'>
                             <input type='hidden' name='tipo' value='crea'>
-                            <input type='hidden' name='gioco' value='".$row["ID"]."'> 
-                            <input type='hidden' name='numero' value='".$row["Numero_Giocatori"]."'> 
-                            <input type='submit' value='crea stanza'> 
+                            <input type='hidden' name='gioco' value='".$row["ID"]."'>
+                            <input type='hidden' name='numero' value='".$row["Numero_Giocatori"]."'>
+                            <input type='submit' value='crea stanza'>
                         </form>
                         <form method='POST' action='MultiplayerSystem/AggiungiStanza.php'>
-                            <input type='submit' value='aggiungi'> 
+                            <input type='submit' value='aggiungi'>
                         </form>
                         <div class='".$row["Nome"]." mask'></div>
                     </div>";
@@ -159,7 +161,7 @@ if (!isset($_SESSION['username'])) {
             });
         }
     });
-    }); 
+    });
 </script>
 
 </body>

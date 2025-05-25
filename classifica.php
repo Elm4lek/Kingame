@@ -11,24 +11,19 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], ['it', 'en'])) {
     $_SESSION['lang'] = $_GET['lang'];
 }
 
-$lang = $_SESSION['lang']; 
-include_once "lang/$lang.php"; 
+$lang = $_SESSION['lang'];
+include_once "lang/$lang.php";
 ?>
 
 <?php
-include 'menu.php'; // Includi il menu
-$conn = new mysqli('localhost', 'root', '', 'kingame'); // Connessione al database
+require_once 'db_connect.php';
+include 'menu.php';
 
-if ($conn->connect_error) {
-    die("Connessione fallita: " . $conn->connect_error);
-}
 
-// Filtri per la classifica
 $filter = isset($_GET['filter']) ? $_GET['filter'] : 'global';
 $selectedCountry = isset($_GET['country']) ? $_GET['country'] : '';
 $selectedGame = isset($_GET['game']) ? $_GET['game'] : '';
 
-// Query per la classifica globale
 $query = "SELECT u.NickName,u.UserName, u.img_profile, SUM(s.Punteggio) AS punti, u.ISO
           FROM utenti u
           JOIN sessione s ON u.UserName = s.User
@@ -36,15 +31,13 @@ $query = "SELECT u.NickName,u.UserName, u.img_profile, SUM(s.Punteggio) AS punti
           ORDER BY punti DESC";
 
 if ($filter == 'nazione') {
-    // Classifica per nazione
-    $query = "SELECT nazioni.Nome_Nazione, nazioni.ISO, SUM(sessione.Punteggio) AS punti 
-              FROM nazioni 
-              LEFT JOIN utenti ON nazioni.ISO = utenti.ISO 
-              LEFT JOIN sessione ON utenti.UserName = sessione.User 
+    $query = "SELECT nazioni.Nome_Nazione, nazioni.ISO, SUM(sessione.Punteggio) AS punti
+              FROM nazioni
+              LEFT JOIN utenti ON nazioni.ISO = utenti.ISO
+              LEFT JOIN sessione ON utenti.UserName = sessione.User
               GROUP BY nazioni.Nome_Nazione, nazioni.ISO
               ORDER BY punti DESC";
 } elseif ($filter == 'locale' && $selectedCountry != '') {
-    // Classifica locale
     $query = "SELECT u.NickName,u.UserName, u.img_profile, SUM(s.Punteggio) AS punti, u.ISO
               FROM utenti u
               JOIN sessione s ON u.UserName = s.User
@@ -52,7 +45,6 @@ if ($filter == 'nazione') {
               GROUP BY u.UserName
               ORDER BY punti DESC";
 } elseif ($filter == 'gioco' && $selectedGame != '') {
-    // Classifica locale
     $query = "SELECT u.NickName,u.UserName, u.img_profile, SUM(s.Punteggio) AS punti
               FROM utenti u
               Join sessione s ON u.UserName = s.USer
@@ -86,7 +78,7 @@ if (!$result) {
     <div class="ranking-container">
         <header class="ranking-header">
             <h1><span>🏆</span> <?= $TEXT['ranking_title'] ?></h1>
-            
+
             <form method="GET" action="" class="filter-form">
                 <div class="filter-group">
                     <label for="filter"><?= $TEXT['filter_label'] ?>:</label>
@@ -143,40 +135,39 @@ if (!$result) {
                     <?php if ($result->num_rows > 0): ?>
                         <?php $position = 1; ?>
                         <?php while ($row = $result->fetch_assoc()): ?>
-                            <?php 
+                            <?php
                             $name = $row['NickName'] ?? $row['Nome_Nazione'] ?? 'Anonimo';
                             $points = $row['punti'] ?? 0;
-                            
-                            // Gestione avatar/bandiera
+
                             if ($filter == 'nazione') {
                                 $iso = strtolower($row['ISO'] ?? 'xx');
                                 $avatar = "https://flagcdn.com/48x36/$iso.png";
                                 $avatarClass = 'country-flag';
+                                unset($userName); // Ensure userName is not set for country view
                             } else {
-                                
                                 $userName = isset($row['UserName']) ? $row['UserName'] : 'N/A';
                                 $avatar = $row['img_profile'] ?? 'img/default-avatar.png';
                                 $avatarClass = 'player-avatar';
                             }
-                            
+
                             $medal = $position <= 3 ? 'medal-' . $position : '';
                             ?>
-                            
+
                             <tr class="<?= $medal ?>">
                                 <td><?= $position ?></td>
                                 <td>
-                                    <img src="<?= $avatar ?>" alt="<?= $name ?>" 
-                                        class="<?= $avatarClass ?> <?= isset($userName) ? 'clickable' : '' ?>" 
-                                        data-user-id="<?= $userName ?>">
+                                    <img src="<?= $avatar ?>" alt="<?= htmlspecialchars($name) ?>"
+                                        class="<?= $avatarClass ?> <?= isset($userName) && $userName !== 'N/A' ? 'clickable' : '' ?>"
+                                        <?= isset($userName) && $userName !== 'N/A' ? 'data-user-id="' . htmlspecialchars($userName) . '"' : '' ?>>
                                 </td>
                                 <td>
-                                    <span class="<?= isset($userName) ? 'clickable' : '' ?>" data-user-id="<?= $userName ?>">
+                                    <span class="<?= isset($userName) && $userName !== 'N/A' ? 'clickable' : '' ?>" <?= isset($userName) && $userName !== 'N/A' ? 'data-user-id="' . htmlspecialchars($userName) . '"' : '' ?>>
                                         <?= htmlspecialchars($name) ?>
                                     </span>
                                 </td>
                                 <td><?= number_format($points) ?></td>
                             </tr>
-                            
+
                             <?php $position++; ?>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -196,11 +187,11 @@ if (!$result) {
 document.querySelectorAll('.clickable').forEach(function(elem) {
     elem.addEventListener('click', function() {
         const userId = this.getAttribute('data-user-id');
+        if (!userId || userId === 'N/A') return;
 
-        // Crea un form nascosto e lo invia come POST
         const form = document.createElement('form');
         form.method = 'POST';
-        form.action = 'dettagliUtente.php'; // <-- Modifica qui con la tua destinazione
+        form.action = 'dettagliUtente.php';
 
         const input = document.createElement('input');
         input.type = 'hidden';
