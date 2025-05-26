@@ -132,7 +132,7 @@ html{
     color: red
 }
 .nonSelezionato{
-    background-color: #f3f3f3;
+    background-color: #b5abc2;
 }
 .vittoria-player{
     background-color: aqua;
@@ -259,4 +259,7 @@ html{
 }
 #playerBox img{
   border: 4px solid aqua;
+}
+.secondary-content:not(.nonSelezionato) .cell:not(.player-select):not(.adversary-select):hover {
+  background-color: aqua;
 }

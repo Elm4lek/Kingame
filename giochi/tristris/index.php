@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 };
 include "../../menu.php";
-
+$_SESSION["gioco"]["giocatore"] =json_decode(file_get_contents(("http://".host."/kingame/MultiplayerSystem/CercaGiocatori.php?stanza=".$_SESSION["gioco"]["stanza"])),true);
 function getPositionalClass($i, $j) {
     $rows = ['north', 'center', 'south'];
     $cols = ['west', 'center', 'est'];
@@ -17,6 +17,8 @@ function getCellClass($i, $j) {
 
     return $rows[intdiv($j, 3)] . '-' . $cols[$j % 3];
 }
+
+$playerStart = $_SESSION["gioco"]["giocatore"][0]["userName"]==$_SESSION["username"];
 ?>
 <html>
     <head>
@@ -154,18 +156,6 @@ function getCellClass($i, $j) {
                 border-top: 2px solid black;
             }
 
-            .vittoria{
-                color: red
-            }
-            .nonSelezionato{
-                background-color: #f3f3f3;
-            }
-            .vittoriaG1{
-                background-color: lightblue;
-            }
-            .vittoriaG2{
-                background-color: lightcoral;
-            }
 
         </style>
     </head>
@@ -173,7 +163,7 @@ function getCellClass($i, $j) {
         <?php
         echo '<input id="stanza" type="hidden" value="'.$_SESSION["gioco"]["stanza"].'">';
         echo '<input id="username" type="hidden" value="'.$_SESSION["username"].'">';
-        echo '<input id="inizia" type="hidden" value="'.isset($_SESSION["gioco"]["capo"]).'">';
+        echo '<input id="inizia" type="hidden" value="'.$playerStart.'">';
         ?>
         <div id="main" class="main-content">        
             <?php
@@ -193,7 +183,12 @@ function getCellClass($i, $j) {
         <div class="info-box minimized" id="infoBox">
             <div class="info-content" id="adversaryBox">
                 <div class="avatar">
-                <img src="https://raw.githubusercontent.com/Elm4lek/kingame_img/main/img_profilo/7.png">
+                <?php 
+                    if(!$playerStart) $i = 0;
+                    else $i = 1;
+                    $adversaryAvatar = $_SESSION["gioco"]["giocatore"][$i]["img"];
+                ?>
+                <img src=<?php echo "'".$adversaryAvatar."'"?>>
                 </div>
                 <span class="status-text">waiting</span>
             </div>
