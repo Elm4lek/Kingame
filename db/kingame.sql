@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 10, 2025 alle 23:22
+-- Creato il: Mag 26, 2025 alle 14:28
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -33,16 +33,18 @@ CREATE TABLE `giochi` (
   `Numero_Giocatori` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
 --
--- Dump dei dati per la tabella `nazioni`
+-- Dump dei dati per la tabella `giochi`
 --
+
 INSERT INTO `giochi` (`ID`, `Nome`, `Numero_Giocatori`) VALUES
 (1, 'tetris', 1),
 (2, 'tristris', 2),
 (3, 'cacciatore', 1),
 (4, 'snake', 1);
+
 -- --------------------------------------------------------
+
 --
 -- Struttura della tabella `nazioni`
 --
@@ -3689,6 +3691,66 @@ CREATE TABLE `sessione` (
   `Punteggio` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dump dei dati per la tabella `sessione`
+--
+
+INSERT INTO `sessione` (`User`, `Stanza`, `Punteggio`) VALUES
+('dc', 29, 814),
+('dc', 30, 0),
+('dc', 36, 55),
+('dc', 37, 80),
+('dc', 38, 85),
+('dc', 39, 5),
+('dyy', 8, 50),
+('dyy', 9, 252),
+('dyy', 10, 11),
+('dyy', 11, 2),
+('dyy', 12, 0),
+('dyy', 13, 145),
+('dyy', 14, 6),
+('dyy', 15, 223),
+('dyy', 41, 0),
+('dyy', 47, 200),
+('dyy', 48, 700),
+('dyy', 52, 20),
+('dyy', 54, 0),
+('Juns._.XD', 16, 0),
+('Juns._.XD', 17, 0),
+('Juns._.XD', 18, 0),
+('Juns._.XD', 19, 0),
+('Juns._.XD', 20, 59),
+('Juns._.XD', 21, 108),
+('Juns._.XD', 22, 160),
+('Juns._.XD', 23, 146),
+('Juns._.XD', 24, 23),
+('Juns._.XD', 25, 114),
+('Juns._.XD', 26, 0),
+('Juns._.XD', 27, 100),
+('Juns._.XD', 28, 0),
+('spie', 31, 30),
+('spie', 32, 24),
+('spie', 33, 10),
+('spie', 34, 330),
+('spie', 35, 0),
+('yy', 0, 1),
+('yy', 1, 0),
+('yy', 2, 0),
+('yy', 3, 1),
+('yy', 4, 5),
+('yy', 5, 0),
+('yy', 6, 10),
+('yy', 7, 0),
+('yy', 40, 5),
+('yy', 42, 0),
+('yy', 43, 0),
+('yy', 44, 0),
+('yy', 47, 700),
+('yy', 48, 200),
+('yy', 49, 20),
+('yy', 50, 45),
+('yy', 54, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -3701,6 +3763,63 @@ CREATE TABLE `stanze` (
   `Data` date NOT NULL,
   `Stato` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `stanze`
+--
+
+INSERT INTO `stanze` (`Id`, `Gioco`, `Data`, `Stato`) VALUES
+(0, 4, '2025-05-19', 1),
+(1, 4, '2025-05-19', 1),
+(2, 4, '2025-05-19', 1),
+(3, 4, '2025-05-19', 1),
+(4, 4, '2025-05-19', 1),
+(5, 1, '2025-05-19', 1),
+(6, 4, '2025-05-19', 1),
+(7, 1, '2025-05-19', 1),
+(8, 4, '2025-05-19', 1),
+(9, 3, '2025-05-19', 1),
+(10, 3, '2025-05-19', 1),
+(11, 3, '2025-05-19', 1),
+(12, 3, '2025-05-19', 1),
+(13, 3, '2025-05-19', 1),
+(14, 3, '2025-05-19', 1),
+(15, 3, '2025-05-19', 1),
+(16, 1, '2025-05-19', 1),
+(17, 3, '2025-05-19', 1),
+(18, 1, '2025-05-19', 1),
+(19, 1, '2025-05-19', 1),
+(20, 3, '2025-05-19', 1),
+(21, 1, '2025-05-19', 1),
+(22, 4, '2025-05-19', 1),
+(23, 3, '2025-05-19', 1),
+(24, 3, '2025-05-19', 1),
+(25, 3, '2025-05-19', 1),
+(26, 1, '2025-05-19', 1),
+(27, 1, '2025-05-19', 1),
+(28, 1, '2025-05-19', 1),
+(29, 1, '2025-05-19', 1),
+(30, 1, '2025-05-19', 1),
+(31, 1, '2025-05-19', 1),
+(32, 1, '2025-05-19', 1),
+(33, 4, '2025-05-19', 1),
+(34, 4, '2025-05-19', 1),
+(35, 1, '2025-05-19', 1),
+(36, 4, '2025-05-19', 1),
+(37, 4, '2025-05-19', 1),
+(38, 4, '2025-05-19', 1),
+(39, 4, '2025-05-19', 1),
+(40, 4, '2025-05-19', 1),
+(41, 2, '2025-05-23', 1),
+(42, 2, '2025-05-24', 1),
+(43, 2, '2025-05-25', 1),
+(44, 2, '2025-05-25', 1),
+(47, 2, '2025-05-26', 1),
+(48, 2, '2025-05-26', 1),
+(49, 4, '2025-05-26', 1),
+(50, 4, '2025-05-26', 1),
+(52, 1, '2025-05-26', 1),
+(54, 2, '2025-05-26', 0);
 
 -- --------------------------------------------------------
 
@@ -3825,6 +3944,37 @@ CREATE TABLE `tristris` (
   `y` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dump dei dati per la tabella `tristris`
+--
+
+INSERT INTO `tristris` (`stanza`, `giocatore`, `x`, `y`) VALUES
+(48, 'dyy', 0, 0),
+(48, 'yy', 0, 1),
+(48, 'yy', 0, 4),
+(48, 'yy', 0, 7),
+(48, 'dyy', 1, 0),
+(48, 'yy', 1, 1),
+(48, 'dyy', 1, 3),
+(48, 'dyy', 1, 6),
+(48, 'yy', 2, 7),
+(48, 'yy', 3, 1),
+(48, 'yy', 3, 4),
+(48, 'yy', 3, 7),
+(48, 'dyy', 4, 0),
+(48, 'dyy', 4, 1),
+(48, 'dyy', 4, 2),
+(48, 'yy', 5, 3),
+(48, 'yy', 5, 6),
+(48, 'dyy', 6, 0),
+(48, 'yy', 6, 1),
+(48, 'dyy', 6, 3),
+(48, 'yy', 6, 4),
+(48, 'dyy', 6, 6),
+(48, 'dyy', 7, 0),
+(48, 'dyy', 7, 3),
+(48, 'dyy', 7, 6);
+
 -- --------------------------------------------------------
 
 --
@@ -3846,7 +3996,11 @@ CREATE TABLE `utenti` (
 --
 
 INSERT INTO `utenti` (`UserName`, `NickName`, `Email`, `Password`, `Data_registrazione`, `ISO`, `img_profile`) VALUES
-('dyyy', 'YY', 'dnx0903@gmail.com', '4a7d1ed414474e4033ac29ccb8653d9b', '0000-00-00', 'IT', '');
+('dc', 'BytePhantoms', 'vd09433@gmail.com', 'f1b708bba17f1ce948dc979f4d7092bc', '2025-05-19', 'CN', 'https://raw.githubusercontent.com/Elm4lek/kingame_img/main/img_profilo/13.png'),
+('dyy', 'yy', 'dnx0903@gmail.com', 'f1b708bba17f1ce948dc979f4d7092bc', '2025-05-19', 'IT', 'https://raw.githubusercontent.com/Elm4lek/kingame_img/main/img_profilo/7.png'),
+('Juns._.XD', 'Junsito._.xd', 'junsito@yopmail.com', 'c221c04fbbe56d593ad71acbc8b69f99', '2025-05-19', 'SV', 'https://raw.githubusercontent.com/Elm4lek/kingame_img/main/img_profilo/12.png'),
+('spie', 'spie', 'spz06@gmail.com', 'e807f1fcf82d132f9bb018ca6738a19f', '2025-05-19', 'IT', 'https://raw.githubusercontent.com/Elm4lek/kingame_img/main/img_profilo/10.png'),
+('yy', 'YY', 'vd09433@gmail.com', 'f1b708bba17f1ce948dc979f4d7092bc', '2025-05-19', 'GS', 'https://raw.githubusercontent.com/Elm4lek/kingame_img/main/img_profilo/1.png');
 
 --
 -- Indici per le tabelle scaricate
@@ -3977,6 +4131,12 @@ ALTER TABLE `stanze`
 --
 ALTER TABLE `testi`
   ADD PRIMARY KEY (`name`);
+
+--
+-- Indici per le tabelle `tristris`
+--
+ALTER TABLE `tristris`
+  ADD PRIMARY KEY (`stanza`,`x`,`y`);
 
 --
 -- Indici per le tabelle `utenti`
