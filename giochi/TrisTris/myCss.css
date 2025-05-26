@@ -11,12 +11,13 @@ html{
     width: 40vw;
     height: 40vw;
     position: absolute;
+    justify-content: center;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
-    
+    background-color:white;
     display: flex;
     flex-wrap: wrap;
 }
@@ -157,17 +158,13 @@ html{
 .player-select:after {
   transform: rotate(-45deg);
 }
-
+/* 
 .adversary-select {
-  right: 32px;
-  top: 32px;
-  width: 32px;
+   width: 32px;
   height: 32px;
+  background: transparent;
+  box-shadow: 0 0 0 2px #333;
+  clip-path: circle(50%);
 }
-.adversary-select:before{
-  width: 32px;
-  height: 32px;
-  border: 2px solid black;  /* contorno */
-  border-radius: 50%;       /* lo rende circolare */
-  background-color: transparent; /* trasparente all'interno */
-}
+
+ */

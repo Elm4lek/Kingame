@@ -205,8 +205,6 @@ async function getUpdateCell() {
 
 async function handleAdversaryMove(){
     let [x,y,cell] = await getUpdateCell();
-    console.log("aaa",cell);
-    console.log(!cell);
     if(!cell){
         return false;
     }
@@ -289,8 +287,21 @@ function disegnaPiano(){
                     htmlCell.classList.add("player-select");
             }
             if(cell == 2){
-                if(!htmlCell.classList.contains("adversary-select"))
-                    htmlCell.classList.add("adversary-select");
+                if(!htmlCell.classList.contains("adversary-select")){
+                        htmlCell.classList.add("adversary-select");
+                        var svg = document.createElement("svg");
+                        svg.width = 32;
+                        svg.height = 32;
+                        htmlCell.appendChild(svg);
+                        var circle = document.createElement("circle");
+                        circle.cx = 16;
+                        circle.cy = 16;
+                        circle.r = 15;
+                        circle.fill = "none";
+                        circle.stroke = "#333"
+                        circle["stroke-width"]="2";
+                        svg.appendChild(circle);
+                    }
             }
         }
     }

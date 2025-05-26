@@ -2,7 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 };
-include "../menu.php";
+include "../../menu.php";
 
 function getPositionalClass($i, $j) {
     $rows = ['north', 'center', 'south'];
