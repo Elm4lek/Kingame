@@ -8,6 +8,7 @@ html{
     z-index: -1;
 }
 .main-content {
+    z-index: 100;
     width: 40vw;
     height: 40vw;
     position: absolute;
@@ -133,11 +134,11 @@ html{
 .nonSelezionato{
     background-color: #f3f3f3;
 }
-.vittoriaG1{
-    background-color: lightblue;
+.vittoria-player{
+    background-color: aqua;
 }
-.vittoriaG2{
-    background-color: lightcoral;
+.vittoria-adversary{
+    background-color: red;
 }
 .player-select {
   right: 32px;
@@ -168,3 +169,94 @@ html{
 }
 
  */
+
+#gameover-text{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #000;
+    align-content: center;
+    opacity: 0.8;
+}
+#gameover-text.in-progress{
+    background-color: transparent;
+    z-index: -1;
+}
+.info-box {
+    position: absolute;
+    height: 90%;
+    width: 100%;
+    background-color: transparent;
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex
+;
+    align-items: center;
+}
+
+/* Contenuto che si espande */
+.info-content {
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 50px;
+  transition:
+    width 0.6s ease,
+    background-color 0.6s ease,
+    transform 0.6s ease;
+}
+
+/* Stato espanso */
+.info-content.expanded {
+  width: 300px;
+}
+
+/* Immagine */
+.avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+.info-content.expanded .avatar img {
+  width: 70px;
+  height: 70px;
+}
+
+/* Testo che appare da sinistra */
+.status-text {
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition:
+    opacity 0.4s ease 0.2s,
+    transform 0.4s ease 0.2s;
+  font-weight: bold;
+  color: black;
+  white-space: nowrap;
+}
+
+.info-content.expanded .status-text {
+  opacity: 1;
+  transform: scaleX(1);
+}
+#adversaryBox{
+    position: absolute;
+    right: 1%;
+    top: 5%;
+    background-color: red;
+}
+#playerBox{
+    position: absolute;
+    left: 1%;
+    bottom: 5%;
+    background-color: aqua;
+}
+#adversaryBox img{
+  border: 4px solid red;
+}
+#playerBox img{
+  border: 4px solid aqua;
+}

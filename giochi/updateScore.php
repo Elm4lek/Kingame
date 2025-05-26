@@ -31,6 +31,14 @@ if (isset($post["score"])) {
         echo "Errore nell'aggiornamento del punteggio: " . $conn->error;
     }
 
+    // Usa una query preparata per evitare SQL injection
+    $sql = $conn->prepare("UPDATE stanze SET Stato = true WHERE Id = ".$stanza.";");
+    if ($sql->execute()) {
+        echo "Punteggio aggiornato con successo!";
+    } else {
+        echo "Errore nell'aggiornamento del punteggio: " . $conn->error;
+    }
+
     $sql->close();
     $conn->close();
 } else {

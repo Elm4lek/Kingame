@@ -25,7 +25,6 @@ $giocatore = json_decode($data);
         <?php echo "<input id='numero' type='hidden' value='".$numero."'>";?>
         <div class="main container" style="display: block">
             <?php
-                print_r($_SESSION);
                 echo '<div class="content testo">';
                 echo 'gioco : <p id="gioco">'. $gioco.'</p>';
                 echo '</div>';

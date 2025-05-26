@@ -1,4 +1,5 @@
 <?php
+include 'startGame.php';
 ?>
 <html>
     <head>

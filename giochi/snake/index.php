@@ -40,8 +40,8 @@ include_once "../../lang/$lang.php";
             position: absolute;
             top: 55%;
             left: 50%;
-            width: 640px;
-            height: 640px;
+            width: 550px;
+            height: 550px;
             margin: -320px 0 0 -320px;
             background-color: #000;
         }

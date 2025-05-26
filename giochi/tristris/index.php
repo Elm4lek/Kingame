@@ -173,7 +173,7 @@ function getCellClass($i, $j) {
         <?php
         echo '<input id="stanza" type="hidden" value="'.$_SESSION["gioco"]["stanza"].'">';
         echo '<input id="username" type="hidden" value="'.$_SESSION["username"].'">';
-        echo '<input id="inizia" type="hidden" value="'.($_SESSION["gioco"]["giocatore"]==$_SESSION["username"]).'">';
+        echo '<input id="inizia" type="hidden" value="'.isset($_SESSION["gioco"]["capo"]).'">';
         ?>
         <div id="main" class="main-content">        
             <?php
@@ -188,6 +188,21 @@ function getCellClass($i, $j) {
                 echo '</div></div>';
             }
             ?>
+            <div id="gameover-text" class = "in-progress"></div>
+        </div>
+        <div class="info-box minimized" id="infoBox">
+            <div class="info-content" id="adversaryBox">
+                <div class="avatar">
+                <img src="https://raw.githubusercontent.com/Elm4lek/kingame_img/main/img_profilo/7.png">
+                </div>
+                <span class="status-text">waiting</span>
+            </div>
+            <div class="info-content" id="playerBox">
+                <div class="avatar">
+                <img src=<?php echo "'".$_SESSION["img_profilo"]."'" ?>>
+                </div>
+                <span class="status-text">your turn</span>
+            </div>
         </div>
     </body>
 </html>

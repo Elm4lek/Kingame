@@ -86,20 +86,25 @@ function handleKeyPress(event) {
     }
 
     // Gestione direzioni con buffer per input rapidi
-    switch(event.code) {
+   switch (event.code) {
         case "ArrowLeft":
+        case "KeyA":
             if (gameState.direction !== "RIGHT") gameState.nextDirection = "LEFT";
             break;
         case "ArrowUp":
+        case "KeyW":
             if (gameState.direction !== "DOWN") gameState.nextDirection = "UP";
             break;
         case "ArrowRight":
+        case "KeyD":
             if (gameState.direction !== "LEFT") gameState.nextDirection = "RIGHT";
             break;
         case "ArrowDown":
+        case "KeyS":
             if (gameState.direction !== "UP") gameState.nextDirection = "DOWN";
             break;
     }
+
 }
 
 async function handleCanvasClick() {

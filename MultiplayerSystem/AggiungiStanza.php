@@ -23,21 +23,10 @@ require_once __DIR__ . '/../config.php';
             <div id = "aggiungiButtonInsert"></div>
         </div>
         <div class="bottom main container">
-            <select id="nomeGioco" onchange="selezionaGioco()" >
-                <?php 
-                $data = file_get_contents("http://".host."/kingame/MultiplayerSystem/CercaStanze.php");
-                echo "<option value='Tutto'>Tutto</option>";
-                $stanze = json_decode($data);
-                $games = [];
-                foreach($stanze as $stanza){
-                    if(!in_array($stanza->gioco,$games)){
-                        echo "<option value=".$stanza->gioco." data-numero=".$stanza->numero." data-id=".$stanza->ID.">".$stanza->gioco."</option>";
-                        array_push($games,$stanza->gioco);
-                    }
-                }
-                ?>
-            </select>
-            <div id="Stanza"></div>
+            <div id="Stanza">
+                <select id="codStanza" onchange="stanzaSelezionata()">
+                </select>
+            </div>
             <div id = "aggiungiButtonSelect"></div>
         </div>
         <input type="button" value="fetch" onclick="fetchStanze()"> 

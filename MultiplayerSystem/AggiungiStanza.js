@@ -17,15 +17,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
     init()
 });
 
-async function init(){
-    let element = document.getElementById("nomeGioco");
-    element.value = "Tutto";
-    
+async function init(){    
     await fetchStanze();
     selezionaGioco();
 }
 function selezionaGioco(){
-    var gioco = document.getElementById("nomeGioco").value;
     var stanze = [];
 
     var stanzeList;
@@ -45,9 +41,7 @@ function selezionaGioco(){
         myParent.appendChild(stanzeList);
     }
     for(let i = 0; i < elencoStanze.length; i++ ){
-        if(elencoStanze[i]['gioco'] === gioco || gioco === "Tutto"){
-            stanze.push(elencoStanze[i]['stanza']);
-        }
+        stanze.push(elencoStanze[i]['stanza']);
     }
     
     for(let i = 0; i < stanze.length; i++ ){

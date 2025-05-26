@@ -1,7 +1,7 @@
 var piano = new Array();
 
 var pianoV = new Array();
-
+var gameEnded = false;
 var statoCelle=[];
 var waitAdversary;
 
@@ -34,91 +34,15 @@ var vittoria = [
 ]
 
 function checkVittoria(piano){
+    console.log("piano:",piano);
     for(let i = 0; i < vittoria.length; i++){
         if(piano[vittoria[i][0]] == piano[vittoria[i][1]] && piano[vittoria[i][1]] == piano[vittoria[i][2]] && piano[vittoria[i][1]] != 0){
+            console.log([piano[vittoria[i][0]],piano[vittoria[i][1]],piano[vittoria[i][2]]])
             return vittoria[i];
         }
     }
     return false;
 }
-
-/* 
-function mossa(gPos, pPos){
-    if(piano[gPos][pPos] === 0){
-        if(giocatore){
-            piano[gPos][pPos] = 1;
-            document.getElementById(gPos+'-'+pPos).innerHTML = 'X';
-        }
-        else{
-            piano[gPos][pPos] = 2;
-            document.getElementById(gPos+'-'+pPos).innerHTML = 'O';
-        }
-        giocatore = !giocatore;
-        var ris = checkVittoria(piano[gPos]);
-        if(ris !== false){
-            for(let i = 0; i < 3; i ++)
-                document.getElementById(gPos+'-'+ris[i]).classList.add('vittoria');
-            piano[gPos].splice(0,piano[gPos].length);
-            if(giocatore){
-                document.getElementById(gPos).classList.add('vittoriaG1');
-                pianoV[gPos] = 1;
-            }
-            else{
-                document.getElementById(gPos).classList.add('vittoriaG2');
-                pianoV[gPos] = 2;
-            }
-        }
-
-        if(piano[pPos].length !== 0){
-            document.getElementById(pPos).classList.remove('nonSelezionato');
-            for(let i = 0 ; i < 9; i++){
-                if(i !== pPos)
-                    document.getElementById(i).classList.add('nonSelezionato');
-                for(let j = 0; j < 9; j ++){
-                    if(i !== pPos){
-                        document.getElementById(i+'-'+j).style.pointerEvents = 'none';
-                    }
-                    else{
-                        document.getElementById(i+'-'+j).style.pointerEvents = 'auto';
-                    }
-                }
-            }
-        }
-        else{
-            var ris1 = checkVittoria(pianoV);
-            if(ris1 == false){
-                for(let i = 0 ; i < 9; i++){
-                    if(piano[i].length === 0)
-                        document.getElementById(i).classList.add('nonSelezionato');
-                    else
-                        document.getElementById(i).classList.remove('nonSelezionato');
-                    for(let j = 0; j < 9; j ++){
-                        if(piano[i].length === 0){
-                            document.getElementById(i+'-'+j).style.pointerEvents = 'none';
-                        }
-                        else{
-                            document.getElementById(i+'-'+j).style.pointerEvents = 'auto';
-                        }
-                    }
-                }
-            }
-        }
-        console.log(pianoV);
-        var ris1 = checkVittoria(pianoV);
-        if(ris1 != false){
-
-            for(let i = 0 ; i < 9; i++){
-                document.getElementById(i).classList.remove('nonSelezionato');
-                for(let j = 0; j < 9; j ++)
-                    document.getElementById(i+'-'+j).style.pointerEvents = 'none';
-            }
-            if(giocatore)
-                alert('vittoria giocatore1');
-            else
-                alert('vittoria giocatore2');
-        }  
-    }
-} */
 
 document.addEventListener("DOMContentLoaded", function(event) {
     init();
@@ -129,12 +53,23 @@ function init(){
     stanza = document.getElementById("stanza").value;
     document.getElementById("stanza").remove();
     staGiocando = (document.getElementById("inizia").value == true);
+    console.log(document.getElementById("inizia").value);
     document.getElementById("inizia").remove();
+    console.log(staGiocando);
     if(staGiocando)
         setClickPiano(statoCelle);
+    else{
+        waitAdversary = setInterval(()=>{
+            console.log(piano);
+            handleAdversaryMove()}
+        ,3000);
+    }
+    cambiaGiocatore()
 }
 
 function cellClickHandler(x, y) {
+    console.log("game ended:",gameEnded);
+    if (gameEnded) return;
     return function () {
         selectCell(x, y);
     };
@@ -143,17 +78,17 @@ function cellClickHandler(x, y) {
 const cellListeners = {}; // store listeners for later removal
 
 function setClickPiano(trisPiano) {
+    console.log("game ended:",gameEnded);
+    if (gameEnded) return;
     console.log(trisPiano);
     for (let x = 0; x < 9; x++) {
         if(trisPiano[x].canMove)
             for (let y = 0; y<9; y++) {
-                console.log(piano[x][y]);
                 if (piano[x][y] === 0) {
                     let cell = document.getElementById(x + "-" + y);
                     const handler = cellClickHandler(x, y);
                     cellListeners[`${x}-${y}`] = handler;
                     cell.addEventListener("click", handler);
-                    console.log(x + "-" + y);
                 }
             }
     }
@@ -214,20 +149,14 @@ async function handleAdversaryMove(){
     giocatoreMove();
 }
 
-function setStatoCell(x,y, isPlayer){
+function setStatoCell(x, y, isPlayer){
     let stat = checkVittoria(piano[x]);
-    console.log(`${x}-${y}-${isPlayer}`,stat);
-
-    if(stat){
+    if(Array.isArray(stat)||Array.isArray(checkVittoria(piano[y]))){
         pianoV[x] = piano[x][stat[0]];
-        if(checkVittoria(pianoV)){
-            if(isPlayer) win()
-            else lose();
-            return;
-        }
-        for(let [trisPiano,index] of piano.entries()){
+        for(let [index,trisPiano] of piano.entries()){
             let cellaS = checkVittoria(trisPiano); 
-            if(!cellaS){
+            console.log(Array.isArray(cellaS),cellaS);
+            if(Array.isArray(cellaS)){
                 statoCelle[index] = {
                     canMove: false,
                     v: cellaS
@@ -238,6 +167,7 @@ function setStatoCell(x,y, isPlayer){
                     canMove: true
                 }
             }
+            console.log(statoCelle);
         }
     }else{
         for(let [index,pianoTris] of piano.entries()){
@@ -252,12 +182,18 @@ function setStatoCell(x,y, isPlayer){
                 }
             }
         }
-        console.log(statoCelle);
+    }
+    console.log("pianoV:",checkVittoria(pianoV));
+    if(Array.isArray(checkVittoria(pianoV))){
+        if(isPlayer) win()
+        else lose();
+        return;
     }
 }
 
 function giocatoreMove(){
     staGiocando = true;
+    cambiaGiocatore();
     let movePiano = [];
     for(let [cell,index] of statoCelle.entries()){
         if(cell.canMove)
@@ -270,10 +206,22 @@ function giocatoreMove(){
 function disegnaPiano(){
     for(let i=0; i<9; i++){
         let cellStat = statoCelle[i];
-        console.log("statocell"+i,cellStat);
         let canSelect = cellStat.canMove;
         if(!canSelect){
-            document.getElementById(i).classList.add("nonSelezionato");
+            if(pianoV[i]!=0){
+                if(pianoV[i]==1){
+                    document.getElementById(i).classList.add("vittoria-player");
+                }
+                else if(pianoV[i]==2){
+                    document.getElementById(i).classList.add("vittoria-adversary");
+                }
+                else{
+                    document.getElementById(i).classList.add("nonSelezionato");
+                }
+            }
+            else{
+                document.getElementById(i).classList.add("nonSelezionato");
+            }
         }
         else{
             if(document.getElementById(i).classList.contains("nonSelezionato"))
@@ -289,18 +237,21 @@ function disegnaPiano(){
             if(cell == 2){
                 if(!htmlCell.classList.contains("adversary-select")){
                         htmlCell.classList.add("adversary-select");
-                        var svg = document.createElement("svg");
-                        svg.width = 32;
-                        svg.height = 32;
+                        var svgNS = "http://www.w3.org/2000/svg";
+                        var svg = document.createElementNS(svgNS, "svg");
+                        svg.setAttribute("width", 32);
+                        svg.setAttribute("height", 32);
                         htmlCell.appendChild(svg);
-                        var circle = document.createElement("circle");
-                        circle.cx = 16;
-                        circle.cy = 16;
-                        circle.r = 15;
-                        circle.fill = "none";
-                        circle.stroke = "#333"
-                        circle["stroke-width"]="2";
+
+                        var circle = document.createElementNS(svgNS, "circle");
+                        circle.setAttribute("cx", 16);
+                        circle.setAttribute("cy", 16);
+                        circle.setAttribute("r", 15);
+                        circle.setAttribute("fill", "none");
+                        circle.setAttribute("stroke", "#333");
+                        circle.setAttribute("stroke-width", "2");
                         svg.appendChild(circle);
+
                     }
             }
         }
@@ -310,17 +261,17 @@ function disegnaPiano(){
 
 function selectCell(x,y){
     staGiocando = false;
+    cambiaGiocatore();
     unsetClickPiano();
     piano[x][y] = 1;
     setStatoCell(x,y, true);
     disegnaPiano();
     let vittoria = checkVittoria(pianoV);
-    if(vittoria){
+    if(Array.isArray(vittoria)){
         win();
     }
     updateCell(x,y);
     waitAdversary = setInterval(()=>{
-        console.log(piano);
         handleAdversaryMove()}
     ,3000);
 }
@@ -335,13 +286,39 @@ function updateCell(x, y){
 }
 
 function win(){
-    gameOver();
+    let score = 700;
+    gameOver(score,"you win");
 }
 function lose(){
-    gameOver();
+    let score = 200;
+    gameOver(score,"you lose");
 }
-function gameOver(){
+async function gameOver(score,text){
+    gameEnded = true;
+    console.log("gameOver");
+    unsetClickPiano();
+    disegnaPiano();
     clearInterval(waitAdversary);
+
+    const params = { score: score };
+    try {
+        const response = await fetch("http://"+host+"/kingame/giochi/updateScore.php", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(params)
+        });
+        
+        const text = await response.text();
+        console.log('Risposta grezza:', text);
+        
+    } catch (error) {
+        console.error('Errore invio score:', error);
+        return { success: false, error: error.message };
+    }
+
+    let gameoverText = document.getElementById("gameover-text");
+    gameoverText.classList.remove("in-progress");
+    gameoverText.innerHTML = text+"<br> score:"+score;
 }
 
 async function post(params,url){
@@ -359,4 +336,11 @@ async function post(params,url){
     .catch(error => {
         console.error('Error:', error); // Handle any errors
     });
+}
+
+function cambiaGiocatore(){
+    var id = staGiocando? "playerBox" : "adversaryBox";
+    var lastId = staGiocando? "adversaryBox" : "playerBox";
+    document.getElementById(id).classList.add("expanded");
+    document.getElementById(lastId).classList.remove("expanded");
 }
