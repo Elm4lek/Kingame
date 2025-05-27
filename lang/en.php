@@ -114,5 +114,7 @@ $TEXT = [
     "profile_updated_error_generic" => "An error occurred while updating the profile.",
     "profile_updated_success_heading" => "Profile Updated",
     "profile_updated_error_heading" => "Update Error",
+    "create" => "Create Room",
+    "add" => "Join Room",
 ];
 ?>
