@@ -34,8 +34,8 @@ img {
     justify-items: end;
     margin-right: 2%;
 }
-
-.player-img {clip-path: circle(25px at center);}
+/* 
+.player-img {clip-path: circle(25px at center);} */
 
 .player-img {
     margin-right: 8%;

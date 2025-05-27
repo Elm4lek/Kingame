@@ -479,21 +479,6 @@ function select(choice){
     }
 }
 
-function cancel(){
-    clearDialogBox();
-    let bag = document.getElementById("bag");
-    if(bag){
-        let parent = bag.parentElement;
-        parent.removeChild(bag);
-    }
-}
-
-function clearDialogBox(){
-    var box = document.getElementById("dialog-box");
-    while (box.firstChild) {
-        box.removeChild(box.lastChild);
-    }
-}
 function fight() {
     clearDialogBox();
     currentSelect = selectType.FIGHT;
@@ -880,30 +865,6 @@ function showPokemon(changePokemon = true, other) {
     });
 }
 
-function showBag() {
-    cancel();
-    const content = document.getElementById("content");
-    const bag = document.createElement("div");
-    bag.id = "bag";
-    content.appendChild(bag);
-
-    const bagLeft = document.createElement("div");
-    bagLeft.id = "bag-left";
-    const bagRight = document.createElement("div");
-    bagRight.id = "bag-right";
-    bag.appendChild(bagLeft);
-    bag.appendChild(bagRight);
-
-    const bagItems = document.createElement("div");
-    bagItems.id = "bag-items";
-    const bagBottom = document.createElement("div");
-    bagBottom.id = "bag-bottom";
-    bagRight.appendChild(bagItems);
-    bagRight.appendChild(bagBottom);
-
-    return bagItems;
-}
-
 function handleSelection(container, selectedId) {
     const lastSelected = document.getElementById(container.dataset.selected);
     if (lastSelected) lastSelected.classList.remove("item-selected");
@@ -1046,13 +1007,6 @@ function forcedChangePokemon(targetSide,i){
     console.log(" forced change pokemon side:",targetSide);
     changePokemon(targetSide,i);
     showBattleQueue(currentQueueIndex+1);
-}
-function showDialog(reason){
-    dialogBoxText(reason)
-}
-function dialogBoxText(text){
-    var box = document.getElementById("dialog-box");
-    box.innerHTML=text;
 }
 function checkMovesStatus(){
     for( let i = 0; i < 4; i++){
@@ -1239,7 +1193,3 @@ function endBattle(targetSide){
 init();
 
 window.select = select;
-window.fight = fight;
-window.cancel = cancel;
-window.selectFightMove = selectFightMove;
-window.playerTeam = playerTeam;

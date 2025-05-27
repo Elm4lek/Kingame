@@ -10,73 +10,142 @@
                             INNER JOIN pm_trainer USING(Trainer_ID)
                             WHERE ID = '".$username."';");
     $stmt->execute();
-    $stmt->get_result();
     $result = $stmt->get_result();
-    if ($result->num_rows > 0) {
+    if ($result->num_rows <= 0) {
+        
+        $stmt = $conn->prepare("SELECT COUNT(*) as id FROM pm_trainer");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $trainer_id = $row["id"];
+        }
+        else{
+            $trainer_id = 0;
+        }
+
+        $stmt = $conn->prepare("INSERT INTO pm_trainer(Trainer_ID, tipo) 
+                                VALUES(".$trainer_id.",'1');");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt = $conn->prepare("INSERT INTO pm_user(ID, Nome, livello, soldi,Trainer_ID) 
+                                VALUES('$username','$nickname',1,400,$trainer_id);");
+        $stmt->execute();
+        $result = $stmt->get_result();
+    }
+    $stmt = $conn->prepare("SELECT * FROM pm_user 
+                            INNER JOIN pm_trainer USING(Trainer_ID)
+                            WHERE ID = '".$username."';");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows >0) {
         $row = $result->fetch_assoc();
         $trainer = $row;
         //conn for user's bag items
         $stmt = $conn->prepare("SELECT * FROM pm_trainer 
                                 INNER JOIN pm_borsa USING(Trainer_ID)
                                 LEFT JOIN pm_oggetti USING(Oggetto_ID)
-                                WHERE Trainer_ID = '".$data["Trainer_ID"]."';");
+                                WHERE Trainer_ID = '".$trainer["Trainer_ID"]."';");
         $stmt->execute();
-        $stmt->get_result();
         $result = $stmt->get_result();
         $borsa = [];
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()){
-                $borsa = [$row];
+                $borsa[] = $row;
             }
         }
         
         //conn for user's pokemons
-        $stmt = $conn->prepare("SELECT * FROM pm_trainer 
+        $stmt = $conn->prepare("SELECT *
+                                FROM pm_trainer 
                                 INNER JOIN pm_squadra USING(Trainer_ID)
-                                INNER JOIN pm_mossa mossa1 ON pm_squadra.Mossa1 = mossa1.MT
-                                INNER JOIN pm_mossa mossa2 ON pm_squadra.Mossa2 = mossa2.MT
-                                INNER JOIN pm_mossa mossa3 ON pm_squadra.Mossa3 = mossa3.MT
-                                INNER JOIN pm_mossa mossa4 ON pm_squadra.Mossa4 = mossa4.MT
                                 INNER JOIN pokemon USING(Pokedex)
                                 INNER JOIN pm_img USING(Pokedex)
-                                INNER JOIN pm_tipo tipo1 USING(Pokedex) ON pokemon.tipo1 = tipo1.Tipo
-                                INNER JOIN pm_tipo tipo2 USING(Pokedex) ON pokemon.tipo2 = tipo2.Tipo
-                                WHERE Trainer_ID = '".$data["Trainer_ID"]."';");
+                                WHERE Trainer_ID = ".$trainer["Trainer_ID"].";");
+
         $stmt->execute();
-        $stmt->get_result();
         $result = $stmt->get_result();
         $squadra = [];
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()){
-                $squadra = [$row];
+                $pokemon["id"] = $row["PM_ID"];
+                $pokemon["pokedex"] = $row["Pokedex"];
+                $pokemon["stato"] = $row["Stato"];
+                $pokemon["nome"] = $row["nome"];
+                $pokemon["ps"] = $row["PS"];
+                $pokemon["atk"] = $row["Atk"];
+                $pokemon["atksp"] = $row["AtkSP"];
+                $pokemon["dif"] = $row["Dif"];
+                $pokemon["difsp"] = $row["DifSP"];
+                $pokemon["vel"] = $row["Vel"];
+                $pokemon["tipo1"] = $row["tipo1"];
+                $pokemon["tipo2"] = $row["tipo2"];
+                $pokemon["img"] = $row["Sprite_url"];
+                $squadra[] = $pokemon;
             }
         }
-    }
-    else{
-        $stmt = $conn->prepare("SELECT Trainer_ID FROM pm_trainer ORDER BY DESC LIMIT 1");
-        $stmt->execute();
-        $stmt->get_result();
-        $result = $stmt->get_result();
-        
-        if ($result->num_rows > 0) {
-            $trainer_id = $row["Trainer_ID"];
-            $trainer_id += 1;
-        }
-        else{
-            $trainer_id = 0;
-        }
+        for($i=0; $i < sizeof($squadra); $i++){
+            
+            //conn for user's pokemons
+            $stmt = $conn->prepare("SELECT pm_mossa.* FROM pm_squadra INNER JOIN pm_mossa ON pm_squadra.Mossa1 = pm_mossa.MT WHERE PM_ID = ".$squadra[$i]["id"]." UNION 
+                                    SELECT pm_mossa.* FROM pm_squadra INNER JOIN pm_mossa ON pm_squadra.Mossa2 = pm_mossa.MT WHERE PM_ID = ".$squadra[$i]["id"]." UNION
+                                    SELECT pm_mossa.* FROM pm_squadra INNER JOIN pm_mossa ON pm_squadra.Mossa3 = pm_mossa.MT WHERE PM_ID = ".$squadra[$i]["id"]." UNION
+                                    SELECT pm_mossa.* FROM pm_squadra INNER JOIN pm_mossa ON pm_squadra.Mossa4 = pm_mossa.MT WHERE PM_ID = ".$squadra[$i]["id"]." ;");
 
-        $stmt = $conn->prepare("INSERT INTO pm_user(Trainer_ID, tipo) 
-                                VALUES($trainer_id,'giocatore');");
-        $stmt->execute();
-        $stmt->get_result();
-        $result = $stmt->get_result();
-        $stmt = $conn->prepare("INSERT INTO pm_user(ID, Nome, livello, soldi,Trainer_ID) 
-                                VALUES('$username','$nickname',0,400,$trainer_id);");
-        $stmt->execute();
-        $stmt->get_result();
-        $result = $stmt->get_result();
-    }
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()){
+                    $squadra[$i]["mossa"][] = $row;
+                }
+            }
+        }
+        for($i=0; $i < sizeof($squadra); $i++){
+            //conn for user's pokemons
+            $stmt = $conn->prepare("SELECT * FROM pm_tipo WHERE Tipo = '".$squadra[$i]["tipo1"]."' UNION 
+                                    SELECT * FROM pm_tipo WHERE Tipo = '".$squadra[$i]["tipo2"]."' ;");
 
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                $debolezza = [];
+                while($row = $result->fetch_assoc()){
+                    $d = [];
+                    foreach ($row as $tipo => $valore) {
+                        if($tipo == "Tipo") continue; 
+                        $d[$tipo] = (float)$valore;
+                    }
+                    $debolezza[] = $d;
+                }
+                if(sizeof($debolezza)>1){
+                    $debolezzaFinale = [];
+                    foreach ($debolezza[0] as $tipo => $valore1) {
+                        $valore2 = isset($debolezza[1][$tipo]) ? $debolezza[1][$tipo] : 1.0;
+                        $debolezzaFinale[$tipo] = $valore1 * $valore2;
+                    }
+                    $squadra[$i]["debolezze"]= $debolezzaFinale;
+                }
+                else $squadra[$i]["debolezze"]= $debolezza;
+            }
+        }
+        $dati = [
+            "trainer" => $trainer,
+            "bag" => $borsa,
+            "team" => $squadra
+        ];
+    }
+    $stmt = $conn->prepare("SELECT nome.ENG as nome, pm_oggetti.Tipo AS tipo, pm_oggetti.Livello AS livello, pm_oggetti.Prezzo AS prezzo, descrizione.ENG AS descrizione
+                            FROM pm_oggetti 
+                            INNER JOIN testi nome ON nome.name = pm_oggetti.Nome
+                            INNER JOIN testi descrizione ON descrizione.name = pm_oggetti.Descrizione
+                            WHERE ID = '".$username."';");
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows >0) {
+        $row = $result->fetch_assoc();
+        $shop[] = $row;
+    }
     $conn->close();
 ?>
