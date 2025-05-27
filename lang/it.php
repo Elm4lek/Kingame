@@ -114,6 +114,8 @@ $TEXT = [
     "profile_updated_error_generic" => "Si è verificato un errore durante l'aggiornamento del profilo.",
     "profile_updated_success_heading" => "Profilo Modificato",
     "profile_updated_error_heading" => "Errore Aggiornamento",
+    "create" => "Crea Stanza",
+    "add" => "Unisciti alla stanza",
 
 
 

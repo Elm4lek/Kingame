@@ -36,25 +36,6 @@ if (!isset($_SESSION['username'])) {
         gap: 4px;
 
         }
-        .contenitore {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            background-color: #fff;
-            border-radius: 20px;
-            margin: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            cursor: pointer;
-            display: grid;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            background-size: cover;
-            background-position: center;
-            box-sizing: border-box;
-            padding: 2%;
-        }
         .mask{
             position: absolute;
             top: 0;
@@ -111,29 +92,105 @@ if (!isset($_SESSION['username'])) {
             margin-top: 500px;
         }
 
+        .contenitore {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        background-color: #fff; 
+        border-radius: 20px;
+        margin: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column; 
+        justify-content: center;
+        align-items: center; 
+        overflow: hidden; 
+        box-sizing: border-box;
+        padding: 10px; 
+    }
+
+    .contenitore h3 {
+        color: #333333;
+        margin: 0 0 8px 0;      
+        padding: 0 5px;          
+        font-size: 1.15em;    
+        font-weight: bold;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+        line-height: 1.25; 
+        max-width: 100%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .contenitore form {
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 6px; 
+        width: 100%;           
+        position: relative;
+        z-index: 10;
+    }
+
+    .contenitore form:last-of-type {
+        margin-bottom: 0;
+    }
+
+    .contenitore input[type='submit'] {
+        background-color: #7d5a8c;
+        color: white;
+        border: none;
+        padding: 8px 10px;       
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.85em;     
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        width: 90%;          
+        max-width: 160px;       
+        box-sizing: border-box;
+        text-align: center;
+        line-height: 1.2;     
+        white-space: normal;     
+        word-break: break-word; 
+        height: auto;            
+    }
+
+    .contenitore input[type='submit']:hover {
+        background-color: #6c4675;
+    }
+
     </style>
 </head>
 <body>
     <div class="centro">
         <?php
-        require_once 'db_connect.php'; // Connessione al database tramite db_connect.php
+        require_once 'db_connect.php'; 
 
         $sql = "SELECT * FROM `giochi`";
         $result = $conn->query($sql);
         if ($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
-                echo    "<div class='contenitore' data-name='".$row["Nome"]."'>
+                echo "<div class='contenitore' data-name='".$row["Nome"]."'>
                         <h3>".$row["Nome"]."</h3>
                         <form method='POST' action='MultiplayerSystem/CreaStanza.php'>
                             <input type='hidden' name='tipo' value='crea'>
                             <input type='hidden' name='gioco' value='".$row["ID"]."'>
                             <input type='hidden' name='numero' value='".$row["Numero_Giocatori"]."'>
-                            <input type='submit' value='crea stanza'>
-                        </form>
-                        <form method='POST' action='MultiplayerSystem/AggiungiStanza.php'>
-                            <input type='submit' value='aggiungi'>
-                        </form>
-                        <div class='".$row["Nome"]." mask'></div>
+                            <input type='submit' value='".$TEXT['create']."'>
+                        </form>";
+
+                if (strtolower($row["Nome"]) === 'tristris') {
+                    echo "<form method='POST' action='MultiplayerSystem/AggiungiStanza.php'>
+                            <input type='submit' value='".$TEXT['add']."'>
+                        </form>";
+                }
+
+                echo "<div class='".$row["Nome"]." mask'></div>
                     </div>";
             }
         }
