@@ -9,6 +9,10 @@ include 'startGame.php';
 
 <body>
     <input type="hidden" id="dati" data-userData='<?php echo json_encode($dati); ?>'>
+    <script id="shop-data" type="application/json">
+        <?= json_encode($shop, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) ?>
+    </script>
+
     <div id="content">
         <div style="
         width: 100%;

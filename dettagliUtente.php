@@ -31,6 +31,7 @@ $n_giochi = isset($data['n_giochi']) ? $data['n_giochi'] : 0;
 $punteggio = isset($data['punteggio']) ? $data['punteggio'] : 0;
 $email = isset($data['email']) ? $data['email'] : 'N/A';
 $nazione = isset($data['nazione']) ? $data['nazione'] : 'N/A';
+$giochi = isset($data['gioco']) ? $data['gioco'] : 'N/A';
 ?>
 
 <!DOCTYPE html>
@@ -149,6 +150,22 @@ $nazione = isset($data['nazione']) ? $data['nazione'] : 'N/A';
                     <span>⭐ <strong><?= $TEXT['points'] ?>:</strong> <?php echo $punteggio;?></span>
                     <span>📅 <strong><?= $TEXT['account_created'] ?>:</strong> <?php echo $data_reg;?></span>
                     <span>🌍 <strong><?= $TEXT['country'] ?>:</strong> <?php echo $nazione;?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="info-row">
+                    <?php
+                    echo "<div class='card-header'>";
+                    echo "<h4 class='card-title ms-3'>TOP SCORES</h4>";
+                    echo "</div>";
+                    foreach ($giochi as $gioco => $record) {
+                        echo "<span>🎮 <strong>" . $gioco . ":</strong> " . $record . "</span><br>";
+                    }
+                    ?>
                 </div>
             </div>
         </div>

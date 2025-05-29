@@ -912,6 +912,7 @@ function createBagItem({ id, name, description, count, hpFillId, hpData, onClick
     nameDiv.innerHTML = name;
     details.appendChild(nameDiv);
 
+
     if (description) {
         const descDiv = document.createElement("div");
         descDiv.className = "half-container description-name";
@@ -938,6 +939,9 @@ function createBagItem({ id, name, description, count, hpFillId, hpData, onClick
     }
 
     if (count !== null && count !== undefined) {
+
+        descDiv.className = "half-container description-name object-name";
+
         const data = document.createElement("div");
         data.className = "list-data";
         data.innerHTML = "X" + count;

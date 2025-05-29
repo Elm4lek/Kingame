@@ -13,3 +13,12 @@ export function setUserData(newData) {
 export function getUserData() {
   return _userData;
 }
+let _shop = {};
+
+export function setShop(newData) {
+  _shop = newData;
+}
+
+export function getShop() {
+  return _shop;
+}

@@ -185,3 +185,28 @@ body{
     border-radius: 50%;
     margin: 2%;
 }
+.object-name{
+    height: auto;
+}
+#pocketBox{
+    height: 20%;
+    width: 98%;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    border: 5px solid darkslategrey;
+}
+.shop-item {
+    width: 70%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+}
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.arrow {
+    cursor: pointer;
+    user-select: none;
+}

@@ -51,3 +51,10 @@ export function clearDialogBox(){
         box.removeChild(box.lastChild);
     }
 }
+export function handleSelection(container, selectedId) {
+    const lastSelected = document.getElementById(container.dataset.selected);
+    if (lastSelected) lastSelected.classList.remove("item-selected");
+    container.dataset.selected = selectedId;
+    const newSelected = document.getElementById(selectedId);
+    if (newSelected) newSelected.classList.add("item-selected");
+}

@@ -69,7 +69,30 @@ if ($stmt) {
     // error_log("Errore nella preparazione della query (getUteneData.php): " . $conn->error);
     $data['error'] = "Errore nel recupero dei dati utente: " . $conn->error;
 }
+$sql = "SELECT giochi.Nome as gioco, MAX(Punteggio) as punti FROM utenti
+        LEFT JOIN sessione ON utenti.UserName = sessione.User
+        LEFT JOIN stanze ON sessione.Stanza = stanze.Id
+        LEFT JOIN giochi ON giochi.ID = stanze.Gioco
+        WHERE utenti.UserName = ?
+        GROUP BY giochi.ID";
 
+$stmt = $conn->prepare($sql);
+
+if ($stmt) {
+    $stmt->bind_param("s", $username); // Lega il parametro username
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()){
+            $data["gioco"][$row["gioco"]] = $row["punti"];
+        }
+    } else {
+        // Utente non trovato
+        $data['error'] = "Utente non trovato";
+    }
+    $stmt->close();
+}
 echo json_encode($data);
 $conn->close();
 ?>
