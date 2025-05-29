@@ -73,6 +73,11 @@ if (!isset($_SESSION['username'])) {
             background-size: cover;
             background-position: center;
         }
+        .candy {
+            background-image: url('Grafiche videogiochi/candy.jpg');
+            background-size: cover;
+            background-position: center;
+        }
         .contenitore:hover {
             transform: scale(1.1);
         }
