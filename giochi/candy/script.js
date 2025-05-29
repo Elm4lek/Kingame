@@ -3,10 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function candyCrushGame() {
+    // DOM Elements
     const grid = document.querySelector(".grid");
     const scoreDisplay = document.getElementById("score");
     const timerDisplay = document.getElementById("timer");
-    const restartButtonElement = document.getElementById("restartButton"); // Riferimento al nuovo pulsante Restart
+    const restartButtonElement = document.getElementById("restartButton");
 
     // Game State Variables
     const width = 8;
@@ -77,7 +78,7 @@ function candyCrushGame() {
     async function performServerRestartProcedures() {
         if (typeof host === 'undefined' || !host) {
             console.error("Error: 'host' variable is not defined. Cannot perform server restart procedures.");
-            return { multiplayer: false, gioco: "CANDY_CRUSH_GAME_ID_FALLBACK" }; 
+            return { multiplayer: false, gioco: "5" }; 
         }
         try {
             const response = await fetch("http://" + host + "/kingame/giochi/restart.php");
@@ -92,7 +93,7 @@ function candyCrushGame() {
                 try {
                     const data = JSON.parse(jsonText);
                     if (!data.tipo) data.tipo = "crea";
-                    if (!data.gioco) data.gioco = "CANDY_CRUSH_GAME_ID"; 
+                    if (!data.gioco) data.gioco = "5"; 
                     if (!data.username) data.username = "guest"; 
                     if (!data.numero) data.numero = "1";
                     return data;
@@ -102,7 +103,7 @@ function candyCrushGame() {
             }
             return { 
                 tipo: "crea", 
-                gioco: "CANDY_CRUSH_GAME_ID", 
+                gioco: "5", 
                 username: "guest", 
                 numero: "1",
                 multiplayer: false 
@@ -111,52 +112,65 @@ function candyCrushGame() {
             console.error("Error fetching data from restart.php:", error);
             return { 
                 tipo: "crea", 
-                gioco: "CANDY_CRUSH_GAME_ID", 
+                gioco: "5", 
                 username: "guest", 
                 numero: "1",
                 multiplayer: false 
             };
         }
     }
-    
+
     async function handleGameRestart() {
-        // Nascondi il pulsante di restart prima di tentare il riavvio effettivo
         if (restartButtonElement) {
             restartButtonElement.style.display = 'none';
         }
 
         try {
-            const restartData = await performServerRestartProcedures();
-            if (restartData && (restartData.multiplayer === true || (restartData.gioco && restartData.gioco !== "CANDY_CRUSH_GAME_ID_FALLBACK" && restartData.gioco !== "CANDY_CRUSH_GAME_ID" && restartData.tipo === "join_multiplayer_room_specific_flag"))) {
-                post("http://"+host+"/kingame/MultiplayerSystem/CreaStanza.php", restartData);
-                return; 
+            const restartData = await performServerRestartProcedures(); 
+            
+            if (restartData && typeof restartData === 'object') {
+                if (restartData.multiplayer === true || (restartData.tipo && restartData.gioco)) { 
+                    post("http://"+host+"/kingame/MultiplayerSystem/CreaStanza.php", restartData);
+                    return;
+                }
             }
+            
             startGame(); 
         } catch (error) {
             console.error("Error during game restart:", error);
             startGame(); 
         }
     }
+    
 
     function createBoard() {
-        grid.innerHTML = "";
-        squares.length = 0;
-        for (let i = 0; i < width * width; i++) {
-            const square = document.createElement("div");
-            square.setAttribute("draggable", true);
-            square.setAttribute("id", i);
-            let randomColor = Math.floor(Math.random() * candyColors.length);
-            square.style.backgroundImage = candyColors[randomColor];
-            grid.appendChild(square);
-            squares.push(square);
+    grid.innerHTML = "";
+    squares.length = 0;
+    for (let i = 0; i < width * width; i++) {
+        const square = document.createElement("div");
+        square.setAttribute("draggable", true);
+        square.setAttribute("id", i);
+
+        let randomColor = Math.floor(Math.random() * candyColors.length);
+        let color = candyColors[randomColor];
+
+        if (!color) {
+            console.warn("Colore mancante per indice:", randomColor);
+            color = "url('https://via.placeholder.com/70x70?text=ERROR')";
         }
-        squares.forEach(square => square.addEventListener("dragstart", dragStart));
-        squares.forEach(square => square.addEventListener("dragend", dragEnd));
-        squares.forEach(square => square.addEventListener("dragover", dragOver));
-        squares.forEach(square => square.addEventListener("dragenter", dragEnter));
-        squares.forEach(square => square.addEventListener("dragleave", dragLeave));
-        squares.forEach(square => square.addEventListener("drop", dragDrop));
+
+        square.style.backgroundImage = color;
+        grid.appendChild(square);
+        squares.push(square);
     }
+
+    squares.forEach(square => square.addEventListener("dragstart", dragStart));
+    squares.forEach(square => square.addEventListener("dragend", dragEnd));
+    squares.forEach(square => square.addEventListener("dragover", dragOver));
+    squares.forEach(square => square.addEventListener("dragenter", dragEnter));
+    squares.forEach(square => square.addEventListener("dragleave", dragLeave));
+    squares.forEach(square => square.addEventListener("drop", dragDrop));
+}
 
     let colorBeingDragged, colorBeingReplaced, squareIdBeingDragged, squareIdBeingReplaced;
 
@@ -236,23 +250,30 @@ function candyCrushGame() {
         return boardChanged;
     }
     function refillTopRow() {
-        let boardChanged = false;
-        for (let c = 0; c < width; c++) {
-            if (squares[c].style.backgroundImage === '') {
-                let randomColor = Math.floor(Math.random() * candyColors.length);
-                squares[c].style.backgroundImage = candyColors[randomColor];
-                boardChanged = true;
+    let boardChanged = false;
+    for (let c = 0; c < width; c++) {
+        if (squares[c].style.backgroundImage === '') {
+            let randomColor = Math.floor(Math.random() * candyColors.length);
+            let color = candyColors[randomColor];
+
+            if (!color) {
+                console.warn("Colore mancante durante refill per indice:", randomColor);
+                color = "url('https://via.placeholder.com/70x70?text=ERROR')";
             }
+
+            squares[c].style.backgroundImage = color;
+            boardChanged = true;
         }
-        return boardChanged;
     }
+    return boardChanged;
+}
+
     function manageBoardChanges() { 
         const fell = moveCandiesDown();
         const refilled = refillTopRow();
         return fell || refilled;
     }
 
-    // Check for Matches
     function checkPattern(length, isRow, isCheckOnly = false) {
         let matchFoundAnywhere = false;
         const iterationLimitOuter = isRow ? width : width; 
@@ -297,29 +318,39 @@ function candyCrushGame() {
         return matchFoundAnywhere;
     }
     function checkForAnyMatch(isCheckOnly = false) {
-        // Controlla prima i 4 per evitare che un 4 venga contato come un 3 se non gestito correttamente
-        if (checkPattern(4, true, isCheckOnly)) { if (isCheckOnly) return true; }
-        if (checkPattern(4, false, isCheckOnly)) { if (isCheckOnly) return true; }
-        if (checkPattern(3, true, isCheckOnly)) { if (isCheckOnly) return true; }
-        if (checkPattern(3, false, isCheckOnly)) { if (isCheckOnly) return true; }
-        if (!isCheckOnly) {
-            let foundAndCleared = false;
-            if (checkPattern(4, true, false)) foundAndCleared = true;
-            if (checkPattern(4, false, false)) foundAndCleared = true;
-            if (checkPattern(3, true, false)) foundAndCleared = true;
-            if (checkPattern(3, false, false)) foundAndCleared = true;
-            return foundAndCleared;
+        if (!isCheckOnly) { 
+            let foundAndClearedThisPass = false;
+            let continueChecking = true;
+            while(continueChecking) { 
+                let clearedInIteration = false;
+                if (checkPattern(4, true, false)) clearedInIteration = true;
+                if (checkPattern(4, false, false)) clearedInIteration = true;
+                if (checkPattern(3, true, false)) clearedInIteration = true;
+                if (checkPattern(3, false, false)) clearedInIteration = true;
+                
+                if(clearedInIteration) {
+                    foundAndClearedThisPass = true; 
+                    manageBoardChanges(); 
+                } else {
+                    continueChecking = false; 
+                }
+            }
+            return foundAndClearedThisPass;
+        } else { 
+            if (checkPattern(4, true, true)) return true;
+            if (checkPattern(4, false, true)) return true;
+            if (checkPattern(3, true, true)) return true;
+            if (checkPattern(3, false, true)) return true;
         }
-        return false; // Solo per isCheckOnly, se nessuno ha ritornato true sopra
+        return false;
     }
-    function checkAndClearAllMatches() {
+    function checkAndClearAllMatches() { 
         return checkForAnyMatch(false); 
     }
 
-    // Game Loop
     function gameLoopAction() {
-        const matchesCleared = checkAndClearAllMatches();
-        const boardChangedByFall = manageBoardChanges();
+    const matchesCleared = checkAndClearAllMatches();
+    const boardChangedByFall = manageBoardChanges(); 
     }
 
     function startGame() {
@@ -344,12 +375,13 @@ function candyCrushGame() {
             }
         } while (initialMatchesCleared);
 
+
         score = 0;
         scoreDisplay.innerHTML = score;
         
-        gameInterval = setInterval(gameLoopAction, 150);
+        gameInterval = setInterval(gameLoopAction, 200); 
 
-        timeLeft = 120; 
+        timeLeft = 5; 
         updateTimerDisplay();
         timerInterval = setInterval(() => {
             timeLeft--;
@@ -374,7 +406,6 @@ function candyCrushGame() {
         
         await sendGameScore(score); 
 
-        // Mostra il pulsante Restart
         if (restartButtonElement) {
             restartButtonElement.style.display = 'block'; 
         }
@@ -384,7 +415,6 @@ function candyCrushGame() {
     if (restartButtonElement) {
         restartButtonElement.addEventListener('click', handleGameRestart);
     }
-
 
     startGame(); 
 }
