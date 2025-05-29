@@ -381,7 +381,7 @@ function candyCrushGame() {
         
         gameInterval = setInterval(gameLoopAction, 200); 
 
-        timeLeft = 5; 
+        timeLeft = 120; 
         updateTimerDisplay();
         timerInterval = setInterval(() => {
             timeLeft--;
