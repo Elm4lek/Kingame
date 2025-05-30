@@ -4,6 +4,7 @@ var user;
 var team = [];
 var bag = [];
 var playerMoney;
+var playerSelect;
 const selectType = {
     adversary : "Adversary",
     pokemon : "Pokemon",
@@ -27,19 +28,23 @@ function init(){
     setShop(shopData);
     console.log(user);
     console.log(shopData);
-    playerMoney = 400000;
+    playerMoney=1000;
 }
 
 function select(type){
     Funcs.cancel();
     switch(type){
         case selectType.fight: fight();
+        playerSelect = selectType.fight;
         break;
         case selectType.pokemon: pokemon();
+        playerSelect = selectType.pokemon;
         break;
         case selectType.shop: shop();
+        playerSelect = selectType.shop;
         break;
         case selectType.adversary: adversary();
+        playerSelect = selectType.adversary;
         break;
     }
 }
@@ -138,80 +143,136 @@ function createBagItem(item){
     return div;
 }
 function createShopItemUI(itemName) {
-    let shop = getShop();
+    const shop = getShop();
     const item = shop.find(i => i.nome === itemName);
-    let bagItem = bag.find(i => i.nome === itemName)
-    if(!bagItem){
-        bagItem = [];
-        bagItem.Numero = 0;
-    }
+    let bagItem = bag.find(i => i.nome === itemName);
+
     if (!item) return;
+
+    if (!bagItem) {
+        bagItem = { Numero: 0 };
+    }
 
     let quantity = 1;
 
-    const container = document.createElement("div");
-    container.className = "shop-item";
+    // 🔄 Cerca container esistente
+    let container = document.getElementById("shop-container");
+    let title, quantityDisplay, priceDisplay, leftArrow, rightArrow;
 
-    const title = document.createElement("h3");
-    title.style.margin = 0;
-    title.textContent = ` NOW HAVE ${bagItem.Numero} ${item.nome}`;
+    if (!container) {
+        // 🆕 Se non esiste, lo crea
+        container = document.createElement("div");
+        container.className = "shop-item";
+        container.id = "shop-container";
 
-    const quantityControl = document.createElement("div");
-    quantityControl.className = "quantity-control";
+        title = document.createElement("h3");
+        title.style.margin = 0;
 
-    const leftArrow = document.createElement("span");
-    leftArrow.textContent = "←";
-    leftArrow.className = "arrow";
+        const quantityControl = document.createElement("div");
+        quantityControl.className = "quantity-control";
 
-    const quantityDisplay = document.createElement("span");
-    quantityDisplay.textContent = quantity;
+        leftArrow = document.createElement("span");
+        leftArrow.textContent = "←";
+        leftArrow.className = "arrow";
 
-    const rightArrow = document.createElement("span");
-    rightArrow.textContent = "→";
-    rightArrow.className = "arrow";
+        quantityDisplay = document.createElement("span");
 
-    const priceDisplay = document.createElement("input");
-    priceDisplay
-    priceDisplay.value = `Price: ${item.prezzo * quantity}`;
+        rightArrow = document.createElement("span");
+        rightArrow.textContent = "→";
+        rightArrow.className = "arrow";
 
-    const updatePrice = () => {
-    const total = item.prezzo * quantity;
-    priceDisplay.value = `Price: ${total}`;
-    quantityDisplay.textContent = quantity;
-    };
+        priceDisplay = document.createElement("input");
+        priceDisplay.type = "button";
+        priceDisplay.readOnly = true;
+        priceDisplay.onclick = () => {
+            const total = item.prezzo * quantity;
+            console.log(quantity);
 
-    leftArrow.onclick = () => {
-    if (quantity > 1) {
-        quantity--;
-        updatePrice();
-    }
-    };
+            if (total > playerMoney) {
+                alert("You don't have enough money!");
+                return;
+            }
 
-    rightArrow.onclick = () => {
-        const total = item.prezzo * (quantity + 1);
-        console.log("increment called");
-        console.log("quantity:"+quantity);
-        console.log("item.price:"+item.price);
-        console.log("total:"+total);
-        console.log("playerMoney:"+playerMoney);
-        console.log("quantity < 99:"+(quantity < 99));
-        console.log("total <= playerMoney:"+(total <= playerMoney));
-    if (quantity < 99 && total <= playerMoney) {
-        quantity++;
-        updatePrice();
-    }
-    };
+            buyItem(item, quantity);
+            container._updatePrice(); // aggiorna il conteggio visuale
+        };
 
-    quantityControl.appendChild(leftArrow);
-    quantityControl.appendChild(quantityDisplay);
-    quantityControl.appendChild(rightArrow);
+        quantityControl.appendChild(leftArrow);
+        quantityControl.appendChild(quantityDisplay);
+        quantityControl.appendChild(rightArrow);
+        quantityControl.appendChild(priceDisplay);
 
-    container.appendChild(title);
-    container.appendChild(quantityControl);
-    quantityControl.appendChild(priceDisplay);
+        container.appendChild(title);
+        container.appendChild(quantityControl);
+        document.getElementById("bag-bottom").appendChild(container);
 
-    document.getElementById("bag-bottom").appendChild(container);
+        // 🔁 Funzioni aggiornamento
+        const updatePrice = () => {
+            const total = item.prezzo * quantity;
+            priceDisplay.value = `total: ${total}`;
+            quantityDisplay.textContent = quantity;
+            title.textContent = `NOW HAVE ${bagItem.Numero} ${item.nome}`;
+        };
+
+        leftArrow.onclick = () => {
+            if (quantity > 1) {
+                quantity--;
+                updatePrice();
+            }
+        };
+
+        rightArrow.onclick = () => {
+            const total = item.prezzo * (quantity + 1);
+            if (quantity < 99 && total <= playerMoney) {
+                quantity++;
+                updatePrice();
+            }
+        };
+
+        container._updatePrice = updatePrice;
+        container._setItem = (newItem, newBagItem) => {
+            item.nome = newItem.nome;
+            item.prezzo = newItem.prezzo;
+            bagItem.Numero = newBagItem?.Numero || 0;
+            quantity = 1;
+            updatePrice();
+        };
+    } 
+
+    container._setItem(item, bagItem);
 }
+function buyItem(item, quantity) {
+    const total = item.prezzo * quantity;
+
+    if (total > playerMoney) {
+        console.warn("Not enough money.");
+        return;
+    }
+
+    console.log(playerMoney);
+    playerMoney -= total;
+    console.log(playerMoney);
+
+    // Cerca se l'oggetto è già nel bag
+    let bagEntry = bag.find(i => i.nome === item.nome);
+    if (bagEntry) {
+        bagEntry.Numero += quantity;
+    } else {
+        bag.push({ nome: item.nome, Numero: quantity });
+    }
+    if(playerSelect == selectType.shop){
+        // Aggiorna visuale dei soldi, se presente
+        const pocketBox = document.getElementById("pocketBox");
+        if (pocketBox) {
+            const pocketMoney = pocketBox.querySelector(".description-name:last-child");
+            if (pocketMoney) {
+                pocketMoney.innerHTML = "$" + playerMoney;
+            }
+    }}
+
+    console.log(`Acquistati ${quantity} × ${item.nome}. Rimangono $${playerMoney}`);
+}
+
 async function adversary() {
     let bag = Funcs.showBag(); // Suppongo sia sincrona
 

@@ -7,7 +7,7 @@ $stanza = $_SESSION['gioco']['stanza'];
 $nome = $_SESSION['nickname'];
 $gioco = $_SESSION['gioco']['gioco'];
 $numero = $_SESSION['gioco']['numero'];
-$data = file_get_contents("http://".host."/kingame/MultiplayerSystem/CercaGiocatori.php?stanza=".$stanza);
+$data = file_get_contents(host."/kingame/MultiplayerSystem/CercaGiocatori.php?stanza=".$stanza);
 $giocatore = json_decode($data);
 if(($numero - sizeOf($giocatore)) == 0){
     header("Location: http://".host."/kingame/giochi/".$gioco);
