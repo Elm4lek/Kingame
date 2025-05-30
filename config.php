@@ -1,3 +1,3 @@
 <?php
-define('host', 'https://localhost'); 
+define('host', 'localhost'); 
 ?>

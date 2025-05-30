@@ -23,7 +23,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 $username = $_POST["username"];
-$data = json_decode(file_get_contents(host."/kingame/getUteneData.php?username=".$username),true);
+$data = json_decode(file_get_contents("http://".host."/kingame/getUteneData.php?username=".$username),true);
 $nickname = isset($data['nickname']) ? $data['nickname'] : 'N/A';
 $data_reg = isset($data['data_reg']) ? $data['data_reg'] : 'N/A';
 $foto_profilo = isset($data['img_profilo']) ? $data['img_profilo'] : 'N/A';

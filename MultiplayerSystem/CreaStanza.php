@@ -7,7 +7,7 @@ require_once '../db_connect.php';
 
 $haPosto = true;
 if(!empty($_SESSION['gioco']) && !$_SESSION["gioco"]["isFinished"]){
-    file_get_contents(host."/Kingame/MultiplayerSystem/removeSession.php?giocatore=".$_SESSION["username"]."&stanza=".$_SESSION['gioco']['stanza']);
+    file_get_contents("http://".host."/Kingame/MultiplayerSystem/removeSession.php?giocatore=".$_SESSION["username"]."&stanza=".$_SESSION['gioco']['stanza']);
 }
 
 $sql = "SELECT * FROM stanze INNER JOIN sessione ON stanze.Id = sessione.Stanza WHERE User = '".$_SESSION["username"]."' AND Stato = 0";
@@ -15,7 +15,7 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        file_get_contents(host."/Kingame/MultiplayerSystem/removeSession.php?giocatore=".$_SESSION["username"]."&stanza=".$row["Id"]);
+        file_get_contents("http://".host."/Kingame/MultiplayerSystem/removeSession.php?giocatore=".$_SESSION["username"]."&stanza=".$row["Id"]);
     }
 }
 
