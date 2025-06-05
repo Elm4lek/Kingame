@@ -23,6 +23,8 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 $username = $_POST["username"];
+$URL = "http://".host."/kingame/getUteneData.php?username=".$username;
+echo $URL;
 $data = json_decode(file_get_contents("http://".host."/kingame/getUteneData.php?username=".$username),true);
 $nickname = isset($data['nickname']) ? $data['nickname'] : 'N/A';
 $data_reg = isset($data['data_reg']) ? $data['data_reg'] : 'N/A';

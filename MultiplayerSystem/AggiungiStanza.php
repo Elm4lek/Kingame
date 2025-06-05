@@ -149,6 +149,7 @@ require_once __DIR__ . '/../config.php';
 
         input[type="button"] {
             margin-top: 20px;
+            width: 500px;
         }
 
         input[type="button"][value="Aggiorna Elenco Stanze"] {

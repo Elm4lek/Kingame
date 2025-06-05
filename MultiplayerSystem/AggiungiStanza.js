@@ -95,7 +95,7 @@ function aggiungiStanza(padre, stanza){
     var p = document.getElementById(padre);
     var button = document.createElement('input');
     button.setAttribute('type','button');
-    button.setAttribute('value', 'AggiungiStanza');
+    button.setAttribute('value', 'Unisciti');
     button.stanza = stanza.id;
     button.addEventListener("click",function(){
         cambiaStanza(stanza);
