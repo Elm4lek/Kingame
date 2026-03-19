@@ -26,9 +26,6 @@
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
 - [Installation](#installation)
-- [Configuration](#configuration)
-- [Team](#team)
-- [License](#license)
 
 ---
 
