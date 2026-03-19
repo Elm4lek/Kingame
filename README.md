@@ -181,17 +181,3 @@ Kingame/
 5. **Start the server**
    - Start Apache and MySQL from XAMPP
    - Go to [http://localhost/kingame](http://localhost/kingame)
-
----
-
-## Configuration
-
-### `config.php`
-```php
-
-```
-
-Configure database credentials directly in `db_connect.php`. For
-production environments, use secure credentials and environment variables.
-
----
